@@ -7,3 +7,4 @@
 |  3  | 2023.03.08.WED | 아이디어 회의, 팀 미팅                                |                                                                                                                                                                           |
 |  4  | 2023.03.09.THU | 와이어 프레임 제작                                    |                                                                                                                                                                           |
 |  5  | 2023.03.10.FRI | 와이어 프레임 제작, 전문가 미팅, 요구사항 명세서 작성 | [전문가미팅기록](https://lab.ssafy.com/s08-bigdata-dist-sub2/S08P22A507/-/blob/parkjuhee/parkjuhee/%EC%A0%84%EB%AC%B8%EA%B0%80_%EB%AF%B8%ED%8C%85_%EA%B8%B0%EB%A1%9D.pdf) |
+|  6  | 2023.03.13.MON | 기능 명세서 작성 완료                                 | [기능명세서]()                                                                                                                                                            |
