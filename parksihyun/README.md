@@ -1,7 +1,5 @@
 # TypeScript 학습
 
-
-
 ### TypeScript
 
 ## = JavaScript + Type 문법
@@ -142,11 +140,7 @@
     // [key : string] : string => 글자로 된 모든 object 속성의 타입은 :string
     ```
 
-
-
 ---
-
-
 
 ## 1. TypeScript를 쓰는 이유를 알아보자
 
@@ -377,4 +371,122 @@ myOs = Os.Window
 
 let a:null = null
 let b:undefined = undefined
+```
+
+---
+
+## Three.js 실습
+
+### 회전하는 정육면체 만들기
+
+```jsx
+npm install three
+npm install @react-three/fiber
+npm install @react-three/drei
+```
+
+```jsx
+import React from 'react';
+import { Canvas } from '@react-three/fiber';
+import { OrbitControls } from '@react-three/drei';
+
+function App() {
+  return (
+    <>
+      <Canvas>
+
+        {/* 마우스 휠로 회전, 확대/축소 가능, autoRotate={true} 하면 자동회전 */}
+        <OrbitControls />
+
+        {/* 3D 도형을 감쌀 mesh 태그 */}
+        <mesh>  
+          {/* 1:1:1 비율의 정육면체 */}
+          <boxGeometry args={[1, 1, 1]} />
+          {/* 색상 추가 */}
+          <meshStandardMaterial attach="material" color={0xa3b18a} />
+          {/* 조명 추가. default는 1. directionalLight는 방향이 있음 */}
+          <ambientLight intensity={1} />
+        </mesh>
+      </Canvas>
+    </>
+  );
+}
+
+export default App;
+```
+
+```jsx
+// html
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+    <canvas id="canvas" width="300" height="300"></canvas>
+
+    <script type="importmap">
+        {
+            "imports": {
+            "three": "<https://unpkg.com/three@0.141.0/build/three.module.js>",
+            "GLTFLoader" : "<https://unpkg.com/three@0.141.0/examples/jsm/loaders/GLTFLoader.js>"
+            }
+        }
+    </script>
+
+    <script type="module">
+        // import {GLTFLoader} from "three/examples/jsm/loaders/GLTFLoader";
+        import { GLTFLoader } from 'GLTFLoader'
+        import * as THREE from 'three'
+
+        let scene = new THREE.Scene();
+        let renderer = new THREE.WebGLRenderer()
+        // 원래 색 되찾기
+        renderer.outputEncoding = THREE.sRGBEncoding
+
+        // 3d model 은 1.카메라 2.조명 3.배경 필요
+        // camera는 PerspectiveCamera(원근법O), OrthographicCamera(원근법X) 2가지
+        let camera = new THREE.PerspectiveCamera(30, 1)
+        // camera 좌표 설정
+        camera.position.set(0,0,5)
+
+        // 배경
+        scene.background = new THREE.Color('white')
+
+        // 조명
+        // AmbientLight  ,  PointLight  ,  DirectionalLight
+        let light = new THREE.DirectionalLight(0xffff00, 10)
+        scene.add(light)
+
+        // GLTF 파일 가져오기
+        let loader = new GLTFLoader()
+        // 로딩이 오래 걸리니 콜백 함수 설정해 로딩 끝난 후 작업 지정
+        loader.load('shiba/scene.gltf', function(gltf) {
+            scene.add(gltf.scene)
+
+            // 애니메이션 주지 않을 때는 이거 활성화
+            // renderer.render(scene, camera)
+
+            // 애니메이션 주고 싶다면?
+            function animate() {
+                requestAnimationFrame(animate)
+                //회전
+                gltf.scene.rotation.x += 0.03
+                gltf.scene.rotation.y += 0.03
+                gltf.scene.rotation.z += 0.03
+                // 마우스컨트롤
+                // Three.js 내의 OrbitControl 사용
+                renderer.render(scene, camera)
+            }
+            animate()
+
+        })
+
+    </script>
+
+</body>
+</html>
 ```
