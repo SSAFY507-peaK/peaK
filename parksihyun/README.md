@@ -373,6 +373,312 @@ let a:null = null
 let b:undefined = undefined
 ```
 
+## 3. 인터페이스
+
+```jsx
+let user:object
+
+user = {
+    name: 'xx',
+    age: 30
+}
+
+console.log(user.name) // error 메세지 뜸
+                                           // Property 'name' does not exist on type 'object'.
+```
+
+```jsx
+interface User {
+    name : string;
+    age : number;
+}
+
+let user : User = {
+
+}      // error 메세지 뜸
+             // Type '{}' is missing the following properties from type 'User': name, age
+```
+
+```jsx
+interface User {
+    name : string;
+    age : number;
+}
+
+let user : User = {
+    name: 'xx',
+    age: 30
+}      
+
+console.log(user.age)  // 30
+```
+
+```jsx
+// gender를 option으로 지정해보자
+
+interface User {
+    name : string;
+    age : number;
+    gender? : string;
+}
+
+let user : User = {
+    name: 'xx',
+    age: 30
+}      
+
+user.gender = "male"
+
+console.log(user.age)     // 30
+console.log(user.gender)  // male
+```
+
+```jsx
+// 읽기 전용 property를 만들어보자
+
+interface User {
+    name : string;
+    age : number;
+    gender? : string;
+    readonly birthYear : number;
+}
+
+let user : User = {
+    name: 'xx',
+    age: 30,
+    birthYear : 2000,     // 최초 생성 시만 할당 가능, 이후 수정 불가
+}      
+
+user.birthYear = 1990;  // 읽기 전용 속성이므로 수정 불가
+```
+
+```jsx
+// number를 key로, string을 value로 하는 property 여러 개 받을 수 있음
+
+interface User {
+    name : string;
+    age : number;
+    gender? : string;
+    readonly birthYear : number;
+    [grade:number] : string;
+}
+
+let user : User = {
+    name: 'xx',
+    age: 30,
+    birthYear : 2000,
+    1 : 'A',
+    2 : 'B'
+}
+```
+
+```jsx
+// 위의 경우를 문자열 리터럴로 해보자
+// 위의 경우에 string이라면 무엇이든 입력 가능하지만,
+// 지금은 A, B, C, D 만 입력 가능
+
+type Score = 'A' | 'B' | 'C' | 'F';
+
+interface User {
+    name : string;
+    age : number;
+    gender? : string;
+    readonly birthYear : number;
+    [grade:number] : Score;
+}
+
+let user : User = {
+    name: 'xx',
+    age: 30,
+    birthYear : 2000,
+    1 : 'A',
+    2 : 'B'
+}
+```
+
+---
+
+인터페이스로 함수도 정의할 수 있다.
+
+```jsx
+interface Add {
+    (num1:number, num2:number): number;
+}
+
+const add : Add = function(x, y) {
+    return x + y;
+}
+
+add(10, 20)   // 30
+
+------------------------------------------
+
+interface IsAdult {
+    (age:number):boolean;
+}
+
+const a:IsAdult = (age) => {
+    return age > 19
+}
+
+a(33)     // true
+```
+
+---
+
+인터페이스로 클래스도 정의할 수 있음
+
+```jsx
+// implements
+
+interface Car {
+    color: string;
+    wheels: number;
+    start(): void;
+}
+
+class Bmw implements Car {
+    color;
+    wheels = 4;
+
+    constructor(c:string){
+        this.color = c;
+    }
+
+    start() {
+        console.log('go...')
+    }
+}
+
+const b = new Bmw('green')
+console.log(b)
+// Bmw: {
+//   "wheels": 4,
+//   "color": "green"
+//  }
+
+b.start()   // "go.."
+```
+
+---
+
+인터페이스는 확장이 가능함
+
+```jsx
+//extends
+
+interface Car {
+    color: string;
+    wheels: number;
+    start(): void;
+}
+
+// Car가 있을 때
+// 이미 Car가 가지고 있던 속성 그대로 가짐
+// 문의 개수나 추가 함수 정의 가능
+interface Benz extends Car {
+    door: number;
+    stop(): void;
+}
+
+const benz : Benz = {
+    door : 5,
+    stop(){
+        console.log('stop')
+    },
+    color : 'black',
+    wheels : 4,
+    start(){
+        console.log('go...')
+    }
+}
+```
+
+---
+
+확장은 여러 개 가능
+
+```jsx
+interface Car {
+    color: string;
+    wheels: number;
+    start(): void;
+}
+
+interface Toy {
+    name: string;
+}
+
+interface ToyCar extends Car, Toy {
+    price : number;
+}
+```
+
+## 4. 함수
+
+```tsx
+// 복습
+
+function add(num1: number, num2: number): number {
+    return num1 + num2;
+}
+
+function add(num1: number, num2: number): void {
+    console.log(num1 + num2);
+}
+
+function isAdult(age: number): boolean {
+    return age > 19;
+}
+```
+
+```tsx
+// 인터페이스처럼 함수의 매개변수도 optional로 지정 가능
+// 선택적 매개변수 라고 부름
+
+function hello(name?: string) {
+    return `Hello, ${name || "world"}`;
+}
+
+const result = hello();
+console.log(result)     // Hello, world
+
+// 참고로, JavaScript에서는 매개변수에 default를 줄 수 있음
+// 따라서 아래처럼 쓸 수도 있음
+
+function hello(name = "world") {
+    return `Hello, ${name}`;
+}
+```
+
+```tsx
+// 이름과 나이를 받아서, 문자열을 출력해보자
+
+function hello(name:string, age?:number):string {
+    if (age !== undefined) {
+        return `Hello, ${name}. You are ${age}.`;
+    } else {
+        return `Hello, ${name}.`;
+    }
+}
+
+// 주의할 점!!
+// 첫째 줄이 "function hello(age?:number, name:string):string {" 이면 불가!!
+// 선택적 매개변수가 필수 매개변수보다 앞에 오면 에러 발생
+// 만약 굳이 앞에 두고 싶다면?
+
+function hello(age: number | undefined, name: string):string {
+    if (age !== undefined) {
+        return `Hello, ${name}. You are ${age}.`;
+    } else {
+        return `Hello, ${name}.`;
+    }
+}
+
+console.log(hello(30, "Sam"));
+console.log(hello(undefined, "Sam"));
+```
+
 ---
 
 ## Three.js 실습
