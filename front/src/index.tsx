@@ -28,6 +28,8 @@ import MyPage from "./routes/MyPage";
 
 import reportWebVitals from "./reportWebVitals";
 
+import { GlobalStyle } from "./components/globalStyle.js";
+
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route>
@@ -58,6 +60,7 @@ const root = createRoot(container);
 
 root.render(
   <Provider store={store}>
+    <GlobalStyle />
     <RouterProvider router={router} />
   </Provider>,
 );
