@@ -9,7 +9,6 @@ const iconStyle = {
 };
 
 const GlobalStyle = createGlobalStyle`
-  @import url("https://font.elice.io/EliceDigitalBaeum.css");
   :root {
     /* Color */
     --white800-color: #FCF8F8;
@@ -24,19 +23,31 @@ const GlobalStyle = createGlobalStyle`
     --purple500-color: #A869CD;
     --purple400-color: #9244C0;
     --purple300-color: #76349D;
-
+    
     /* Navigation bar height */
     --nav-height: 60px;
+
+    /* empty space */
+    --side-space: 200px;
   }
+
   *, *::before, *::after {
     box-sizing: border-box;
   }
+  @font-face {
+    font-family: 'EliceDigitalBaeum';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_elice@1.0/EliceDigitalBaeum.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+  
   
   html, body {
     color: var(--default-font-color);
     width: 100%;
     height: 100%;
-    font-family: 'Elice Digital Baeum', -apple-system, Helvetica Neue, sans-serif;
+    font-family: "EliceDigitalBaeum", -apple-system, Helvetica Neue, sans-serif;
+    margin: 0;
   }
 
   button {

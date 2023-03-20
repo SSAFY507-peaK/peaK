@@ -1,5 +1,6 @@
-import React from "react";
 import { NavLink, Outlet } from "react-router-dom";
+
+import React from "react";
 
 /** 랭킹과 차트 이동을 위한 탭 페이지입니다. 언제든 삭제될 위험이 있음. */
 function RankingLayout() {
