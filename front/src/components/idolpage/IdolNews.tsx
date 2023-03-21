@@ -1,4 +1,4 @@
-import FrameCommponent from "./FrameCommponent";
+import FrameCommponent from "./FrameComponent";
 import IdolNewsItem from "./IdolNewsItem";
 import styled from "styled-components";
 

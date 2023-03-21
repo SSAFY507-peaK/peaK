@@ -1,4 +1,4 @@
-import FrameCommponent from './FrameCommponent';
+import FrameCommponent from './FrameComponent';
 import HelpIcon from '@mui/icons-material/Help';
 import styled from "styled-components";
 
