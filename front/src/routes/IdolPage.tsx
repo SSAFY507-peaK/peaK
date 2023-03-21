@@ -1,16 +1,28 @@
 import { Link, useParams } from "react-router-dom";
 
-import styled from "styled-components";
+import Bg from "../components/idolpage/sampleImg/Rectangle 299.png"
 import IdolBanner from "../components/idolpage/IdolBanner";
 import IdolChat from "../components/idolpage/IdolChat";
 import IdolData from "../components/idolpage/IdolData";
 import IdolEmotion from "../components/idolpage/IdolEmotion";
 import IdolNews from "../components/idolpage/IdolNews";
 import IdolYoutube from "../components/idolpage/IdolYoutube";
+import styled from "styled-components";
 
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
+`;
+
+
+
+const BannerImg = styled.img`
+  width: 100%;
+  height: 100%;
+  background-image: url(${Bg});
+  background-size: cover;
+  opacity: 0.8;
+
 `;
 
 function IdolPage() {
@@ -19,7 +31,7 @@ function IdolPage() {
   
   return (
     <Wrapper>
-      <IdolBanner />
+      <BannerImg src={Bg}/>
       <IdolData />
       <IdolEmotion />
       <IdolNews />
