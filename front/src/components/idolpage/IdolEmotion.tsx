@@ -4,6 +4,7 @@ import HelpIcon from '@mui/icons-material/Help';
 import TabComponent from "./TabComponent";
 import styled from "styled-components";
 import { useState } from "react";
+import IdolEmotionChart from "./IdolEmotionChart";
 
 const Title = styled.div`
   font-size: 2rem;
@@ -31,17 +32,10 @@ const ChartTagFrame = styled.div`
   align-items: center;
 `;
 
-const EmotionChart = styled.div`
-
-`;
-
-const RankingChart = styled.div`
-
-`;
-
 
 function IdolEmotion() {
   const [check, setCheck] = useState<boolean>(true);
+
   return(
     <FrameCommponent
       leftitem={
@@ -64,9 +58,9 @@ function IdolEmotion() {
           {
             check 
             ?
-            <EmotionChart>나는 감정 차트야</EmotionChart>
+            <IdolEmotionChart />
             :
-            <RankingChart>나는 랭킹 차트야</RankingChart>
+            <IdolEmotionChart />
           }
         </>
         }
