@@ -1,10 +1,16 @@
-import React from "react";
+import News from "../components/News";
+import styled from "styled-components";
 
+const TapMenu = styled.div`
+  font-size: 24px;
+  margin-top: 50px;
+  margin-bottom: 25px;
+`;
 function NewsPage() {
   return (
     <div>
-      <h1>뉴스 페이지입니다.</h1>
-      <h2>여기서 아이돌 디테일 뉴스 페이지로 이동을 못하는게 좀 아쉽습니다.</h2>
+      <TapMenu>트렌딩 뉴스</TapMenu>
+      <News></News>
     </div>
   );
 }
