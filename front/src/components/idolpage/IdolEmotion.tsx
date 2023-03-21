@@ -1,7 +1,7 @@
 import Emotion from "./sampleImg/Emotion.png"
 import FrameCommponent from './FrameComponent';
 import HelpIcon from '@mui/icons-material/Help';
-import TabComponent from "./TagComponent";
+import TabComponent from "./TabComponent";
 import styled from "styled-components";
 import { useState } from "react";
 
