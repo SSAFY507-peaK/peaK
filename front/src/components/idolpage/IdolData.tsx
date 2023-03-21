@@ -6,10 +6,6 @@ import YouTubeIcon from '@mui/icons-material/YouTube';
 import styled from "styled-components";
 import { useState } from 'react';
 
-// interface LikeType {
-//   like: boolean;
-// }
-
 const Wrapper = styled.div`
   display: flex;
   flex-direction: row;
