@@ -11,6 +11,14 @@ const iconStyle = {
 const GlobalStyle = createGlobalStyle`
   :root {
     /* Color */
+    --gray800-color: #EBEBEB;
+    --gray700-color: #D1D1D1;
+    --gray600-color: #B8B8B8;
+    --gray500-color: #9E9E9E;
+    --gray400-color: #858585;
+    --gray300-color: #6B6B6B;
+    --gray200-color: #525252;
+    --gray100-color: #383838;
     --white800-color: #FCF8F8;
     --white700-color: #EBD6D6;
     --white600-color: #DAB4B4;
