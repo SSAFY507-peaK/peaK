@@ -9,7 +9,7 @@ function fullPage() {
   return (
     <FullPage controls controlsProps={{className: 'slide-navigation'}}>
       <Slide>
-        <SectionOne />
+        <SectionOne backgroundColor="var(--white800-color)" />
       </Slide>
       <Slide>
         <SectionTwo />
