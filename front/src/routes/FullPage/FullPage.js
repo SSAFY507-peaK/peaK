@@ -1,21 +1,21 @@
 import React from "react";
-import { FullPage, Slide } from 'react-full-page';
-import './FullPage.scss'
+import { FullPage, Slide } from "react-full-page";
+import "./FullPage.scss";
 import SectionOne from "./SectionOne";
 import SectionTwo from "./SectionTwo";
 import SectionThree from "./SectionThree";
 
 function fullPage() {
   return (
-    <FullPage controls controlsProps={{className: 'slide-navigation'}}>
+    <FullPage controls controlsProps={{ className: "slide-navigation" }}>
       <Slide>
         <SectionOne backgroundColor="var(--white800-color)" />
       </Slide>
       <Slide>
-        <SectionTwo />
+        <SectionTwo backgroundColor="var(--purple800-color)" />
       </Slide>
       <Slide>
-        <SectionThree />
+        <SectionThree backgroundColor="var(--red800-color)" />
       </Slide>
     </FullPage>
     // <>
