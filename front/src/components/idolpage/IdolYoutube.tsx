@@ -1,8 +1,31 @@
+import IdolYoutubeCarousel from './IdolYoutubeCarousel';
+import YouTubeIcon from '@mui/icons-material/YouTube';
+import styled from "styled-components";
+
+const Frame = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
+const TitleFrame = styled.div`
+  display: flex;
+  flex-direction: row;
+`;
+
+
+const Title = styled.div`
+  
+`;
+
 function IdolYoutube () {
   return (
-    <div>
-      <h1>유튜브 컴포넌트</h1>
-    </div>
+    <Frame>
+      <TitleFrame>
+        <Title>Youtube</Title>
+        <YouTubeIcon sx={{ color: "red" }} />
+      </TitleFrame>
+      <IdolYoutubeCarousel />
+    </Frame>
   )
 }
 
