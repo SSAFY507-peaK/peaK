@@ -1,24 +1,38 @@
-import { Link } from "react-router-dom";
+import Carousel from "../components/Carousel";
+import styled from "styled-components";
+
+/** 메인페이지 탭 메뉴 */
+const TapMenu = styled.div`
+  font-size: 24px;
+  margin-top: 50px;
+  margin-bottom: 25px;
+`;
+
+/** 1~3위, 4~8위 */
+const RankMenu = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+`;
 
 /** 메인페이지 */
-function MainPage() {
+function MainPage(): JSX.Element {
   return (
     <div>
-      <h1>MainPage</h1>
-      <h2>로그인 시 -{`>`} 메인 페이지 렌더링</h2>
-      <h2>로그인 X -{`>`} 인트로 페이지 렌더링</h2>
-      <h3>그냥 다르게 렌더링할까..?</h3>
-      <hr />
-      <div>일단 link잘 되는지 확인용으로 아래 써둘게요</div>
-      <Link to="ranking">랭킹 페이지</Link>
-      <br />
-      <Link to="news">뉴스 페이지</Link>
-      <br />
-      <Link to={`아이돌이름`}>아이돌 페이지</Link>
-      <br />
-      <Link to={`mypage/유저이름`}>내 페이지</Link>
-      <br />
-      <Link to="signup/nickname">회원가입 시 닉네임 설정 페이지</Link>
+      <div>
+        <TapMenu>실시간 아이돌 Top 8</TapMenu>
+        <RankMenu></RankMenu>
+        <RankMenu></RankMenu>
+        <TapMenu>나의 관심 아이돌</TapMenu>
+
+        <TapMenu>트렌딩 유튜브</TapMenu>
+        <Carousel></Carousel>
+
+        <TapMenu>트렌딩 뉴스</TapMenu>
+        <Carousel></Carousel>
+        <div></div>
+      </div>
     </div>
   );
 }
