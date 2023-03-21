@@ -1,5 +1,12 @@
-import React from "react";
+import News from "../components/News";
+import styled from "styled-components";
 import { useParams } from "react-router-dom";
+
+const TapMenu = styled.div`
+  font-size: 24px;
+  margin-top: 50px;
+  margin-bottom: 25px;
+`;
 
 function NewsDetailPage() {
   const params = useParams();
@@ -7,9 +14,8 @@ function NewsDetailPage() {
 
   return (
     <div>
-      <h1>아이돌 뉴스 디테일 페이지</h1>
-      <h2>아이돌 키워드에 대한 디테일 뉴스를 확인할 수 있습니다.</h2>
-      <h2>이 페이지는 "{`${idolName}`}" 아이돌의 상세 뉴스를 확인할 수 있습니다.</h2>
+      <TapMenu>이 페이지는 "{`${idolName}`}" 아이돌의 상세 뉴스를 확인할 수 있습니다.</TapMenu>
+      <News></News>
     </div>
   );
 }
