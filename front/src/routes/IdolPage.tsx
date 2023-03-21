@@ -1,7 +1,6 @@
 import { Link, useParams } from "react-router-dom";
 
 import Bg from "../components/idolpage/sampleImg/Rectangle 299.png"
-import IdolBanner from "../components/idolpage/IdolBanner";
 import IdolChat from "../components/idolpage/IdolChat";
 import IdolData from "../components/idolpage/IdolData";
 import IdolEmotion from "../components/idolpage/IdolEmotion";

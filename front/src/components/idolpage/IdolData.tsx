@@ -34,6 +34,9 @@ const IdolName = styled.div`
 `;
 
 const IdolRank = styled.div`
+  font-size: 1.6rem;
+  font-weight: 700;
+  opacity: 0.5;
 `;
 
 function IdolData () {
