@@ -63,6 +63,7 @@ const GlobalStyle = createGlobalStyle`
 
     /* empty space */
     --side-space: 200px;
+    --content-space: 950px;
   }
 
   *, *::before, *::after {
