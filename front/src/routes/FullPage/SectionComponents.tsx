@@ -1,6 +1,13 @@
 import styled from "styled-components";
 
-const Wrapper = styled.div<{ backgroundColor: string }>`
+type WrapperType = {
+  backgroundColor?: string;
+};
+
+type ImageType = {
+  width?: string;
+}
+const SectionWrapper = styled.div<WrapperType>`
   //height: 100vh;
   height: 100%;
   width: 100%;
@@ -25,7 +32,7 @@ const TextSection = styled.div`
   }
 `;
 
-const ImageSection = styled.div`
+const ImageSection = styled.div<ImageType>`
   display: flex;
   flex: 1;
   flex-direction: column;
@@ -33,8 +40,8 @@ const ImageSection = styled.div`
   align-items: center;
 
   img {
-    width: 70%;
+    width: ${props => props.width || "70%"};
   }
 `;
 
-export { Wrapper, TextSection, ImageSection };
+export { SectionWrapper, TextSection, ImageSection };

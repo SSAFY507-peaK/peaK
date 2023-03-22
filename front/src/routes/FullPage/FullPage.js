@@ -1,9 +1,8 @@
 import React from "react";
 import { FullPage, Slide } from "react-full-page";
 import "./FullPage.scss";
-import SectionOne from "./SectionOne";
-import SectionTwo from "./SectionTwo";
-import SectionThree from "./SectionThree";
+
+import { SectionOne, SectionTwo, SectionThree, SectionFour } from "./SectionPages";
 
 function fullPage() {
   return (
@@ -12,17 +11,15 @@ function fullPage() {
         <SectionOne backgroundColor="var(--white800-color)" />
       </Slide>
       <Slide>
-        <SectionTwo backgroundColor="var(--purple800-color)" />
+        <SectionTwo backgroundColor="#fff1f9" />
       </Slide>
       <Slide>
-        <SectionThree backgroundColor="var(--red800-color)" />
+        <SectionThree backgroundColor="#f0fff2" />
+      </Slide>
+      <Slide>
+        <SectionFour backgroundColor="#cff4ff" />
       </Slide>
     </FullPage>
-    // <>
-    //   <SectionOne />
-    //   <SectionTwo />
-    //   <SectionThree />
-    // </>
   );
 }
 
