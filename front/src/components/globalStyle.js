@@ -48,6 +48,7 @@ const GlobalStyle = createGlobalStyle`
     height: 100%;
     font-family: "EliceDigitalBaeum", -apple-system, Helvetica Neue, sans-serif;
     margin: 0;
+    background: var(--white800-color);
   }
 
   button {
