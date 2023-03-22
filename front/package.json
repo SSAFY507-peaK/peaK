@@ -5,7 +5,6 @@
   "dependencies": {
     "@emotion/react": "^11.10.6",
     "@emotion/styled": "^11.10.6",
-    "@fullpage/react-fullpage": "^0.1.36",
     "@mui/icons-material": "^5.11.11",
     "@mui/material": "^5.11.14",
     "@reduxjs/toolkit": "^1.9.3",
@@ -22,6 +21,7 @@
     "react": "^18.2.0",
     "react-chartjs-2": "^5.2.0",
     "react-dom": "^18.2.0",
+    "react-full-page": "^0.1.12",
     "react-material-ui-carousel": "^3.4.2",
     "react-redux": "^8.0.5",
     "react-router": "^6.9.0",
