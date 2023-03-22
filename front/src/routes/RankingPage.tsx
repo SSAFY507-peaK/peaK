@@ -1,10 +1,9 @@
-import React from "react";
+import RankingPageBar from "../components/RankingPageBar";
 
 function RankingPage() {
   return (
     <div>
-      <h1>랭킹 페이지입니다</h1>
-      <h2>아이돌 전체의 랭킹을 확인할 수 있습니다.</h2>
+      <RankingPageBar></RankingPageBar>
     </div>
   );
 }
