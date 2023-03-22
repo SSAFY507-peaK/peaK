@@ -10,7 +10,7 @@ const CarouselDiv = styled.div`
   border-radius: 20px;
 `;
 
-function CarouselComponent(props) {
+function CarouselComponent(props:any) {
   const profileImg: string = props.profileImg;
   const profileTitle: string = props.profileTitle;
   return (
