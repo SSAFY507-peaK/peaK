@@ -11,6 +11,8 @@ const iconStyle = {
 const GlobalStyle = createGlobalStyle`
   :root {
     /* Color */
+    --default-font-color: #1B1B1B;
+    
     --gray800-color: #EBEBEB;
     --gray700-color: #D1D1D1;
     --gray600-color: #B8B8B8;
