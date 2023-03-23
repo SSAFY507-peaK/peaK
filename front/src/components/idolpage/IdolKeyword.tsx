@@ -19,7 +19,7 @@ const NewsFrame = styled.div`
   flex-direction: row;
 `;
 
-function IdolNews() {
+function IdolKeyword() {
   return (
     <FrameCommponent
       leftitem={
@@ -43,4 +43,4 @@ function IdolNews() {
   )
 }
 
-export default IdolNews;
+export default IdolKeyword;
