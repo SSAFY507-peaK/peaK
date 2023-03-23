@@ -1,45 +1,35 @@
-import FrameCommponent from "./FrameComponent";
-import IdolNewsItem from "./IdolNewsItem";
-import IdolNewsWordCloud from "./IdolNewsWordCloud";
+import IdolKeywordNews from "./IdolKeywordNews";
+import IdolKeywordRank from "./IdolKeywordRank";
+import IdolKeywordWordCloud from "./IdolKeywordWordCloud";
 import styled from "styled-components";
+
+const Frame = styled.div`
+  display: flex;
+  flex-direction: row;
+  background-color: rgba(255, 255, 255, 0.5);
+  border-radius: 30px;
+`;
+
+const LeftFrame = styled.div`
+  flex: 0.4;
+
+`;
 
 const Title = styled.div`
   font-size: 2rem;
   font-weight: 700;
 `;
 
-const WordCloudFrame = styled.div`
-  display: flex;
-  justify-content: center;
-  align-content: center;
-`;
-
-const NewsFrame = styled.div`
-  display: flex;
-  flex-direction: row;
-`;
 
 function IdolKeyword() {
   return (
-    <FrameCommponent
-      leftitem={
-        <>
-          <Title>오늘의 키워드</Title>
-          <WordCloudFrame>
-            <IdolNewsWordCloud />
-          </WordCloudFrame>
-        </>
-      }
-      rightitem={
-        <>
-          <Title>News &gt;</Title>
-          <NewsFrame>
-            <IdolNewsItem></IdolNewsItem>
-          </NewsFrame>
-        </>
-      }
-    ></FrameCommponent>
-    
+    <Frame>
+      <LeftFrame>
+        <IdolKeywordRank />
+        <IdolKeywordWordCloud />
+      </LeftFrame>
+      <IdolKeywordNews />
+    </Frame>
   )
 }
 

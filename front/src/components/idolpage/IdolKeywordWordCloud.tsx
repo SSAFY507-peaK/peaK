@@ -1,7 +1,7 @@
 import ReactWordcloud from 'react-wordcloud';
 import styled from "styled-components";
 
-function IdolNewsWordCloud (){
+function IdolKeywordWordCloud (){
   const words = [
     {
       text: 'told',
@@ -25,4 +25,4 @@ function IdolNewsWordCloud (){
   )
 }
 
-export default IdolNewsWordCloud;
+export default IdolKeywordWordCloud;

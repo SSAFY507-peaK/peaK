@@ -10,6 +10,7 @@ const Frame = styled.div`
   flex-direction: column;
   background-color: rgba(255, 255, 255, 0.5);
   border-radius: 30px;
+  margin-bottom: 15px;
 `;
 
 const Title = styled.div`
