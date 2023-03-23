@@ -1,4 +1,3 @@
-import Carousel from "../Carousel";
 import styled from "styled-components";
 
 const ComponentDiv = styled.div`
@@ -31,7 +30,6 @@ function TrendNews() {
         <h2>트렌딩</h2>
         <PurpleH2> 뉴스</PurpleH2>
       </TitleDiv>
-      <Carousel />
     </ComponentDiv>
   );
 }
