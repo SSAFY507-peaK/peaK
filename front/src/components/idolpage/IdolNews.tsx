@@ -1,13 +1,17 @@
 import FrameCommponent from "./FrameComponent";
 import IdolNewsItem from "./IdolNewsItem";
+import IdolNewsWordCloud from "./IdolNewsWordCloud";
 import styled from "styled-components";
 
 const Title = styled.div`
-  
+  font-size: 2rem;
+  font-weight: 700;
 `;
 
-const WordCloud = styled.div`
-
+const WordCloudFrame = styled.div`
+  display: flex;
+  justify-content: center;
+  align-content: center;
 `;
 
 const NewsFrame = styled.div`
@@ -21,7 +25,9 @@ function IdolNews() {
       leftitem={
         <>
           <Title>오늘의 키워드</Title>
-          <WordCloud>나는 워드클라우드</WordCloud>
+          <WordCloudFrame>
+            <IdolNewsWordCloud />
+          </WordCloudFrame>
         </>
       }
       rightitem={

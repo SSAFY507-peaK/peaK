@@ -1,10 +1,11 @@
 import Emotion from "./sampleImg/Emotion.png"
 import FrameCommponent from './FrameComponent';
 import HelpIcon from '@mui/icons-material/Help';
+import IdolEmotionChart from "./IdolEmotionChart";
+import IdolEmotionRankChart from "./IdolEmotionRankChart";
 import TabComponent from "./TabComponent";
 import styled from "styled-components";
 import { useState } from "react";
-import IdolEmotionChart from "./IdolEmotionChart";
 
 const Title = styled.div`
   font-size: 2rem;
@@ -55,13 +56,13 @@ function IdolEmotion() {
             <TabComponent isTab = {!check} title = "랭킹 차트" size ="1.5rem" onClick={() => check? setCheck(false) :setCheck(true)}></TabComponent>
             <HelpIcon sx={{ color: "lightgray" }} />
           </ChartTagFrame>
-          {
-            check 
-            ?
-            <IdolEmotionChart />
-            :
-            <IdolEmotionChart />
-          }
+            {
+              check 
+              ?
+              <IdolEmotionChart />
+              :
+              <IdolEmotionRankChart />
+            }
         </>
         }
     ></FrameCommponent>
