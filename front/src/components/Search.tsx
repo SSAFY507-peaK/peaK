@@ -9,7 +9,7 @@ const Wrapper = styled.div<WrapperType>`
   position: relative;
   display: flex;
   align-items: center;
-  border: 1px solid #d9d9d9;
+  border: 1px solid var(--gray700-color);
   background-color: white;
   border-radius: 20px;
   padding-right: 7px;
@@ -27,7 +27,7 @@ function Search({width}: WrapperType) {
   return (
     <Wrapper width={width}>
       <SearchInput placeholder="아이돌 이름을 입력해주세요" />
-      <SearchIcon sx={{ opacity: "0.6" }} />
+      <SearchIcon sx={{ color: "var(--gray600-color)" }} />
     </Wrapper>
   );
 }
