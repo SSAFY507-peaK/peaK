@@ -1,11 +1,5 @@
-import RankingPageBar from "../components/RankingPageBar";
-
 function RankingPage() {
-  return (
-    <div>
-      <RankingPageBar></RankingPageBar>
-    </div>
-  );
+  return <div></div>;
 }
 
 export default RankingPage;
