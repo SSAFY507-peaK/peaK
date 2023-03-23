@@ -35,6 +35,7 @@ const ChartBtnFrame = styled.div`
 
 const ChartFrame = styled.div`
   flex: 0.7;
+  margin: 15px;
 `;
 
 
