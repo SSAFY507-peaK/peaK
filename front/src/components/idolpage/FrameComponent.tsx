@@ -20,7 +20,8 @@ function FrameCommponent({leftitem,rightitem}:any) {
   return(
     <Wrapper>
       <Frame width="40%">{leftitem}</Frame>
-      <Frame width="60%">{rightitem}</Frame>
+      <Frame width="10%"></Frame>
+      <Frame width="45%">{rightitem}</Frame>
     </Wrapper>
   )
 }

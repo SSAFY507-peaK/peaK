@@ -15,12 +15,18 @@ const ChartTabOn = styled.div<TabType>`
   background-color: var(--purple800-color);
   font-size: ${props => props.size};
   font-weight: 300;
+  border-radius:20px;
+  padding-left: 30px;
+  padding-right: 30px;
   cursor: pointer;
 `;
 
 const ChartTabOff = styled.div<TabType>`
   font-size: ${props => props.size};
   font-weight: 300;
+  border-radius:20px;
+  padding-left: 30px;
+  padding-right: 30px;
   cursor: pointer;
 `;
 

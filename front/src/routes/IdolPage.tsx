@@ -30,7 +30,7 @@ function IdolPage() {
   
   return (
     <Wrapper>
-      <BannerImg src={Bg}/>
+      {/* <BannerImg src={Bg}/> */}
       <IdolData />
       <IdolEmotion />
       <IdolNews />
