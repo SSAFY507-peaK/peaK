@@ -71,7 +71,7 @@ function MenuBar() {
   return (
     <MenuBackground>
       <MenuSection>
-        <Logo />
+        <Link to="/"><Logo /></Link>
         <Search width="220px" />
         <MenuTab>
           <Menu><NavLink to="/" className={({ isActive }) => (isActive ? "active" : "")}><HomeIcon style={style}/>홈</NavLink></Menu>
