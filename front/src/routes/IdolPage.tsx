@@ -1,8 +1,8 @@
 import { Link, useParams } from "react-router-dom";
 
+import IdolData from "../components/idolpage/IdolData";
 import IdolEmotion from "../components/idolpage/IdolEmotion";
 import IdolKeyword from "../components/idolpage/IdolKeyword";
-import IdolProfile from "../components/idolpage/IdolProfile";
 import IdolYoutube from "../components/idolpage/IdolYoutube";
 import styled from "styled-components";
 
@@ -37,7 +37,7 @@ function IdolPage() {
           <IdolEmotion />
           <IdolKeyword />
         </TopLeftFrame>
-        <IdolProfile />
+        <IdolData />
       </TopFrame>
       <BottomFrame>
         <IdolYoutube />
