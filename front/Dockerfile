@@ -5,5 +5,5 @@ RUN npm install -g serve
 RUN mkdir ./build
 COPY ./build ./build
 
-EXPOSE 3000
+EXPOSE 3126
 ENTRYPOINT ["serve", "-s", "build"]
