@@ -21,6 +21,10 @@ const SearchInput = styled.input`
   width: 100%;
   margin: 3px 10px;
   font-size: 13px;
+  color: var(--gray200-color);
+  &::placeholder {
+    color: var(--gray600-color);
+  }
 `;
 
 function Search({width}: WrapperType) {

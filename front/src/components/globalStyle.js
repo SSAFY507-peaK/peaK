@@ -11,8 +11,6 @@ const iconStyle = {
 const GlobalStyle = createGlobalStyle`
   :root {
     /* Color */
-    --default-font-color: #1B1B1B;
-    
     --gray800-color: #EBEBEB;
     --gray700-color: #D1D1D1;
     --gray600-color: #B8B8B8;
@@ -78,7 +76,7 @@ const GlobalStyle = createGlobalStyle`
   
   
   html, body {
-    color: var(--default-font-color);
+    color: var(--gray100-color);
     width: 100%;
     height: 100%;
     font-family: "Pretendard", -apple-system, Helvetica Neue, sans-serif;
