@@ -1,7 +1,7 @@
 import SearchIcon from "@mui/icons-material/Search";
 import styled from "styled-components";
 
-interface WrapperType {
+type WrapperType = {
   width?: string;
 }
 
@@ -9,24 +9,29 @@ const Wrapper = styled.div<WrapperType>`
   position: relative;
   display: flex;
   align-items: center;
-  border: 1px solid #d9d9d9;
+  border: 1px solid var(--gray700-color);
   background-color: white;
   border-radius: 20px;
-  padding: 3px 10px;
+  padding-right: 7px;
   height: 33px;
   width: ${props => props.width || "300px"};
 `;
 
 const SearchInput = styled.input`
   width: 100%;
+  margin: 3px 10px;
   font-size: 13px;
+  color: var(--gray200-color);
+  &::placeholder {
+    color: var(--gray600-color);
+  }
 `;
 
-function Search() {
+function Search({width}: WrapperType) {
   return (
-    <Wrapper>
+    <Wrapper width={width}>
       <SearchInput placeholder="아이돌 이름을 입력해주세요" />
-      <SearchIcon sx={{ opacity: "0.6" }} />
+      <SearchIcon sx={{ color: "var(--gray600-color)" }} />
     </Wrapper>
   );
 }
