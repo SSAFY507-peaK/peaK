@@ -22,7 +22,7 @@ const NewsSource = styled.div`
 `;
 
 
-function IdolNewsItem() {
+function IdolKeywordNews() {
   return (
     <>
       <NewsImg>나는 뉴스 이미지</NewsImg>
@@ -35,4 +35,4 @@ function IdolNewsItem() {
   )
 }
 
-export default IdolNewsItem;
+export default IdolKeywordNews;
