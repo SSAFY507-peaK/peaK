@@ -70,20 +70,19 @@ const GlobalStyle = createGlobalStyle`
     box-sizing: border-box;
   }
   @font-face {
-    font-family: 'EliceDigitalBaeum';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_elice@1.0/EliceDigitalBaeum.woff2') format('woff2');
-    font-weight: normal;
+    font-family: 'Pretendard';
+    src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+    font-weight: 400;
     font-style: normal;
-}
+  }
   
   
   html, body {
     color: var(--default-font-color);
     width: 100%;
     height: 100%;
-    font-family: "EliceDigitalBaeum", -apple-system, Helvetica Neue, sans-serif;
+    font-family: "Pretendard", -apple-system, Helvetica Neue, sans-serif;
     margin: 0;
-    background: var(--white800-color);
   }
 
   button {

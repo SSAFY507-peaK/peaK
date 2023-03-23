@@ -1,11 +1,19 @@
-import styled from 'styled-components';
+import { Outlet } from "react-router";
+import React from "react";
+import styled from "styled-components";
 
-const Wrapper = styled.div`
-  height: 100%;
-  width: var(--content-space);
-  padding-top: var(--nav-height);
-  margin-left: auto;
-  margin-right: auto;
-`
+const WrapperDiv = styled.div`
+  margin: 30px;
+  width: 100%;
+  overflow-y: auto;
+`;
 
-export default Wrapper
+function Wrapper(): any {
+  return (
+    <WrapperDiv>
+      <Outlet />
+    </WrapperDiv>
+  );
+}
+
+export default Wrapper;
