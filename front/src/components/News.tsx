@@ -42,7 +42,7 @@ const NewsBroad = styled.div`
   color: #d9d9d9;
 `;
 
-function News(props:any) {
+function News() {
   const items = [
     {
       title: "기사 제목 111",

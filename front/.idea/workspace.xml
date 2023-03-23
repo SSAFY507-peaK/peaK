@@ -1,11 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
-    <list default="true" id="8dd91feb-81e6-4086-8748-a2cd20fef572" name="Default Changelist" comment="" />
+    <list default="true" id="8dd91feb-81e6-4086-8748-a2cd20fef572" name="Default Changelist" comment="### 제목&#10;# :커밋타입: [FE]/[BE] #이슈번호 작업내용&#10;:truck: [FE] pacakge 수정&#10;&#10;#   [커밋 타입]  리스트&#10;#   :sparkles:          : 새로운 기능에 대한 커밋&#10;#   :bug:               : 버그 수정에 대한 커밋&#10;#   :lipstick:          : CSS 등 사용자 UI 디자인 변경&#10;#   :recycle:           : 코드 리팩토링에 대한 커밋&#10;#   :art:               : 스타일 (코드 형식 변경: 비즈니스 로직에 변경 없음)&#10;#   :memo:              : 문서 추가, 수정에 대한 커밋&#10;#   :hammer:            : 빌드 관련 파일 수정에 대한 커밋&#10;#   :truck:             : 파일 혹은 폴더명을 수정하거나 옮기는 작업만인 경우&#10;#   :fire:              : 파일을 삭제하는 작업만 수행한 경우&#10;#   :rocket:            : CI 관련 설정, 수정에 대한 커밋 &#10;#   :speech_balloon:    : 필요한 주석 추가 및 변경&#10;#   :twisted_rightwards_arrows:    : 브랜치 합병">
+      <change afterPath="$PROJECT_DIR$/src/components/Wrapper.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/NavBar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/NavBar.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/globalStyle.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/globalStyle.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/routes/Layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/Layout.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/routes/MainPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/MainPage.tsx" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="TypeScript JSX File" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
@@ -16,10 +33,13 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">
-    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
-    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "node.js.selected.package.tslint": "(autodetect)",
+    "prettierjs.PrettierConfiguration.Package": "C:\\Users\\SSAFY\\Desktop\\SSAFY PJT2\\PJT\\front\\node_modules\\prettier",
+    "ts.external.directory.path": "C:\\Users\\SSAFY\\Desktop\\SSAFY PJT2\\PJT\\front\\node_modules\\typescript\\lib"
+  }
+}]]></component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
       <changelist id="8dd91feb-81e6-4086-8748-a2cd20fef572" name="Default Changelist" comment="" />
@@ -28,6 +48,28 @@
       <option name="presentableId" value="Default" />
       <updated>1679147898413</updated>
     </task>
+    <task id="LOCAL-00001" summary="### 제목&#10;# :커밋타입: [FE]/[BE] #이슈번호 작업내용&#10;:twisted_rightwards_arrows: [FE] merge conflict 해결&#10;&#10;- 다들 라이브러리를 많이 추가해서 생긴 오류&#10;&#10;#   [커밋 타입]  리스트&#10;#   :sparkles:          : 새로운 기능에 대한 커밋&#10;#   :bug:               : 버그 수정에 대한 커밋&#10;#   :lipstick:          : CSS 등 사용자 UI 디자인 변경&#10;#   :recycle:           : 코드 리팩토링에 대한 커밋&#10;#   :art:               : 스타일 (코드 형식 변경: 비즈니스 로직에 변경 없음)&#10;#   :memo:              : 문서 추가, 수정에 대한 커밋&#10;#   :hammer:            : 빌드 관련 파일 수정에 대한 커밋&#10;#   :truck:             : 파일 혹은 폴더명을 수정하거나 옮기는 작업만인 경우&#10;#   :fire:              : 파일을 삭제하는 작업만 수행한 경우&#10;#   :rocket:            : CI 관련 설정, 수정에 대한 커밋 &#10;#   :speech_balloon:    : 필요한 주석 추가 및 변경&#10;#   :twisted_rightwards_arrows:    : 브랜치 합병">
+      <created>1679458160439</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1679458160439</updated>
+    </task>
+    <task id="LOCAL-00002" summary="### 제목&#10;# :커밋타입: [FE]/[BE] #이슈번호 작업내용&#10;:truck: [FE] package.json 수정&#10;&#10;#   [커밋 타입]  리스트&#10;#   :sparkles:          : 새로운 기능에 대한 커밋&#10;#   :bug:               : 버그 수정에 대한 커밋&#10;#   :lipstick:          : CSS 등 사용자 UI 디자인 변경&#10;#   :recycle:           : 코드 리팩토링에 대한 커밋&#10;#   :art:               : 스타일 (코드 형식 변경: 비즈니스 로직에 변경 없음)&#10;#   :memo:              : 문서 추가, 수정에 대한 커밋&#10;#   :hammer:            : 빌드 관련 파일 수정에 대한 커밋&#10;#   :truck:             : 파일 혹은 폴더명을 수정하거나 옮기는 작업만인 경우&#10;#   :fire:              : 파일을 삭제하는 작업만 수행한 경우&#10;#   :rocket:            : CI 관련 설정, 수정에 대한 커밋 &#10;#   :speech_balloon:    : 필요한 주석 추가 및 변경&#10;#   :twisted_rightwards_arrows:    : 브랜치 합병">
+      <created>1679458702746</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1679458702746</updated>
+    </task>
+    <task id="LOCAL-00003" summary="### 제목&#10;# :커밋타입: [FE]/[BE] #이슈번호 작업내용&#10;:truck: [FE] pacakge 수정&#10;&#10;#   [커밋 타입]  리스트&#10;#   :sparkles:          : 새로운 기능에 대한 커밋&#10;#   :bug:               : 버그 수정에 대한 커밋&#10;#   :lipstick:          : CSS 등 사용자 UI 디자인 변경&#10;#   :recycle:           : 코드 리팩토링에 대한 커밋&#10;#   :art:               : 스타일 (코드 형식 변경: 비즈니스 로직에 변경 없음)&#10;#   :memo:              : 문서 추가, 수정에 대한 커밋&#10;#   :hammer:            : 빌드 관련 파일 수정에 대한 커밋&#10;#   :truck:             : 파일 혹은 폴더명을 수정하거나 옮기는 작업만인 경우&#10;#   :fire:              : 파일을 삭제하는 작업만 수행한 경우&#10;#   :rocket:            : CI 관련 설정, 수정에 대한 커밋 &#10;#   :speech_balloon:    : 필요한 주석 추가 및 변경&#10;#   :twisted_rightwards_arrows:    : 브랜치 합병">
+      <created>1679459080609</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1679459080609</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -35,10 +77,28 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="dev" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
           </value>
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="### 제목&#10;# :커밋타입: [FE]/[BE] #이슈번호 작업내용&#10;:twisted_rightwards_arrows: [FE] merge conflict 해결&#10;&#10;- 다들 라이브러리를 많이 추가해서 생긴 오류&#10;&#10;#   [커밋 타입]  리스트&#10;#   :sparkles:          : 새로운 기능에 대한 커밋&#10;#   :bug:               : 버그 수정에 대한 커밋&#10;#   :lipstick:          : CSS 등 사용자 UI 디자인 변경&#10;#   :recycle:           : 코드 리팩토링에 대한 커밋&#10;#   :art:               : 스타일 (코드 형식 변경: 비즈니스 로직에 변경 없음)&#10;#   :memo:              : 문서 추가, 수정에 대한 커밋&#10;#   :hammer:            : 빌드 관련 파일 수정에 대한 커밋&#10;#   :truck:             : 파일 혹은 폴더명을 수정하거나 옮기는 작업만인 경우&#10;#   :fire:              : 파일을 삭제하는 작업만 수행한 경우&#10;#   :rocket:            : CI 관련 설정, 수정에 대한 커밋 &#10;#   :speech_balloon:    : 필요한 주석 추가 및 변경&#10;#   :twisted_rightwards_arrows:    : 브랜치 합병" />
+    <MESSAGE value="### 제목&#10;# :커밋타입: [FE]/[BE] #이슈번호 작업내용&#10;:truck: [FE] package.json 수정&#10;&#10;#   [커밋 타입]  리스트&#10;#   :sparkles:          : 새로운 기능에 대한 커밋&#10;#   :bug:               : 버그 수정에 대한 커밋&#10;#   :lipstick:          : CSS 등 사용자 UI 디자인 변경&#10;#   :recycle:           : 코드 리팩토링에 대한 커밋&#10;#   :art:               : 스타일 (코드 형식 변경: 비즈니스 로직에 변경 없음)&#10;#   :memo:              : 문서 추가, 수정에 대한 커밋&#10;#   :hammer:            : 빌드 관련 파일 수정에 대한 커밋&#10;#   :truck:             : 파일 혹은 폴더명을 수정하거나 옮기는 작업만인 경우&#10;#   :fire:              : 파일을 삭제하는 작업만 수행한 경우&#10;#   :rocket:            : CI 관련 설정, 수정에 대한 커밋 &#10;#   :speech_balloon:    : 필요한 주석 추가 및 변경&#10;#   :twisted_rightwards_arrows:    : 브랜치 합병" />
+    <MESSAGE value="### 제목&#10;# :커밋타입: [FE]/[BE] #이슈번호 작업내용&#10;:truck: [FE] pacakge 수정&#10;&#10;#   [커밋 타입]  리스트&#10;#   :sparkles:          : 새로운 기능에 대한 커밋&#10;#   :bug:               : 버그 수정에 대한 커밋&#10;#   :lipstick:          : CSS 등 사용자 UI 디자인 변경&#10;#   :recycle:           : 코드 리팩토링에 대한 커밋&#10;#   :art:               : 스타일 (코드 형식 변경: 비즈니스 로직에 변경 없음)&#10;#   :memo:              : 문서 추가, 수정에 대한 커밋&#10;#   :hammer:            : 빌드 관련 파일 수정에 대한 커밋&#10;#   :truck:             : 파일 혹은 폴더명을 수정하거나 옮기는 작업만인 경우&#10;#   :fire:              : 파일을 삭제하는 작업만 수행한 경우&#10;#   :rocket:            : CI 관련 설정, 수정에 대한 커밋 &#10;#   :speech_balloon:    : 필요한 주석 추가 및 변경&#10;#   :twisted_rightwards_arrows:    : 브랜치 합병" />
+    <option name="LAST_COMMIT_MESSAGE" value="### 제목&#10;# :커밋타입: [FE]/[BE] #이슈번호 작업내용&#10;:truck: [FE] pacakge 수정&#10;&#10;#   [커밋 타입]  리스트&#10;#   :sparkles:          : 새로운 기능에 대한 커밋&#10;#   :bug:               : 버그 수정에 대한 커밋&#10;#   :lipstick:          : CSS 등 사용자 UI 디자인 변경&#10;#   :recycle:           : 코드 리팩토링에 대한 커밋&#10;#   :art:               : 스타일 (코드 형식 변경: 비즈니스 로직에 변경 없음)&#10;#   :memo:              : 문서 추가, 수정에 대한 커밋&#10;#   :hammer:            : 빌드 관련 파일 수정에 대한 커밋&#10;#   :truck:             : 파일 혹은 폴더명을 수정하거나 옮기는 작업만인 경우&#10;#   :fire:              : 파일을 삭제하는 작업만 수행한 경우&#10;#   :rocket:            : CI 관련 설정, 수정에 대한 커밋 &#10;#   :speech_balloon:    : 필요한 주석 추가 및 변경&#10;#   :twisted_rightwards_arrows:    : 브랜치 합병" />
   </component>
 </project>

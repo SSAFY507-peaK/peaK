@@ -18,6 +18,7 @@ const RankingNum = styled.div<RankingNumType>`
       : "#000000"};
 `;
 
+/** 아이돌 순위, 프로필, 그룹명 보여주는 컴포넌트 */
 function Rank(props: any): any {
   let IdolRank: any = 0;
   if (props.rank in ["1", "2", "3"]) {

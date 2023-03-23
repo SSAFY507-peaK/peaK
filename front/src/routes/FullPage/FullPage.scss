@@ -1,0 +1,29 @@
+.slide-navigation {
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  bottom: 30px;
+
+  button {
+    background-color: var(--gray600-color);
+    border-radius: 10px;
+    width: 5px;
+    height: 5px;
+    margin: 0 5px;
+    font-size: 0;
+    cursor: pointer;
+
+    &:disabled {
+      background-color: var(--gray400-color);
+      width: 7px;
+      height: 7px;
+    }
+
+    &:nth-child(1),
+    &:nth-last-child(1) {
+      display: none;
+    }
+  }
+}

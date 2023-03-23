@@ -9,7 +9,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import CarouselComponent from "./CarouselComponent";
 
 /** items 내부에 캐러셀 적용 원하는 항목들 넣기 */
-export default function Carousel(props:any) {
+export default function Carousel() {
   const items = [
     {
       name: "1",
