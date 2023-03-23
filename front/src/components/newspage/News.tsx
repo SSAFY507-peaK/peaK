@@ -1,4 +1,4 @@
-import NewsProfile from "./NewsProfile";
+import NewsProfile from "../newspage/NewsProfile";
 import styled from "styled-components";
 
 const NewsDiv = styled.div`
