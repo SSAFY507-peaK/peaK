@@ -19,11 +19,12 @@ const TopFrame = styled.div`
 const TopLeftFrame = styled.div`
   display: flex;
   flex-direction: column;
+  flex: 0.6;
+  margin-right: 15px;
 `;
 
 
 const BottomFrame = styled.div`
-  
 `;
 
 function IdolPage() {
