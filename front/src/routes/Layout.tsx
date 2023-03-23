@@ -14,7 +14,7 @@ const DashboardFrame = styled.div`
   width: 100%;
   border-radius: 30px;
   background: rgba(255, 255, 255, 0.5);
-
+  
   display: flex;
 `;
 

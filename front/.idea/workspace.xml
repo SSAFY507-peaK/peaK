@@ -4,15 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8dd91feb-81e6-4086-8748-a2cd20fef572" name="Default Changelist" comment="### 제목&#10;# :커밋타입: [FE]/[BE] #이슈번호 작업내용&#10;:truck: [FE] pacakge 수정&#10;&#10;#   [커밋 타입]  리스트&#10;#   :sparkles:          : 새로운 기능에 대한 커밋&#10;#   :bug:               : 버그 수정에 대한 커밋&#10;#   :lipstick:          : CSS 등 사용자 UI 디자인 변경&#10;#   :recycle:           : 코드 리팩토링에 대한 커밋&#10;#   :art:               : 스타일 (코드 형식 변경: 비즈니스 로직에 변경 없음)&#10;#   :memo:              : 문서 추가, 수정에 대한 커밋&#10;#   :hammer:            : 빌드 관련 파일 수정에 대한 커밋&#10;#   :truck:             : 파일 혹은 폴더명을 수정하거나 옮기는 작업만인 경우&#10;#   :fire:              : 파일을 삭제하는 작업만 수행한 경우&#10;#   :rocket:            : CI 관련 설정, 수정에 대한 커밋 &#10;#   :speech_balloon:    : 필요한 주석 추가 및 변경&#10;#   :twisted_rightwards_arrows:    : 브랜치 합병">
-      <change beforePath="$PROJECT_DIR$/.idea/watcherTasks.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/watcherTasks.xml" afterDir="false" />
+    <list default="true" id="8dd91feb-81e6-4086-8748-a2cd20fef572" name="Default Changelist" comment="### 제목&#10;# :커밋타입: [FE]/[BE] #이슈번호 작업내용&#10;:truck: [FE] package.json 수정&#10;&#10;#   [커밋 타입]  리스트&#10;#   :sparkles:          : 새로운 기능에 대한 커밋&#10;#   :bug:               : 버그 수정에 대한 커밋&#10;#   :lipstick:          : CSS 등 사용자 UI 디자인 변경&#10;#   :recycle:           : 코드 리팩토링에 대한 커밋&#10;#   :art:               : 스타일 (코드 형식 변경: 비즈니스 로직에 변경 없음)&#10;#   :memo:              : 문서 추가, 수정에 대한 커밋&#10;#   :hammer:            : 빌드 관련 파일 수정에 대한 커밋&#10;#   :truck:             : 파일 혹은 폴더명을 수정하거나 옮기는 작업만인 경우&#10;#   :fire:              : 파일을 삭제하는 작업만 수행한 경우&#10;#   :rocket:            : CI 관련 설정, 수정에 대한 커밋 &#10;#   :speech_balloon:    : 필요한 주석 추가 및 변경&#10;#   :twisted_rightwards_arrows:    : 브랜치 합병">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/NavBar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/NavBar.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/MenuBar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/MenuBar.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Search.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Search.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/Wrapper.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Wrapper.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/globalStyle.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/globalStyle.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/routes/Layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/Layout.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/routes/MainPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/MainPage.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -48,7 +46,7 @@
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
     "prettierjs.PrettierConfiguration.Package": "C:\\Users\\SSAFY\\Desktop\\SSAFY PJT2\\PJT\\front\\node_modules\\prettier",
-    "ts.external.directory.path": "C:\\Users\\SSAFY\\Desktop\\peaK\\front\\node_modules\\typescript\\lib",
+    "ts.external.directory.path": "C:\\Users\\SSAFY\\Desktop\\SSAFY PJT2\\PJT\\front\\node_modules\\typescript\\lib",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>

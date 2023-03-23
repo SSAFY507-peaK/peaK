@@ -3,8 +3,8 @@ import React from "react";
 import styled from "styled-components";
 
 const WrapperDiv = styled.div`
-  margin: 30px;
   width: 100%;
+  margin: 30px;
   overflow-y: auto;
 `;
 
