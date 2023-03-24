@@ -77,7 +77,6 @@ function RankingDiv(props: any) {
       content.push(<RankingComponent item={item} />);
     }
   }
-  console.log(content);
   return <ContentDiv>{content}</ContentDiv>;
 }
 
