@@ -1,8 +1,8 @@
 import { Link, useParams } from "react-router-dom";
 
 import IdolData from "../components/idolpage/IdolData";
-import IdolEmotion from "../components/idolpage/IdolEmotion";
-import IdolKeyword from "../components/idolpage/IdolKeyword";
+import IdolEmotion from "../components/idolpage/idolemotion/IdolEmotion";
+import IdolKeyword from "../components/idolpage/idolkeyword/IdolKeyword";
 import IdolYoutube from "../components/idolpage/IdolYoutube";
 import styled from "styled-components";
 
