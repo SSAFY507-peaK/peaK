@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 
 import IdolKeywordRankBtn from "./IdolKeywordRankBtn";
+import TitleComponent from "../TitleComponent";
 import styled from "styled-components";
 
 const RankFrame = styled.div`
@@ -8,17 +9,6 @@ const RankFrame = styled.div`
   margin-bottom: 20px;
 `;
 
-const TitleFrame = styled.div`
-  display: flex;
-  flex-direction: row;
-`;
-
-const Title = styled.div`
-  font-size: 2rem;
-  font-weight: 700;
-  margin: 30px 0px 20px 10px;
-  color: ${props => props.color || `var(--purple500-color)`};
-`;
 
 function IdolKeywordRank() {
   const dumy = [
@@ -48,10 +38,7 @@ function IdolKeywordRank() {
 
   return (
     <RankFrame>
-      <TitleFrame>
-        <Title color="black">인기</Title>
-        <Title>키워드</Title>
-      </TitleFrame>
+      <TitleComponent blacktxt="인기" purpletxt="키워드" />
       {
         dumy.map((e, idx) => {
           return (
