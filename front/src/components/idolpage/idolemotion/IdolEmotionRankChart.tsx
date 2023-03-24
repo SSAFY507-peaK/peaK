@@ -26,9 +26,27 @@ ChartJS.register(
   Legend
 );
 
-function IdolEmotionChart() {
+function IdolEmotionRankChart() {
   const options = {
     responsive: true,
+    interaction: {
+      mode: "index" as const,
+      intersect: false,
+    },
+    animations: {
+      tension: {
+        duration: 1000,
+        // easing: 'linear',
+        from: 1,
+        to: 0.5,
+      }
+    },
+    scales: {
+      y: { // defining min and max so hiding the dataset does not change scale range
+        min: 0,
+        max: 1,
+      }
+    },
     plugins: {
       legend: {
         position: 'bottom' as const,
@@ -46,16 +64,10 @@ function IdolEmotionChart() {
     labels,
     datasets: [
       {
-        label: '긍정',
-        data: labels.map(() => faker.datatype.number({ min: 0, max: 100 })),
+        label: '세븐틴',
+        data: labels.map(() => faker.datatype.float({ min: 0, max: 1 })),
         borderColor: 'rgb(255, 99, 132)',
         backgroundColor: 'rgba(255, 99, 132, 0.5)',
-      },
-      {
-        label: '부정',
-        data: labels.map(() => faker.datatype.number({ min: 0, max: 100 })),
-        borderColor: 'rgb(53, 162, 235)',
-        backgroundColor: 'rgba(53, 162, 235, 0.5)',
       },
     ],
   };
@@ -63,5 +75,4 @@ function IdolEmotionChart() {
   return <Line options={options} data={data} />;
 }
 
-export default IdolEmotionChart;
-
+export default IdolEmotionRankChart;

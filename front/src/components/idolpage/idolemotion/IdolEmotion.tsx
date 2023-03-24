@@ -23,20 +23,19 @@ const Title = styled.div`
 const DataFrame = styled.div`
   display: flex;
   flex-direction: row;
-
 `;
 
 const ChartBtnFrame = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-between;
   flex: 0.3;
+  margin-top: 10px;
 `;
 
 const ChartFrame = styled.div`
-  flex: 0.7;
-  margin: 15px;
+  flex: 0.6;
+  margin: 0px 10px 10px 10px;
 `;
 
 
@@ -55,9 +54,9 @@ function IdolEmotion() {
           {
             check 
             ?
-            <IdolEmotionChart />
-            :
             <IdolEmotionRankChart />
+            :
+            <IdolEmotionChart />
           }
         </ChartFrame>
       </DataFrame>

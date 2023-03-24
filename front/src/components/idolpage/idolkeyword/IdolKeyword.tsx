@@ -11,15 +11,11 @@ const Frame = styled.div`
 `;
 
 const LeftFrame = styled.div`
+  display: flex;
+  flex-direction: column;
   flex: 0.4;
-
+  margin-bottom: 10px;
 `;
-
-const Title = styled.div`
-  font-size: 2rem;
-  font-weight: 700;
-`;
-
 
 function IdolKeyword() {
   return (
