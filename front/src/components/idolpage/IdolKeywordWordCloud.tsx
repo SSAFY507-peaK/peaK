@@ -21,7 +21,8 @@ function IdolKeywordWordCloud (){
     },
   ]
   return (
-    <ReactWordcloud words={words} />
+    // <ReactWordcloud words={words} />
+    <div></div>
   )
 }
 
