@@ -1,8 +1,8 @@
 import { Link, NavLink } from "react-router-dom";
 
-import Button from "./Button";
-import { ReactComponent as Logo } from "../assets/peaK.svg";
-import Search from "./Search";
+import Button from "../Button";
+import { ReactComponent as Logo } from "../../assets/peaK.svg";
+import Search from "../Search";
 import styled from "styled-components";
 
 const Header = styled.header`

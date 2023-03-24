@@ -1,11 +1,11 @@
-import MenuBar from "../components/MenuBar";
-import Wrapper from "../components/Wrapper";
+import MenuBar from "../components/LayoutPage/MenuBar";
+import Wrapper from "../components/LayoutPage/Wrapper";
 import styled from "styled-components";
 
 const Background = styled.div`
   width: 100vw;
   height: 100vh;
-  background: linear-gradient(247.41deg, #FDD8D8 5.54%, #EBDDF3 67.65%);
+  background: linear-gradient(to bottom left, #FDD8D8 5%, #EBDDF3 90%);
   padding: 20px;
 `
 
