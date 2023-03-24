@@ -32,7 +32,6 @@ function MainPage() {
        <Carousel></Carousel>
       <div></div>
     </div>
-    // <FullPage />
   );
 }
 
