@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-import Button from "../Button";
+import { RedButton } from "../Button";
 import { ReactComponent as Logo } from "../../assets/peaK.svg";
 
 const Header = styled.header`
@@ -37,7 +37,7 @@ function NavBar() {
     <Header>
       <Nav>
         <Logo style={{ marginTop: "10px" }} />
-        <Button buttonColor="red">로그인</Button>
+        <RedButton>로그인</RedButton>
       </Nav>
     </Header>
   );
