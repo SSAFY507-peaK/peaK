@@ -1,28 +1,25 @@
 import ReactWordcloud from 'react-wordcloud';
+import { faker } from '@faker-js/faker';
 import styled from "styled-components";
 
+const WordCloudFrame = styled.div`
+  height: 200px;
+  border-radius: 100px;
+`;
+
 function IdolKeywordWordCloud (){
-  const words = [
-    {
-      text: 'told',
-      value: 64,
-    },
-    {
-      text: 'mistake',
-      value: 400,
-    },
-    {
-      text: 'thought',
-      value: 100,
-    },
-    {
-      text: 'bad',
-      value: 30,
-    },
-  ]
+
+  const dumy = []
+
+  for (let i=0;  i < 20; i++) {
+    const tmp = {text: faker.datatype.string(5), value: faker.datatype.number({ min: 0, max: 1000})}
+    dumy.push(tmp)
+  }
+
   return (
-    // <ReactWordcloud words={words} />
-    <div></div>
+    <WordCloudFrame>
+      <ReactWordcloud words={dumy} />
+    </WordCloudFrame>
   )
 }
 

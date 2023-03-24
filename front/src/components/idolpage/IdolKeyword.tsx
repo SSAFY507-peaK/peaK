@@ -11,15 +11,9 @@ const Frame = styled.div`
 `;
 
 const LeftFrame = styled.div`
-  flex: 0.5;
-
+  flex: 0.4;
+  margin-bottom: 10px;
 `;
-
-const Title = styled.div`
-  font-size: 2rem;
-  font-weight: 700;
-`;
-
 
 function IdolKeyword() {
   return (

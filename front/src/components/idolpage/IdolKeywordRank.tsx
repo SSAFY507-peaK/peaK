@@ -3,6 +3,11 @@ import { useEffect, useState } from "react";
 import IdolKeywordRankBtn from "./IdolKeywordRankBtn";
 import styled from "styled-components";
 
+const RankFrame = styled.div`
+  padding: 0px 0px 10px 10px;
+  margin-bottom: 20px;
+`;
+
 const TitleFrame = styled.div`
   display: flex;
   flex-direction: row;
@@ -11,7 +16,7 @@ const TitleFrame = styled.div`
 const Title = styled.div`
   font-size: 2rem;
   font-weight: 700;
-  margin: 30px 0px 30px 10px;
+  margin: 30px 0px 20px 10px;
   color: ${props => props.color || `var(--purple500-color)`};
 `;
 
@@ -42,7 +47,7 @@ function IdolKeywordRank() {
 
 
   return (
-    <div>
+    <RankFrame>
       <TitleFrame>
         <Title color="black">인기</Title>
         <Title>키워드</Title>
@@ -66,7 +71,7 @@ function IdolKeywordRank() {
 
         })
       }
-    </div>
+    </RankFrame>
   )
 }
 

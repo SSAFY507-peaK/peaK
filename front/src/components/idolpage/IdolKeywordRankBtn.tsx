@@ -17,8 +17,8 @@ const Frame = styled.div<FrameType>`
   background: ${props => props.isClick ?`rgba(235, 221, 243, 0.6)`: null};
   opacity: ${props => props.isClick ? null : 0.5 };
   border-radius: 20px;
-  padding: 10px;
-  margin: 3px;
+  padding: 5px 10px 5px 10px;
+  margin: 0px 10px 0px 10px;
   cursor: pointer;
 `;
 
@@ -29,12 +29,15 @@ const RankFrame = styled.div`
   color: white;
   text-align: center;
   padding: 10px;
+  font-size: 1.1rem;
 `;
 
 const TextFrame = styled.div`
   flex: 0.9;
   text-align: left;
   padding: 10px;
+  margin-left: 10px;
+  font-size: 1.1rem;
 `;
 
 
