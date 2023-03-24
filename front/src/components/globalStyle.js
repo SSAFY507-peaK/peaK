@@ -65,7 +65,7 @@ const GlobalStyle = createGlobalStyle`
     --green-gradient: linear-gradient(to bottom right, #93F2A2 0%, #1AD138 100%);
     
     /* Navigation bar height */
-    --nav-height: 60px;
+    --nav-height: 50px;
 
     /* empty space */
     --side-space: 200px;
