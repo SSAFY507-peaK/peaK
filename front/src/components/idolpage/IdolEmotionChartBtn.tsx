@@ -23,8 +23,8 @@ const ButtonFrameOn = styled.div`
   box-shadow: 0px 4px 18px -5px #F84444;
   border-radius: 30px;
   width: 75%;
-  height: 140px;
-  margin-bottom: 20px;
+  height: 120px;
+  margin-bottom: 10px;
   cursor: pointer;
 `;
 
@@ -36,8 +36,8 @@ const ButtonFrameOff = styled.div`
   background: rgba(255, 255, 255, 0.5);
   border-radius: 30px;
   width: 75%;
-  height: 140px;
-  margin-bottom: 20px;
+  height: 120px;
+  margin-bottom: 10px;
   cursor: pointer;
 `;
 
