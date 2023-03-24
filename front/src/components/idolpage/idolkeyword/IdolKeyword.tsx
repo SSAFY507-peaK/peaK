@@ -11,6 +11,8 @@ const Frame = styled.div`
 `;
 
 const LeftFrame = styled.div`
+  display: flex;
+  flex-direction: column;
   flex: 0.4;
   margin-bottom: 10px;
 `;

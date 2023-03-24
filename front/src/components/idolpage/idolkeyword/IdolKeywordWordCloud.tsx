@@ -6,6 +6,7 @@ const WordCloudFrame = styled.div`
   height: 200px;
   border-radius: 100px;
   background-color: var(--gray800-color);
+  
 `;
 
 function IdolKeywordWordCloud (){

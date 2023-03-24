@@ -1,38 +1,29 @@
+import IdolKeywordNewsItem from "./IdolKeywordNewsItem";
+import TitleComponent from "../TitleComponent"
+import bg  from "../sampleImg/image 38.png"
 import styled from "styled-components";
 
-const NewsImg = styled.div` 
-
+const Frame = styled.div`
+  margin-bottom: 10px;
 `;
 
-const NewsDataFrame = styled.div`
+const NewsFrame = styled.div`
   display: flex;
   flex-direction: column;
+  height: 100%;
 `;
-
-const NewsTitle = styled.div`
-
-`;
-
-const NewsDetail = styled.div`
-
-`;
-
-const NewsSource = styled.div`
-  
-`;
-
 
 function IdolKeywordNews() {
   return (
-    <>
-      <NewsImg>나는 뉴스 이미지</NewsImg>
-      <NewsDataFrame>
-        <NewsTitle>나는야 뉴스제목</NewsTitle>
-        <NewsDetail>나는야 뉴스내용내용내용</NewsDetail>
-        <NewsSource>나는 출처</NewsSource>
-      </NewsDataFrame>
-    </>
+    <Frame>
+      <TitleComponent blacktxt="관련" purpletxt="뉴스"/>
+      <NewsFrame>
+        <IdolKeywordNewsItem image={bg} title="1번 뉴스" summary="세븐틴 하이하이 바이바이 하이하이" source="billboard"/>
+        <IdolKeywordNewsItem image={bg} title="1번 뉴스" summary="세븐틴 하이하이 바이바이 하이하이" source="billboard"/>
+        <IdolKeywordNewsItem image={bg} title="1번 뉴스" summary="세븐틴 하이하이 바이바이 하이하이" source="billboard"/>
+      </NewsFrame>
+    </Frame>
   )
 }
 
-export default IdolKeywordNews;
+export default IdolKeywordNews
