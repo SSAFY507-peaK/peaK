@@ -22,8 +22,8 @@ const ButtonFrameOn = styled.div`
   background: linear-gradient(130.91deg, #FA7474 7.03%, #CE0808 91.83%);
   box-shadow: 0px 4px 18px -5px #F84444;
   border-radius: 30px;
-  width: 75%;
-  height: 120px;
+  width: 65%;
+  height: 100px;
   margin-bottom: 10px;
   cursor: pointer;
 `;
@@ -35,8 +35,8 @@ const ButtonFrameOff = styled.div`
   border-radius: 30px;
   background: rgba(255, 255, 255, 0.5);
   border-radius: 30px;
-  width: 75%;
-  height: 120px;
+  width: 65%;
+  height: 100px;
   margin-bottom: 10px;
   cursor: pointer;
 `;
@@ -57,7 +57,7 @@ function IdolEmotionChartBtn({ ranknum, rankicon, changenum, title, isTab, onCli
     return (
     <ButtonFrameOn onClick={onClick}>
       <TextFrame>
-        <TextValue size="1.5rem" fontweight="700">{ranknum}</TextValue>
+        <TextValue size="1.3rem" fontweight="700">{ranknum}</TextValue>
         {rankicon}
         <TextValue size="0.7rem">{changenum}</TextValue>
       </TextFrame >
@@ -68,7 +68,7 @@ function IdolEmotionChartBtn({ ranknum, rankicon, changenum, title, isTab, onCli
     return(
     <ButtonFrameOff onClick={onClick}>
       <TextFrame>
-        <TextValue size="1.5rem" fontweight="700">{ranknum}</TextValue>
+        <TextValue size="1.3rem" fontweight="700">{ranknum}</TextValue>
         {rankicon}
         <TextValue size="0.7rem">{changenum}</TextValue>
       </TextFrame>
