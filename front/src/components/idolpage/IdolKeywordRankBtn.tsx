@@ -15,9 +15,10 @@ const Frame = styled.div<FrameType>`
   display: flex;
   flex-direction: row;
   background: ${props => props.isClick ?`rgba(235, 221, 243, 0.6)`: null};
+  opacity: ${props => props.isClick ? null : 0.5 };
   border-radius: 20px;
   padding: 10px;
-  margin: 10px;
+  margin: 3px;
   cursor: pointer;
 `;
 
