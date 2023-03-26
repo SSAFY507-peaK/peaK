@@ -3,10 +3,10 @@ import styled from "styled-components";
 
 const Card = styled(Slider)`
   width: 100%;
-  height: 100%;
+  height: 95%;
 
   .slick-list {
-    width: 300px;
+    width: 250px;
     height: 100%;
     margin: 0 auto;
     background-color: #f0f9ff;

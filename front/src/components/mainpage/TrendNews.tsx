@@ -22,11 +22,11 @@ const TitleDiv = styled.div`
 const NewsCarouselDiv = styled.div`
   width: 100%;
   display: flex;
+  justify-content: space-around;
 `;
 
 const CarouselDiv = styled.div`
-  width: 70%;
-  justify-content: space-around;
+  width: 80%;
 `;
 
 const PurpleH2 = styled.h2`
@@ -81,7 +81,7 @@ function TrendNews() {
       <div style={{ width: "100%" }}>
         <NewsCarouselDiv>
           <CarouselDiv>
-            <CarouselCustom items={items} width="300px" height="180px"></CarouselCustom>
+            <CarouselCustom items={items} width="250px" height="180px"></CarouselCustom>
           </CarouselDiv>
         </NewsCarouselDiv>
       </div>
