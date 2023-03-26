@@ -6,7 +6,7 @@ const ComponentDiv = styled.div`
   border-radius: 30px;
   display: flex;
   flex-direction: column;
-  padding: 10px 30px;
+  padding: 10px 30px 30px 30px;
   flex: 0.7;
   margin-right: 15px;
   margin-bottom: 7.5px;
@@ -16,6 +16,7 @@ const TitleDiv = styled.div`
   display: flex;
   flex-direction: row;
   padding: 0px;
+  margin-bottom: 15px;
 `;
 
 const PurpleH2 = styled.h2`

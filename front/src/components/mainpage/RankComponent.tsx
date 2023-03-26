@@ -13,6 +13,7 @@ interface RankingNumType {
 /** 순위 숫자 (색을 다르게 부여) */
 const RankingNum = styled.div<RankingNumType>`
   font-size: ${props => (props.rank in ["1", "2", "3", "4"] ? "20px" : "14px")};
+  font-weight: ${props => (props.rank in ["1", "2", "3", "4"] ? "bold" : "normal")};
   color: ${props =>
     props.rank === "1"
       ? "#FFB800"
@@ -26,6 +27,8 @@ const RankingNum = styled.div<RankingNumType>`
 const NameDiv = styled.div`
   display: flex;
   justify-content: space-around;
+  font-size: 14px;
+  margin-top: 5px;
 `;
 
 function RankComponent(props: any) {
