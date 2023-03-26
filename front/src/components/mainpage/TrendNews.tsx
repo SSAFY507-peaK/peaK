@@ -19,9 +19,14 @@ const TitleDiv = styled.div`
   flex-direction: row;
 `;
 
+const NewsCarouselDiv = styled.div`
+  width: 100%;
+  display: flex;
+`;
+
 const CarouselDiv = styled.div`
-  width: 50%;
-  align-content: space-between;
+  width: 70%;
+  justify-content: space-around;
 `;
 
 const PurpleH2 = styled.h2`
@@ -73,9 +78,13 @@ function TrendNews() {
         <h2>트렌딩</h2>
         <PurpleH2> 뉴스</PurpleH2>
       </TitleDiv>
-      <CarouselDiv>
-        <CarouselCustom items={items}></CarouselCustom>
-      </CarouselDiv>
+      <div style={{ width: "100%" }}>
+        <NewsCarouselDiv>
+          <CarouselDiv>
+            <CarouselCustom items={items} width="300px" height="180px"></CarouselCustom>
+          </CarouselDiv>
+        </NewsCarouselDiv>
+      </div>
     </ComponentDiv>
   );
 }

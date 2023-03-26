@@ -6,6 +6,8 @@ import IdolProfile from "../IdolProfile";
 
 const CarouselCustom = (props: any) => {
   let items = props.items;
+  let width = props.width;
+  let height = props.height;
   const settings = {
     infinite: true,
     speed: 500,
@@ -16,7 +18,10 @@ const CarouselCustom = (props: any) => {
   return (
     <Card {...settings}>
       {items.map((item: any) => (
-        <IdolProfile shape="rect" width="250px" height="250px" url={item.src} />
+        <div>
+          <IdolProfile shape="rect" width={width} height={height} url={item.src} />
+          <h3>{item.title || item.name}</h3>
+        </div>
       ))}
     </Card>
   );
