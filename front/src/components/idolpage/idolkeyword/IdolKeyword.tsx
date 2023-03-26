@@ -23,7 +23,7 @@ function IdolKeyword() {
     <Frame>
       <LeftFrame>
         <IdolKeywordRank />
-        {/* <IdolKeywordWordCloud /> */}
+        <IdolKeywordWordCloud />
       </LeftFrame>
       <IdolKeywordNews />
     </Frame>
