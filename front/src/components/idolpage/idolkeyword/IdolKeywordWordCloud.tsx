@@ -1,28 +1,31 @@
-import ReactWordcloud from 'react-wordcloud';
-import { faker } from '@faker-js/faker';
-import styled from "styled-components";
+// import ReactWordcloud from 'react-wordcloud';
+// import { faker } from '@faker-js/faker';
+// import styled from "styled-components";
 
-const WordCloudFrame = styled.div`
-  height: 200px;
-  border-radius: 100px;
-  background-color: var(--gray800-color);
+// const WordCloudFrame = styled.div`
+//   height: 15vh;
+//   width: 80%;
+//   border-radius: 100px;
+//   background-color: var(--gray800-color);
+// `;
+
+
+
+// function IdolKeywordWordCloud (){
   
-`;
+//   const dumy = []
+//   // const canvas = document.createElement('canvas');
+//   // const ctx = canvas.getContext('2d', {willReadFrequently: true});
+//   for (let i=0;  i < 30; i++) {
+//     const tmp = {text: faker.datatype.string(5), value: faker.datatype.number({ min: 0, max: 100})}
+//     dumy.push(tmp)
+//   }
 
-function IdolKeywordWordCloud (){
+//   return (
+//     <WordCloudFrame>
+//       <ReactWordcloud maxWords={30} words={dumy} />
+//     </WordCloudFrame>
+//   )
+// }
 
-  const dumy = []
-
-  for (let i=0;  i < 50; i++) {
-    const tmp = {text: faker.datatype.string(5), value: faker.datatype.number({ min: 0, max: 1000})}
-    dumy.push(tmp)
-  }
-
-  return (
-    <WordCloudFrame>
-      <ReactWordcloud words={dumy} />
-    </WordCloudFrame>
-  )
-}
-
-export default IdolKeywordWordCloud;
+// export default IdolKeywordWordCloud;

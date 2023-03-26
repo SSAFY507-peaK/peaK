@@ -5,6 +5,7 @@ import styled from "styled-components";
 
 const Frame = styled.div`
   margin-bottom: 10px;
+  flex: 0.6;
 `;
 
 const NewsFrame = styled.div`

@@ -8,6 +8,7 @@ const Frame = styled.div`
   flex-direction: row;
   background-color: rgba(255, 255, 255, 0.5);
   border-radius: 30px;
+  width: 100%;
 `;
 
 const LeftFrame = styled.div`
@@ -22,7 +23,7 @@ function IdolKeyword() {
     <Frame>
       <LeftFrame>
         <IdolKeywordRank />
-        <IdolKeywordWordCloud />
+        {/* <IdolKeywordWordCloud /> */}
       </LeftFrame>
       <IdolKeywordNews />
     </Frame>

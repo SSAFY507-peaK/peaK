@@ -43,16 +43,17 @@ function IdolKeywordRank() {
         dumy.map((e, idx) => {
           return (
             <IdolKeywordRankBtn
-            rank={e.rank}
-            keyword={e.keyword}
-            onClick={()=>
-              {
-                const tmp = [ false ,false, false, false, false]
-                tmp[idx] = true
-                setCheck(tmp) 
-              }
-              }
-            isClick={check[idx]}
+              key={idx}
+              rank={e.rank}
+              keyword={e.keyword}
+              onClick={()=>
+                {
+                  const tmp = [ false ,false, false, false, false]
+                  tmp[idx] = true
+                  setCheck(tmp) 
+                }
+                }
+              isClick={check[idx]}
             ></IdolKeywordRankBtn>
           )
 
