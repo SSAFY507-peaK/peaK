@@ -1,6 +1,6 @@
 import { Link, useParams } from "react-router-dom";
 
-import IdolData from "../components/idolpage/IdolData";
+import IdolData from "../components/idolpage/IdolProfile/IdolData";
 import IdolEmotion from "../components/idolpage/idolemotion/IdolEmotion";
 import IdolKeyword from "../components/idolpage/idolkeyword/IdolKeyword";
 import IdolYoutube from "../components/idolpage/IdolYoutube";
@@ -19,7 +19,7 @@ const TopFrame = styled.div`
 const TopLeftFrame = styled.div`
   display: flex;
   flex-direction: column;
-  flex: 0.6;
+  flex: 0.7;
   margin-right: 15px;
 `;
 
