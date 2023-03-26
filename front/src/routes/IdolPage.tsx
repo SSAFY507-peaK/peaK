@@ -14,6 +14,7 @@ const Wrapper = styled.div`
 const TopFrame = styled.div`
   display: flex;
   flex-direction: row;
+  margin-bottom: 15px;
 `;
 
 const TopLeftFrame = styled.div`
