@@ -16,30 +16,34 @@ const Frame = styled.div`
 
 const NewsImg = styled.img` 
   flex: 0.3;
-  border-radius: 30px;
+  border-radius: 20px;
   background-size: cover;
   width: 150px;
-  /* width: 150px;
-  height: 100px; */
+  margin: 0px 20px 10px 10px;
 `;
 
 const NewsDataFrame = styled.div`
   display: flex;
   flex-direction: column;
   flex: 0.7 ;
+  justify-content: space-evenly;
 `;
 
 const NewsTitle = styled.div`
-  font-size: 1.1rem;
+  font-size: 1.2rem;
   font-weight: 700;
+  margin-bottom: 10px;
 `;
 
 const NewsDetail = styled.div`
-
+  font-size: 0.9rem;
+  opacity: 0.8;
+  padding-right: 100px;
 `;
 
 const NewsSource = styled.div`
-  
+  font-size: 0.8rem;
+  opacity: 0.5;  
 `;
 
 

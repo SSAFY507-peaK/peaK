@@ -8,7 +8,9 @@ const WordCloudFrame = styled.div`
   height: 15vh;
   width: 80%;
   border-radius: 100px;
-  background-color: var(--gray800-color);
+  border: 10px;
+  /* background-color: var(--gray800-color); */
+  
 `;
 
 
@@ -25,9 +27,18 @@ function IdolKeywordWordCloud (){
       <WordCloud
         data={data}
         fontSize={(word) => Math.log2(word.value) * 4} 
-        width={300} 
+        width={400} 
         height={150} 
-        rotate={(word) => word.value % 360} 
+        rotate={(word) => word.value % 360}
+        // onWordClick={(event, d) => {
+        //   console.log(`onWordClick: ${d.text}`);
+        // }}
+        // onWordMouseOver={(event, d) => {
+        //   console.log(`onWordMouseOver: ${d.text}`);
+        // }}
+        // onWordMouseOut={(event, d) => {
+        //   console.log(`onWordMouseOut: ${d.text}`);
+        // }}
       />
     </WordCloudFrame>
   )
