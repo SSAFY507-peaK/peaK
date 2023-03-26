@@ -1,4 +1,14 @@
 import styled from "styled-components";
+import TitleComponent from "../TitleComponent";
+
+// const Wrapper = styled.div`
+//   display: flex;
+//   flex-direction: column;
+//   align-items: center;
+//   flex: 0.5;
+//   padding: 15px;
+//   width: 100%;
+// `;
 
 const Frame = styled.div`
   display: flex;
@@ -42,6 +52,7 @@ const ChatInput = styled.input`
 function IdolChat() {
   return (
     <Frame>
+      <TitleComponent purpletxt="응원" blacktxt="한 마디"/>
       <Title>응원 한 마디</Title>
       <ChatFrame>여기는 댓글들이 달리는 곳</ChatFrame>
       <ChatInputFrame>      
