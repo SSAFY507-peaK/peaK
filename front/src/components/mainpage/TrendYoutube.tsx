@@ -26,11 +26,11 @@ const PurpleH2 = styled.h2`
 const YoutubeCarouselDiv = styled.div`
   width: 100%;
   display: flex;
+  justify-content: space-around;
 `;
 
 const CarouselDiv = styled.div`
-  width: 70%;
-  justify-content: space-around;
+  width: 80%;
 `;
 
 function TrendYoutube() {
@@ -80,7 +80,7 @@ function TrendYoutube() {
       <div style={{ width: "100%" }}>
         <YoutubeCarouselDiv>
           <CarouselDiv>
-            <CarouselCustom items={items} width="300px" height="180px"></CarouselCustom>
+            <CarouselCustom items={items} width="250px" height="180px"></CarouselCustom>
           </CarouselDiv>
         </YoutubeCarouselDiv>
       </div>

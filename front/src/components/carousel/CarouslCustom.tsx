@@ -2,7 +2,7 @@ import "slick-carousel/slick/slick-theme.css";
 import "slick-carousel/slick/slick.css";
 
 import Card from "./Card";
-import IdolProfile from "../IdolProfile";
+import CarouselProfile from "./CarouselProfile";
 
 const CarouselCustom = (props: any) => {
   let items = props.items;
@@ -19,8 +19,8 @@ const CarouselCustom = (props: any) => {
     <Card {...settings}>
       {items.map((item: any) => (
         <div>
-          <IdolProfile shape="rect" width={width} height={height} url={item.src} />
-          <h3>{item.title || item.name}</h3>
+          <CarouselProfile width={width} height={height} url={item.src} />
+          <p>{item.title || item.name}</p>
         </div>
       ))}
     </Card>
