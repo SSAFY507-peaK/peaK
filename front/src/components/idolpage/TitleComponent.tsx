@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 interface TitleType {
+  id?: string;
   blacktxt: string;
   purpletxt : string;
 }
@@ -18,12 +19,22 @@ const Title = styled.div`
 `;
 
 
-function TitleComponent({blacktxt, purpletxt}:TitleType) {
-  return (
-    <TitleFrame>
-      <Title color="black">{blacktxt}</Title>
-      <Title>{purpletxt}</Title>
-    </TitleFrame>  )
+function TitleComponent({blacktxt, purpletxt, id}:TitleType) {
+  if (id === "1") {
+    return (
+      <TitleFrame id = {id}>  
+        <Title>{purpletxt}</Title>
+        <Title color="black">{blacktxt}</Title>
+      </TitleFrame>
+    )  
+  } else {
+    return (
+      <TitleFrame>
+        <Title>{purpletxt}</Title>
+        <Title color="black">{blacktxt}</Title>
+      </TitleFrame>
+    )
+  }
 }
 
 export default TitleComponent;
