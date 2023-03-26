@@ -10,8 +10,8 @@ import PersonIcon from '@mui/icons-material/Person';
 import HelpIcon from '@mui/icons-material/Help';
 import LogoutIcon from '@mui/icons-material/Logout';
 
-import { ReactComponent as Logo } from "../assets/peaK.svg";
-import Search from "./Search";
+import { ReactComponent as Logo } from "../../assets/peaK.svg";
+import Search from "../Search";
 
 const MenuBackground = styled.div`
   flex: 1 0 250px;

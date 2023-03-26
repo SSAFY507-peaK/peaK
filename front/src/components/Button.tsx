@@ -1,10 +1,8 @@
-import styled, { css } from "styled-components";
-
-type ButtonColor = "red" | "purple";
+import styled from "styled-components";
 
 interface ButtonType {
-  buttonColor: ButtonColor;
   width?: string;
+  height?: string;
 }
 
 const Button = styled.button<ButtonType>`
@@ -12,30 +10,25 @@ const Button = styled.button<ButtonType>`
   font-size: 0.8rem;
   padding-left: 20px;
   padding-right: 20px;
-  border-radius: 20px;
-  height: 33px;
+  border-radius: 100px;
+  height: ${props => (props.height? props.height : "30px")};
   width: ${props => (props.width ? props.width : "auto")};
-  /* display: flex;
-  align-items: center; */
   text-align: center;
-
-  ${props =>
-    props.buttonColor === "red" &&
-    css`
-      background-color: var(--red600-color);
-      &:hover {
-        background-color: var(--red300-color);
-      }
-    `};
-
-  ${props =>
-    props.buttonColor === "purple" &&
-    css`
-      background-color: var(--purple500-color);
-      &:hover {
-        background-color: var(--purple300-color);
-      }
-    `}
+  transition: all 300ms ease-in-out;
 `;
 
-export default Button;
+const PurpleButton = styled(Button)`
+  background-color: var(--purple500-color);
+  &:hover {
+    background-color: var(--purple400-color);
+  }
+`
+
+const RedButton = styled(Button)`
+  background-color: var(--red600-color);
+  &:hover {
+    background-color: var(--red500-color);
+  }
+`
+
+export { PurpleButton, RedButton };

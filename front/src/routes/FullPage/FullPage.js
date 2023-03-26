@@ -1,26 +1,31 @@
 import React from "react";
-import { FullPage, Slide } from "react-full-page";
-import "./FullPage.scss";
+import { FullPage as Full, Slide } from "react-full-page";
 
+import NavBar from "../../components/LayoutPage/NavBar";
 import { SectionOne, SectionTwo, SectionThree, SectionFour } from "./SectionPages";
 
-function fullPage() {
+import "./FullPage.scss";
+
+function FullPage() {
   return (
-    <FullPage controls controlsProps={{ className: "slide-navigation" }}>
-      <Slide>
-        <SectionOne backgroundColor="var(--white800-color)" />
-      </Slide>
-      <Slide>
-        <SectionTwo backgroundColor="#fff1f9" />
-      </Slide>
-      <Slide>
-        <SectionThree backgroundColor="#f0fff2" />
-      </Slide>
-      <Slide>
-        <SectionFour backgroundColor="#cff4ff" />
-      </Slide>
-    </FullPage>
+    <>
+      <NavBar />
+      <Full controls controlsProps={{ className: "slide-navigation" }}>
+        <Slide>
+          <SectionOne backgroundColor="var(--white800-color)" />
+        </Slide>
+        <Slide>
+          <SectionTwo backgroundColor="#fff1f9" />
+        </Slide>
+        <Slide>
+          <SectionThree backgroundColor="#f0fff2" />
+        </Slide>
+        <Slide>
+          <SectionFour backgroundColor="#cff4ff" />
+        </Slide>
+      </Full>
+    </>
   );
 }
 
-export default fullPage;
+export default FullPage;

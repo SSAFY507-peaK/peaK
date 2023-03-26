@@ -56,8 +56,16 @@ const GlobalStyle = createGlobalStyle`
     --purple200-color: #592877;
     --purple100-color: #3C1B50;
     
+    /* Color gradient */
+    /* 5개나 만든 이유는.. 좋아하는 아이돌이 최대 5팀이니깐 */
+    --red-gradient: linear-gradient(to bottom right, #FA7474 0%, #CE0808 100%);
+    --purple-gradient: linear-gradient(to bottom right, #A869CD 0%, #76349D 100%);
+    --blue-gradient: linear-gradient(to bottom right, #9FC6F4 0%, #1976E1 100%);
+    --yellow-gradient: linear-gradient(to bottom right, #FFD99E 0%, #FF9B05 100%);
+    --green-gradient: linear-gradient(to bottom right, #93F2A2 0%, #1AD138 100%);
+    
     /* Navigation bar height */
-    --nav-height: 60px;
+    --nav-height: 50px;
 
     /* empty space */
     --side-space: 200px;
@@ -67,6 +75,7 @@ const GlobalStyle = createGlobalStyle`
   *, *::before, *::after {
     box-sizing: border-box;
   }
+  
   @font-face {
     font-family: 'Pretendard';
     src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');

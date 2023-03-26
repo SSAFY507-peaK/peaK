@@ -4,10 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8dd91feb-81e6-4086-8748-a2cd20fef572" name="Default Changelist" comment="### 제목&#10;# :커밋타입: [FE]/[BE] #이슈번호 작업내용&#10;:sparkles: [FE] #1 스크롤바 디자인&#10;&#10;- webkit을 이용해 스크롤바 디자인&#10;- mdn에서 권장하는 방법은 아니다.&#10;&#10;#   [커밋 타입]  리스트&#10;#   :sparkles:          : 새로운 기능에 대한 커밋&#10;#   :bug:               : 버그 수정에 대한 커밋&#10;#   :lipstick:          : CSS 등 사용자 UI 디자인 변경&#10;#   :recycle:           : 코드 리팩토링에 대한 커밋&#10;#   :art:               : 스타일 (코드 형식 변경: 비즈니스 로직에 변경 없음)&#10;#   :memo:              : 문서 추가, 수정에 대한 커밋&#10;#   :hammer:            : 빌드 관련 파일 수정에 대한 커밋&#10;#   :truck:             : 파일 혹은 폴더명을 수정하거나 옮기는 작업만인 경우&#10;#   :fire:              : 파일을 삭제하는 작업만 수행한 경우&#10;#   :rocket:            : CI 관련 설정, 수정에 대한 커밋 &#10;#   :speech_balloon:    : 필요한 주석 추가 및 변경&#10;#   :twisted_rightwards_arrows:    : 브랜치 합병">
+    <list default="true" id="8dd91feb-81e6-4086-8748-a2cd20fef572" name="Default Changelist" comment="### 제목&#10;# :커밋타입: [FE]/[BE] #이슈번호 작업내용&#10;:sparkles: [FE] #1 버튼 디자인 변경&#10;&#10;- height값을 props로 전달할 수 있음&#10;- hover시 너무 색깔이 진해지는 것 수정&#10;- hover시 애니메이션 적용 (transition)&#10;&#10;#   [커밋 타입]  리스트&#10;#   :sparkles:          : 새로운 기능에 대한 커밋&#10;#   :bug:               : 버그 수정에 대한 커밋&#10;#   :lipstick:          : CSS 등 사용자 UI 디자인 변경&#10;#   :recycle:           : 코드 리팩토링에 대한 커밋&#10;#   :art:               : 스타일 (코드 형식 변경: 비즈니스 로직에 변경 없음)&#10;#   :memo:              : 문서 추가, 수정에 대한 커밋&#10;#   :hammer:            : 빌드 관련 파일 수정에 대한 커밋&#10;#   :truck:             : 파일 혹은 폴더명을 수정하거나 옮기는 작업만인 경우&#10;#   :fire:              : 파일을 삭제하는 작업만 수행한 경우&#10;#   :rocket:            : CI 관련 설정, 수정에 대한 커밋 &#10;#   :speech_balloon:    : 필요한 주석 추가 및 변경&#10;#   :twisted_rightwards_arrows:    : 브랜치 합병">
+      <change afterPath="$PROJECT_DIR$/src/routes/FullPage/Section1.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/routes/FullPage/Section2.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/routes/FullPage/Section3.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/routes/FullPage/Section4.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/routes/FullPage/tmpFullPage.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Search.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Search.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/globalStyle.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/globalStyle.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/routes/FullPage/FullPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/FullPage/FullPage.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/routes/FullPage/SectionComponents.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/FullPage/SectionComponents.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -17,6 +23,7 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="TypeScript File" />
         <option value="TypeScript JSX File" />
       </list>
     </option>
@@ -33,20 +40,25 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "node.js.detected.package.eslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "prettierjs.PrettierConfiguration.Package": "C:\\Users\\SSAFY\\Desktop\\SSAFY PJT2\\PJT\\front\\node_modules\\prettier",
-    "ts.external.directory.path": "C:\\Users\\SSAFY\\Desktop\\SSAFY PJT2\\PJT\\front\\node_modules\\typescript\\lib",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;prettierjs.PrettierConfiguration.Package&quot;: &quot;C:\\Users\\SSAFY\\Desktop\\SSAFY PJT2\\PJT\\front\\node_modules\\prettier&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;C:\\Users\\SSAFY\\Desktop\\SSAFY PJT2\\PJT\\front\\node_modules\\typescript\\lib&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\SSAFY\Desktop\SSAFY PJT2\PJT\front\src\components\LayoutPage" />
+    </key>
+  </component>
   <component name="RunManager">
     <configuration name="start" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
       <package-json value="$PROJECT_DIR$/package.json" />
@@ -73,6 +85,7 @@
       <option name="presentableId" value="Default" />
       <updated>1679147898413</updated>
       <workItem from="1679536932877" duration="726000" />
+      <workItem from="1679619218718" duration="19665000" />
     </task>
     <task id="LOCAL-00001" summary="### 제목&#10;# :커밋타입: [FE]/[BE] #이슈번호 작업내용&#10;:twisted_rightwards_arrows: [FE] merge conflict 해결&#10;&#10;- 다들 라이브러리를 많이 추가해서 생긴 오류&#10;&#10;#   [커밋 타입]  리스트&#10;#   :sparkles:          : 새로운 기능에 대한 커밋&#10;#   :bug:               : 버그 수정에 대한 커밋&#10;#   :lipstick:          : CSS 등 사용자 UI 디자인 변경&#10;#   :recycle:           : 코드 리팩토링에 대한 커밋&#10;#   :art:               : 스타일 (코드 형식 변경: 비즈니스 로직에 변경 없음)&#10;#   :memo:              : 문서 추가, 수정에 대한 커밋&#10;#   :hammer:            : 빌드 관련 파일 수정에 대한 커밋&#10;#   :truck:             : 파일 혹은 폴더명을 수정하거나 옮기는 작업만인 경우&#10;#   :fire:              : 파일을 삭제하는 작업만 수행한 경우&#10;#   :rocket:            : CI 관련 설정, 수정에 대한 커밋 &#10;#   :speech_balloon:    : 필요한 주석 추가 및 변경&#10;#   :twisted_rightwards_arrows:    : 브랜치 합병">
       <created>1679458160439</created>
@@ -123,7 +136,49 @@
       <option name="project" value="LOCAL" />
       <updated>1679557665962</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="### 제목&#10;# :커밋타입: [FE]/[BE] #이슈번호 작업내용&#10;:lipstick: [FE] #1 Search 컴포넌트 수정&#10;&#10;- placeholder 색상이 너무 진해 &quot;--gray600-color&quot; 색상 사용&#10;&#10;#   [커밋 타입]  리스트&#10;#   :sparkles:          : 새로운 기능에 대한 커밋&#10;#   :bug:               : 버그 수정에 대한 커밋&#10;#   :lipstick:          : CSS 등 사용자 UI 디자인 변경&#10;#   :recycle:           : 코드 리팩토링에 대한 커밋&#10;#   :art:               : 스타일 (코드 형식 변경: 비즈니스 로직에 변경 없음)&#10;#   :memo:              : 문서 추가, 수정에 대한 커밋&#10;#   :hammer:            : 빌드 관련 파일 수정에 대한 커밋&#10;#   :truck:             : 파일 혹은 폴더명을 수정하거나 옮기는 작업만인 경우&#10;#   :fire:              : 파일을 삭제하는 작업만 수행한 경우&#10;#   :rocket:            : CI 관련 설정, 수정에 대한 커밋 &#10;#   :speech_balloon:    : 필요한 주석 추가 및 변경&#10;#   :twisted_rightwards_arrows:    : 브랜치 합병">
+      <created>1679557909508</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1679557909508</updated>
+    </task>
+    <task id="LOCAL-00009" summary="### 제목&#10;# :커밋타입: [FE]/[BE] #이슈번호 작업내용&#10;:sparkles: [FE] #1 global style에 그라디언트 색상 추가&#10;&#10;- 색상 5개 추가&#10;  - 좋아하는 아이돌을 최대 5개 선택할 수 있으므로 5개를 만들었다.&#10;&#10;#   [커밋 타입]  리스트&#10;#   :sparkles:          : 새로운 기능에 대한 커밋&#10;#   :bug:               : 버그 수정에 대한 커밋&#10;#   :lipstick:          : CSS 등 사용자 UI 디자인 변경&#10;#   :recycle:           : 코드 리팩토링에 대한 커밋&#10;#   :art:               : 스타일 (코드 형식 변경: 비즈니스 로직에 변경 없음)&#10;#   :memo:              : 문서 추가, 수정에 대한 커밋&#10;#   :hammer:            : 빌드 관련 파일 수정에 대한 커밋&#10;#   :truck:             : 파일 혹은 폴더명을 수정하거나 옮기는 작업만인 경우&#10;#   :fire:              : 파일을 삭제하는 작업만 수행한 경우&#10;#   :rocket:            : CI 관련 설정, 수정에 대한 커밋 &#10;#   :speech_balloon:    : 필요한 주석 추가 및 변경&#10;#   :twisted_rightwards_arrows:    : 브랜치 합병">
+      <created>1679623267170</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1679623267170</updated>
+    </task>
+    <task id="LOCAL-00010" summary="### 제목&#10;# :커밋타입: [FE]/[BE] #이슈번호 작업내용&#10;:truck: [FE] #4 파일 이동&#10;&#10;- components 폴더 정리를 위해 layout에 쓰인 components들을 이동시킴&#10;&#10;#   [커밋 타입]  리스트&#10;#   :sparkles:          : 새로운 기능에 대한 커밋&#10;#   :bug:               : 버그 수정에 대한 커밋&#10;#   :lipstick:          : CSS 등 사용자 UI 디자인 변경&#10;#   :recycle:           : 코드 리팩토링에 대한 커밋&#10;#   :art:               : 스타일 (코드 형식 변경: 비즈니스 로직에 변경 없음)&#10;#   :memo:              : 문서 추가, 수정에 대한 커밋&#10;#   :hammer:            : 빌드 관련 파일 수정에 대한 커밋&#10;#   :truck:             : 파일 혹은 폴더명을 수정하거나 옮기는 작업만인 경우&#10;#   :fire:              : 파일을 삭제하는 작업만 수행한 경우&#10;#   :rocket:            : CI 관련 설정, 수정에 대한 커밋 &#10;#   :speech_balloon:    : 필요한 주석 추가 및 변경&#10;#   :twisted_rightwards_arrows:    : 브랜치 합병">
+      <created>1679623403777</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1679623403777</updated>
+    </task>
+    <task id="LOCAL-00011" summary="### 제목&#10;# :커밋타입: [FE]/[BE] #이슈번호 작업내용&#10;:art: [FE] #2 fullpage 라우트 수정&#10;&#10;- main에서 로그인 여부에 따라 컴포넌트를 바꾸는 기존의 형식&#10;- Outlet을 통해 main페이지가 렌더링되기 때문에, fullpage임에도 navbar가 그대로 노출되었음&#10;- fullpage는 따로 빼기로 결정&#10;&#10;#   [커밋 타입]  리스트&#10;#   :sparkles:          : 새로운 기능에 대한 커밋&#10;#   :bug:               : 버그 수정에 대한 커밋&#10;#   :lipstick:          : CSS 등 사용자 UI 디자인 변경&#10;#   :recycle:           : 코드 리팩토링에 대한 커밋&#10;#   :art:               : 스타일 (코드 형식 변경: 비즈니스 로직에 변경 없음)&#10;#   :memo:              : 문서 추가, 수정에 대한 커밋&#10;#   :hammer:            : 빌드 관련 파일 수정에 대한 커밋&#10;#   :truck:             : 파일 혹은 폴더명을 수정하거나 옮기는 작업만인 경우&#10;#   :fire:              : 파일을 삭제하는 작업만 수행한 경우&#10;#   :rocket:            : CI 관련 설정, 수정에 대한 커밋 &#10;#   :speech_balloon:    : 필요한 주석 추가 및 변경&#10;#   :twisted_rightwards_arrows:    : 브랜치 합병">
+      <created>1679623492130</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1679623492130</updated>
+    </task>
+    <task id="LOCAL-00012" summary="### 제목&#10;# :커밋타입: [FE]/[BE] #이슈번호 작업내용&#10;:lipstick: [FE] #2 nav바 수정&#10;&#10;- 화면을 스크롤해도 항상 navbar가 보이게 수정(css의 fixed 이용)&#10;- 배경을 투명색으로 지정&#10;- 로고와 로그인 버튼만 렌더링&#10;&#10;#   [커밋 타입]  리스트&#10;#   :sparkles:          : 새로운 기능에 대한 커밋&#10;#   :bug:               : 버그 수정에 대한 커밋&#10;#   :lipstick:          : CSS 등 사용자 UI 디자인 변경&#10;#   :recycle:           : 코드 리팩토링에 대한 커밋&#10;#   :art:               : 스타일 (코드 형식 변경: 비즈니스 로직에 변경 없음)&#10;#   :memo:              : 문서 추가, 수정에 대한 커밋&#10;#   :hammer:            : 빌드 관련 파일 수정에 대한 커밋&#10;#   :truck:             : 파일 혹은 폴더명을 수정하거나 옮기는 작업만인 경우&#10;#   :fire:              : 파일을 삭제하는 작업만 수행한 경우&#10;#   :rocket:            : CI 관련 설정, 수정에 대한 커밋 &#10;#   :speech_balloon:    : 필요한 주석 추가 및 변경&#10;#   :twisted_rightwards_arrows:    : 브랜치 합병">
+      <created>1679624742086</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1679624742086</updated>
+    </task>
+    <task id="LOCAL-00013" summary="### 제목&#10;# :커밋타입: [FE]/[BE] #이슈번호 작업내용&#10;:sparkles: [FE] #1 버튼 디자인 변경&#10;&#10;- height값을 props로 전달할 수 있음&#10;- hover시 너무 색깔이 진해지는 것 수정&#10;- hover시 애니메이션 적용 (transition)&#10;&#10;#   [커밋 타입]  리스트&#10;#   :sparkles:          : 새로운 기능에 대한 커밋&#10;#   :bug:               : 버그 수정에 대한 커밋&#10;#   :lipstick:          : CSS 등 사용자 UI 디자인 변경&#10;#   :recycle:           : 코드 리팩토링에 대한 커밋&#10;#   :art:               : 스타일 (코드 형식 변경: 비즈니스 로직에 변경 없음)&#10;#   :memo:              : 문서 추가, 수정에 대한 커밋&#10;#   :hammer:            : 빌드 관련 파일 수정에 대한 커밋&#10;#   :truck:             : 파일 혹은 폴더명을 수정하거나 옮기는 작업만인 경우&#10;#   :fire:              : 파일을 삭제하는 작업만 수행한 경우&#10;#   :rocket:            : CI 관련 설정, 수정에 대한 커밋 &#10;#   :speech_balloon:    : 필요한 주석 추가 및 변경&#10;#   :twisted_rightwards_arrows:    : 브랜치 합병">
+      <created>1679631230658</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1679631230658</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -140,7 +195,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="dev" />
+                        <option value="feature-front/fullpage" />
                       </list>
                     </value>
                   </entry>
@@ -160,6 +215,12 @@
     <MESSAGE value="### 제목&#10;# :커밋타입: [FE]/[BE] #이슈번호 작업내용&#10;:lipstick: [FE] #1 메뉴바 아이콘 추가작업&#10;&#10;- mui에서 해당하는 아이콘 import 후 적용&#10;- 동일한 스타일이 적용되기 때문에 style 객체를 만들었음&#10;&#10;#   [커밋 타입]  리스트&#10;#   :sparkles:          : 새로운 기능에 대한 커밋&#10;#   :bug:               : 버그 수정에 대한 커밋&#10;#   :lipstick:          : CSS 등 사용자 UI 디자인 변경&#10;#   :recycle:           : 코드 리팩토링에 대한 커밋&#10;#   :art:               : 스타일 (코드 형식 변경: 비즈니스 로직에 변경 없음)&#10;#   :memo:              : 문서 추가, 수정에 대한 커밋&#10;#   :hammer:            : 빌드 관련 파일 수정에 대한 커밋&#10;#   :truck:             : 파일 혹은 폴더명을 수정하거나 옮기는 작업만인 경우&#10;#   :fire:              : 파일을 삭제하는 작업만 수행한 경우&#10;#   :rocket:            : CI 관련 설정, 수정에 대한 커밋 &#10;#   :speech_balloon:    : 필요한 주석 추가 및 변경&#10;#   :twisted_rightwards_arrows:    : 브랜치 합병" />
     <MESSAGE value="### 제목&#10;# :커밋타입: [FE]/[BE] #이슈번호 작업내용&#10;:lipstick: [FE] #1 메뉴바 마지막 div의 margin-bottom 없애기&#10;&#10;#   [커밋 타입]  리스트&#10;#   :sparkles:          : 새로운 기능에 대한 커밋&#10;#   :bug:               : 버그 수정에 대한 커밋&#10;#   :lipstick:          : CSS 등 사용자 UI 디자인 변경&#10;#   :recycle:           : 코드 리팩토링에 대한 커밋&#10;#   :art:               : 스타일 (코드 형식 변경: 비즈니스 로직에 변경 없음)&#10;#   :memo:              : 문서 추가, 수정에 대한 커밋&#10;#   :hammer:            : 빌드 관련 파일 수정에 대한 커밋&#10;#   :truck:             : 파일 혹은 폴더명을 수정하거나 옮기는 작업만인 경우&#10;#   :fire:              : 파일을 삭제하는 작업만 수행한 경우&#10;#   :rocket:            : CI 관련 설정, 수정에 대한 커밋 &#10;#   :speech_balloon:    : 필요한 주석 추가 및 변경&#10;#   :twisted_rightwards_arrows:    : 브랜치 합병" />
     <MESSAGE value="### 제목&#10;# :커밋타입: [FE]/[BE] #이슈번호 작업내용&#10;:sparkles: [FE] #1 스크롤바 디자인&#10;&#10;- webkit을 이용해 스크롤바 디자인&#10;- mdn에서 권장하는 방법은 아니다.&#10;&#10;#   [커밋 타입]  리스트&#10;#   :sparkles:          : 새로운 기능에 대한 커밋&#10;#   :bug:               : 버그 수정에 대한 커밋&#10;#   :lipstick:          : CSS 등 사용자 UI 디자인 변경&#10;#   :recycle:           : 코드 리팩토링에 대한 커밋&#10;#   :art:               : 스타일 (코드 형식 변경: 비즈니스 로직에 변경 없음)&#10;#   :memo:              : 문서 추가, 수정에 대한 커밋&#10;#   :hammer:            : 빌드 관련 파일 수정에 대한 커밋&#10;#   :truck:             : 파일 혹은 폴더명을 수정하거나 옮기는 작업만인 경우&#10;#   :fire:              : 파일을 삭제하는 작업만 수행한 경우&#10;#   :rocket:            : CI 관련 설정, 수정에 대한 커밋 &#10;#   :speech_balloon:    : 필요한 주석 추가 및 변경&#10;#   :twisted_rightwards_arrows:    : 브랜치 합병" />
-    <option name="LAST_COMMIT_MESSAGE" value="### 제목&#10;# :커밋타입: [FE]/[BE] #이슈번호 작업내용&#10;:sparkles: [FE] #1 스크롤바 디자인&#10;&#10;- webkit을 이용해 스크롤바 디자인&#10;- mdn에서 권장하는 방법은 아니다.&#10;&#10;#   [커밋 타입]  리스트&#10;#   :sparkles:          : 새로운 기능에 대한 커밋&#10;#   :bug:               : 버그 수정에 대한 커밋&#10;#   :lipstick:          : CSS 등 사용자 UI 디자인 변경&#10;#   :recycle:           : 코드 리팩토링에 대한 커밋&#10;#   :art:               : 스타일 (코드 형식 변경: 비즈니스 로직에 변경 없음)&#10;#   :memo:              : 문서 추가, 수정에 대한 커밋&#10;#   :hammer:            : 빌드 관련 파일 수정에 대한 커밋&#10;#   :truck:             : 파일 혹은 폴더명을 수정하거나 옮기는 작업만인 경우&#10;#   :fire:              : 파일을 삭제하는 작업만 수행한 경우&#10;#   :rocket:            : CI 관련 설정, 수정에 대한 커밋 &#10;#   :speech_balloon:    : 필요한 주석 추가 및 변경&#10;#   :twisted_rightwards_arrows:    : 브랜치 합병" />
+    <MESSAGE value="### 제목&#10;# :커밋타입: [FE]/[BE] #이슈번호 작업내용&#10;:lipstick: [FE] #1 Search 컴포넌트 수정&#10;&#10;- placeholder 색상이 너무 진해 &quot;--gray600-color&quot; 색상 사용&#10;&#10;#   [커밋 타입]  리스트&#10;#   :sparkles:          : 새로운 기능에 대한 커밋&#10;#   :bug:               : 버그 수정에 대한 커밋&#10;#   :lipstick:          : CSS 등 사용자 UI 디자인 변경&#10;#   :recycle:           : 코드 리팩토링에 대한 커밋&#10;#   :art:               : 스타일 (코드 형식 변경: 비즈니스 로직에 변경 없음)&#10;#   :memo:              : 문서 추가, 수정에 대한 커밋&#10;#   :hammer:            : 빌드 관련 파일 수정에 대한 커밋&#10;#   :truck:             : 파일 혹은 폴더명을 수정하거나 옮기는 작업만인 경우&#10;#   :fire:              : 파일을 삭제하는 작업만 수행한 경우&#10;#   :rocket:            : CI 관련 설정, 수정에 대한 커밋 &#10;#   :speech_balloon:    : 필요한 주석 추가 및 변경&#10;#   :twisted_rightwards_arrows:    : 브랜치 합병" />
+    <MESSAGE value="### 제목&#10;# :커밋타입: [FE]/[BE] #이슈번호 작업내용&#10;:sparkles: [FE] #1 global style에 그라디언트 색상 추가&#10;&#10;- 색상 5개 추가&#10;  - 좋아하는 아이돌을 최대 5개 선택할 수 있으므로 5개를 만들었다.&#10;&#10;#   [커밋 타입]  리스트&#10;#   :sparkles:          : 새로운 기능에 대한 커밋&#10;#   :bug:               : 버그 수정에 대한 커밋&#10;#   :lipstick:          : CSS 등 사용자 UI 디자인 변경&#10;#   :recycle:           : 코드 리팩토링에 대한 커밋&#10;#   :art:               : 스타일 (코드 형식 변경: 비즈니스 로직에 변경 없음)&#10;#   :memo:              : 문서 추가, 수정에 대한 커밋&#10;#   :hammer:            : 빌드 관련 파일 수정에 대한 커밋&#10;#   :truck:             : 파일 혹은 폴더명을 수정하거나 옮기는 작업만인 경우&#10;#   :fire:              : 파일을 삭제하는 작업만 수행한 경우&#10;#   :rocket:            : CI 관련 설정, 수정에 대한 커밋 &#10;#   :speech_balloon:    : 필요한 주석 추가 및 변경&#10;#   :twisted_rightwards_arrows:    : 브랜치 합병" />
+    <MESSAGE value="### 제목&#10;# :커밋타입: [FE]/[BE] #이슈번호 작업내용&#10;:truck: [FE] #4 파일 이동&#10;&#10;- components 폴더 정리를 위해 layout에 쓰인 components들을 이동시킴&#10;&#10;#   [커밋 타입]  리스트&#10;#   :sparkles:          : 새로운 기능에 대한 커밋&#10;#   :bug:               : 버그 수정에 대한 커밋&#10;#   :lipstick:          : CSS 등 사용자 UI 디자인 변경&#10;#   :recycle:           : 코드 리팩토링에 대한 커밋&#10;#   :art:               : 스타일 (코드 형식 변경: 비즈니스 로직에 변경 없음)&#10;#   :memo:              : 문서 추가, 수정에 대한 커밋&#10;#   :hammer:            : 빌드 관련 파일 수정에 대한 커밋&#10;#   :truck:             : 파일 혹은 폴더명을 수정하거나 옮기는 작업만인 경우&#10;#   :fire:              : 파일을 삭제하는 작업만 수행한 경우&#10;#   :rocket:            : CI 관련 설정, 수정에 대한 커밋 &#10;#   :speech_balloon:    : 필요한 주석 추가 및 변경&#10;#   :twisted_rightwards_arrows:    : 브랜치 합병" />
+    <MESSAGE value="### 제목&#10;# :커밋타입: [FE]/[BE] #이슈번호 작업내용&#10;:art: [FE] #2 fullpage 라우트 수정&#10;&#10;- main에서 로그인 여부에 따라 컴포넌트를 바꾸는 기존의 형식&#10;- Outlet을 통해 main페이지가 렌더링되기 때문에, fullpage임에도 navbar가 그대로 노출되었음&#10;- fullpage는 따로 빼기로 결정&#10;&#10;#   [커밋 타입]  리스트&#10;#   :sparkles:          : 새로운 기능에 대한 커밋&#10;#   :bug:               : 버그 수정에 대한 커밋&#10;#   :lipstick:          : CSS 등 사용자 UI 디자인 변경&#10;#   :recycle:           : 코드 리팩토링에 대한 커밋&#10;#   :art:               : 스타일 (코드 형식 변경: 비즈니스 로직에 변경 없음)&#10;#   :memo:              : 문서 추가, 수정에 대한 커밋&#10;#   :hammer:            : 빌드 관련 파일 수정에 대한 커밋&#10;#   :truck:             : 파일 혹은 폴더명을 수정하거나 옮기는 작업만인 경우&#10;#   :fire:              : 파일을 삭제하는 작업만 수행한 경우&#10;#   :rocket:            : CI 관련 설정, 수정에 대한 커밋 &#10;#   :speech_balloon:    : 필요한 주석 추가 및 변경&#10;#   :twisted_rightwards_arrows:    : 브랜치 합병" />
+    <MESSAGE value="### 제목&#10;# :커밋타입: [FE]/[BE] #이슈번호 작업내용&#10;:lipstick: [FE] #2 nav바 수정&#10;&#10;- 화면을 스크롤해도 항상 navbar가 보이게 수정(css의 fixed 이용)&#10;- 배경을 투명색으로 지정&#10;- 로고와 로그인 버튼만 렌더링&#10;&#10;#   [커밋 타입]  리스트&#10;#   :sparkles:          : 새로운 기능에 대한 커밋&#10;#   :bug:               : 버그 수정에 대한 커밋&#10;#   :lipstick:          : CSS 등 사용자 UI 디자인 변경&#10;#   :recycle:           : 코드 리팩토링에 대한 커밋&#10;#   :art:               : 스타일 (코드 형식 변경: 비즈니스 로직에 변경 없음)&#10;#   :memo:              : 문서 추가, 수정에 대한 커밋&#10;#   :hammer:            : 빌드 관련 파일 수정에 대한 커밋&#10;#   :truck:             : 파일 혹은 폴더명을 수정하거나 옮기는 작업만인 경우&#10;#   :fire:              : 파일을 삭제하는 작업만 수행한 경우&#10;#   :rocket:            : CI 관련 설정, 수정에 대한 커밋 &#10;#   :speech_balloon:    : 필요한 주석 추가 및 변경&#10;#   :twisted_rightwards_arrows:    : 브랜치 합병" />
+    <MESSAGE value="### 제목&#10;# :커밋타입: [FE]/[BE] #이슈번호 작업내용&#10;:sparkles: [FE] #1 버튼 디자인 변경&#10;&#10;- height값을 props로 전달할 수 있음&#10;- hover시 너무 색깔이 진해지는 것 수정&#10;- hover시 애니메이션 적용 (transition)&#10;&#10;#   [커밋 타입]  리스트&#10;#   :sparkles:          : 새로운 기능에 대한 커밋&#10;#   :bug:               : 버그 수정에 대한 커밋&#10;#   :lipstick:          : CSS 등 사용자 UI 디자인 변경&#10;#   :recycle:           : 코드 리팩토링에 대한 커밋&#10;#   :art:               : 스타일 (코드 형식 변경: 비즈니스 로직에 변경 없음)&#10;#   :memo:              : 문서 추가, 수정에 대한 커밋&#10;#   :hammer:            : 빌드 관련 파일 수정에 대한 커밋&#10;#   :truck:             : 파일 혹은 폴더명을 수정하거나 옮기는 작업만인 경우&#10;#   :fire:              : 파일을 삭제하는 작업만 수행한 경우&#10;#   :rocket:            : CI 관련 설정, 수정에 대한 커밋 &#10;#   :speech_balloon:    : 필요한 주석 추가 및 변경&#10;#   :twisted_rightwards_arrows:    : 브랜치 합병" />
+    <option name="LAST_COMMIT_MESSAGE" value="### 제목&#10;# :커밋타입: [FE]/[BE] #이슈번호 작업내용&#10;:sparkles: [FE] #1 버튼 디자인 변경&#10;&#10;- height값을 props로 전달할 수 있음&#10;- hover시 너무 색깔이 진해지는 것 수정&#10;- hover시 애니메이션 적용 (transition)&#10;&#10;#   [커밋 타입]  리스트&#10;#   :sparkles:          : 새로운 기능에 대한 커밋&#10;#   :bug:               : 버그 수정에 대한 커밋&#10;#   :lipstick:          : CSS 등 사용자 UI 디자인 변경&#10;#   :recycle:           : 코드 리팩토링에 대한 커밋&#10;#   :art:               : 스타일 (코드 형식 변경: 비즈니스 로직에 변경 없음)&#10;#   :memo:              : 문서 추가, 수정에 대한 커밋&#10;#   :hammer:            : 빌드 관련 파일 수정에 대한 커밋&#10;#   :truck:             : 파일 혹은 폴더명을 수정하거나 옮기는 작업만인 경우&#10;#   :fire:              : 파일을 삭제하는 작업만 수행한 경우&#10;#   :rocket:            : CI 관련 설정, 수정에 대한 커밋 &#10;#   :speech_balloon:    : 필요한 주석 추가 및 변경&#10;#   :twisted_rightwards_arrows:    : 브랜치 합병" />
   </component>
 </project>

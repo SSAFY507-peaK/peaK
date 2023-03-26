@@ -8,8 +8,8 @@ type ImageType = {
   width?: string;
 }
 const SectionWrapper = styled.div<WrapperType>`
-  //height: 100vh;
-  height: 100%;
+  height: 100vh;
+  //height: 100%;
   width: 100%;
   background-color: ${props => props.backgroundColor};
   display: flex;
