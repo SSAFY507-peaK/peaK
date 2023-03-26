@@ -1,4 +1,4 @@
-import News from "../components/News";
+import News from "../components/newspage/News";
 import styled from "styled-components";
 
 const TapMenu = styled.div`
