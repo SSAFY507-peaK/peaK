@@ -1,5 +1,14 @@
+import IdolKeywordRank from "../idolpage/idolkeyword/IdolKeywordRank";
+import IdolKeywordWordCloud from "../idolpage/idolkeyword/IdolKeywordWordCloud";
 import styled from "styled-components";
+import { useState } from "react";
 
+const LeftFrame = styled.div`
+  display: flex;
+  flex-direction: column;
+  flex: 0.4;
+  margin-bottom: 10px;
+`;
 const ComponentDiv = styled.div`
   background-color: rgba(255, 255, 255, 0.5);
   border-radius: 30px;
@@ -11,23 +20,14 @@ const ComponentDiv = styled.div`
   margin-bottom: 7.5px;
 `;
 
-const TitleDiv = styled.div`
-  display: flex;
-  flex-direction: row;
-`;
-
-const PurpleH2 = styled.h2`
-  color: var(--purple400-color);
-  margin-left: 5px;
-`;
-
 function TrendKeyword() {
+  const [chooseKeyword, setChooseKeyword] = useState<number>(0);
   return (
     <ComponentDiv>
-      <TitleDiv>
-        <h2> 트렌딩</h2>
-        <PurpleH2> 키워드</PurpleH2>
-      </TitleDiv>
+      <LeftFrame>
+        <IdolKeywordRank setChooseKeyword={setChooseKeyword} chooseKeyword={chooseKeyword} />
+        <IdolKeywordWordCloud chooseKeyword={chooseKeyword} />
+      </LeftFrame>
     </ComponentDiv>
   );
 }
