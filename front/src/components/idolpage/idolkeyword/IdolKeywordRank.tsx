@@ -4,13 +4,18 @@ import IdolKeywordRankBtn from "./IdolKeywordRankBtn";
 import TitleComponent from "../TitleComponent";
 import styled from "styled-components";
 
+interface Props {
+  setChooseKeyword: React.Dispatch<React.SetStateAction<number>>;
+  chooseKeyword: number;
+}
+
 const RankFrame = styled.div`
   padding: 0px 0px 10px 10px;
   margin-bottom: 20px;
 `;
 
 
-function IdolKeywordRank() {
+function IdolKeywordRank({setChooseKeyword, chooseKeyword}:Props) {
   const dumy = [
     {
       rank: "1",
@@ -35,7 +40,6 @@ function IdolKeywordRank() {
   ]
   const [check, setCheck] = useState<boolean[]>([true, false, false, false, false])
 
-
   return (
     <RankFrame>
       <TitleComponent blacktxt="인기" purpletxt="키워드" />
@@ -50,7 +54,8 @@ function IdolKeywordRank() {
                 {
                   const tmp = [ false ,false, false, false, false]
                   tmp[idx] = true
-                  setCheck(tmp) 
+                  setCheck(tmp)
+                  setChooseKeyword(idx)
                 }
                 }
               isClick={check[idx]}
