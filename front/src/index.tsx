@@ -1,38 +1,39 @@
+import MainPage, { loader as MainLoader } from "./routes/MainPage";
 import {
   Route,
   RouterProvider,
   createBrowserRouter,
   createRoutesFromElements,
 } from "react-router-dom";
-import { Provider } from "react-redux";
-import { createRoot } from "react-dom/client";
-import reportWebVitals from "./reportWebVitals";
-import { store } from "./_store/store";
 
-import { GlobalStyle } from "./components/globalStyle.js";
 import ChartPage from "./routes/ChartPage";
 import ErrorPage from "./routes/ErrorPage";
+import { GlobalStyle } from "./components/globalStyle.js";
 import IdolPage from "./routes/IdolPage";
 import Layout from "./routes/Layout";
-import MainPage from "./routes/MainPage";
 import MyPage from "./routes/MyPage";
 import NewsDetailPage from "./routes/NewsDetailPage";
 import NewsPage from "./routes/NewsPage";
 import NicknamePage from "./routes/NicknamePage";
+import { Provider } from "react-redux";
 import RankingLayout from "./routes/RankingLayout";
 import RankingPage from "./routes/RankingPage";
 import SelectPage from "./routes/SelectPage";
-// import FullPage from "./routes/FullPage/FullPage"
 import TmpFullPage from "./routes/FullPage/tmpFullPage";
+import { createRoot } from "react-dom/client";
+import reportWebVitals from "./reportWebVitals";
+import { store } from "./_store/store";
+
+// import FullPage from "./routes/FullPage/FullPage"
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route>
       {/*<Route path="/intro" element={ <FullPage /> } />*/}
-      <Route path="/intro" element={ <TmpFullPage /> } />
+      <Route path="/intro" element={<TmpFullPage />} />
       <Route path="/" element={<Layout />} errorElement={<ErrorPage />}>
         <Route errorElement={<ErrorPage />}>
-          <Route index element={<MainPage />} />
+          <Route index element={<MainPage />} loader={MainLoader} />
           <Route path="signup/nickname" element={<NicknamePage />} />
           <Route path="signup/select" element={<SelectPage />} />
 
