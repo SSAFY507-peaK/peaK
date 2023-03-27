@@ -14,19 +14,53 @@ const ModalBackground = styled.div`
   
   z-index: 999;
 `
-
 const ModalWrapper = styled.div`
-  width: 500px;
-  height: 550px;
+  width: 400px;
+  height: 450px;
   background-color: white;
   border-radius: 30px;
-  padding: 100px 30px;
+  padding: 30px;
   
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
+  position: relative;
 `
+const CloseButton = styled.button`
+  height: 20px;
+  width: 20px;
+  border-radius: 15px;
+  color: white;
+  background-color: var(--gray700-color);
+  
+  position: absolute;
+  top: 30px;
+  right: 30px;
+`
+
+const LogoWrapper = styled.div`
+  flex: 0.6;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  &>h2 {
+    margin-top: 5px;
+  }
+`;
+const ButtonWrapper = styled.div`
+  flex: 0.4;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  &>h2 {
+    margin-top: 5px;
+  }
+`;
 
 function LoginModal() {
   const location = useLocation();
@@ -34,14 +68,15 @@ function LoginModal() {
   return (
     <ModalBackground>
       <ModalWrapper>
-        <div>
+        <CloseButton>X</CloseButton>
+        <LogoWrapper>
           <Logo />
-          <h2>peaK에 로그인하기</h2>
-        </div>
-        <div>
-          <NaverLogin  />
+          <h2>로그인하기</h2>
+        </LogoWrapper>
+        <ButtonWrapper>
+          <NaverLogin />
           <KakaoLogin />
-        </div>
+        </ButtonWrapper>
       </ModalWrapper>
     </ModalBackground>
   );

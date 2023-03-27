@@ -8,6 +8,9 @@ const ButtonWrapper = styled.button`
   margin-bottom: 15px;
   background-color: transparent;
   position: relative;
+  &:nth-last-of-type(1) {
+    margin-bottom: 0;
+  }
 `;
 const IconSection = styled.img`
   padding: 0;
@@ -23,7 +26,7 @@ const LoginButton = styled.div`
   width: 100%;
   height: 100%;
   border-radius: 30px;
-
+  
   background-color: white;
   color: var(--gray200-color);
   transition: all 100ms ease-in;
@@ -51,7 +54,7 @@ function NaverLogin() {
   return (
     <ButtonWrapper>
       <IconSection src={naverLogin} alt="네이버 소셜 로그인" />
-      <NaverLoginButton>네이버로 로그인</NaverLoginButton>
+      <NaverLoginButton>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;네이버로 로그인</NaverLoginButton>
     </ButtonWrapper>
   );
 }
@@ -60,7 +63,7 @@ function KakaoLogin() {
   return (
     <ButtonWrapper>
       <IconSection src={kakaoLogin} alt="카카오 소셜 로그인"></IconSection>
-      <KakaoLoginButton>카카오로 로그인</KakaoLoginButton>
+      <KakaoLoginButton>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;카카오로 로그인</KakaoLoginButton>
     </ButtonWrapper>
   );
 }
