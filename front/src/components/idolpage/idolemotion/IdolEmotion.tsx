@@ -11,12 +11,14 @@ const Frame = styled.div`
   background-color: rgba(255, 255, 255, 0.5);
   border-radius: 30px;
   margin-bottom: 15px;
+  padding: 20px;
 `;
 
 const Title = styled.h2`
   /* font-size: 2rem;
   font-weight: 700; */
-  margin: 30px 0px 20px 20px;
+  margin: 0px 10px 20px 0px;
+  /* padding-left: 20px; */
   color: var(--purple500-color);
 `;
 
@@ -35,7 +37,7 @@ const ChartBtnFrame = styled.div`
 
 const ChartFrame = styled.div`
   flex: 0.6;
-  margin: 0px 10px 10px 10px;
+  /* margin: 0px 10px 10px 10px; */
 `;
 
 

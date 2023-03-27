@@ -1,14 +1,14 @@
+import CarouselCustom from '../carousel/CarouslCustom';
 import IdolYoutubeCarousel from './IdolYoutubeCarousel';
+import TitleComponent from './TitleComponent';
 import YouTubeIcon from '@mui/icons-material/YouTube';
 import styled from "styled-components";
-import TitleComponent from './TitleComponent';
-import CarouselCustom from '../carousel/CarouslCustom';
 
 const Frame = styled.div`
   background-color: rgba(255, 255, 255, 0.5);
   border-radius: 30px;
   width: 100%;
-  padding: 0px 0px 10px 10px;
+  padding: 20px;
 `;
 
 
