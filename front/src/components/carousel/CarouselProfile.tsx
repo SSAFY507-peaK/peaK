@@ -10,6 +10,7 @@ const CarouselProfile = styled.div<CarouselProfileType>`
   background-image: url(${props => props.url});
   background-size: cover;
   background-position: center;
+  border-radius: 30px;
   width: ${props => props.width};
   height: ${props => props.height};
 `;
