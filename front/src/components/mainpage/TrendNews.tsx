@@ -26,7 +26,7 @@ const NewsCarouselDiv = styled.div`
 `;
 
 const CarouselDiv = styled.div`
-  width: 80%;
+  width: 70%;
 `;
 
 const PurpleH2 = styled.h2`
@@ -37,37 +37,31 @@ const PurpleH2 = styled.h2`
 function TrendNews() {
   const items = [
     {
-      title: "기안 84, 84세가 아닌 것으로 밝혀져..",
-      content:
-        "가나다라마바사아자차카타파하가나다라마바사아자차카타파하가나다라마바사아자차카타파하 abcdefghijklmnopqrstuvwxyz 기사 내용 111",
+      title: "기안 84, 84세가 아닌 것..",
+      content: "가나다라마바사아자차카타파하가",
       broad: "CNN",
-      src: "https://ssl.pstatic.net/mimgnews/image/311/2023/03/27/0001573560_001_20230327090103026.jpg?type=w540",
+      src: "https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMjA2MDFfOTgg%2FMDAxNjU0MDQwMTY5MTUx.NlszJe0R0vMxBz3WzJ1RrMbkuPgKjyGXhRQPcUlDcOgg.8gu7uH7x3uSF-5a2eQjH5Sa1R7wyp2P-y14rskFpTbog.JPEG.junpei%2FBTSGQ.jpg&type=a340",
     },
     {
       title: "BTS.. 흑역사라고 주장",
-      content:
-        "가나다라마바사아자차카타파하가나다라마바사아자차카타파하가나다라마바사아자차카타파하 abcdefghijklmnopqrstuvwxyz 기사 내용 111",
+      content: "가나다라마바사아자차카타파하가",
       broad: "CNN",
       src: "https://pbs.twimg.com/media/BNBGSmGCAAAbOfq.png",
     },
     {
       title: "기사 제목 333",
-      content:
-        "가나다라마바사아자차카타파하가나다라마바사아자차카타파하가나다라마바사아자차카타파하 abcdefghijklmnopqrstuvwxyz 기사 내용 111",
       broad: "CNN",
       src: "https://ssl.pstatic.net/mimgnews/image/311/2023/03/27/0001573560_001_20230327090103026.jpg?type=w540",
     },
     {
       title: "기사 제목 444",
-      content:
-        "가나다라마바사아자차카타파하가나다라마바사아자차카타파하가나다라마바사아자차카타파하 abcdefghijklmnopqrstuvwxyz 기사 내용 111",
+      content: "가나다라마바사아자차카타파하가",
       broad: "CNN",
       src: "https://pbs.twimg.com/media/BNBGSmGCAAAbOfq.png",
     },
     {
       title: "기사 제목 555",
-      content:
-        "가나다라마바사아자차카타파하가나다라마바사아자차카타파하가나다라마바사아자차카타파하 abcdefghijklmnopqrstuvwxyz 기사 내용 111",
+      content: "가나다라마바사아자차카타파하가",
       broad: "CNN",
       src: "https://ssl.pstatic.net/mimgnews/image/311/2023/03/27/0001573560_001_20230327090103026.jpg?type=w540",
     },
@@ -81,7 +75,7 @@ function TrendNews() {
       <div style={{ width: "100%" }}>
         <NewsCarouselDiv>
           <CarouselDiv>
-            <CarouselCustom items={items} width="400px" height="180px"></CarouselCustom>
+            <CarouselCustom items={items} width="300px" height="180px"></CarouselCustom>
           </CarouselDiv>
         </NewsCarouselDiv>
       </div>

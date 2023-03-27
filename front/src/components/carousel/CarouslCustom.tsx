@@ -5,16 +5,33 @@ import Card from "./Card";
 import CarouselProfile from "./CarouselProfile";
 import styled from "@emotion/styled";
 
-const CarouselTitle = styled.div`
+const CarouselWith = styled.div`
   position: relative;
-  padding: 20px 20px 20px 30px;
+  height: 100%;
+  padding: 25px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+`;
+
+const CarouselTitle = styled.div`
   font-size: 20px;
   color: white;
-  text-shadow: 1px 1px 1px black;
-  /* text-shadow: 1px 1px 2px black; */
+  text-shadow: 1px 1px 2px #232323;
+  font-weight: bold;
   display: flex;
   align-items: flex-end;
-  height: 95%;
+  justify-content: space-between;
+  margin: 0px 0px 5px 0px;
+`;
+
+const CarouselContent = styled.div`
+  font-size: 14px;
+  color: #ededed;
+  text-shadow: 1px 1px 2px #626262;
+  display: flex;
+  align-items: flex-end;
+  margin: 5px 0px 5px 0px;
   justify-content: space-between;
 `;
 
@@ -33,7 +50,10 @@ const CarouselCustom = (props: any) => {
     <Card {...settings}>
       {items.map((item: any) => (
         <CarouselProfile width={width} height={height} url={item.src}>
-          <CarouselTitle>{item.title || item.name}</CarouselTitle>
+          <CarouselWith>
+            <CarouselTitle>{item.title || item.name}</CarouselTitle>
+            {item.content && <CarouselContent>{item.content}</CarouselContent>}
+          </CarouselWith>
         </CarouselProfile>
       ))}
     </Card>
