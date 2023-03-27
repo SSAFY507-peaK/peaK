@@ -4,14 +4,10 @@ import {
   createBrowserRouter,
   createRoutesFromElements,
 } from "react-router-dom";
-import { Provider } from "react-redux";
-import { createRoot } from "react-dom/client";
-import reportWebVitals from "./reportWebVitals";
-import { store } from "./_store/store";
 
-import { GlobalStyle } from "./components/globalStyle.js";
 import ChartPage from "./routes/ChartPage";
 import ErrorPage from "./routes/ErrorPage";
+import { GlobalStyle } from "./components/globalStyle.js";
 import IdolPage from "./routes/IdolPage";
 import Layout from "./routes/Layout";
 import MainPage from "./routes/MainPage";
@@ -19,11 +15,24 @@ import MyPage from "./routes/MyPage";
 import NewsDetailPage from "./routes/NewsDetailPage";
 import NewsPage from "./routes/NewsPage";
 import NicknamePage from "./routes/NicknamePage";
+import { Provider } from "react-redux";
 import RankingLayout from "./routes/RankingLayout";
 import RankingPage from "./routes/RankingPage";
 import SelectPage from "./routes/SelectPage";
-// import FullPage from "./routes/FullPage/FullPage"
 import TmpFullPage from "./routes/FullPage/tmpFullPage";
+import { createRoot } from "react-dom/client";
+import reportWebVitals from "./reportWebVitals";
+import { store } from "./_store/store";
+
+// import ReactGA from 'react-ga'
+
+
+
+
+
+
+// import FullPage from "./routes/FullPage/FullPage"
+
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -54,6 +63,9 @@ const router = createBrowserRouter(
 
 const container = document.getElementById("root")!;
 const root = createRoot(container);
+
+// const TRACKING_ID = process.env.REACT_APP_GOOGLE_ANALYTICS_TRANKING_ID;
+// ReactGA.initialize(TRACKING_ID, {debug: true });
 
 root.render(
   <Provider store={store}>

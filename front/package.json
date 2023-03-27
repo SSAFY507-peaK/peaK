@@ -25,6 +25,7 @@
     "react-d3-cloud": "^1.0.6",
     "react-dom": "^18.2.0",
     "react-full-page": "^0.1.12",
+    "react-ga": "^3.3.1",
     "react-material-ui-carousel": "^3.4.2",
     "react-redux": "^8.0.5",
     "react-router": "^6.9.0",
