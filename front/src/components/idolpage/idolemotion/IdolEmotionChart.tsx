@@ -36,7 +36,7 @@ function IdolEmotionChart() {
     animations: {
       tension: {
         duration: 1000,
-        from: 1,
+        from: 0.5,
         to: 0.5,
       }
     },
