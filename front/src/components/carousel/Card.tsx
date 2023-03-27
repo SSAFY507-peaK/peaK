@@ -6,12 +6,12 @@ const Card = styled(Slider)`
   height: 95%;
 
   .slick-list {
-    width: 400px;
+    width: 300px;
     height: 100%;
     margin: 0 auto;
     background-color: #f0f9ff;
 
-    border-radius: 30px;
+    border-radius: 20px;
   }
 
   .slick-prev:before,

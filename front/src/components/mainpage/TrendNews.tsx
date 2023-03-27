@@ -26,7 +26,7 @@ const NewsCarouselDiv = styled.div`
 `;
 
 const CarouselDiv = styled.div`
-  width: 80%;
+  width: 70%;
 `;
 
 const PurpleH2 = styled.h2`
@@ -37,39 +37,33 @@ const PurpleH2 = styled.h2`
 function TrendNews() {
   const items = [
     {
-      title: "기안 84, 84세가 아닌 것으로 밝혀져..",
-      content:
-        "가나다라마바사아자차카타파하가나다라마바사아자차카타파하가나다라마바사아자차카타파하 abcdefghijklmnopqrstuvwxyz 기사 내용 111",
+      title: "기안 84, 84세가 아닌 것..",
+      content: "가나다라마바사아자차카타파하가",
       broad: "CNN",
-      src: "https://ssl.pstatic.net/mimgnews/image/311/2023/03/27/0001573560_001_20230327090103026.jpg?type=w540",
+      src: "https://ssl.pstatic.net/mimgnews/image/108/2023/03/27/0003139452_002_20230327145003970.jpg?type=w540",
     },
     {
       title: "BTS.. 흑역사라고 주장",
-      content:
-        "가나다라마바사아자차카타파하가나다라마바사아자차카타파하가나다라마바사아자차카타파하 abcdefghijklmnopqrstuvwxyz 기사 내용 111",
+      content: "가나다라마바사아자차카타파하가",
       broad: "CNN",
-      src: "https://pbs.twimg.com/media/BNBGSmGCAAAbOfq.png",
+      src: "https://cdn.cnn.com/cnnnext/dam/assets/220905135750-everyrealm-daniel-arsham-1-large-tease.jpg",
     },
     {
       title: "기사 제목 333",
-      content:
-        "가나다라마바사아자차카타파하가나다라마바사아자차카타파하가나다라마바사아자차카타파하 abcdefghijklmnopqrstuvwxyz 기사 내용 111",
       broad: "CNN",
-      src: "https://ssl.pstatic.net/mimgnews/image/311/2023/03/27/0001573560_001_20230327090103026.jpg?type=w540",
+      src: "https://cdn.cnn.com/cnnnext/dam/assets/220721082106-08-ehlers-danlos-syndrome-poppy-large-tease.jpg",
     },
     {
       title: "기사 제목 444",
-      content:
-        "가나다라마바사아자차카타파하가나다라마바사아자차카타파하가나다라마바사아자차카타파하 abcdefghijklmnopqrstuvwxyz 기사 내용 111",
+      content: "가나다라마바사아자차카타파하가",
       broad: "CNN",
-      src: "https://pbs.twimg.com/media/BNBGSmGCAAAbOfq.png",
+      src: "https://media.cnn.com/api/v1/images/stellar/prod/230324121916-01-germany-reichsbuerger-movement.jpg?c=16x9&q=h_720,w_1280,c_fill/f_webp",
     },
     {
       title: "기사 제목 555",
-      content:
-        "가나다라마바사아자차카타파하가나다라마바사아자차카타파하가나다라마바사아자차카타파하 abcdefghijklmnopqrstuvwxyz 기사 내용 111",
+      content: "가나다라마바사아자차카타파하가",
       broad: "CNN",
-      src: "https://ssl.pstatic.net/mimgnews/image/311/2023/03/27/0001573560_001_20230327090103026.jpg?type=w540",
+      src: "https://cdn.cnn.com/cnnnext/dam/assets/230324080604-01-lorraine-schwartz-joopiter-sale-swift-restricted-large-tease.jpg",
     },
   ];
   return (
@@ -81,7 +75,7 @@ function TrendNews() {
       <div style={{ width: "100%" }}>
         <NewsCarouselDiv>
           <CarouselDiv>
-            <CarouselCustom items={items} width="400px" height="180px"></CarouselCustom>
+            <CarouselCustom items={items} width="300px" height="180px"></CarouselCustom>
           </CarouselDiv>
         </NewsCarouselDiv>
       </div>
