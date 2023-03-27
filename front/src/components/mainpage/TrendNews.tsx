@@ -40,30 +40,30 @@ function TrendNews() {
       title: "기안 84, 84세가 아닌 것..",
       content: "가나다라마바사아자차카타파하가",
       broad: "CNN",
-      src: "https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMjA2MDFfOTgg%2FMDAxNjU0MDQwMTY5MTUx.NlszJe0R0vMxBz3WzJ1RrMbkuPgKjyGXhRQPcUlDcOgg.8gu7uH7x3uSF-5a2eQjH5Sa1R7wyp2P-y14rskFpTbog.JPEG.junpei%2FBTSGQ.jpg&type=a340",
+      src: "https://ssl.pstatic.net/mimgnews/image/108/2023/03/27/0003139452_002_20230327145003970.jpg?type=w540",
     },
     {
       title: "BTS.. 흑역사라고 주장",
       content: "가나다라마바사아자차카타파하가",
       broad: "CNN",
-      src: "https://pbs.twimg.com/media/BNBGSmGCAAAbOfq.png",
+      src: "https://cdn.cnn.com/cnnnext/dam/assets/220905135750-everyrealm-daniel-arsham-1-large-tease.jpg",
     },
     {
       title: "기사 제목 333",
       broad: "CNN",
-      src: "https://ssl.pstatic.net/mimgnews/image/311/2023/03/27/0001573560_001_20230327090103026.jpg?type=w540",
+      src: "https://cdn.cnn.com/cnnnext/dam/assets/220721082106-08-ehlers-danlos-syndrome-poppy-large-tease.jpg",
     },
     {
       title: "기사 제목 444",
       content: "가나다라마바사아자차카타파하가",
       broad: "CNN",
-      src: "https://pbs.twimg.com/media/BNBGSmGCAAAbOfq.png",
+      src: "https://media.cnn.com/api/v1/images/stellar/prod/230324121916-01-germany-reichsbuerger-movement.jpg?c=16x9&q=h_720,w_1280,c_fill/f_webp",
     },
     {
       title: "기사 제목 555",
       content: "가나다라마바사아자차카타파하가",
       broad: "CNN",
-      src: "https://ssl.pstatic.net/mimgnews/image/311/2023/03/27/0001573560_001_20230327090103026.jpg?type=w540",
+      src: "https://cdn.cnn.com/cnnnext/dam/assets/230324080604-01-lorraine-schwartz-joopiter-sale-swift-restricted-large-tease.jpg",
     },
   ];
   return (

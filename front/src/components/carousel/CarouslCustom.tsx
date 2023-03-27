@@ -15,23 +15,22 @@ const CarouselWith = styled.div`
 `;
 
 const CarouselTitle = styled.div`
-  font-size: 20px;
+  font-size: 18px;
   color: white;
   text-shadow: 1px 1px 2px #232323;
   font-weight: bold;
   display: flex;
   align-items: flex-end;
   justify-content: space-between;
-  margin: 0px 0px 5px 0px;
 `;
 
 const CarouselContent = styled.div`
-  font-size: 14px;
+  font-size: 12px;
   color: #ededed;
   text-shadow: 1px 1px 2px #626262;
   display: flex;
   align-items: flex-end;
-  margin: 5px 0px 5px 0px;
+  margin: 5px 0px;
   justify-content: space-between;
 `;
 
