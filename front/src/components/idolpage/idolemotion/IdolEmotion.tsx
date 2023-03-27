@@ -13,9 +13,9 @@ const Frame = styled.div`
   margin-bottom: 15px;
 `;
 
-const Title = styled.div`
-  font-size: 2rem;
-  font-weight: 700;
+const Title = styled.h2`
+  /* font-size: 2rem;
+  font-weight: 700; */
   margin: 30px;
   color: var(--purple500-color);
 `;
