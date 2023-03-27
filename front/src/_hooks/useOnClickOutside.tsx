@@ -1,8 +1,8 @@
 import {useEffect} from 'react';
 
-function UseOnClickOutside(ref, handler) {
+function UseOnClickOutside(ref:any, handler:()=>void) {
   useEffect(() => {
-    const listener = (e) => {
+    const listener = (e:any) => {
       // console.log(ref.current);
       // 내가 모달창을 클릭하고 있으면 listener는 아무것도 하지 않음
       if(!ref.current || ref.current.contains(e.target)) {

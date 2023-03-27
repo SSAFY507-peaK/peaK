@@ -74,7 +74,7 @@ const ButtonWrapper = styled.div`
 `;
 
 function LoginModal({ setLoginOpen }:LoginModalProps) {
-  const ref = useRef();
+  const ref = useRef<HTMLDivElement>(null);
   useOnClickOutside(ref, () => {setLoginOpen(false)})
 
   return (
