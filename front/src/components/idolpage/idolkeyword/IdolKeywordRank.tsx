@@ -11,7 +11,7 @@ interface Props {
 
 const RankFrame = styled.div`
   padding: 0px 0px 10px 10px;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 `;
 
 

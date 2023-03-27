@@ -30,8 +30,8 @@ function TitleComponent({blacktxt, purpletxt, id}:TitleType) {
   } else {
     return (
       <TitleFrame>
-        <Title>{purpletxt}</Title>
         <Title color="black">{blacktxt}</Title>
+        <Title>{purpletxt}</Title>
       </TitleFrame>
     )
   }

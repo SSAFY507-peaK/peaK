@@ -1,10 +1,10 @@
-import { useState } from "react";
-import styled from "styled-components"
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import TwitterIcon from '@mui/icons-material/Twitter';
 import YouTubeIcon from '@mui/icons-material/YouTube';
+import styled from "styled-components"
+import { useState } from "react";
 
 const Wrapper = styled.div`
   display: flex;
@@ -24,8 +24,8 @@ const IconFrame = styled.div`
   display: flex;
   background-color: ${props => props.color || `var(--purple800-color)` };
   border-radius: 10px;
-  width: 50px;
-  height: 50px;
+  width: 40px;
+  height: 40px;
   justify-content: center;
   align-items: center;
   margin-bottom: 10px;
@@ -33,6 +33,7 @@ const IconFrame = styled.div`
 
 const IconText = styled.div`
   text-align: center;
+  font-size: 0.8rem;
 `;
 
 
@@ -46,19 +47,19 @@ function IdolDataProfileSns() {
     <Wrapper>
       <SnsFrame>
         <IconFrame>
-          <InstagramIcon sx={{ fontSize: "2rem", cursor: "pointer", color: `var(--purple500-color)` }} onClick={()=> window.open(instagramUrl)} />
+          <InstagramIcon sx={{ fontSize: "1.5rem", cursor: "pointer", color: `var(--purple500-color)` }} onClick={()=> window.open(instagramUrl)} />
         </IconFrame>
         <IconText>인스타그램</IconText>
       </SnsFrame>
       <SnsFrame>
         <IconFrame>
-          <TwitterIcon sx={{ fontSize: "2rem", cursor: "pointer", color: `var(--purple500-color)` }} onClick={()=> window.open(twitterUrl)} />
+          <TwitterIcon sx={{ fontSize: "1.5rem", cursor: "pointer", color: `var(--purple500-color)` }} onClick={()=> window.open(twitterUrl)} />
         </IconFrame>
         <IconText>트위터</IconText>
         </SnsFrame>
         <SnsFrame>
         <IconFrame>
-        <YouTubeIcon sx={{ fontSize: "2rem", cursor: "pointer", color: `var(--purple500-color)` }} onClick={()=> window.open(youtubeUrl)} />
+        <YouTubeIcon sx={{ fontSize: "1.5rem", cursor: "pointer", color: `var(--purple500-color)` }} onClick={()=> window.open(youtubeUrl)} />
         </IconFrame>
         <IconText>유튜브</IconText>
         </SnsFrame>
@@ -66,9 +67,9 @@ function IdolDataProfileSns() {
         <IconFrame color="#FDD8D8" >
         {
           like?
-          <FavoriteIcon sx={{ fontSize: "2rem", cursor: "pointer", color: `var(--red600-color)` }} onClick={() => setLike(false)} />
+          <FavoriteIcon sx={{ fontSize: "1.5rem", cursor: "pointer", color: `var(--red600-color)` }} onClick={() => setLike(false)} />
           :
-          <FavoriteBorderIcon sx={{ fontSize: "2rem", cursor: "pointer", color: `var(--red600-color)` }} onClick={() => setLike(true)}/>
+          <FavoriteBorderIcon sx={{ fontSize: "1.5rem", cursor: "pointer", color: `var(--red600-color)` }} onClick={() => setLike(true)}/>
         } 
         </IconFrame>
         <IconText>팔로잉</IconText>

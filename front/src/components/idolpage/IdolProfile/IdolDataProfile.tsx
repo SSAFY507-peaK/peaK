@@ -1,7 +1,6 @@
-
-import styled from "styled-components";
-import bg  from "../sampleImg/Rectangle 343.png"
 import IdolDataProfileSns from './IdolDataProfileSns';
+import bg  from "../sampleImg/Rectangle343.png"
+import styled from "styled-components";
 
 const Wrapper = styled.div`
   display: flex;
@@ -9,13 +8,6 @@ const Wrapper = styled.div`
   align-items: center;
   flex: 0.5;
   padding: 15px;
-  width: 100%;
-`;
-
-const TopFrame = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
   width: 100%;
 `;
 
@@ -35,10 +27,6 @@ const IdolName = styled.div`
   margin-bottom: 30px;
 `;
 
-const RightBox = styled.div`
-  display: flex;
-  flex-direction: row;
-`;
 
 // const IdolRank = styled.div`
 //   font-size: 1.6rem;
@@ -49,14 +37,10 @@ const RightBox = styled.div`
 function IdolDataProfile () {
   return (
     <Wrapper>
-      <TopFrame>
         <ProfileImg />
         <IdolName>세븐틴</IdolName>
         {/* <IdolRank>2위</IdolRank> */}
         <IdolDataProfileSns />
-      </TopFrame>
-      <RightBox>
-      </RightBox>
     </Wrapper>
   )
 }

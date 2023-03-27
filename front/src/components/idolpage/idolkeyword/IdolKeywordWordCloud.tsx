@@ -11,7 +11,7 @@ const WordCloudFrame = styled.div`
   width: 80%;
   border-radius: 100px;
   border: 10px;
-  margin-top: 20px;
+  /* margin-top: 10px; */
   margin-left: 20px;
   /* background-color: var(--gray800-color); */
   

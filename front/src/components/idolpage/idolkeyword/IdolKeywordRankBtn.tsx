@@ -16,20 +16,25 @@ const Frame = styled.div<FrameType>`
   flex-direction: row;
   background: ${props => props.isClick ?`rgba(235, 221, 243, 0.6)`: null};
   opacity: ${props => props.isClick ? null : 0.5 };
-  border-radius: 20px;
-  padding: 5px 10px 5px 10px;
-  margin: 0px 10px 0px 10px;
+  border-radius: 30px;
+  /* padding: 5px 5px 5px 5px; */
+  margin: 5px 10px 5px 10px;
   cursor: pointer;
+  justify-content: center;
+  align-items: center;
 `;
 
 const RankFrame = styled.div`
-  flex: 0.1;
+  /* flex: 0.1; */
+  width: 30px;
+  height: 30px;
   background: linear-gradient(151.76deg, #A869CD 9.32%, #76349D 84.76%);
   border-radius: 20px;
   color: white;
   text-align: center;
-  padding: 10px;
+  padding: 5px;
   font-size: 1.1rem;
+
 `;
 
 const TextFrame = styled.div`
@@ -44,8 +49,8 @@ const TextFrame = styled.div`
 function IdolKeywordRankBtn({rank, keyword, isClick, onClick}: BtnType) {
   return (
     <Frame 
-    onClick={onClick}
-    isClick={isClick}
+      onClick={onClick}
+      isClick={isClick}
     >
       <RankFrame>{rank}</RankFrame>
       <TextFrame>{keyword}</TextFrame>
