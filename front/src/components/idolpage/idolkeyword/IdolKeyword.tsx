@@ -11,6 +11,7 @@ const Frame = styled.div`
   background-color: rgba(255, 255, 255, 0.5);
   border-radius: 30px;
   width: 100%;
+  padding: 20px;
 `;
 
 const LeftFrame = styled.div`

@@ -14,7 +14,8 @@ const TitleFrame = styled.div`
 const Title = styled.h2`
   /* font-size: 2rem;
   font-weight: 700; */
-  margin: 30px 0px 20px 10px;
+  /* margin-right: 10px; */
+  margin: 0px 10px 20px 0px;
   color: ${props => props.color || `var(--purple500-color)`};
 `;
 
