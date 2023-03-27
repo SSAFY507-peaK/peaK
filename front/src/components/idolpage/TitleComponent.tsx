@@ -11,9 +11,9 @@ const TitleFrame = styled.div`
   flex-direction: row;
 `;
 
-const Title = styled.div`
-  font-size: 2rem;
-  font-weight: 700;
+const Title = styled.h2`
+  /* font-size: 2rem;
+  font-weight: 700; */
   margin: 30px 0px 20px 10px;
   color: ${props => props.color || `var(--purple500-color)`};
 `;
