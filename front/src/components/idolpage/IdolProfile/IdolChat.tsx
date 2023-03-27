@@ -1,7 +1,6 @@
-import styled from "styled-components";
-import Button from "../../Button";
+import { PurpleButton } from "../../Button";
 import TitleComponent from "../TitleComponent";
-
+import styled from "styled-components";
 
 const Wrapper = styled.div`
   display: flex;
@@ -83,7 +82,7 @@ function IdolChat() {
       </ChatFrame>
       <ChatInputFrame>      
         <ChatInput placeholder="여기는 댓글을 적는 곳"></ChatInput>
-        <Button buttonColor="purple" width="100px">응원</Button>
+        <PurpleButton width="100px">응원</PurpleButton>
       </ChatInputFrame>
     </Wrapper>
   )
