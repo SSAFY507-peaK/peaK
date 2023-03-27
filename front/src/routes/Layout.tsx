@@ -5,16 +5,16 @@ import styled from "styled-components";
 const Background = styled.div`
   width: 100vw;
   height: 100vh;
-  background: linear-gradient(to bottom left, #FDD8D8 5%, #EBDDF3 90%);
+  background: linear-gradient(to bottom left, #fdd8d8 5%, #ebddf3 90%);
   padding: 20px;
-`
+`;
 
 const DashboardFrame = styled.div`
   height: 100%;
   width: 100%;
   border-radius: 30px;
   background: rgba(255, 255, 255, 0.5);
-  
+
   display: flex;
 `;
 

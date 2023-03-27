@@ -18,7 +18,7 @@ const NewsImg = styled.img`
   flex: 0.3;
   border-radius: 20px;
   background-size: cover;
-  width: 150px;
+  width: 100px;
   margin: 0px 20px 10px 10px;
 `;
 
@@ -30,7 +30,7 @@ const NewsDataFrame = styled.div`
 `;
 
 const NewsTitle = styled.div`
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   font-weight: 700;
   margin-bottom: 10px;
 `;

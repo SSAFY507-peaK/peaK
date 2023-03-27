@@ -1,20 +1,24 @@
+import WordCloud from 'react-d3-cloud';
 import { faker } from '@faker-js/faker';
 import styled from "styled-components";
-import WordCloud from 'react-d3-cloud';
 
-
+interface Props {
+  chooseKeyword: number;
+}
 
 const WordCloudFrame = styled.div`
   height: 15vh;
   width: 80%;
   border-radius: 100px;
   border: 10px;
+  /* margin-top: 10px; */
+  margin-left: 20px;
   /* background-color: var(--gray800-color); */
   
 `;
 
 
-function IdolKeywordWordCloud (){
+function IdolKeywordWordCloud ({chooseKeyword}:Props){
   
   const data = []
   for (let i=0;  i < 50; i++) {
@@ -40,6 +44,7 @@ function IdolKeywordWordCloud (){
         //   console.log(`onWordMouseOut: ${d.text}`);
         // }}
       />
+
     </WordCloudFrame>
   )
 }

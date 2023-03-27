@@ -36,8 +36,7 @@ function IdolEmotionRankChart() {
     animations: {
       tension: {
         duration: 1000,
-        // easing: 'linear',
-        from: 1,
+        from: 0.5,
         to: 0.5,
       }
     },

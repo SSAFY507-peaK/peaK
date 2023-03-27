@@ -1,21 +1,20 @@
-import styled from "styled-components";
-import Button from "../../Button";
+import { PurpleButton } from "../../Button";
 import TitleComponent from "../TitleComponent";
-
+import styled from "styled-components";
 
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   border-radius: 10px;
   box-shadow: 5px;
-  padding: 30px;
+  padding: 30px 30px 30px 30px;
   height: 100%;
 `;
 
 const ChatFrame = styled.div`
   width: 100%;
-  height: 300px;
-  margin: 25px 13px 40px 25px;
+  height: 200px;
+  margin: 0px 13px 40px 25px;
   padding-right: 25px;
   overflow-y: auto;
 
@@ -31,12 +30,13 @@ const ChatFrame = styled.div`
   }
 `;
 const ChatTitle = styled.div`
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   font-weight: 700;
   padding-bottom: 3px;
 `;
 
 const ChatData = styled.div`
+  font-size: 0.9rem;
   opacity: 0.8;
   margin-bottom: 10px;
 `;
@@ -68,7 +68,7 @@ function IdolChat() {
 
   return (
     <Wrapper>
-      <TitleComponent purpletxt="응원" blacktxt="한 마디"/>
+      <TitleComponent id="1" purpletxt="응원" blacktxt="한 마디"/>
       <ChatFrame>
         {
           chat.map((e, idx) => {
@@ -83,7 +83,7 @@ function IdolChat() {
       </ChatFrame>
       <ChatInputFrame>      
         <ChatInput placeholder="여기는 댓글을 적는 곳"></ChatInput>
-        <Button buttonColor="purple" width="100px">응원</Button>
+        <PurpleButton width="100px">응원</PurpleButton>
       </ChatInputFrame>
     </Wrapper>
   )

@@ -11,10 +11,11 @@ const TitleFrame = styled.div`
   flex-direction: row;
 `;
 
-const Title = styled.div`
-  font-size: 2rem;
-  font-weight: 700;
-  margin: 30px 0px 20px 10px;
+const Title = styled.h2`
+  /* font-size: 2rem;
+  font-weight: 700; */
+  /* margin-right: 10px; */
+  margin: 0px 10px 20px 0px;
   color: ${props => props.color || `var(--purple500-color)`};
 `;
 
@@ -30,8 +31,8 @@ function TitleComponent({blacktxt, purpletxt, id}:TitleType) {
   } else {
     return (
       <TitleFrame>
-        <Title>{purpletxt}</Title>
         <Title color="black">{blacktxt}</Title>
+        <Title>{purpletxt}</Title>
       </TitleFrame>
     )
   }

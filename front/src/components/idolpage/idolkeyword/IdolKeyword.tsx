@@ -1,3 +1,5 @@
+import { useEffect, useState } from "react";
+
 import IdolKeywordNews from "./IdolKeywordNews";
 import IdolKeywordRank from "./IdolKeywordRank";
 import IdolKeywordWordCloud from "./IdolKeywordWordCloud";
@@ -9,6 +11,7 @@ const Frame = styled.div`
   background-color: rgba(255, 255, 255, 0.5);
   border-radius: 30px;
   width: 100%;
+  padding: 20px;
 `;
 
 const LeftFrame = styled.div`
@@ -19,13 +22,20 @@ const LeftFrame = styled.div`
 `;
 
 function IdolKeyword() {
+  // const [clickKeyword, setClickKeyword] = useState<boolean[]>([true, false, false, false, false])
+  const [chooseKeyword, setChooseKeyword] = useState<number>(0)
+
+  useEffect(() => {
+
+  }, [chooseKeyword])
+
   return (
     <Frame>
       <LeftFrame>
-        <IdolKeywordRank />
-        <IdolKeywordWordCloud />
+        <IdolKeywordRank setChooseKeyword={setChooseKeyword} chooseKeyword={chooseKeyword} />
+        <IdolKeywordWordCloud chooseKeyword={chooseKeyword} />
       </LeftFrame>
-      <IdolKeywordNews />
+      <IdolKeywordNews chooseKeyword={chooseKeyword} />
     </Frame>
   )
 }

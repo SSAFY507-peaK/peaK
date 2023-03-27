@@ -6,10 +6,12 @@ const Card = styled(Slider)`
   height: 95%;
 
   .slick-list {
-    width: 250px;
+    width: 300px;
     height: 100%;
     margin: 0 auto;
     background-color: #f0f9ff;
+
+    border-radius: 20px;
   }
 
   .slick-prev:before,
@@ -24,6 +26,7 @@ const Card = styled(Slider)`
 
   .slick-slide div {
     cursor: pointer;
+    /* background: black; */
   }
 `;
 export default Card;

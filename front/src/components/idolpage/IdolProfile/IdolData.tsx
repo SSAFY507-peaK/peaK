@@ -1,6 +1,6 @@
-import styled from "styled-components";
 import IdolChat from "./IdolChat";
 import IdolDataProfile from "./IdolDataProfile";
+import styled from "styled-components";
 
 const Frame = styled.div`
   display: flex;
