@@ -24,7 +24,8 @@ import { createRoot } from "react-dom/client";
 import reportWebVitals from "./reportWebVitals";
 import { store } from "./_store/store";
 
-// import ReactGA from 'react-ga'
+import ReactGA from 'react-ga'
+import RouteChangeTracker from "./_utils/RouteChangeTracker";
 
 
 
@@ -64,8 +65,10 @@ const router = createBrowserRouter(
 const container = document.getElementById("root")!;
 const root = createRoot(container);
 
-// const TRACKING_ID = process.env.REACT_APP_GOOGLE_ANALYTICS_TRANKING_ID;
-// ReactGA.initialize(TRACKING_ID, {debug: true });
+if (process.env.REACT_APP_GOOGLE_ANALYTICS_TRANKING_ID) {
+  ReactGA.initialize(process.env.REACT_APP_GOOGLE_ANALYTICS_TRANKING_ID);
+}
+// RouteChangeTracker();
 
 root.render(
   <Provider store={store}>
