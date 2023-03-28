@@ -9,12 +9,12 @@ import { useLoaderData } from "react-router";
 export async function loader() {
   let items;
   const YOUTUBE_KEY = process.env.REACT_APP_YOUTUBE_KEY;
-  await axios
-    .get(
-      `https://www.googleapis.com/youtube/v3/search?part=snippet&chart=mostPopular&maxResults=10&q=아이돌&key=${YOUTUBE_KEY}`,
-    )
-    .then(response => (items = response.data.items));
-  console.log(items);
+  // await axios
+  //   .get(
+  //     `https://www.googleapis.com/youtube/v3/search?part=snippet&chart=mostPopular&maxResults=10&q=아이돌&key=${YOUTUBE_KEY}`,
+  //   )
+  //   .then(response => (items = response.data.items));
+  // console.log(items);
   return [items];
 }
 
@@ -34,7 +34,7 @@ function MainPage() {
       </MainDiv>
       <MainDiv>
         <TrendNews />
-        <TrendYoutube items={items} />
+        {/* <TrendYoutube items={items} /> */}
       </MainDiv>
     </>
     // <FullPage />

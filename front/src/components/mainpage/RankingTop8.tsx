@@ -16,7 +16,6 @@ const TitleDiv = styled.div`
   display: flex;
   flex-direction: row;
   padding: 0px;
-  margin-bottom: 15px;
 `;
 
 const PurpleH2 = styled.h2`

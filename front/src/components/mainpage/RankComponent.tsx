@@ -12,16 +12,22 @@ interface RankingNumType {
 
 /** 순위 숫자 (색을 다르게 부여) */
 const RankingNum = styled.div<RankingNumType>`
-  font-size: ${props => (props.rank in ["1", "2", "3", "4"] ? "20px" : "14px")};
-  font-weight: ${props => (props.rank in ["1", "2", "3", "4"] ? "bold" : "normal")};
-  color: ${props =>
+  position: relative;
+  top: ${props => (props.rank in ["1", "2", "3", "4"] ? "40px" : "20px")};
+  font-size: ${props => (props.rank in ["1", "2", "3", "4"] ? "40px" : "20px")};
+  color: rgba(0, 0, 0, 0);
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: #828282;
+  font-weight: bold;
+
+  /* color: ${props =>
     props.rank === "1"
       ? "#FFB800"
       : props.rank === "2"
       ? "#B7B7B7"
       : props.rank === "3"
       ? "#A55A23"
-      : "#000000"};
+      : "#000000"}; */
 `;
 
 const NameDiv = styled.div`
@@ -35,11 +41,11 @@ function RankComponent(props: any) {
   let IdolRank: any = 0;
   if (props.item.rank in ["1", "2", "3", "4"]) {
     IdolRank = (
-      <IdolProfile width="180px" height="140px" shape="rect" url={props.item.src}></IdolProfile>
+      <IdolProfile width="170px" height="170px" shape="round" url={props.item.src}></IdolProfile>
     );
   } else {
     IdolRank = (
-      <IdolProfile width="100px" height="100px" shape="round" url={props.item.src}></IdolProfile>
+      <IdolProfile width="95px" height="95px" shape="round" url={props.item.src}></IdolProfile>
     );
   }
   return (

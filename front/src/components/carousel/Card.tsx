@@ -10,7 +10,6 @@ const Card = styled(Slider)`
     height: 100%;
     margin: 0 auto;
     background-color: #f0f9ff;
-
     border-radius: 20px;
   }
 
