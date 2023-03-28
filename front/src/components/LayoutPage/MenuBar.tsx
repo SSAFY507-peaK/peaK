@@ -1,24 +1,23 @@
-import React from "react";
 import { Link, NavLink } from "react-router-dom";
+
+import BarChartIcon from '@mui/icons-material/BarChart';
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import HelpIcon from '@mui/icons-material/Help';
+import HomeIcon from '@mui/icons-material/Home';
+import { ReactComponent as Logo } from "../../assets/peaK.svg";
+import LogoutIcon from '@mui/icons-material/Logout';
+import PersonIcon from '@mui/icons-material/Person';
+import React from "react";
+import ReactGA from 'react-ga'
+import Search from "../Search";
+import TrendingUpIcon from '@mui/icons-material/TrendingUp';
 import styled from "styled-components";
 
-import HomeIcon from '@mui/icons-material/Home';
-import FavoriteIcon from '@mui/icons-material/Favorite';
-import BarChartIcon from '@mui/icons-material/BarChart';
-import TrendingUpIcon from '@mui/icons-material/TrendingUp';
-import PersonIcon from '@mui/icons-material/Person';
-import HelpIcon from '@mui/icons-material/Help';
-import LogoutIcon from '@mui/icons-material/Logout';
-
-import { ReactComponent as Logo } from "../../assets/peaK.svg";
-import Search from "../Search";
-
-const MenuBackground = styled.div`
+const MenuBackground = styled.nav`
   flex: 1 0 250px;
   height: 100%;
-  border-radius: 30px;
   padding: 40px 0;
-  background-color: rgba(255, 255, 255, 0.5);
+  background-color: white;
 
   display: flex;
   flex-direction: column;
@@ -44,37 +43,54 @@ const MenuTab = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-end;
 `;
 
 const Menu = styled.div`
-  width: 100%;
+  width: 90%;
   color: var(--gray400-color);
   
   > * {
     display: flex;
     align-items: center;
-    padding: 10px 0 10px 40px;
+    padding: 15px 0 15px 30px;
+    
+    &:hover{
+      font-weight: 600;
+    }
 
     &.active {
       color: var(--purple500-color);
-      padding: 10px 0 10px 36px;
-      border-left: 4px solid var(--purple400-color);
+      border-right: 4px solid var(--purple400-color);
       font-weight: 600;
+      background-color: var(--background-color);
+      border-radius: 15px 0 0 15px;
     }
   }
 `;
 
-const style = {marginRight: "7px", fontSize: "medium"}
+const style = {marginRight: "10px", fontSize: "medium"}
 
 function MenuBar() {
   return (
     <MenuBackground>
       <MenuSection>
-        <Link to="/"><Logo /></Link>
+        <Link onClick={()=>{
+            ReactGA.event({
+              category: "Button",
+              action: "go to other's Home",
+              label: "Home",
+            });
+          }} to="/"><Logo /></Link>
         <Search width="220px" />
         <MenuTab>
-          <Menu><NavLink to="/" className={({ isActive }) => (isActive ? "active" : "")}><HomeIcon style={style}/>홈</NavLink></Menu>
+          <Menu onClick={()=>{
+            ReactGA.event({
+              category: "Button",
+              action: "go to other's Home",
+              label: "Home",
+            });
+          } }><NavLink to="/" className={({ isActive }) => (isActive ? "active" : "")}><HomeIcon style={style}/>홈</NavLink></Menu>
           <Menu><NavLink to="/newjeans" className={({ isActive }) => (isActive ? "active" : "")}><FavoriteIcon style={style}/>관심 아이돌</NavLink></Menu>
           <Menu><NavLink to="/ranking" className={({ isActive }) => (isActive ? "active" : "")}><BarChartIcon style={style}/>랭킹/차트</NavLink></Menu>
           <Menu><NavLink to="/news" className={({ isActive }) => (isActive ? "active" : "")}><TrendingUpIcon style={style}/>트렌딩</NavLink></Menu>
