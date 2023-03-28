@@ -71,7 +71,13 @@ function MenuBar() {
   return (
     <MenuBackground>
       <MenuSection>
-        <Link to="/"><Logo /></Link>
+        <Link onClick={()=>{
+            ReactGA.event({
+              category: "Button",
+              action: "go to other's Home",
+              label: "Home",
+            });
+          }} to="/"><Logo /></Link>
         <Search width="220px" />
         <MenuTab>
           <Menu onClick={()=>{
