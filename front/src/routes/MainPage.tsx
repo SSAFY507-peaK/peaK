@@ -7,12 +7,10 @@ import styled from "styled-components";
 import { useLoaderData } from "react-router";
 
 export async function loader() {
+  const YOUTUBE_KEY = process.env.REACT_APP_YOUTUBE_KEY;
   let items;
-
   await axios
-    .get(
-      "https://www.googleapis.com/youtube/v3/search?part=snippet&q=아이돌&key=AIzaSyB9YfLaWHlI9hTmQgfRoaTRRC6FRnDlVUA",
-    )
+    .get(`https://www.googleapis.com/youtube/v3/search?part=snippet&q=아이돌&key=${YOUTUBE_KEY}`)
     .then(response => (items = response.data.items));
 
   return [items];
