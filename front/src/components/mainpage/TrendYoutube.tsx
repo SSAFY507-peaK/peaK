@@ -38,7 +38,12 @@ function TrendYoutube(props: any) {
   console.log("hello", youtubeData);
   let items: any[] = [];
   youtubeData.map((item: any) =>
-    items.push({ title: `${item.snippet.title}`, src: `${item.snippet.thumbnails.high.url}` }),
+    items.push({
+      title: `${item.snippet.title}`,
+      src: `${item.snippet.thumbnails.high.url}`,
+      channelId: `${item.snippet.channelId}`,
+      videoId: `${item.id.videoId}`,
+    }),
   );
   console.log("items", items);
   return (
