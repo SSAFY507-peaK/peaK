@@ -13,12 +13,11 @@ import Search from "../Search";
 import TrendingUpIcon from '@mui/icons-material/TrendingUp';
 import styled from "styled-components";
 
-const MenuBackground = styled.div`
+const MenuBackground = styled.nav`
   flex: 1 0 250px;
   height: 100%;
-  border-radius: 30px;
   padding: 40px 0;
-  background-color: rgba(255, 255, 255, 0.5);
+  background-color: white;
 
   display: flex;
   flex-direction: column;
@@ -44,28 +43,33 @@ const MenuTab = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-end;
 `;
 
 const Menu = styled.div`
-  width: 100%;
+  width: 90%;
   color: var(--gray400-color);
   
   > * {
     display: flex;
     align-items: center;
-    padding: 10px 0 10px 40px;
+    padding: 15px 0 15px 30px;
+    
+    &:hover{
+      font-weight: 600;
+    }
 
     &.active {
       color: var(--purple500-color);
-      padding: 10px 0 10px 36px;
-      border-left: 4px solid var(--purple400-color);
+      border-right: 4px solid var(--purple400-color);
       font-weight: 600;
+      background-color: var(--background-color);
+      border-radius: 15px 0 0 15px;
     }
   }
 `;
 
-const style = {marginRight: "7px", fontSize: "medium"}
+const style = {marginRight: "10px", fontSize: "medium"}
 
 function MenuBar() {
   return (
