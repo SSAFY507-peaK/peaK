@@ -73,10 +73,10 @@ function IdolChat() {
         {
           chat.map((e, idx) => {
             return(
-              <>
+              <div key={idx}>
                 <ChatTitle>{e.name}</ChatTitle>
                 <ChatData>{e.data}</ChatData>
-              </>
+              </div>
             )
           })
         }

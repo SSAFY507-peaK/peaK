@@ -1,4 +1,5 @@
 import MenuBar from "../components/LayoutPage/MenuBar";
+import RouteChangeTracker from "../_utils/RouteChangeTracker";
 import Wrapper from "../components/LayoutPage/Wrapper";
 import styled from "styled-components";
 
@@ -20,6 +21,8 @@ const DashboardFrame = styled.div`
 
 /** nav바랑 footer를 담는 페이지. 아래 Outlet에 진짜 페이지들이 렌더링됩니다. */
 function Layout() {
+  RouteChangeTracker();
+
   return (
     <Background>
       <DashboardFrame>
