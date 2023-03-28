@@ -12,6 +12,7 @@ const CarouselWith = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
+  background: linear-gradient(0deg, rgb(0, 0, 0), rgba(0, 0, 0, 0) 50%);
 `;
 
 const CarouselTitle = styled.div`
@@ -49,7 +50,9 @@ const CarouselCustom = (props: any) => {
     <Card {...settings}>
       {items.map((item: any) => (
         <CarouselProfile width={width} height={height} url={item.src}>
-          <CarouselWith>
+          <CarouselWith
+            onClick={() => window.open(`https://www.youtube.com/watch?v=${item.videoId}`)}
+          >
             <CarouselTitle>{item.title || item.name}</CarouselTitle>
             {item.content && <CarouselContent>{item.content}</CarouselContent>}
           </CarouselWith>
