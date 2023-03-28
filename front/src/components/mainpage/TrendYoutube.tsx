@@ -35,17 +35,17 @@ const CarouselDiv = styled.div`
 
 function TrendYoutube(props: any) {
   const youtubeData = props.items[0];
-  console.log("hello", youtubeData);
   let items: any[] = [];
-  youtubeData.map((item: any) =>
+  youtubeData.map((item: any) => {
+    console.log(item); //////////////////////
     items.push({
       title: `${item.snippet.title}`,
       src: `${item.snippet.thumbnails.high.url}`,
       channelId: `${item.snippet.channelId}`,
       videoId: `${item.id.videoId}`,
-    }),
-  );
-  console.log("items", items);
+    });
+  });
+  console.log("items", items); /////////////////
   return (
     <ComponentDiv>
       <TitleDiv>
