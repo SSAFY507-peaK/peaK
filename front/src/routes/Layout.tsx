@@ -3,19 +3,23 @@ import RouteChangeTracker from "../_utils/RouteChangeTracker";
 import Wrapper from "../components/LayoutPage/Wrapper";
 import styled from "styled-components";
 
-const Background = styled.div`
-  width: 100vw;
+// const Background = styled.div`
+//   width: 100vw;
+//   height: 100vh;
+// `;
+
+// const DashboardFrame = styled.div`
+//   height: 100vh;
+//   width: 100vw;
+//   border-radius: 30px;
+//   background: rgba(255, 255, 255, 0.5);
+//
+//   display: flex;
+// `;
+
+const Frame = styled.div`
   height: 100vh;
-  background: linear-gradient(to bottom left, #fdd8d8 5%, #ebddf3 90%);
-  padding: 20px;
-`;
-
-const DashboardFrame = styled.div`
-  height: 100%;
-  width: 100%;
-  border-radius: 30px;
-  background: rgba(255, 255, 255, 0.5);
-
+  width: 100vw;
   display: flex;
 `;
 
@@ -24,12 +28,10 @@ function Layout() {
   RouteChangeTracker();
 
   return (
-    <Background>
-      <DashboardFrame>
+      <Frame>
         <MenuBar />
         <Wrapper />
-      </DashboardFrame>
-    </Background>
+      </Frame>
   );
 }
 

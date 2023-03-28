@@ -64,6 +64,9 @@ const GlobalStyle = createGlobalStyle`
     --yellow-gradient: linear-gradient(to bottom right, #FFD99E 0%, #FF9B05 100%);
     --green-gradient: linear-gradient(to bottom right, #93F2A2 0%, #1AD138 100%);
     
+    /* background color */
+    --background-color: #F9F7FA;
+    
     /* Navigation bar height */
     --nav-height: 50px;
 
@@ -90,6 +93,7 @@ const GlobalStyle = createGlobalStyle`
     height: 100%;
     font-family: "Pretendard", -apple-system, Helvetica Neue, sans-serif;
     margin: 0;
+    background-color: var(--background-color) ;
   }
 
   button {
