@@ -11,13 +11,14 @@ import NewsPage from "./routes/NewsPage";
 import SignUpPage from "./routes/SignUpPage";
 import RankingLayout from "./routes/RankingLayout";
 import RankingPage from "./routes/RankingPage";
-import TmpFullPage from "./routes/FullPage/tmpFullPage";
+import FullPage from "./routes/FullPage/FullPage"
+// import TmpFullPage from "./routes/FullPage/tmpFullPage";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route>
-      {/*<Route path="/intro" element={ <FullPage /> } />*/}
-      <Route path="/intro" element={<TmpFullPage />} />
+      <Route path="/intro" element={ <FullPage /> } />
+      {/*<Route path="/intro" element={<TmpFullPage />} />*/}
       <Route path="/signup" element={<SignUpPage />} />
       <Route path="/" element={<Layout />} errorElement={<ErrorPage />}>
         <Route errorElement={<ErrorPage />}>
