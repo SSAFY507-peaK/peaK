@@ -1,4 +1,4 @@
-package com.ssafy.peak;
+package com.ssafy.peak.security;
 
 import java.util.ArrayList;
 import java.util.Collection;

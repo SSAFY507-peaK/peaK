@@ -7,6 +7,7 @@ import org.springframework.beans.factory.InitializingBean;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
 
+import com.ssafy.peak.security.UserPrincipal;
 import com.ssafy.peak.util.RedisUtil;
 
 import io.jsonwebtoken.Claims;
