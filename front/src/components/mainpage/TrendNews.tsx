@@ -2,7 +2,6 @@ import CarouselCustom from "../carousel/CarouslCustom";
 import styled from "styled-components";
 
 const ComponentDiv = styled.div`
-  background-color: rgba(255, 255, 255, 0.5);
   border-radius: 30px;
   display: flex;
   flex-direction: column;
@@ -21,7 +20,7 @@ const NewsCarouselDiv = styled.div`
 `;
 
 const CarouselDiv = styled.div`
-  width: 70%;
+  width: 85%;
 `;
 
 function TrendNews() {
