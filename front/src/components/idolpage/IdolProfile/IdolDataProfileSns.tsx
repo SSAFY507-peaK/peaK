@@ -11,7 +11,7 @@ const Wrapper = styled.div`
   flex-direction: row;
   width: 70%;
   justify-content: space-evenly;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
 `;
 
 const SnsFrame = styled.div`

@@ -17,10 +17,10 @@ const TopFrame = styled.div`
   margin-bottom: 15px;
 `;
 
-const TopLeftFrame = styled.div`
+const TopRightFrame = styled.div`
   display: flex;
   flex-direction: column;
-  flex: 0.7;
+  flex: 0.65;
   margin-right: 15px;
 `;
 
@@ -37,10 +37,10 @@ function IdolPage() {
       <IdolList />
       <TopFrame>
         <IdolData />
-        <TopLeftFrame>
+        <TopRightFrame>
           <IdolEmotion />
           <IdolKeyword />
-        </TopLeftFrame>
+        </TopRightFrame>
       </TopFrame>
       <BottomFrame>
         <IdolYoutube />

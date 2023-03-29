@@ -8,14 +8,15 @@ const Wrapper = styled.div`
   background-color: white;
   border-radius: 15px;
   box-shadow: 5px;
-  padding: 15px;
+  padding: 20px;
   height: 100%;
 `;
 
 const ChatFrame = styled.div`
   /* width: 100%; */
   height: 25vh;
-  padding-left: 15px;
+  padding-left: 20px;
+  padding-right: 20px;
   margin-bottom: 10px;
   overflow-y: auto;
 

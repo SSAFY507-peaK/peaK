@@ -6,10 +6,12 @@ interface DataType {
   changenum?: number;
   title: string;
   isTab: boolean;
+  color: string;
   onClick: () => void;
 }
 
 interface TextType {
+  isTab: boolean;
   size: string;
   fontweight?: string;
 }
@@ -17,30 +19,27 @@ interface TextType {
 const ButtonFrameOn = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: center;
+  /* align-items: center; */
   justify-content: center;
-  border-radius: 30px;
-  background: linear-gradient(130.91deg, #FA7474 7.03%, #CE0808 91.83%);
-  box-shadow: 0px 4px 18px -5px #F84444;
-  border-radius: 30px;
-  width: 65%;
-  flex: 0.4;
-  margin-bottom: 10px;
+  background: linear-gradient(130.91deg, #A869CD 7.03%, #76349D 91.83%);
+  border-radius: 15px;
+  width: 85%;
+  flex: 0.45;
   cursor: pointer;
+  padding-left: 25px;
 `;
 
 const ButtonFrameOff = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: center;
+  /* align-items: center; */
   justify-content: center;
-  border-radius: 30px;
-  background: rgba(255, 255, 255, 0.5);
-  border-radius: 30px;
-  width: 65%;
-  flex: 0.4;
-  margin-bottom: 10px;
+  background: white;
+  border-radius: 15px;
+  width: 85%;
+  flex: 0.45;
   cursor: pointer;
+  padding-left: 25px;
 `;
 
 const TextFrame = styled.div`
@@ -54,29 +53,35 @@ const TextValue = styled.p<TextType>`
   font-size: ${props => props.size};
   font-weight: ${props => props.fontweight};
   margin: 0px;
+  color: ${props => props.isTab ? "white" : "black"}
 `;
 
-function IdolEmotionChartBtn({ ranknum, rankicon, changenum, title, isTab, onClick}: DataType) {
+const TextRank = styled.p`
+  font-size: 0.6rem;
+  color: ${props => props.color};
+`;
+
+function IdolEmotionChartBtn({ ranknum, rankicon, changenum, title, isTab, color, onClick}: DataType) {
   if (isTab) {
     return (
     <ButtonFrameOn onClick={onClick}>
       <TextFrame>
-        <TextValue size="1.3rem" fontweight="700">{ranknum}</TextValue>
+        <TextValue isTab={isTab} size="1.3rem" fontweight="700">{ranknum}</TextValue>
         {rankicon}
-        <TextValue size="0.6rem">{changenum}</TextValue>
+        <TextRank color={color}>{changenum}</TextRank>
       </TextFrame >
-      <TextFrame>{title}</TextFrame>
+      <TextValue isTab={isTab} size="0.7rem">{title}</TextValue>
     </ButtonFrameOn>
     )
   } else {
     return(
     <ButtonFrameOff onClick={onClick}>
       <TextFrame>
-        <TextValue size="1.3rem" fontweight="700">{ranknum}</TextValue>
+        <TextValue isTab={isTab} size="1.3rem" fontweight="700">{ranknum}</TextValue>
         {rankicon}
-        <TextValue size="0.7rem">{changenum}</TextValue>
+        <TextRank color={color} >{changenum}</TextRank>
       </TextFrame>
-      <TextFrame>{title}</TextFrame>
+      <TextValue isTab={isTab} size="0.7rem">{title}</TextValue>
     </ButtonFrameOff>
     )
   }
