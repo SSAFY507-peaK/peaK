@@ -1,43 +1,54 @@
-import RankingTop8 from "../components/mainpage/RankingTop8";
+import CarouselDiv from "../components/mainpage/CarouselDiv";
+import CommonDiv from "../components/mainpage/CommonDiv";
+import Top8 from "../components/mainpage/Top8";
 import TrendKeyword from "../components/mainpage/TrendKeyword";
 import TrendNews from "../components/mainpage/TrendNews";
-import TrendYoutube from "../components/mainpage/TrendYoutube";
-import axios from "axios";
 import styled from "styled-components";
-import { useLoaderData } from "react-router";
-
-export async function loader() {
-  let items;
-  const YOUTUBE_KEY = process.env.REACT_APP_YOUTUBE_KEY;
-  // await axios
-  //   .get(
-  //     `https://www.googleapis.com/youtube/v3/search?part=snippet&chart=mostPopular&maxResults=10&q=아이돌&key=${YOUTUBE_KEY}`,
-  //   )
-  //   .then(response => (items = response.data.items));
-  // console.log(items);
-  return [items];
-}
 
 const MainDiv = styled.div`
+  width: 100%;
   display: flex;
   justify-content: space-between;
 `;
 
-/** 메인페이지 */
 function MainPage() {
-  const items = useLoaderData();
   return (
     <>
-      <MainDiv>
-        <RankingTop8 />
-        <TrendKeyword />
+      <MainDiv style={{ marginBottom: "2vh" }}>
+        <CommonDiv
+          type={true}
+          firstWord="랭킹"
+          secondWord="Top 8"
+          ratio="0.65"
+          mr={true}
+          data={Top8()}
+        />
+        <CommonDiv
+          type={false}
+          firstWord="인기"
+          secondWord="키워드"
+          ratio="0.35"
+          data={<TrendKeyword />}
+        />
       </MainDiv>
       <MainDiv>
-        <TrendNews />
-        {/* <TrendYoutube items={items} /> */}
+        <CommonDiv
+          type={false}
+          firstWord="트렌딩"
+          secondWord="뉴스"
+          ratio="0.47"
+          mr={true}
+          data={<TrendNews />}
+        />
+        <CommonDiv
+          type={false}
+          firstWord="트렌딩"
+          secondWord="유튜브"
+          ratio="0.53"
+          data={<TrendNews />}
+        />
       </MainDiv>
     </>
-    // <FullPage />
   );
 }
 

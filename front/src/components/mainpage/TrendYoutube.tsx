@@ -30,7 +30,7 @@ const YoutubeCarouselDiv = styled.div`
 `;
 
 const CarouselDiv = styled.div`
-  width: 70%;
+  width: 85%;
 `;
 
 function TrendYoutube(props: any) {
