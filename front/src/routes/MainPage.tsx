@@ -1,15 +1,8 @@
-import CarouselDiv from "../components/mainpage/CarouselDiv";
 import CommonDiv from "../components/mainpage/CommonDiv";
+import MainDiv from "../components/MainDiv";
 import Top8 from "../components/mainpage/Top8";
 import TrendKeyword from "../components/mainpage/TrendKeyword";
 import TrendNews from "../components/mainpage/TrendNews";
-import styled from "styled-components";
-
-const MainDiv = styled.div`
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-`;
 
 function MainPage() {
   return (
