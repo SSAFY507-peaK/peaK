@@ -3,6 +3,7 @@ import { Link, useParams } from "react-router-dom";
 import IdolData from "../components/idolpage/IdolProfile/IdolData";
 import IdolEmotion from "../components/idolpage/idolemotion/IdolEmotion";
 import IdolKeyword from "../components/idolpage/idolkeyword/IdolKeyword";
+import IdolList from "../components/idolpage/IdolList";
 import IdolYoutube from "../components/idolpage/IdolYoutube";
 import styled from "styled-components";
 
@@ -10,7 +11,6 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
 `;
-
 const TopFrame = styled.div`
   display: flex;
   flex-direction: row;
@@ -34,12 +34,13 @@ function IdolPage() {
   
   return (
     <Wrapper>
+      <IdolList />
       <TopFrame>
+        <IdolData />
         <TopLeftFrame>
           <IdolEmotion />
           <IdolKeyword />
         </TopLeftFrame>
-        <IdolData />
       </TopFrame>
       <BottomFrame>
         <IdolYoutube />

@@ -5,9 +5,8 @@ import styled from "styled-components";
 const Frame = styled.div`
   display: flex;
   flex-direction: column;
-  background-color: rgba(255, 255, 255, 0.5);
-  border-radius: 30px;
-  flex: 0.4;
+  margin-right: 25px;
+  flex: 0.35;
 `;
 
 function IdolData() {

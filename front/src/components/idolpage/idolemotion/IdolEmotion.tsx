@@ -8,8 +8,7 @@ import { useState } from "react";
 const Frame = styled.div`
   display: flex;
   flex-direction: column;
-  background-color: rgba(255, 255, 255, 0.5);
-  border-radius: 30px;
+
   margin-bottom: 15px;
   padding: 20px;
 `;
@@ -23,6 +22,8 @@ const Title = styled.h2`
 `;
 
 const DataFrame = styled.div`
+  background-color: white;
+  border-radius: 20px;
   display: flex;
   flex-direction: row;
 `;

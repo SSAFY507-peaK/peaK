@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import IdolKeywordNews from "./IdolKeywordNews";
 import IdolKeywordRank from "./IdolKeywordRank";
 import IdolKeywordWordCloud from "./IdolKeywordWordCloud";
+import TitleComponent from "../TitleComponent";
 import styled from "styled-components";
 
 const Frame = styled.div`
@@ -32,6 +33,7 @@ function IdolKeyword() {
   return (
     <Frame>
       <LeftFrame>
+        <TitleComponent blacktxt="인기" purpletxt="키워드" />
         <IdolKeywordRank setChooseKeyword={setChooseKeyword} chooseKeyword={chooseKeyword} />
         <IdolKeywordWordCloud chooseKeyword={chooseKeyword} />
       </LeftFrame>
