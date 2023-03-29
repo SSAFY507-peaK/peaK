@@ -23,10 +23,10 @@ interface NewsProfileType {
 }
 
 const NewsProfile = styled.div<NewsProfileType>`
-  background-image: url(${props => props.url});
   width: 25%;
   height: 8vw;
   background-size: cover;
+  background-image: url(${props => props.url});
   background-position: center 25%;
   border-radius: 15px;
 `;
