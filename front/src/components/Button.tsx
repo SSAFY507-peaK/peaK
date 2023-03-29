@@ -15,19 +15,32 @@ const Button = styled.button<ButtonType>`
   width: ${props => (props.width ? props.width : "auto")};
   text-align: center;
   transition: all 300ms ease-in-out;
+  
+  // 버튼 비활성화하면 안눌리게 하기
+  &[disabled] {
+    background: var(--gray500-color);
+    cursor: not-allowed;
+  }
 `;
 
 const PurpleButton = styled(Button)`
-  background-color: var(--purple500-color);
+  background: var(--purple-gradient);
   &:hover {
-    background-color: var(--purple400-color);
+    background: var(--purple-gradient-hover);
+  }
+  &[disabled] {
+    background: var(--gray500-color);
   }
 `
 
 const RedButton = styled(Button)`
-  background-color: var(--red600-color);
+  background: var(--red-gradient);
+
   &:hover {
-    background-color: var(--red500-color);
+    background: var(--red-gradient-hover);
+  }
+  &[disabled] {
+    background: var(--gray500-color);
   }
 `
 
