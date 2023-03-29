@@ -18,7 +18,7 @@ const SelectedSection = styled.div`
 `
 const IdolWrapper = styled.div`
   overflow-y: scroll;
-  padding-right: 15px;
+  padding: 15px;
   &::-webkit-scrollbar {
     width: 7px;
     border-radius: 4px;
@@ -112,7 +112,7 @@ function SignUpPage() {
   const [isUnique, setIsUnique] = useState<boolean | undefined>();
   const [pageIdx, setPageIdx] = useState<number>(1);
 
-  const [selectedIdol, setSelectedIdol] = useState<number[]>([0, 0, -1, -1, -1]);
+  const [selectedIdol, setSelectedIdol] = useState<number[]>([-1, -1, -1, -1, -1]);
   // const [countSelected, setCountSelected] = useState<number>(2);
   // const [Idols, setIdols] = useState<Object[]>()
   const handleNickname = (e: React.ChangeEvent<HTMLInputElement>): void => {
