@@ -1,6 +1,7 @@
 import CommonDiv from "../components/mainpage/CommonDiv";
 import MainDiv from "../components/MainDiv";
 import TrendingNews from "../components/trendingpage/TrendingNews";
+import TrendingYoutube from "../components/trendingpage/TrendingYoutube";
 
 function TrendingPage() {
   return (
@@ -11,7 +12,7 @@ function TrendingPage() {
         secondWord="유튜브"
         ratio="0.3"
         mr={true}
-        data={<p>유튜브 호버하면 재생 되도록 구성 예정</p>}
+        data={<TrendingYoutube />}
       />
       <CommonDiv
         type={false}
