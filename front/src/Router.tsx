@@ -1,11 +1,10 @@
-import MainPage, { loader as MainLoader } from "./routes/MainPage";
 import { Route, createBrowserRouter, createRoutesFromElements } from "react-router-dom";
 
 import ChartPage from "./routes/ChartPage";
 import ErrorPage from "./routes/ErrorPage";
 import IdolPage from "./routes/IdolPage";
 import Layout from "./routes/Layout";
-import MainPage2 from "./routes/MainPage2";
+import MainPage from "./routes/MainPage";
 import MyPage from "./routes/MyPage";
 import NewsDetailPage from "./routes/NewsDetailPage";
 import NewsPage from "./routes/NewsPage";
@@ -22,7 +21,7 @@ const router = createBrowserRouter(
       <Route path="/intro" element={<TmpFullPage />} />
       <Route path="/" element={<Layout />} errorElement={<ErrorPage />}>
         <Route errorElement={<ErrorPage />}>
-          <Route index element={<MainPage2 />} />
+          <Route index element={<MainPage />} />
           <Route path="signup/nickname" element={<NicknamePage />} />
           <Route path="signup/select" element={<SelectPage />} />
 
