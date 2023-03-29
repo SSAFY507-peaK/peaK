@@ -11,7 +11,11 @@ const NewsDiv = styled.div`
   display: flex;
   width: 100%;
   margin-bottom: 4vh;
-  cursor: pointer;
+  transition: all 100ms ease-in-out;
+  &:hover {
+    transform: scale(1.01, 1.01);
+    cursor: pointer;
+  }
 `;
 
 interface NewsProfileType {
