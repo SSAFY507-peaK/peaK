@@ -23,7 +23,6 @@ public class RedisConfig {
 
 	@Bean
 	public RedisConnectionFactory redisConnectionFactory() {
-		
 		RedisStandaloneConfiguration redisStandaloneConfiguration = new RedisStandaloneConfiguration();
 		redisStandaloneConfiguration.setHostName(host);
 		redisStandaloneConfiguration.setPort(port);
@@ -34,7 +33,6 @@ public class RedisConfig {
 
 	@Bean
 	public RedisTemplate<String, String> redisTemplate() {
-
 		RedisTemplate<String, String> redisTemplate = new RedisTemplate<>();
 		redisTemplate.setKeySerializer(new StringRedisSerializer());
 		redisTemplate.setValueSerializer(new StringRedisSerializer());
