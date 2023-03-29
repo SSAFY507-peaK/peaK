@@ -19,7 +19,7 @@ const GlobalStyle = createGlobalStyle`
     --gray300-color: #6B6B6B;
     --gray200-color: #525252;
     --gray100-color: #383838;
-    
+
     --white800-color: #FCF8F8;
     --white700-color: #EBD6D6;
     --white600-color: #DAB4B4;
@@ -37,7 +37,7 @@ const GlobalStyle = createGlobalStyle`
     --yellow300-color: #D17E00;
     --yellow200-color: #9E5F00;
     --yellow100-color: #6B4100;
-    
+
     --red800-color: #FDD8D8;
     --red700-color: #FCA7A7;
     --red600-color: #FA7474;
@@ -46,7 +46,7 @@ const GlobalStyle = createGlobalStyle`
     --red300-color: #CE0808;
     --red200-color: #9D0606;
     --red100-color: #6C0404;
-    
+
     --purple800-color: #EBDDF3;
     --purple700-color: #D5B6E7;
     --purple600-color: #BE90DA;
@@ -55,18 +55,20 @@ const GlobalStyle = createGlobalStyle`
     --purple300-color: #76349D;
     --purple200-color: #592877;
     --purple100-color: #3C1B50;
-    
+
     /* Color gradient */
     /* 5개나 만든 이유는.. 좋아하는 아이돌이 최대 5팀이니깐 */
     --red-gradient: linear-gradient(to bottom right, #FA7474 0%, #CE0808 100%);
+    --red-gradient-hover: linear-gradient(to bottom right, #e06767 0%, #b50707 100%);
     --purple-gradient: linear-gradient(to bottom right, #A869CD 0%, #76349D 100%);
+    --purple-gradient-hover: linear-gradient(to bottom right, #925bb3 0%, #642c85 100%);
     --blue-gradient: linear-gradient(to bottom right, #9FC6F4 0%, #1976E1 100%);
     --yellow-gradient: linear-gradient(to bottom right, #FFD99E 0%, #FF9B05 100%);
     --green-gradient: linear-gradient(to bottom right, #93F2A2 0%, #1AD138 100%);
-    
+
     /* background color */
     --background-color: #F9F7FA;
-    
+
     /* Navigation bar height */
     --nav-height: 50px;
 
@@ -78,22 +80,22 @@ const GlobalStyle = createGlobalStyle`
   *, *::before, *::after {
     box-sizing: border-box;
   }
-  
+
   @font-face {
     font-family: 'Pretendard';
     src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
     font-weight: 400;
     font-style: normal;
   }
-  
-  
+
+
   html, body {
     color: var(--gray100-color);
     width: 100%;
     height: 100%;
     font-family: "Pretendard", -apple-system, Helvetica Neue, sans-serif;
     margin: 0;
-    background-color: var(--background-color) ;
+    background-color: var(--background-color);
   }
 
   button {
@@ -101,17 +103,21 @@ const GlobalStyle = createGlobalStyle`
     cursor: pointer;
     padding: 0;
   }
+
   input {
     border: none;
     background-color: inherit;
   }
+
   input:focus {
     outline: none;
   }
+
   a {
     text-decoration: none;
     color: inherit;
   }
+
   a,
   div,
   span,
