@@ -6,13 +6,12 @@ import IdolPage from "./routes/IdolPage";
 import Layout from "./routes/Layout";
 import MainPage from "./routes/MainPage";
 import MyPage from "./routes/MyPage";
-import NewsDetailPage from "./routes/NewsDetailPage";
-import NewsPage from "./routes/NewsPage";
 import NicknamePage from "./routes/NicknamePage";
 import RankingLayout from "./routes/RankingLayout";
 import RankingPage from "./routes/RankingPage";
 import SelectPage from "./routes/SelectPage";
 import TmpFullPage from "./routes/FullPage/tmpFullPage";
+import TrendingPage from "./routes/TrendingPage";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -30,8 +29,7 @@ const router = createBrowserRouter(
             <Route path="chart" element={<ChartPage />} />
           </Route>
 
-          <Route path="news" element={<NewsPage />} />
-          <Route path="news/:idolName" element={<NewsDetailPage />} />
+          <Route path="trending" element={<TrendingPage />} />
 
           <Route path=":idolName" element={<IdolPage />} />
           <Route path="mypage/:userName" element={<MyPage />} />
