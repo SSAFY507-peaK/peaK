@@ -14,11 +14,6 @@ const ComponentDiv = styled.div`
   margin-right: 7.5px;
 `;
 
-const TitleDiv = styled.div`
-  display: flex;
-  flex-direction: row;
-`;
-
 const NewsCarouselDiv = styled.div`
   width: 100%;
   display: flex;
@@ -27,11 +22,6 @@ const NewsCarouselDiv = styled.div`
 
 const CarouselDiv = styled.div`
   width: 70%;
-`;
-
-const PurpleH2 = styled.h2`
-  color: var(--purple400-color);
-  margin-left: 5px;
 `;
 
 function TrendNews() {
@@ -68,10 +58,6 @@ function TrendNews() {
   ];
   return (
     <ComponentDiv>
-      <TitleDiv>
-        <h2>트렌딩</h2>
-        <PurpleH2> 뉴스</PurpleH2>
-      </TitleDiv>
       <div style={{ width: "100%" }}>
         <NewsCarouselDiv>
           <CarouselDiv>
