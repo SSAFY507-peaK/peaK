@@ -1,3 +1,4 @@
+import CarouselDiv from "../components/mainpage/CarouselDiv";
 import CommonDiv from "../components/mainpage/CommonDiv";
 import Top8 from "../components/mainpage/Top8";
 import TrendKeyword from "../components/mainpage/TrendKeyword";
