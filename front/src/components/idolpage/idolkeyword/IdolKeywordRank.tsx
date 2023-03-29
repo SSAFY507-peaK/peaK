@@ -41,7 +41,6 @@ function IdolKeywordRank({setChooseKeyword, chooseKeyword}:Props) {
 
   return (
     <RankFrame>
-      <TitleComponent blacktxt="인기" purpletxt="키워드" />
       {
         dumy.map((e, idx) => {
           return (

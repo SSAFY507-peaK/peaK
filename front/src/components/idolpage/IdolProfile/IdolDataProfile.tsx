@@ -7,26 +7,19 @@ const Wrapper = styled.div`
   flex-direction: column;
   align-items: center;
   flex: 0.5;
-  padding: 15px;
   width: 100%;
+  padding: 30px;
 `;
 
 const ProfileImg = styled.div`
-  border-radius: 30px;
-  margin: 10px;
+  border-radius: 100px;
   width: 200px;
   height: 200px;
   background-image: url(${bg});
   background-color: aqua;
   background-size: cover;
+  margin: 30px;
 `;
-
-const IdolName = styled.div`
-  font-size: 2rem;
-  font-weight: 700;
-  margin-bottom: 30px;
-`;
-
 
 // const IdolRank = styled.div`
 //   font-size: 1.6rem;
@@ -38,7 +31,6 @@ function IdolDataProfile () {
   return (
     <Wrapper>
         <ProfileImg />
-        <IdolName>세븐틴</IdolName>
         {/* <IdolRank>2위</IdolRank> */}
         <IdolDataProfileSns />
     </Wrapper>

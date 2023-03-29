@@ -11,7 +11,7 @@ const TitleFrame = styled.div`
   flex-direction: row;
 `;
 
-const Title = styled.h2`
+const Title = styled.h3`
   /* font-size: 2rem;
   font-weight: 700; */
   /* margin-right: 10px; */
