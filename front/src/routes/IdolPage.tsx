@@ -11,6 +11,7 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
 `;
+
 const TopFrame = styled.div`
   display: flex;
   flex-direction: row;
