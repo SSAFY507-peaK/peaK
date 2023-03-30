@@ -9,17 +9,19 @@ function TrendingPage() {
       <CommonDiv
         type={false}
         firstWord="트렌딩"
-        secondWord="유튜브"
-        ratio="0.3"
+        secondWord="뉴스"
+        ratio="0.65"
         mr={true}
-        data={<TrendingYoutube />}
+        h={true}
+        data={<TrendingNews />}
       />
       <CommonDiv
         type={false}
         firstWord="트렌딩"
-        secondWord="뉴스"
-        ratio="0.7"
-        data={<TrendingNews />}
+        secondWord="유튜브"
+        ratio="0.35"
+        h={true}
+        data={<TrendingYoutube />}
       />
     </MainDiv>
   );

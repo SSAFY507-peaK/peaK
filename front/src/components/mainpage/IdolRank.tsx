@@ -24,12 +24,12 @@ const IdolImg = styled.div<IdolImgType>`
   background-size: cover;
   background-position: center;
   border-radius: 50%;
-  width: ${props => (props.rank <= 3 ? "10vw" : "7vw")};
-  height: ${props => (props.rank <= 3 ? "10vw" : "7vw")};
+  width: ${props => (props.rank <= 3 ? "11vw" : "8vw")};
+  height: ${props => (props.rank <= 3 ? "11vw" : "8vw")};
   margin: 15px 0px 0px 5px;
   transition: all 100ms ease-in-out;
   &:hover {
-    transform: scale(1.05, 1.05);
+    transform: scale(1.03, 1.03);
     cursor: pointer;
   }
   z-index: 1;
