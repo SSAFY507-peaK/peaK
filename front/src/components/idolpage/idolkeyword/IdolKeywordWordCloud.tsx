@@ -33,12 +33,8 @@ function IdolKeywordWordCloud ({chooseKeyword}:Props){
         width={400} 
         height={300}
         rotate={(word) => {
-          if (word.value % 4) {
-            return (-45)
-          } else if (word.value % 4 == 2) {
+          if (word.value % 2) {
             return (0)
-          } else if (word.value % 4 == 3) {
-            return (45)
           } else {
             return (90)
           }
