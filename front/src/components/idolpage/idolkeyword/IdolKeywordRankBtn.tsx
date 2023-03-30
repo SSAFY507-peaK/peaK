@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled from 'styled-components';
 
 interface BtnType {
   rank: string;
@@ -17,15 +17,15 @@ const Frame = styled.div<FrameType>`
   background: ${props => props.isClick ?`rgba(235, 221, 243, 0.6)`: null};
   opacity: ${props => props.isClick ? null : 0.5 };
   border-radius: 30px;
-  /* padding: 5px 5px 5px 5px; */
   margin: 5px 10px 5px 0px;
   cursor: pointer;
   justify-content: center;
   align-items: center;
+  transition: all 100ms ease-in-out;
+  transform: ${props => props.isClick ? `scale(1.01, 1.01)` : null};
 `;
 
 const RankFrame = styled.div`
-  /* flex: 0.1; */
   width: 30px;
   height: 30px;
   background: linear-gradient(151.76deg, #A869CD 9.32%, #76349D 84.76%);

@@ -1,7 +1,6 @@
 import React from "react";
 import ReactPlayer from "react-player/youtube";
 import styled from "styled-components";
-import { useState } from "react";
 
 // import ReactPlayer from "react-player/lazy";
 
@@ -14,10 +13,10 @@ const YoutubeDiv = styled.div`
   width: 100%;
   height: 30vh;
   margin-bottom: 3vh;
+  border-radius: 10px;
 `;
 
 function TrendingYoutube() {
-  const [hover, setHover] = useState(false);
   const items = [
     {
       title:
@@ -47,13 +46,14 @@ function TrendingYoutube() {
   return (
     <YoutubeListDiv>
       {items.map(item => (
-        <YoutubeDiv onMouseOver={() => setHover(true)} onMouseOut={() => setHover(false)}>
-          <ReactPlayer url={item.url} width="100%" height="100%"></ReactPlayer>
-          {/* {hover ? (
-            <ReactPlayer url={item.url}></ReactPlayer>
-          ) : (
-            <img src={item.thumbnail} alt="" style={{ width: "100%", height: "100%" }} />
-          )} */}
+        <YoutubeDiv>
+          <ReactPlayer
+            url={item.url}
+            width="100%"
+            height="100%"
+            light={true}
+            controls={true}
+          ></ReactPlayer>
         </YoutubeDiv>
       ))}
     </YoutubeListDiv>

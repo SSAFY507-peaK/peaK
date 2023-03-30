@@ -8,6 +8,7 @@ interface WrapperDivType {
   ml?: boolean;
   mt?: boolean;
   mb?: boolean;
+  h?: boolean;
 }
 
 /** NameDiv와 ContentDiv를 감싸는 역할 */
@@ -19,12 +20,13 @@ const WrapperDiv = styled.div<WrapperDivType>`
   margin-left: ${props => (props.ml ? "25px" : "0px")};
   margin-top: ${props => (props.mt ? "25px" : "0px")};
   margin-bottom: ${props => (props.mb ? "25px" : "0px")};
+  height: ${props => (props.h ? "90vh" : null)};
 `;
 
 /** type이 true이면 purple이 왼쪽, false이면 오른쪽 */
 function CommonDiv(props: any) {
   return (
-    <WrapperDiv ratio={props.ratio} mr={props.mr}>
+    <WrapperDiv ratio={props.ratio} mr={props.mr} h={props.h || false}>
       {NameDiv(props)}
       <ContentDiv>{props.data}</ContentDiv>
     </WrapperDiv>
