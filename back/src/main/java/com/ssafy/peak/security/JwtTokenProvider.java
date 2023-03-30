@@ -3,10 +3,13 @@ package com.ssafy.peak.security;
 import java.security.Key;
 import java.util.Date;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
+import org.springframework.util.StringUtils;
 
 import com.ssafy.peak.util.RedisUtil;
 
@@ -19,15 +22,15 @@ import io.jsonwebtoken.UnsupportedJwtException;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.io.Encoders;
 import io.jsonwebtoken.security.Keys;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 @Component
-@RequiredArgsConstructor
 @Slf4j
 public class JwtTokenProvider implements InitializingBean {
 
-	private static final String AUTHORITIES_KEY = "role";
+	private static final String ROLE = "role";
+	private static final String AUTHORIZATION = "Authorization";
+	private static final String BEARER_TOKEN_PREFIX = "Bearer ";
 	@Value("${jwt.secret}")
 	private String secretKey;
 	private long accessTokenValidTime;
@@ -69,7 +72,7 @@ public class JwtTokenProvider implements InitializingBean {
 
 		String accessToken = Jwts.builder()
 			.setSubject(userPrincipal.getName()) // user id
-			.claim(AUTHORITIES_KEY, userPrincipal.getRole()) // ROLE_USER 권한
+			.claim(ROLE, userPrincipal.getRole()) // ROLE_USER 권한
 			.setIssuedAt(now) // 액세스 토큰 발행 시간
 			.setExpiration(expiration) // 액세스 토큰 유효 시간
 			.signWith(SignatureAlgorithm.HS512, key) // 사용할 암호화 알고리즘 (HS512), signature 에 들어갈 secret key 세팅
@@ -90,7 +93,7 @@ public class JwtTokenProvider implements InitializingBean {
 
 		String refreshToken = Jwts.builder()
 			.setSubject(userPrincipal.getName()) // user id
-			.claim(AUTHORITIES_KEY, userPrincipal.getRole()) // ROLE_USER 권한
+			.claim(ROLE, userPrincipal.getRole()) // ROLE_USER 권한
 			.setIssuedAt(now) // 리프레시 토큰 발행 시간
 			.setExpiration(expiration) // 리프레시 토큰 유효 시간
 			.signWith(SignatureAlgorithm.HS512, secretKey) // 사용할 암호화 알고리즘 (HS512), signature 에 들어갈 secret key 세팅
@@ -106,7 +109,7 @@ public class JwtTokenProvider implements InitializingBean {
 	// public Authentication getAuthentication(String token) {
 	// 	Claims claims = parseClaims(token);
 	//
-	// 	if (claims.get(AUTHORITIES_KEY) == null) {
+	// 	if (claims.get(ROLE) == null) {
 	// 		throw new RuntimeException();
 	// 	}
 	// 	UserPrincipal userPrincipal = userRepository.findById(claims.getSubject())
@@ -173,4 +176,12 @@ public class JwtTokenProvider implements InitializingBean {
 		}
 	}
 
+	public String resolveToken(HttpServletRequest httpServletRequest) {
+		String bearerToken = httpServletRequest.getHeader(AUTHORIZATION);
+
+		if (StringUtils.hasText(bearerToken) && bearerToken.startsWith(BEARER_TOKEN_PREFIX)) {
+			return bearerToken.substring(7);
+		}
+		return null;
+	}
 }
