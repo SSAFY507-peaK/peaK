@@ -12,7 +12,7 @@ function MainPage() {
           type={true}
           firstWord="랭킹"
           secondWord="Top 8"
-          ratio="0.65"
+          ratio="0.7"
           mr={true}
           data={Top8()}
         />
@@ -20,7 +20,7 @@ function MainPage() {
           type={false}
           firstWord="인기"
           secondWord="키워드"
-          ratio="0.35"
+          ratio="0.3"
           data={<TrendKeyword />}
         />
       </MainDiv>
