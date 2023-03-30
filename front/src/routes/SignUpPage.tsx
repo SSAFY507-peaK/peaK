@@ -188,7 +188,7 @@ function SignUpPage() {
           <div>좋아하는 아이돌은 최소 한명에서 최대 다섯 명을 선택할 수 있습니다.</div>
           <div>
             <PurpleButton height="30px" width="150px" onClick={() => setPageIdx(1)}>이전으로</PurpleButton>
-            <RedButton height="30px" width="150px">회원가입 완료</RedButton>
+            <RedButton disabled={selectedIdols.length<=0} height="30px" width="150px">회원가입 완료</RedButton>
           </div>
         </div>
         <IdolGrid cols={5}>
