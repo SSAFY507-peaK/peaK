@@ -1,8 +1,28 @@
 import CommonDiv from "../components/mainpage/CommonDiv";
 import MainDiv from "../components/MainDiv";
+import NameDiv from "../components/NameDiv";
+import NewCarousel from "../components/newcarousel/NewCarousel.jsx";
 import Top8 from "../components/mainpage/Top8";
 import TrendKeyword from "../components/mainpage/TrendKeyword";
 import TrendNews from "../components/mainpage/TrendNews";
+import styled from "styled-components";
+
+interface NewCarouselDivType {
+  ratio: number;
+}
+
+const CarouselDiv = styled.div`
+  width: 100%;
+  margin: 0 auto;
+`;
+
+const NewCarouselDiv = styled.div<NewCarouselDivType>`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  flex: ${props => props.ratio};
+`;
 
 function MainPage() {
   return (
@@ -25,21 +45,18 @@ function MainPage() {
         />
       </MainDiv>
       <MainDiv>
-        <CommonDiv
-          type={false}
-          firstWord="트렌딩"
-          secondWord="뉴스"
-          ratio="0.47"
-          mr={true}
-          data={<TrendNews />}
-        />
-        <CommonDiv
-          type={false}
-          firstWord="트렌딩"
-          secondWord="유튜브"
-          ratio="0.53"
-          data={<TrendNews />}
-        />
+        <NewCarouselDiv ratio={0.47}>
+          <NameDiv type={false} firstWord="트렌딩" secondWord="뉴스" />
+          <CarouselDiv>
+            <NewCarousel />
+          </CarouselDiv>
+        </NewCarouselDiv>
+        <NewCarouselDiv ratio={0.47}>
+          <NameDiv type={false} firstWord="트렌딩" secondWord="유튜브" />
+          <CarouselDiv>
+            <NewCarousel />
+          </CarouselDiv>
+        </NewCarouselDiv>
       </MainDiv>
     </>
   );
