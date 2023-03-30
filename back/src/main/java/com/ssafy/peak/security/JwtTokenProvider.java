@@ -1,13 +1,13 @@
-package com.ssafy.peak;
+package com.ssafy.peak.security;
 
 import java.security.Key;
 import java.util.Date;
 
 import org.springframework.beans.factory.InitializingBean;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
 
-import com.ssafy.peak.security.UserPrincipal;
 import com.ssafy.peak.util.RedisUtil;
 
 import io.jsonwebtoken.Claims;
@@ -28,6 +28,7 @@ import lombok.extern.slf4j.Slf4j;
 public class JwtTokenProvider implements InitializingBean {
 
 	private static final String AUTHORITIES_KEY = "role";
+	@Value("${jwt.secret}")
 	private String secretKey;
 	private long accessTokenValidTime;
 	private long refreshTokenValidTime;
@@ -35,13 +36,7 @@ public class JwtTokenProvider implements InitializingBean {
 	private RedisUtil redisUtil;
 	private Key key;
 
-	// public JwtTokenProvider(UserRepository userRepository, RedisUtil redisUtil) {
-	// 	this.userRepository = userRepository;
-	// 	this.redisUtil = redisUtil;
-	// }
-
 	// public JwtTokenProvider(
-	// 	@Value("${jwt.secret}") String secretKey,
 	// 	@Value("${jwt.access-token-valid-time}") long accessTokenValidTime,
 	// 	@Value("${jwt.refresh-token-valid-time}") long refreshTokenValidTime,
 	// 	UserRepository userRepository,
