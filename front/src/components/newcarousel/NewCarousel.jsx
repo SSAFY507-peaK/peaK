@@ -16,13 +16,19 @@ const AlignDiv = styled.div`
   margin: 0 auto;
 `;
 
-const CARDS = 10;
 const MAX_VISIBILITY = 3;
 
-const Card = ({ title, content }) => (
-  <div className="card">
-    <h2>{title}</h2>
-    <p>{content}</p>
+const Card = props => (
+  <div
+    className="card"
+    style={{
+      backgroundImage: `url(${props.src})`,
+      backgroundSize: "cover",
+      backgroundPosition: "center",
+    }}
+  >
+    <h3>{props.title}</h3>
+    <p>{props.content}</p>
   </div>
 );
 
@@ -62,12 +68,12 @@ const Carousel = ({ children }) => {
   );
 };
 
-const NewCarousel = () => (
+const NewCarousel = props => (
   <AlignDiv>
     <Carousel>
-      {[...new Array(CARDS)].map((_, i) => (
-        <Card title={"Card " + (i + 1)} content="내용이로소이다" />
-      ))}
+      {props.items.map((item, idx) => {
+        return <Card title={item.title} content={item.content} src={item.src} />;
+      })}
     </Carousel>
   </AlignDiv>
 );

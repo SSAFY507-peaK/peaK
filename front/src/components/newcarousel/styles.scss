@@ -2,7 +2,7 @@ $color-purple: #8b5cf6;
 $color-pink: #ec4899;
 $color-gray: #9ca3af;
 $color-black: #1f2937;
-$card-size: 17rem;
+$card-size: 20rem;
 
 body {
   width: 50vw;
@@ -21,7 +21,7 @@ body {
 .carousel {
   position: relative;
   width: $card-size;
-  height: $card-size/1.2;
+  height: $card-size/1.618;
   perspective: 500px;
   transform-style: preserve-3d;
 }
@@ -39,22 +39,26 @@ body {
 .card {
   width: 100%;
   height: 100%;
-  padding: 1rem;
+  // padding: 1rem;
+  padding: 6rem 1rem 0 1rem;
   background-color: hsl(280deg, 40%, calc(100% - var(--abs-offset) * 50%));
   border-radius: 1rem;
   color: $color-gray;
   text-align: justify;
   transition: all 0.3s ease-out;
 
-  h2 {
+  h3 {
     // text-align: center;
-    font-size: 1.2rem;
+    font-size: 1rem;
     font-weight: bold;
-    color: $color-black;
+    color: white;
+    text-shadow: 1px 1px 2px #626262;
   }
 
   p {
-    font-size: 0.8rem;
+    font-size: 0.7rem;
+    color: white;
+    text-shadow: 1px 1px 2px #626262;
   }
   // h2 {
   //   transition: all 0.3s ease-out;
@@ -63,8 +67,8 @@ body {
 }
 
 .nav {
-  color: white;
-  font-size: 5rem;
+  color: rgba(255, 178, 249, 0.962);
+  font-size: 3rem;
   position: absolute;
   display: flex;
   align-items: center;
