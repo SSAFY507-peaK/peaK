@@ -49,7 +49,8 @@ type IdolObjectType = {
 }
 
 function SignUpPage() {
-  // 더미데이터
+
+
   let dummyData: IdolObjectType[] = [
     {
       idolNum: 1,
@@ -114,32 +115,60 @@ function SignUpPage() {
       idolName: "아이돌12",
       idolImg: "http://openimage.interpark.com/goods_image_big/1/9/6/0/9472491960_l.jpg",
     },
-  ];
-  // idols = idols.map(idol => {...idol, idol.isSelected: false});
+  ];  // 더미데이터
   const [pageIdx, setPageIdx] = useState<number>(1);
 
   // page 1에 대한 설정들
+  type NicknameType = "long" | "character" | "duplicate" | "ok";
   const [nickname, setNickname] = useState<string>("");
-  const [isUnique, setIsUnique] = useState<boolean | undefined>();
+  const [isValidNickname, setIsValidNickname] = useState<NicknameType | undefined>();
+  const regex = /^[ㄱ-ㅎ가-힣a-zA-Z0-9]+$/;  // 닉네임 정규표현식
+
+  /** 닉네임을 받자 */
   const handleNickname = (e: React.ChangeEvent<HTMLInputElement>): void => {
     setNickname(e.target.value);
+    setIsValidNickname(undefined);
   };
-  const handleCheckUnique = (): void => {
-    setIsUnique(true);
+  /** 닉네임 유효성을 체크하자 */
+  const handleValidNickname = (): void => {
+    if (nickname.length > 8) {
+      setIsValidNickname("long")
+    }
+    else if (!regex.test(nickname)) {
+      setIsValidNickname("character");
+    }
+    else {
+      setIsValidNickname("ok");
+    }
   };
+  /** 닉네임 유효성에 대한 메시지를 보여주자 */
+  const nicknameMessage = () => {
+    switch (isValidNickname) {
+      case "long":
+        return "닉네임은 8자 이하여야 합니다."
+      case 'character' :
+        return "닉네임은 한글, 영어, 숫자로만 이루어져야 합니다."
+      case "duplicate" :
+        return "중복된 닉네임입니다."
+      case "ok":
+        return "사용 가능한 닉네임입니다."
+      default :
+        return " "
+    }
+  }
+
   const page1 = (
     <>
       <h2>닉네임 설정</h2>
-      <NicknameInput onChange={e => handleNickname(e)} value={nickname} />
-      <MessageDiv isUnique={isUnique}>
-        {isUnique ?
-          "사용 가능한 닉네임입니다"
-          : isUnique === false ?
-            "이미 사용중인 닉네임입니다"
-            : " "}
-      </MessageDiv>
-      {!isUnique && <PurpleButton onClick={handleCheckUnique}>중복 확인</PurpleButton>}
-      {isUnique && <PurpleButton onClick={() => setPageIdx(2)}>다음으로</PurpleButton>}
+      <div>닉네임은 8글자 이하의 한글, 영어, 숫자로만 이루어져야 합니다</div>
+      <form>
+        <NicknameInput onChange={e => handleNickname(e)} value={nickname} />
+        <MessageDiv isUnique={isValidNickname === "ok"}>
+          { nicknameMessage() }
+        </MessageDiv>
+        {isValidNickname !== "ok" && <PurpleButton onClick={handleValidNickname}>중복 확인</PurpleButton>}
+        {isValidNickname === "ok" && <PurpleButton onClick={() => setPageIdx(2)}>다음으로</PurpleButton>}
+      </form>
     </>
   );
 
@@ -161,13 +190,13 @@ function SignUpPage() {
     return returnArr;
   }, [selectedIdols]);
 
-  /** 아이돌을 선택하자 */
+  /** 좋아하는 아이돌을 선택하자 */
   const handleSelectIdol = (idol: IdolObjectType): void => {
     if (selectedIdols.length >= 5) {
       alert("최대 5명의 아이돌만 선택할 수 있습니다");
       return
     }
-    if(idol?.isSelected){}
+    if(idol?.isSelected){ return }
     else {
       setIdols(prev => prev.map(idol2 => idol.idolNum === idol2.idolNum? {...idol2, isSelected: true} : idol2))
       setSelectedIdols(prev=> [...prev, {...idol, isSelected: true}]);
@@ -191,14 +220,7 @@ function SignUpPage() {
             <RedButton disabled={selectedIdols.length<=0} height="30px" width="150px">회원가입 완료</RedButton>
           </div>
         </div>
-        <IdolGrid cols={5}>
-          {/*{selectedIdols?.map(idol => {*/}
-          {/*  return <Selected url={idol.idolImg} >*/}
-          {/*    <CloseButton onClick={(e)=>handleDeleteSelectedIdol(e, idol)}>X</CloseButton>*/}
-          {/*  </Selected>*/}
-          {/*})}*/}
-          { showSelectIdols() }
-        </IdolGrid>
+        <IdolGrid cols={5}>{ showSelectIdols() }</IdolGrid>
       </SelectedSection>
       <h3>전체 아이돌</h3>
       <IdolWrapper>
@@ -216,16 +238,8 @@ function SignUpPage() {
 
   return (
     <PageWrapper>
-      { page2 }
-
-      {/*{pageIdx === 1 ? page1 : page2}*/}
-
-
-      {/*<h2>닉네임 설정</h2>*/}
-      {/*<NicknameInput onChange={(e)=>handleNickname(e)} value={nickname}/>*/}
-      {/*<DuplicateDiv isUnique={isUnique}>{isUnique? "사용 가능한 닉네임입니다" : isUnique === false? "이미 사용중인 닉네임입니다" : " "}</DuplicateDiv>*/}
-      {/*{ !isUnique && <PurpleButton onClick={handleCheckUnique}>중복 확인</PurpleButton> }*/}
-      {/*{ isUnique && <PurpleButton>다음으로</PurpleButton> }*/}
+      {/*{ page2 }*/}
+      {pageIdx === 1 ? page1 : page2}
     </PageWrapper>
   );
 }

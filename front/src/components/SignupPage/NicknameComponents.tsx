@@ -11,7 +11,7 @@ const NicknameInput = styled.input`
 const MessageDiv = styled.div<{ isUnique: boolean | undefined }>`
   font-size: 13px;
   margin-bottom: 15px;
-  color: ${props => (props.isUnique ? "blue" : props.isUnique === false ? "red" : "black")};
+  color: ${props => (props.isUnique ? "blue" : props.isUnique === undefined ? "black" : "red")};
 `;
 
 export { NicknameInput, MessageDiv }
