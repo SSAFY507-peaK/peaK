@@ -1,11 +1,9 @@
 import "./styles.scss";
 
 import React, { useState } from "react";
-import {
-  TiChevronLeftOutline,
-  TiChevronRightOutline,
-} from "https://cdn.skypack.dev/react-icons/ti";
 
+import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
+import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import styled from "styled-components";
 
 const AlignDiv = styled.div`
@@ -40,7 +38,7 @@ const Carousel = ({ children }) => {
     <div className="carousel">
       {active > 0 && (
         <button className="nav left" onClick={() => setActive(i => i - 1)}>
-          <TiChevronLeftOutline />
+          <ArrowBackIosNewIcon sx={{ fontSize: "1.75rem" }} />
         </button>
       )}
       {React.Children.map(children, (child, i) => (
@@ -61,7 +59,7 @@ const Carousel = ({ children }) => {
       ))}
       {active < count - 1 && (
         <button className="nav right" onClick={() => setActive(i => i + 1)}>
-          <TiChevronRightOutline />
+          <ArrowForwardIosIcon sx={{ fontSize: "1.75rem" }} />
         </button>
       )}
     </div>
