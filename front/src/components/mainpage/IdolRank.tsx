@@ -26,7 +26,7 @@ const IdolImg = styled.div<IdolImgType>`
   border-radius: 50%;
   width: ${props => (props.rank <= 3 ? "11vw" : "8vw")};
   height: ${props => (props.rank <= 3 ? "11vw" : "8vw")};
-  margin: 15px 0px 0px 5px;
+  margin: 15px 0px 0px 12px;
   transition: all 100ms ease-in-out;
   &:hover {
     transform: scale(1.03, 1.03);
@@ -43,21 +43,21 @@ const NameDiv = styled.div`
 function Logo(rank: any) {
   switch (rank) {
     case 1:
-      return <img src={Rank1} alt="" width="40px" style={{ position: "absolute" }} />;
+      return <img src={Rank1} alt="" width="50vw" style={{ position: "absolute" }} />;
     case 2:
-      return <img src={Rank2} alt="" width="40px" style={{ position: "absolute" }} />;
+      return <img src={Rank2} alt="" width="50vw" style={{ position: "absolute" }} />;
     case 3:
-      return <img src={Rank3} alt="" width="40px" style={{ position: "absolute" }} />;
+      return <img src={Rank3} alt="" width="50vw" style={{ position: "absolute" }} />;
     case 4:
-      return <img src={Rank4} alt="" width="40px" style={{ position: "absolute" }} />;
+      return <img src={Rank4} alt="" width="50vw" style={{ position: "absolute" }} />;
     case 5:
-      return <img src={Rank5} alt="" width="40px" style={{ position: "absolute" }} />;
+      return <img src={Rank5} alt="" width="50vw" style={{ position: "absolute" }} />;
     case 6:
-      return <img src={Rank6} alt="" width="40px" style={{ position: "absolute" }} />;
+      return <img src={Rank6} alt="" width="50vw" style={{ position: "absolute" }} />;
     case 7:
-      return <img src={Rank7} alt="" width="40px" style={{ position: "absolute" }} />;
+      return <img src={Rank7} alt="" width="50vw" style={{ position: "absolute" }} />;
     case 8:
-      return <img src={Rank8} alt="" width="40px" style={{ position: "absolute" }} />;
+      return <img src={Rank8} alt="" width="50vw" style={{ position: "absolute" }} />;
   }
 }
 
