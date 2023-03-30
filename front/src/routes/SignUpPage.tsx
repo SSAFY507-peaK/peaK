@@ -114,13 +114,42 @@ function SignUpPage() {
 
   const [selectedIdol, setSelectedIdol] = useState<number[]>([-1, -1, -1, -1, -1]);
   // const [countSelected, setCountSelected] = useState<number>(2);
-  // const [Idols, setIdols] = useState<Object[]>()
+  const [selectedIdols, setSelectedIdols] = useState<Object[]>([]);
   const handleNickname = (e: React.ChangeEvent<HTMLInputElement>): void => {
     setNickname(e.target.value);
   };
   const handleCheckUnique = (): void => {
     setIsUnique(true);
   };
+
+  const handleSelectIdol = (e:any, idol:object): void => {
+    let classList = e.target.classList;
+
+    // selected라는 클래스가 있으면 선택된 것이므로 무시하자
+    if (classList.contains('selected')) {
+      // console.log('선택됐떤 div입니다');
+      // setSelectedIdols(prev => prev.filter(i => i.idolNum !== idol.idolNum));
+      // e.target.classList.remove('selected');
+      // console.log(selectedIdols);
+    }
+    // 선택되지 않았던 것이면 클래스를 추가하고 state로 관리하기..
+    else {
+      e.target.classList.add('selected');
+      console.log(e);
+      setSelectedIdols(prev => [...prev, idol]);
+    }
+  }
+  const handleDeleteSelectedIdol = (e:any, idol:object): void => {
+    // let classList = e.target.parent.classList;
+    console.log(e);
+
+    // selected라는 클래스가 있으면 선택된 것이므로 삭제하자....... 클래스돟 지우기!
+
+    setSelectedIdols(prev => prev.filter(i => i.idolNum !== idol.idolNum));
+    e.target.parentElement.classList.remove('selected');
+    console.log(selectedIdols);
+
+  }
 
   const page1 = (
     <>
@@ -149,9 +178,14 @@ function SignUpPage() {
           </div>
         </div>
         <IdolGrid cols={5}>
-          {selectedIdol.map(idol => {
-            return idol !== -1 ? <Selected><CloseButton>X</CloseButton></Selected> : <EmptySelected />;
+          {selectedIdols?.map(idol => {
+            return <Selected>
+              <CloseButton onClick={(e)=>handleDeleteSelectedIdol(e, idol)}>X</CloseButton>
+            </Selected>
           })}
+          {
+
+          }
         </IdolGrid>
       </SelectedSection>
       <h3>전체 아이돌</h3>
@@ -159,7 +193,7 @@ function SignUpPage() {
         <IdolGrid cols={6}>
           {idols.map(idol => (
             <IdolImageWrapper >
-              <IdolImage url={idol.idolImg}/>
+              <IdolImage url={idol.idolImg} onClick={(e)=>handleSelectIdol(e, idol)}/>
               <IdolName>{idol.idolName}</IdolName>
             </IdolImageWrapper>
           ))}

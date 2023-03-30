@@ -3,6 +3,7 @@ import { Link, useParams } from "react-router-dom";
 import IdolData from "../components/idolpage/IdolProfile/IdolData";
 import IdolEmotion from "../components/idolpage/idolemotion/IdolEmotion";
 import IdolKeyword from "../components/idolpage/idolkeyword/IdolKeyword";
+import IdolList from "../components/idolpage/IdolList";
 import IdolYoutube from "../components/idolpage/IdolYoutube";
 import styled from "styled-components";
 
@@ -17,10 +18,10 @@ const TopFrame = styled.div`
   margin-bottom: 15px;
 `;
 
-const TopLeftFrame = styled.div`
+const TopRightFrame = styled.div`
   display: flex;
   flex-direction: column;
-  flex: 0.7;
+  flex: 0.65;
   margin-right: 15px;
 `;
 
@@ -34,12 +35,13 @@ function IdolPage() {
   
   return (
     <Wrapper>
+      <IdolList />
       <TopFrame>
-        <TopLeftFrame>
+        <IdolData />
+        <TopRightFrame>
           <IdolEmotion />
           <IdolKeyword />
-        </TopLeftFrame>
-        <IdolData />
+        </TopRightFrame>
       </TopFrame>
       <BottomFrame>
         <IdolYoutube />
