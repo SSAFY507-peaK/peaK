@@ -38,7 +38,7 @@ const IdolName = styled.div`
 const Selected = styled(IdolImage)`
   width: 100px;
   height: 100px;
-  background-color: black;
+  //background-color: black;
   
   position: relative;
 `;

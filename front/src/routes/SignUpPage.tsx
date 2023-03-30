@@ -41,8 +41,16 @@ const CloseButton = styled.button`
   right: 0;
 `
 
+type IdolObjectType = {
+  idolNum?: number;
+  idolName?: string;
+  idolImg?: string;
+  isSelected?: boolean;
+}
+
 function SignUpPage() {
-  const idols = [
+  // 더미데이터
+  let dummyData: IdolObjectType[] = [
     {
       idolNum: 1,
       idolName: "아이돌",
@@ -107,50 +115,18 @@ function SignUpPage() {
       idolImg: "http://openimage.interpark.com/goods_image_big/1/9/6/0/9472491960_l.jpg",
     },
   ];
-
-  const [nickname, setNickname] = useState<string>("");
-  const [isUnique, setIsUnique] = useState<boolean | undefined>();
+  // idols = idols.map(idol => {...idol, idol.isSelected: false});
   const [pageIdx, setPageIdx] = useState<number>(1);
 
-  const [selectedIdol, setSelectedIdol] = useState<number[]>([-1, -1, -1, -1, -1]);
-  // const [countSelected, setCountSelected] = useState<number>(2);
-  const [selectedIdols, setSelectedIdols] = useState<Object[]>([]);
+  // page 1에 대한 설정들
+  const [nickname, setNickname] = useState<string>("");
+  const [isUnique, setIsUnique] = useState<boolean | undefined>();
   const handleNickname = (e: React.ChangeEvent<HTMLInputElement>): void => {
     setNickname(e.target.value);
   };
   const handleCheckUnique = (): void => {
     setIsUnique(true);
   };
-
-  const handleSelectIdol = (e:any, idol:object): void => {
-    let classList = e.target.classList;
-
-    // selected라는 클래스가 있으면 선택된 것이므로 무시하자
-    if (classList.contains('selected')) {
-      // console.log('선택됐떤 div입니다');
-      // setSelectedIdols(prev => prev.filter(i => i.idolNum !== idol.idolNum));
-      // e.target.classList.remove('selected');
-      // console.log(selectedIdols);
-    }
-    // 선택되지 않았던 것이면 클래스를 추가하고 state로 관리하기..
-    else {
-      e.target.classList.add('selected');
-      console.log(e);
-      setSelectedIdols(prev => [...prev, idol]);
-    }
-  }
-  const handleDeleteSelectedIdol = (e:any, idol:object): void => {
-    // let classList = e.target.parent.classList;
-    console.log(e);
-
-    // selected라는 클래스가 있으면 선택된 것이므로 삭제하자....... 클래스돟 지우기!
-
-    setSelectedIdols(prev => prev.filter(i => i.idolNum !== idol.idolNum));
-    e.target.parentElement.classList.remove('selected');
-    console.log(selectedIdols);
-
-  }
-
   const page1 = (
     <>
       <h2>닉네임 설정</h2>
@@ -166,6 +142,30 @@ function SignUpPage() {
       {isUnique && <PurpleButton onClick={() => setPageIdx(2)}>다음으로</PurpleButton>}
     </>
   );
+
+
+  // page 2에 대한 정보들
+  const [selectedIdols, setSelectedIdols] = useState<IdolObjectType[]>([]);
+  const [idols, setIdols] = useState<IdolObjectType[]>(dummyData);
+
+  /** 아이돌을 선택하자 */
+  const handleSelectIdol = (idol: IdolObjectType): void => {
+
+    if(idol?.isSelected){
+      console.log("이미 선택했삼!");
+    }
+    // 선택되지 않았거나 없으면 true 추가하기
+    else {
+      setIdols((prev): IdolObjectType[] => prev.map((idol2): IdolObjectType => idol.idolNum === idol2.idolNum? {...idol2, isSelected: true} : idol2))
+      setSelectedIdols(prev=> [...prev, {...idol, isSelected: true}]);
+    }
+  }
+  const handleDeleteSelectedIdol = (e:any, idol:IdolObjectType): void => {
+    // 원본 배열에서 false로 변경하고... 선택된 배열에서도 삭제를 하자궁...
+    setIdols((prev): IdolObjectType[] => prev.map((idol2): IdolObjectType => idol.idolNum === idol2.idolNum? {...idol2, isSelected: false} : idol2))
+    setSelectedIdols(prev=> prev.filter(idol2 => idol.idolNum !== idol2.idolNum));
+  }
+
   const page2 = (
     <>
       <SelectedSection>
@@ -179,7 +179,7 @@ function SignUpPage() {
         </div>
         <IdolGrid cols={5}>
           {selectedIdols?.map(idol => {
-            return <Selected>
+            return <Selected url={idol.idolImg} >
               <CloseButton onClick={(e)=>handleDeleteSelectedIdol(e, idol)}>X</CloseButton>
             </Selected>
           })}
@@ -191,9 +191,9 @@ function SignUpPage() {
       <h3>전체 아이돌</h3>
       <IdolWrapper>
         <IdolGrid cols={6}>
-          {idols.map(idol => (
+          {idols.map((idol: IdolObjectType) => (
             <IdolImageWrapper >
-              <IdolImage url={idol.idolImg} onClick={(e)=>handleSelectIdol(e, idol)}/>
+              <IdolImage url={idol.idolImg} onClick={()=>handleSelectIdol(idol)}/>
               <IdolName>{idol.idolName}</IdolName>
             </IdolImageWrapper>
           ))}
@@ -204,7 +204,11 @@ function SignUpPage() {
 
   return (
     <PageWrapper>
-      {pageIdx === 1 ? page1 : page2}
+      { page2 }
+
+      {/*{pageIdx === 1 ? page1 : page2}*/}
+
+
       {/*<h2>닉네임 설정</h2>*/}
       {/*<NicknameInput onChange={(e)=>handleNickname(e)} value={nickname}/>*/}
       {/*<DuplicateDiv isUnique={isUnique}>{isUnique? "사용 가능한 닉네임입니다" : isUnique === false? "이미 사용중인 닉네임입니다" : " "}</DuplicateDiv>*/}
