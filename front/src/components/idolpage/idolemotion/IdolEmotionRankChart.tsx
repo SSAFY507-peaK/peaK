@@ -1,6 +1,7 @@
 import {
   CategoryScale,
   Chart as ChartJS,
+  Filler,
   Legend,
   LineElement,
   LinearScale,
@@ -10,7 +11,6 @@ import {
 } from 'chart.js';
 
 import { Line } from 'react-chartjs-2';
-import React from 'react';
 import { faker } from '@faker-js/faker';
 
 // import styled from 'styled-components';
@@ -23,11 +23,14 @@ ChartJS.register(
   LineElement,
   Title,
   Tooltip,
-  Legend
+  Legend,
+  Filler,
+
 );
 
 function IdolEmotionRankChart() {
   const options = {
+    maintainAspectRatio: false,
     responsive: true,
     interaction: {
       mode: "index" as const,
@@ -46,9 +49,15 @@ function IdolEmotionRankChart() {
         max: 1,
       }
     },
+    elements: {
+      point:{
+          radius: 0
+      }
+    },
     plugins: {
       legend: {
         position: 'bottom' as const,
+        display: false,
       },
       title: {
         display: false,
@@ -66,7 +75,11 @@ function IdolEmotionRankChart() {
         label: '세븐틴',
         data: labels.map(() => faker.datatype.float({ min: 0, max: 1 })),
         borderColor: 'rgb(255, 99, 132)',
-        backgroundColor: 'rgba(255, 99, 132, 0.5)',
+        backgroundColor	: 'rgba(255, 99, 132, 0.5)',
+        fill: {
+          target: 'origin',
+          above: 'rgba(255, 99, 132, 0.5)',   // Area will be red above the origin
+        },
       },
     ],
   };

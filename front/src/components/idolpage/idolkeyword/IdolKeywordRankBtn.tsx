@@ -40,7 +40,6 @@ const TextFrame = styled.div`
   text-align: left;
   padding: 10px;
   margin-left: 10px;
-  font-size: 1.1rem;
 `;
 
 

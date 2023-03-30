@@ -5,22 +5,24 @@ import styled from "styled-components";
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
-  border-radius: 10px;
+  background-color: white;
+  border-radius: 15px;
   box-shadow: 5px;
-  padding: 30px 30px 30px 30px;
+  padding: 20px;
   height: 100%;
 `;
 
 const ChatFrame = styled.div`
-  width: 100%;
-  height: 200px;
-  margin: 0px 13px 40px 25px;
-  padding-right: 25px;
+  /* width: 100%; */
+  height: 25vh;
+  padding-left: 20px;
+  padding-right: 20px;
+  margin-bottom: 10px;
   overflow-y: auto;
 
   // 스크롤바 관련 설정
   &::-webkit-scrollbar {
-    width: 7px;
+    width: 3px;
     border-radius: 4px;
     background-color: rgba(255, 255, 255, 0.8);
   }
@@ -30,13 +32,13 @@ const ChatFrame = styled.div`
   }
 `;
 const ChatTitle = styled.div`
-  font-size: 1.1rem;
+  font-size: 0.9rem;
   font-weight: 700;
   padding-bottom: 3px;
 `;
 
 const ChatData = styled.div`
-  font-size: 0.9rem;
+  font-size: 0.8rem;
   opacity: 0.8;
   margin-bottom: 10px;
 `;
@@ -51,7 +53,9 @@ const ChatInput = styled.input`
   width: 100%;
   height: 33px;
   background-color: white;
-  border-radius: 10px;
+  border-radius: 15px;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  margin-right: 5px;
 `;
 
 
@@ -82,7 +86,7 @@ function IdolChat() {
         }
       </ChatFrame>
       <ChatInputFrame>      
-        <ChatInput placeholder="여기는 댓글을 적는 곳"></ChatInput>
+        <ChatInput placeholder="댓글을 입력해주세요."></ChatInput>
         <PurpleButton width="100px">응원</PurpleButton>
       </ChatInputFrame>
     </Wrapper>
