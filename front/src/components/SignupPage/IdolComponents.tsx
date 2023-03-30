@@ -12,6 +12,7 @@ const IdolImageWrapper = styled.div`
   height: 180px;
   display: flex;
   flex-direction: column;
+
 `;
 
 const IdolImage = styled.div<{ url?: string }>`
@@ -21,10 +22,16 @@ const IdolImage = styled.div<{ url?: string }>`
   background-size: cover;
   background-position: center;
   border-radius: 50%;
-  
+
+  transition: all 100ms ease-in-out;
+  &:hover {
+    transform: scale(1.05, 1.05);
+    cursor: pointer;
+  }
+
 `;
 const IdolName = styled.div`
-  margin-top: 5px;
+  margin-top: 7px;
   font-weight: bold;
   text-align: center;
 `
