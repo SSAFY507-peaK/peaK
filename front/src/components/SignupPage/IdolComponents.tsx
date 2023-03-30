@@ -23,7 +23,7 @@ const IdolImage = styled.div<{ url?: string }>`
   background-position: center;
   border-radius: 50%;
 
-  transition: all 100ms ease-in-out;
+  transition: transform 100ms ease-in-out;
   &:hover {
     transform: scale(1.05, 1.05);
     cursor: pointer;
@@ -47,6 +47,11 @@ const EmptySelected = styled(IdolImage)`
   height: 100px;
   background: transparent;
   border: 2px dashed var(--gray700-color);
+
+  &:hover {
+    transform: none;
+    cursor: default;
+  }
 `;
 
 export { IdolGrid, IdolImage, IdolName, IdolImageWrapper, EmptySelected, Selected };

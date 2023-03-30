@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
 import styled from "styled-components";
 import { PurpleButton, RedButton } from "../components/Button";
 import { NicknameInput, MessageDiv } from "../components/SignupPage/NicknameComponents";
@@ -148,18 +148,32 @@ function SignUpPage() {
   const [selectedIdols, setSelectedIdols] = useState<IdolObjectType[]>([]);
   const [idols, setIdols] = useState<IdolObjectType[]>(dummyData);
 
+  /** 내가 선택한 아이돌 팀을 보여주자 */
+  const showSelectIdols = useCallback(() => {
+    const returnArr = selectedIdols?.map(idol =>
+      <Selected url={idol.idolImg} >
+        <CloseButton onClick={(e)=>handleDeleteSelectedIdol(e, idol)}>X</CloseButton>
+      </Selected>
+    )
+    for (let i=0; i<5-selectedIdols.length; i++) {
+      returnArr.push(<EmptySelected />)
+    }
+    return returnArr;
+  }, [selectedIdols]);
+
   /** 아이돌을 선택하자 */
   const handleSelectIdol = (idol: IdolObjectType): void => {
-
-    if(idol?.isSelected){
-      console.log("이미 선택했삼!");
+    if (selectedIdols.length >= 5) {
+      alert("최대 5명의 아이돌만 선택할 수 있습니다");
+      return
     }
-    // 선택되지 않았거나 없으면 true 추가하기
+    if(idol?.isSelected){}
     else {
-      setIdols((prev): IdolObjectType[] => prev.map((idol2): IdolObjectType => idol.idolNum === idol2.idolNum? {...idol2, isSelected: true} : idol2))
+      setIdols(prev => prev.map(idol2 => idol.idolNum === idol2.idolNum? {...idol2, isSelected: true} : idol2))
       setSelectedIdols(prev=> [...prev, {...idol, isSelected: true}]);
     }
   }
+  /** 선택한 아이돌을 삭제하자 */
   const handleDeleteSelectedIdol = (e:any, idol:IdolObjectType): void => {
     // 원본 배열에서 false로 변경하고... 선택된 배열에서도 삭제를 하자궁...
     setIdols((prev): IdolObjectType[] => prev.map((idol2): IdolObjectType => idol.idolNum === idol2.idolNum? {...idol2, isSelected: false} : idol2))
@@ -178,14 +192,12 @@ function SignUpPage() {
           </div>
         </div>
         <IdolGrid cols={5}>
-          {selectedIdols?.map(idol => {
-            return <Selected url={idol.idolImg} >
-              <CloseButton onClick={(e)=>handleDeleteSelectedIdol(e, idol)}>X</CloseButton>
-            </Selected>
-          })}
-          {
-
-          }
+          {/*{selectedIdols?.map(idol => {*/}
+          {/*  return <Selected url={idol.idolImg} >*/}
+          {/*    <CloseButton onClick={(e)=>handleDeleteSelectedIdol(e, idol)}>X</CloseButton>*/}
+          {/*  </Selected>*/}
+          {/*})}*/}
+          { showSelectIdols() }
         </IdolGrid>
       </SelectedSection>
       <h3>전체 아이돌</h3>
