@@ -1,5 +1,4 @@
 import ECharts from "echarts-for-react";
-import styled from "styled-components";
 import { useState } from "react";
 
 // function f() {
@@ -14,24 +13,10 @@ import { useState } from "react";
 //   let D7 = new Date(now.setDate(now.getDate() - 7))
 // }
 
-// legend: {
-//   data: ['Line 1', 'Line 2', 'Line 3'],
-//   orient: 'vertical',
-//   right: 0, // legend를 오른쪽에 배치
-//   top: 0,
-//   bottom: 0,
-// },
-// grid: {
-//   left: 70, // 그래프를 오른쪽으로 이동
-//   right: 100, // legend를 오른쪽에 배치
-//   top: 30,
-//   bottom: 30,
-// },
-
 function IdolChart() {
   let labels = ["D-6", "D-5", "D-4", "D-3", "D-2", "D-1", "오늘"];
   const [options, setOptions] = useState({
-    color: ["red", "blue", "yellow", "green", "skyblue", "purple"],
+    color: ["#93F2A2", "#DAB4B4", "#FFD99E", "#FCA7A7", "#9FC6F4", "#A869CD"],
     tooltip: {
       trigger: "axis",
       axisPointer: {
@@ -46,7 +31,7 @@ function IdolChart() {
     },
     grid: {
       left: "3%",
-      right: "4%",
+      right: "15%",
       bottom: "3%",
       containLabel: true,
     },
@@ -59,7 +44,6 @@ function IdolChart() {
       {
         type: "value",
         min: 1,
-        interval: 20,
         inverse: true,
       },
     ],
@@ -67,27 +51,42 @@ function IdolChart() {
       {
         name: "세븐틴",
         type: "line",
-        data: [22, 11, 11, 11, 10, 3, 1],
+        data: [62, 11, 11, 11, 10, 3, 1],
+        lineStyle: {
+          width: 3,
+        },
       },
       {
         name: "에잇틴",
         type: "line",
         data: [2, 3, 4, 5, 6, 7, 9],
+        lineStyle: {
+          width: 3,
+        },
       },
       {
         name: "나인틴",
         type: "line",
         data: [15, 15, 13, 13, 15, 15, 18],
+        lineStyle: {
+          width: 3,
+        },
       },
       {
         name: "투엔티",
         type: "line",
         data: [7, 8, 9, 8, 9, 8, 19],
+        lineStyle: {
+          width: 3,
+        },
       },
       {
         name: "2NE1",
         type: "line",
         data: [1, 1, 1, 1, 1, 1, 2],
+        lineStyle: {
+          width: 3,
+        },
       },
     ],
   });
