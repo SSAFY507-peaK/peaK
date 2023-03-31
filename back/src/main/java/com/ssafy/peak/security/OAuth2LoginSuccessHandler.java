@@ -6,6 +6,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.stereotype.Component;
@@ -13,7 +14,6 @@ import org.springframework.stereotype.Component;
 import com.ssafy.peak.dto.CustomOAuth2User;
 import com.ssafy.peak.enums.Role;
 import com.ssafy.peak.service.UserService;
-import com.ssafy.peak.util.Utils;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -23,6 +23,8 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class OAuth2LoginSuccessHandler implements AuthenticationSuccessHandler {
 
+	@Value("${redirectUrl}")
+	private String redirectUrl;
 	private final JwtTokenProvider jwtTokenProvider;
 	private final UserService userService;
 
@@ -32,21 +34,17 @@ public class OAuth2LoginSuccessHandler implements AuthenticationSuccessHandler {
 		HttpServletResponse response,
 		Authentication authentication) throws IOException, ServletException {
 
-		log.info("OAuth2 로그인 성공");
-
 		CustomOAuth2User oAuth2User = (CustomOAuth2User)authentication.getPrincipal();
 
+		log.info("oAuth2User: {}", oAuth2User);
+
 		if (oAuth2User.getRole() == Role.ROLE_GUEST) {
-			log.info("회원가입 하세요");
+			log.info("회원가입 진행");
+			userService.redirectSignupPage(response, authentication);
 
-			String accessToken = jwtTokenProvider.createAccessToken(authentication);
-			response.setHeader("AccessToken", Utils.BEARER_TOKEN_PREFIX + accessToken);
-			response.sendRedirect("/singup");
-
-		} else {
-			log.info("로그인 진행 => 토큰 발급");
-
-			userService.loginSuccess(response, authentication);
+		} else if (oAuth2User.getRole() == Role.ROLE_USER) {
+			log.info("로그인 진행");
+			userService.login(response, authentication);
 		}
 	}
 }
