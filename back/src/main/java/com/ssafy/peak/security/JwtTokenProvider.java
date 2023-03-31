@@ -18,6 +18,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
+import com.ssafy.peak.dto.CustomOAuth2User;
 import com.ssafy.peak.dto.JwtTokenDto;
 import com.ssafy.peak.exception.CustomException;
 import com.ssafy.peak.exception.CustomExceptionType;
@@ -27,6 +28,7 @@ import com.ssafy.peak.util.Utils;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
+import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.MalformedJwtException;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -76,14 +78,17 @@ public class JwtTokenProvider implements InitializingBean {
 	 * @return AccessToken
 	 */
 	public String createAccessToken(Authentication authentication) {
-		UserPrincipal userPrincipal = (UserPrincipal)authentication.getPrincipal();
+
+		CustomOAuth2User customOAuth2User = (CustomOAuth2User)authentication.getPrincipal();
+
+		log.info("customOAuth2User: {}", customOAuth2User);
 
 		Date now = new Date();
 		Date expiration = new Date(now.getTime() + accessTokenValidTime);
 
 		String accessToken = Jwts.builder()
-			.setSubject(userPrincipal.getName()) // user id
-			.claim(Utils.ROLE, userPrincipal.getRole()) // ROLE_USER 권한
+			.setSubject(customOAuth2User.getName()) // user id
+			.claim(Utils.ROLE, customOAuth2User.getRole()) // 권한 정보 저장
 			.setIssuedAt(now) // 액세스 토큰 발행 시간
 			.setExpiration(expiration) // 액세스 토큰 유효 시간
 			.signWith(SignatureAlgorithm.HS512, key) // 사용할 암호화 알고리즘 (HS512), signature 에 들어갈 secret key 세팅
@@ -97,7 +102,7 @@ public class JwtTokenProvider implements InitializingBean {
 	 *
 	 * @return RefreshToken
 	 */
-	public void createRefreshToken(Authentication authentication) {
+	public String createRefreshToken(Authentication authentication) {
 		UserPrincipal userPrincipal = (UserPrincipal)authentication.getPrincipal();
 
 		Date now = new Date();
@@ -105,7 +110,7 @@ public class JwtTokenProvider implements InitializingBean {
 
 		String refreshToken = Jwts.builder()
 			.setSubject(userPrincipal.getName()) // user id
-			.claim(Utils.ROLE, userPrincipal.getRole()) // ROLE_USER 권한
+			.claim(Utils.ROLE, userPrincipal.getRole()) // 권한 정보 저장
 			.setIssuedAt(now) // 리프레시 토큰 발행 시간
 			.setExpiration(expiration) // 리프레시 토큰 유효 시간
 			.signWith(SignatureAlgorithm.HS512, secretKey) // 사용할 암호화 알고리즘 (HS512), signature 에 들어갈 secret key 세팅
@@ -113,6 +118,8 @@ public class JwtTokenProvider implements InitializingBean {
 
 		String key = "RT:" + Encoders.BASE64.encode(userPrincipal.getName().getBytes());
 		redisUtil.setDataExpire(key, refreshToken, refreshTokenValidTime);
+
+		return refreshToken;
 	}
 
 	/**
@@ -142,8 +149,8 @@ public class JwtTokenProvider implements InitializingBean {
 	 */
 	public boolean validateToken(String token) {
 		try {
-			Jwts.parserBuilder().setSigningKey(secretKey).build().parseClaimsJws(token);
-			return true;
+			Jws<Claims> claims = Jwts.parserBuilder().setSigningKey(secretKey).build().parseClaimsJws(token);
+			return claims.getBody().getExpiration().after(new Date());
 		} catch (io.jsonwebtoken.security.SecurityException | MalformedJwtException e) {
 			log.info("잘못된 JWT 서명입니다.");
 		} catch (ExpiredJwtException e) {
