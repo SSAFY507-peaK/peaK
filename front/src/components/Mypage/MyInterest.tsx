@@ -1,8 +1,10 @@
 import TitleComponent from "../idolpage/TitleComponent";
 import styled from "styled-components";
+import MyInterestChart from "./MyInterestChart";
 
 interface Props {
   userName: string;
+  idolName: string;
 }
 
 const Wrapper = styled.div`
@@ -23,17 +25,16 @@ const ScoreFrame = styled.div`
   flex-direction: row;
 `;
 
-export default function MyInterest({userName}:Props) {
+export default function MyInterest({userName, idolName}:Props) {
   return (
     <Wrapper>
+      <TitleComponent id="1" blacktxt="관심도" purpletxt={idolName} />
+      <ChartFrame>
+        <MyInterestChart />
+      </ChartFrame>
+      <ScoreFrame>
 
-    <TitleComponent id="1" blacktxt="관심도" purpletxt={userName} />
-    <ChartFrame>
-      
-    </ChartFrame>
-    <ScoreFrame>
-
-    </ScoreFrame>
+      </ScoreFrame>
     </Wrapper>
   )
 }

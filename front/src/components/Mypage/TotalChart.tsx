@@ -5,6 +5,7 @@ import { useState, useMemo, useCallback } from 'react';
 
 interface Props {
   userName: string;
+  setIdolName: React.Dispatch<React.SetStateAction<string>>;
 }
 
 interface SelecteType {
@@ -25,9 +26,16 @@ const ChartFrame = styled.div`
   width: 35vw;
 `;
 
-function TotalChart({userName}:Props) {
+function TotalChart({userName, setIdolName}:Props) {
   const [selectedData, setSelectedData] = useState<SelecteType>();
-
+  const chartData = [
+    { value: 45, name: "세븐틴" },
+    { value: 30, name: "방탄소년단" },      
+    { value: 15, name: "블랙핑크" },      
+    { value: 5, name: "트와이스" },      
+    { value: 5, name: "아이브" },
+  ];
+  
   const options = useMemo(() => {
     return {
       tooltip: {
@@ -75,13 +83,10 @@ function TotalChart({userName}:Props) {
           labelLine: {
             show: false
           },
-          data: [
-            {value: 45, name: "세븐틴"},
-            {value: 30, name: "방탄소년단"},
-            {value: 15, name: "블랙핑크"},
-            {value: 5, name: "트와이스"},
-            {value: 5, name: "아이브"},
-          ]
+          data: chartData,
+          selected: {
+            [setSelectedData.name]: true,
+          },
         }
       ],
       graphic: selectedData
@@ -105,8 +110,9 @@ function TotalChart({userName}:Props) {
   const onChartClick = useCallback((params:any) => {
     if (params.componentType === 'series') {
       // console.log('Selected pie index:', params.seriesIndex);
-      console.log('Selected pie data:', params.data);
+      console.log('Selected pie data:', params.data.name);
       setSelectedData(params.data);
+      setIdolName(params.data.name);
     }
   }, []);
 
