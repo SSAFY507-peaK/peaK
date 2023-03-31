@@ -1,17 +1,24 @@
 import styled from "styled-components";
 
-const NicknameInput = styled.input`
+type IsValidType = {
+  isValid: boolean | undefined | string;
+}
+
+const NicknameInput = styled.input<IsValidType>`
   //background-color: white;
-  padding: 10px;
+  padding: 5px 10px;
+  height: 35px;
   width: 300px;
-  border-bottom: 1px solid var(--gray100-color);
-  margin-bottom: 5px;
+  border-bottom: 1px solid ${props => (props.isValid === "ok" ? "blue" : props.isValid === undefined ? "var(--gray100-color)" : "red")};
+  margin-bottom: 10px;
+  margin-right: 20px
 `;
 
-const MessageDiv = styled.div<{ isUnique: boolean | undefined }>`
+const MessageDiv = styled.div<IsValidType>`
+  height: 16px;
   font-size: 13px;
-  margin-bottom: 15px;
-  color: ${props => (props.isUnique ? "blue" : props.isUnique === undefined ? "black" : "red")};
+  padding-left: 10px;
+  color: ${props => (props.isValid ? "blue" : "red")};
 `;
 
 export { NicknameInput, MessageDiv }

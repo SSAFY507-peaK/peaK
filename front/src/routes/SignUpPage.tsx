@@ -13,6 +13,10 @@ const PageWrapper = styled.div`
   justify-content: center;
   align-items: center;
 `;
+const InputWrapper = styled.div`
+  display: flex;
+  
+`
 const SelectedSection = styled.div`
   display: flex;
 `
@@ -29,6 +33,10 @@ const IdolWrapper = styled.div`
     background: var(--gray700-color);
   }
 `
+const Description = styled.p`
+  margin-top: 0;
+  color: var(--gray400-color);
+`
 const CloseButton = styled.button`
   height: 20px;
   width: 20px;
@@ -41,15 +49,16 @@ const CloseButton = styled.button`
   right: 0;
 `
 
+
 type IdolObjectType = {
   idolNum?: number;
   idolName?: string;
   idolImg?: string;
   isSelected?: boolean;
 }
+type NicknameType = "long" | "character" | "duplicate" | "ok";
 
 function SignUpPage() {
-
 
   let dummyData: IdolObjectType[] = [
     {
@@ -116,12 +125,11 @@ function SignUpPage() {
       idolImg: "http://openimage.interpark.com/goods_image_big/1/9/6/0/9472491960_l.jpg",
     },
   ];  // 더미데이터
-  const [pageIdx, setPageIdx] = useState<number>(1);
+  const [pageIdx, setPageIdx] = useState<number>(1);  // 페이지 기억하기
 
   // page 1에 대한 설정들
-  type NicknameType = "long" | "character" | "duplicate" | "ok";
   const [nickname, setNickname] = useState<string>("");
-  const [isValidNickname, setIsValidNickname] = useState<NicknameType | undefined>();
+  const [isValidNickname, setIsValidNickname] = useState<NicknameType | undefined>(undefined);
   const regex = /^[ㄱ-ㅎ가-힣a-zA-Z0-9]+$/;  // 닉네임 정규표현식
 
   /** 닉네임을 받자 */
@@ -130,13 +138,14 @@ function SignUpPage() {
     setIsValidNickname(undefined);
   };
   /** 닉네임 유효성을 체크하자 */
-  const handleValidNickname = (): void => {
+  const handleIsValidNickname = (): void => {
     if (nickname.length > 8) {
       setIsValidNickname("long")
     }
     else if (!regex.test(nickname)) {
       setIsValidNickname("character");
     }
+    // 여기서 유효성 체크를 하고 온 결과에 따라 "ok"와 "duplicate"로 나눠야함
     else {
       setIsValidNickname("ok");
     }
@@ -150,25 +159,28 @@ function SignUpPage() {
         return "닉네임은 한글, 영어, 숫자로만 이루어져야 합니다."
       case "duplicate" :
         return "중복된 닉네임입니다."
-      case "ok":
+      case "ok" :
         return "사용 가능한 닉네임입니다."
       default :
-        return " "
+        return ""
     }
   }
 
   const page1 = (
     <>
       <h2>닉네임 설정</h2>
-      <div>닉네임은 8글자 이하의 한글, 영어, 숫자로만 이루어져야 합니다</div>
-      <form>
-        <NicknameInput onChange={e => handleNickname(e)} value={nickname} />
-        <MessageDiv isUnique={isValidNickname === "ok"}>
-          { nicknameMessage() }
-        </MessageDiv>
-        {isValidNickname !== "ok" && <PurpleButton onClick={handleValidNickname}>중복 확인</PurpleButton>}
-        {isValidNickname === "ok" && <PurpleButton onClick={() => setPageIdx(2)}>다음으로</PurpleButton>}
-      </form>
+      <Description>닉네임은 8글자 이하의 한글, 영어, 숫자로만 이루어져야 합니다</Description>
+
+      <InputWrapper>
+        <div>
+          <NicknameInput isValid={isValidNickname} onChange={e => handleNickname(e)} value={nickname} />
+          <MessageDiv isValid={isValidNickname === "ok"}>
+            { nicknameMessage() }
+          </MessageDiv>
+        </div>
+        {isValidNickname !== "ok" && <PurpleButton onClick={handleIsValidNickname} width="100px">중복 확인</PurpleButton>}
+        {isValidNickname === "ok" && <PurpleButton onClick={() => setPageIdx(2) } width="100px">다음으로</PurpleButton>}
+      </InputWrapper>
     </>
   );
 

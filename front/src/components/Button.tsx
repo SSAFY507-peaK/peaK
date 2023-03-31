@@ -11,7 +11,7 @@ const Button = styled.button<ButtonType>`
   padding-left: 20px;
   padding-right: 20px;
   border-radius: 100px;
-  height: ${props => (props.height? props.height : "30px")};
+  height: ${props => (props.height? props.height : "35px")};
   width: ${props => (props.width ? props.width : "auto")};
   text-align: center;
   transition: background 300ms ease-in-out;
