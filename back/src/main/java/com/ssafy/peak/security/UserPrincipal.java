@@ -11,7 +11,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Component;
 
-import com.ssafy.peak.entity.User;
+import com.ssafy.peak.domain.User;
 import com.ssafy.peak.enums.Role;
 
 import lombok.AllArgsConstructor;
@@ -47,9 +47,9 @@ public class UserPrincipal implements UserDetails, OAuth2User {
 		return userPrincipal;
 	}
 
-	// public void setAuthorities(Collection<SimpleGrantedAuthority> authorities) {
-	// 	this.authorities = authorities;
-	// }
+	public void setAuthorities(Collection<SimpleGrantedAuthority> authorities) {
+		this.authorities = authorities;
+	}
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
