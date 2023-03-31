@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
+import { useNavigate } from "react-router-dom"
 import styled from "styled-components";
 import { PurpleButton, RedButton } from "../components/Button";
 import { NicknameInput, MessageDiv } from "../components/SignupPage/NicknameComponents";
@@ -13,12 +14,25 @@ const PageWrapper = styled.div`
   justify-content: center;
   align-items: center;
 `;
-const SelectedSection = styled.div`
+const InputWrapper = styled.div`
   display: flex;
+  
+`
+const SelectedSection = styled.div`
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: center
+`
+const DescriptionSection = styled.div`
+  flex: 1 0 350px;
+  & button {
+    margin-right: 15px;
+
+  }
 `
 const IdolWrapper = styled.div`
   overflow-y: scroll;
-  padding-right: 15px;
+  padding: 15px;
   &::-webkit-scrollbar {
     width: 7px;
     border-radius: 4px;
@@ -28,6 +42,10 @@ const IdolWrapper = styled.div`
     border-radius: 4px;
     background: var(--gray700-color);
   }
+`
+const Description = styled.p`
+  margin-top: 0;
+  color: var(--gray400-color);
 `
 const CloseButton = styled.button`
   height: 20px;
@@ -41,8 +59,19 @@ const CloseButton = styled.button`
   right: 0;
 `
 
+
+type IdolObjectType = {
+  idolNum?: number;
+  idolName?: string;
+  idolImg?: string;
+  isSelected?: boolean;
+}
+type NicknameType = "long" | "character" | "duplicate" | "ok";
+
 function SignUpPage() {
-  const idols = [
+  const navigate = useNavigate();
+
+  let dummyData: IdolObjectType[] = [
     {
       idolNum: 1,
       idolName: "아이돌",
@@ -106,60 +135,122 @@ function SignUpPage() {
       idolName: "아이돌12",
       idolImg: "http://openimage.interpark.com/goods_image_big/1/9/6/0/9472491960_l.jpg",
     },
-  ];
+  ];  // 더미데이터
+  const [pageIdx, setPageIdx] = useState<number>(1);  // 페이지 기억하기
 
+  // page 1에 대한 설정들
   const [nickname, setNickname] = useState<string>("");
-  const [isUnique, setIsUnique] = useState<boolean | undefined>();
-  const [pageIdx, setPageIdx] = useState<number>(1);
+  const [isValidNickname, setIsValidNickname] = useState<NicknameType | undefined>(undefined);
+  const regex = /^[ㄱ-ㅎ가-힣a-zA-Z0-9]+$/;  // 닉네임 정규표현식
 
-  const [selectedIdol, setSelectedIdol] = useState<number[]>([0, 0, -1, -1, -1]);
-  // const [countSelected, setCountSelected] = useState<number>(2);
-  // const [Idols, setIdols] = useState<Object[]>()
+  /** 닉네임을 받자 */
   const handleNickname = (e: React.ChangeEvent<HTMLInputElement>): void => {
     setNickname(e.target.value);
+    setIsValidNickname(undefined);
   };
-  const handleCheckUnique = (): void => {
-    setIsUnique(true);
+  /** 닉네임 유효성을 체크하자 */
+  const handleIsValidNickname = (): void => {
+    if (nickname.length > 8) {
+      setIsValidNickname("long")
+    }
+    else if (!regex.test(nickname)) {
+      setIsValidNickname("character");
+    }
+    // 여기서 유효성 체크를 하고 온 결과에 따라 "ok"와 "duplicate"로 나눠야함
+    else {
+      setIsValidNickname("ok");
+    }
   };
+  /** 닉네임 유효성에 대한 메시지를 보여주자 */
+  const nicknameMessage = () => {
+    switch (isValidNickname) {
+      case "long":
+        return "닉네임은 8자 이하여야 합니다."
+      case 'character' :
+        return "닉네임은 한글, 영어, 숫자로만 이루어져야 합니다."
+      case "duplicate" :
+        return "중복된 닉네임입니다."
+      case "ok" :
+        return "사용 가능한 닉네임입니다."
+      default :
+        return ""
+    }
+  }
 
   const page1 = (
     <>
       <h2>닉네임 설정</h2>
-      <NicknameInput onChange={e => handleNickname(e)} value={nickname} />
-      <MessageDiv isUnique={isUnique}>
-        {isUnique ?
-          "사용 가능한 닉네임입니다"
-          : isUnique === false ?
-            "이미 사용중인 닉네임입니다"
-            : " "}
-      </MessageDiv>
-      {!isUnique && <PurpleButton onClick={handleCheckUnique}>중복 확인</PurpleButton>}
-      {isUnique && <PurpleButton onClick={() => setPageIdx(2)}>다음으로</PurpleButton>}
+      <Description>닉네임은 8글자 이하의 한글, 영어, 숫자로만 이루어져야 합니다</Description>
+
+      <InputWrapper>
+        <div>
+          <NicknameInput isValid={isValidNickname} onChange={e => handleNickname(e)} value={nickname} />
+          <MessageDiv isValid={isValidNickname === "ok"}>
+            { nicknameMessage() }
+          </MessageDiv>
+        </div>
+        {isValidNickname !== "ok" && <PurpleButton onClick={handleIsValidNickname} width="100px">중복 확인</PurpleButton>}
+        {isValidNickname === "ok" && <PurpleButton onClick={() => setPageIdx(2) } width="100px">다음으로</PurpleButton>}
+      </InputWrapper>
     </>
   );
+
+
+  // page 2에 대한 정보들
+  const [selectedIdols, setSelectedIdols] = useState<IdolObjectType[]>([]);
+  const [idols, setIdols] = useState<IdolObjectType[]>(dummyData);
+
+  /** 내가 선택한 아이돌 팀을 보여주자 */
+  const showSelectIdols = useCallback(() => {
+    const returnArr = selectedIdols?.map(idol =>
+      <Selected url={idol.idolImg} >
+        <CloseButton onClick={()=>handleDeleteSelectedIdol(idol)}>X</CloseButton>
+      </Selected>
+    )
+    for (let i=0; i<5-selectedIdols.length; i++) {
+      returnArr.push(<EmptySelected />)
+    }
+    return returnArr;
+  }, [selectedIdols]);
+
+  /** 좋아하는 아이돌을 선택하자 */
+  const handleSelectIdol = (idol: IdolObjectType): void => {
+    if (idol.isSelected) { return }
+    else if (selectedIdols.length >= 5) {
+      alert("최대 5명의 아이돌만 선택할 수 있습니다");
+      return
+    }
+    else {
+      setIdols(prev => prev.map(idol2 => idol.idolNum === idol2.idolNum? {...idol2, isSelected: true} : idol2))
+      setSelectedIdols(prev=> [...prev, {...idol, isSelected: true}]);
+    }
+  }
+  /** 선택한 아이돌을 삭제하자 */
+  const handleDeleteSelectedIdol = (idol:IdolObjectType): void => {
+    // 원본 배열에서 false로 변경하고... 선택된 배열에서도 삭제를 하자궁...
+    setIdols(prev => prev.map(idol2 => idol.idolNum === idol2.idolNum? {...idol2, isSelected: false} : idol2))
+    setSelectedIdols(prev=> prev.filter(idol2 => idol.idolNum !== idol2.idolNum));
+  }
+
   const page2 = (
     <>
       <SelectedSection>
-        <div style={{flex: "1", marginRight: "30px"}}>
+        <DescriptionSection>
           <h2>좋아하는 아이돌 선택</h2>
-          <div>좋아하는 아이돌은 최소 한명에서 최대 다섯 명을 선택할 수 있습니다.</div>
+          <Description>좋아하는 아이돌을 한 팀 이상 선택해주세요. <br/>최대 다섯 팀까지 선택 가능합니다.</Description>
           <div>
-            <PurpleButton height="30px" width="150px" onClick={() => setPageIdx(1)}>이전으로</PurpleButton>
-            <RedButton height="30px" width="150px">회원가입 완료</RedButton>
+            <PurpleButton width="120px" onClick={() => setPageIdx(1)}>이전으로</PurpleButton>
+            <RedButton disabled={selectedIdols.length<=0} width="120px" onClick={() => navigate("/")}>회원가입 완료</RedButton>
           </div>
-        </div>
-        <IdolGrid cols={5}>
-          {selectedIdol.map(idol => {
-            return idol !== -1 ? <Selected><CloseButton>X</CloseButton></Selected> : <EmptySelected />;
-          })}
-        </IdolGrid>
+        </DescriptionSection>
+        <IdolGrid cols={5}>{ showSelectIdols() }</IdolGrid>
       </SelectedSection>
       <h3>전체 아이돌</h3>
       <IdolWrapper>
-        <IdolGrid cols={6}>
-          {idols.map(idol => (
+        <IdolGrid cols={6} gap="20px">
+          {idols.map((idol: IdolObjectType) => (
             <IdolImageWrapper >
-              <IdolImage url={idol.idolImg}/>
+              <IdolImage url={idol.idolImg} onClick={()=> idol.isSelected? handleDeleteSelectedIdol(idol) : handleSelectIdol(idol)} className={`${idol.isSelected && "selected"}`}/>
               <IdolName>{idol.idolName}</IdolName>
             </IdolImageWrapper>
           ))}
@@ -171,11 +262,6 @@ function SignUpPage() {
   return (
     <PageWrapper>
       {pageIdx === 1 ? page1 : page2}
-      {/*<h2>닉네임 설정</h2>*/}
-      {/*<NicknameInput onChange={(e)=>handleNickname(e)} value={nickname}/>*/}
-      {/*<DuplicateDiv isUnique={isUnique}>{isUnique? "사용 가능한 닉네임입니다" : isUnique === false? "이미 사용중인 닉네임입니다" : " "}</DuplicateDiv>*/}
-      {/*{ !isUnique && <PurpleButton onClick={handleCheckUnique}>중복 확인</PurpleButton> }*/}
-      {/*{ isUnique && <PurpleButton>다음으로</PurpleButton> }*/}
     </PageWrapper>
   );
 }
