@@ -8,6 +8,7 @@ import TitleComponent from "../components/idolpage/TitleComponent";
 import TotalChart from '../components/Mypage/TotalChart';
 import styled from "styled-components";
 import { useParams } from "react-router-dom";
+import { useEffect, useState } from 'react';
 
 const Wrapper = styled.div`
   display: flex;
@@ -37,6 +38,11 @@ const BottomFrame = styled.div`
 function MyPage() {
   const params = useParams();
   const userName:string = params.userName || "";
+  const [idolName, setIdolName] = useState<string>("")
+  
+  useEffect(() => {
+    console.log(idolName)
+  },[idolName])
 
   return (
     <Wrapper>
@@ -45,8 +51,8 @@ function MyPage() {
         <DriveFileRenameOutlineOutlinedIcon sx={{ fontSize: "1.2rem" }}></DriveFileRenameOutlineOutlinedIcon>
       </TitleFrame>
       <TopFrame>
-        <TotalChart userName={userName} />
-        <MyInterest userName={userName} />
+        <TotalChart userName={userName} setIdolName={setIdolName} />
+        <MyInterest userName={userName} idolName={idolName}/>
         <MyChat userName={userName} />
       </TopFrame>
       {/* <BottomFrame>
