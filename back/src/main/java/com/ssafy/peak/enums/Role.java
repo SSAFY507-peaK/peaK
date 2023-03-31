@@ -1,5 +1,5 @@
 package com.ssafy.peak.enums;
 
 public enum Role {
-	ROLE_USER
+	ROLE_GUEST, ROLE_USER
 }
