@@ -14,7 +14,7 @@ const Button = styled.button<ButtonType>`
   height: ${props => (props.height? props.height : "35px")};
   width: ${props => (props.width ? props.width : "auto")};
   text-align: center;
-  transition: background 300ms ease-in-out;
+  transition: all 300ms ease-in-out;
   
   // 버튼 비활성화하면 안눌리게 하기
   &[disabled] {
@@ -44,4 +44,15 @@ const RedButton = styled(Button)`
   }
 `
 
-export { PurpleButton, RedButton };
+const BlueButton = styled(Button)`
+  background: var(--blue-gradient);
+  
+  &:hover {
+    background: var(--blue-gradient-hover);
+  }
+  &[disabled] {
+    background: var(--gray-gradient);
+  }
+`
+
+export { PurpleButton, RedButton, BlueButton };

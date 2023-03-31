@@ -1,19 +1,79 @@
-import React, { useState, useCallback } from "react";
+import React, {useState, useCallback, useRef} from "react";
 import { useNavigate } from "react-router-dom"
-import styled from "styled-components";
-import { PurpleButton, RedButton } from "../components/Button";
+import styled, { keyframes } from "styled-components";
+import { PurpleButton, BlueButton } from "../components/Button";
 import { NicknameInput, MessageDiv } from "../components/SignupPage/NicknameComponents";
 import { IdolGrid, IdolImage, IdolImageWrapper, IdolName, EmptySelected, Selected } from "../components/SignupPage/IdolComponents";
 
-const PageWrapper = styled.div`
+
+const FromTop = keyframes`
+  from {
+    transform: translateY(-150vh);
+  }
+  to {
+    transform: translateY(-50vh);
+  }
+`
+const ToBottom = keyframes`
+  from {
+    transform: translateY(50vh);
+  }
+  to {
+    transform: translateY(150vh);
+  }
+`
+const FromBottom = keyframes`
+  from {
+    transform: translateY(150vh);
+  }
+  to {
+    transform: translateY(50vh);
+  }
+`
+const ToTop = keyframes`
+  from {
+    transform: translateY(-50vh);
+  }
+  to {
+    transform: translateY(-150vh);
+  }
+`
+
+const Wrapper = styled.div`
   width: 100vw;
-  height: 100vh;
+  height: 200vh;
+  //height: 100vh;
   padding: 5vh 5vw;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 `;
+const PageWrapper = styled.div`
+  width: 100%;
+  height: 100vh;
+  padding: 5vh 5vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  // &.fromTop {
+  //   animation: ${FromTop} 1.5s ease-in-out;
+  //   animation-fill-mode: forwards;
+  // }
+  // &.toBottom {
+  //   animation: ${ToBottom} 1.5s ease-in-out;
+  //   animation-fill-mode: forwards;
+  // }
+  // &.fromBottom {
+  //   animation: ${FromBottom} 1.5s ease-in-out;
+  //   animation-fill-mode: forwards;
+  // }
+  // &.toTop {
+  //   animation: ${ToTop} 1.5s ease-in-out;
+  //   animation-fill-mode: forwards;
+  // }
+`
 const InputWrapper = styled.div`
   display: flex;
   
@@ -60,6 +120,8 @@ const CloseButton = styled.button`
 `
 
 
+
+
 type IdolObjectType = {
   idolNum?: number;
   idolName?: string;
@@ -70,7 +132,11 @@ type NicknameType = "long" | "character" | "duplicate" | "ok";
 
 function SignUpPage() {
   const navigate = useNavigate();
-
+  // useEffect(() => {
+  //
+  // })
+  const page1ref = useRef<HTMLDivElement>(null);
+  const page2ref = useRef<HTMLDivElement>(null);
   let dummyData: IdolObjectType[] = [
     {
       idolNum: 1,
@@ -137,6 +203,29 @@ function SignUpPage() {
     },
   ];  // 더미데이터
   const [pageIdx, setPageIdx] = useState<number>(1);  // 페이지 기억하기
+  /** 이벤트 달았다 뗐다 해주기 */
+  // const handleChangePage = (page:number) => {
+  //   console.log(page1ref.current);
+  //   console.log(page2ref.current);
+  //   if (page === 1 && page1ref.current && page2ref.current) {
+  //     page1ref.current.classList.remove("fromTop");
+  //     page2ref.current.classList.remove("toBottom");
+  //     page1ref.current.classList.add("toTop");
+  //     page2ref.current.classList.add("fromBottom");
+  //     console.log(page1ref);
+  //     console.log(page2ref);
+  //     setPageIdx(2);
+  //   }
+  //   if (page === 2 && page1ref.current && page2ref.current) {
+  //     page1ref.current.classList.remove("toTop");
+  //     page2ref.current.classList.remove("fromBottom");
+  //     page1ref.current.classList.add("fromTop");
+  //     page2ref.current.classList.add("toBottom");
+  //     console.log(page1ref);
+  //     console.log(page2ref);
+  //     setPageIdx(1);
+  //   }
+  // }
 
   // page 1에 대한 설정들
   const [nickname, setNickname] = useState<string>("");
@@ -178,7 +267,7 @@ function SignUpPage() {
   }
 
   const page1 = (
-    <>
+    <PageWrapper ref={page1ref} style={{transform: "scale(1.1, 1.1)"}}>
       <h2>닉네임 설정</h2>
       <Description>닉네임은 8글자 이하의 한글, 영어, 숫자로만 이루어져야 합니다</Description>
 
@@ -189,11 +278,14 @@ function SignUpPage() {
             { nicknameMessage() }
           </MessageDiv>
         </div>
-        {isValidNickname !== "ok" && <PurpleButton onClick={handleIsValidNickname} width="100px">중복 확인</PurpleButton>}
-        {isValidNickname === "ok" && <PurpleButton onClick={() => setPageIdx(2) } width="100px">다음으로</PurpleButton>}
+        {isValidNickname !== "ok" && <PurpleButton onClick={ handleIsValidNickname } width="100px">중복 확인</PurpleButton>}
+        {isValidNickname === "ok" && <BlueButton onClick={() => setPageIdx(2) } width="100px">다음으로</BlueButton>}
+        {/*{isValidNickname === "ok" && <BlueButton onClick={() => handleChangePage(1) } width="100px">다음으로</BlueButton>}*/}
       </InputWrapper>
-    </>
+    </PageWrapper>
   );
+
+
 
 
   // page 2에 대한 정보들
@@ -233,14 +325,15 @@ function SignUpPage() {
   }
 
   const page2 = (
-    <>
+    <PageWrapper ref={page2ref}>
       <SelectedSection>
         <DescriptionSection>
           <h2>좋아하는 아이돌 선택</h2>
           <Description>좋아하는 아이돌을 한 팀 이상 선택해주세요. <br/>최대 다섯 팀까지 선택 가능합니다.</Description>
           <div>
             <PurpleButton width="120px" onClick={() => setPageIdx(1)}>이전으로</PurpleButton>
-            <RedButton disabled={selectedIdols.length<=0} width="120px" onClick={() => navigate("/")}>회원가입 완료</RedButton>
+            {/*<PurpleButton width="120px" onClick={() => handleChangePage(2)}>이전으로</PurpleButton>*/}
+            <BlueButton disabled={selectedIdols.length<=0} width="120px" onClick={() => navigate("/")}>회원가입 완료</BlueButton>
           </div>
         </DescriptionSection>
         <IdolGrid cols={5}>{ showSelectIdols() }</IdolGrid>
@@ -256,13 +349,56 @@ function SignUpPage() {
           ))}
         </IdolGrid>
       </IdolWrapper>
-    </>
+    </PageWrapper>
   );
 
   return (
-    <PageWrapper>
-      {pageIdx === 1 ? page1 : page2}
-    </PageWrapper>
+    <Wrapper>
+      { pageIdx === 1? page1 : page2}
+
+      {/*<PageWrapper ref={page1ref}>*/}
+      {/*  <h2>닉네임 설정</h2>*/}
+      {/*  <Description>닉네임은 8글자 이하의 한글, 영어, 숫자로만 이루어져야 합니다</Description>*/}
+      {/*  <InputWrapper>*/}
+      {/*    <div>*/}
+      {/*      <NicknameInput isValid={isValidNickname} onChange={e => handleNickname(e)} value={nickname} />*/}
+      {/*      <MessageDiv isValid={isValidNickname === "ok"}>*/}
+      {/*        { nicknameMessage() }*/}
+      {/*      </MessageDiv>*/}
+      {/*    </div>*/}
+      {/*    {isValidNickname !== "ok" && <PurpleButton onClick={ handleIsValidNickname } width="100px">중복 확인</PurpleButton>}*/}
+      {/*    /!*{isValidNickname === "ok" && <PurpleButton onClick={() => setPageIdx(2) } width="100px">다음으로</PurpleButton>}*!/*/}
+      {/*    {isValidNickname === "ok" && <BlueButton onClick={() => handleChangePage(1) } width="100px">다음으로</BlueButton>}*/}
+      {/*  </InputWrapper>*/}
+      {/*</PageWrapper>*/}
+
+      {/*<PageWrapper ref={page2ref}>*/}
+      {/*  <SelectedSection>*/}
+      {/*    <DescriptionSection>*/}
+      {/*      <h2>좋아하는 아이돌 선택</h2>*/}
+      {/*      <Description>좋아하는 아이돌을 한 팀 이상 선택해주세요. <br/>최대 다섯 팀까지 선택 가능합니다.</Description>*/}
+      {/*      <div>*/}
+      {/*        /!*<PurpleButton width="120px" onClick={() => setPageIdx(1)}>이전으로</PurpleButton>*!/*/}
+      {/*        <PurpleButton width="120px" onClick={() => handleChangePage(2)}>이전으로</PurpleButton>*/}
+      {/*        <RedButton disabled={selectedIdols.length<=0} width="120px" onClick={() => navigate("/")}>회원가입 완료</RedButton>*/}
+      {/*      </div>*/}
+      {/*    </DescriptionSection>*/}
+      {/*    <IdolGrid cols={5}>{ showSelectIdols() }</IdolGrid>*/}
+      {/*  </SelectedSection>*/}
+      {/*  <h3>전체 아이돌</h3>*/}
+      {/*  <IdolWrapper>*/}
+      {/*    <IdolGrid cols={6} gap="20px">*/}
+      {/*      {idols.map((idol: IdolObjectType) => (*/}
+      {/*        <IdolImageWrapper >*/}
+      {/*          <IdolImage url={idol.idolImg} onClick={()=> idol.isSelected? handleDeleteSelectedIdol(idol) : handleSelectIdol(idol)} className={`${idol.isSelected && "selected"}`}/>*/}
+      {/*          <IdolName>{idol.idolName}</IdolName>*/}
+      {/*        </IdolImageWrapper>*/}
+      {/*      ))}*/}
+      {/*    </IdolGrid>*/}
+      {/*  </IdolWrapper>*/}
+      {/*</PageWrapper>*/}
+
+    </Wrapper>
   );
 }
 

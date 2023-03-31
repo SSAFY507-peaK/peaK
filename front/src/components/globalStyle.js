@@ -64,6 +64,7 @@ const GlobalStyle = createGlobalStyle`
     --purple-gradient-hover: linear-gradient(to bottom right, #925bb3 0%, #642c85 100%);
     --gray-gradient: linear-gradient(to bottom right, #B8B8B8 0%, #6B6B6B 100%);
     --blue-gradient: linear-gradient(to bottom right, #9FC6F4 0%, #1976E1 100%);
+    --blue-gradient-hover: linear-gradient(to bottom right, #8fb2db 0%, #1668c7 100%);
     --yellow-gradient: linear-gradient(to bottom right, #FFD99E 0%, #FF9B05 100%);
     --green-gradient: linear-gradient(to bottom right, #93F2A2 0%, #1AD138 100%);
 
