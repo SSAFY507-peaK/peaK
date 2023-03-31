@@ -1,17 +1,29 @@
 package com.ssafy.peak.security;
 
 import java.security.Key;
+import java.util.Arrays;
+import java.util.Collection;
 import java.util.Date;
+import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
+import com.ssafy.peak.dto.JwtTokenDto;
+import com.ssafy.peak.exception.CustomException;
+import com.ssafy.peak.exception.CustomExceptionType;
+import com.ssafy.peak.repository.UserRepository;
 import com.ssafy.peak.util.RedisUtil;
+import com.ssafy.peak.util.Utils;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
@@ -28,30 +40,28 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class JwtTokenProvider implements InitializingBean {
 
-	private static final String ROLE = "role";
-	private static final String AUTHORIZATION = "Authorization";
-	private static final String BEARER_TOKEN_PREFIX = "Bearer ";
 	@Value("${jwt.secret}")
 	private String secretKey;
 	private long accessTokenValidTime;
 	private long refreshTokenValidTime;
-	// private UserRepository userRepository;
+	private UserRepository userRepository;
 	private RedisUtil redisUtil;
 	private Key key;
 
-	// public JwtTokenProvider(
-	// 	@Value("${jwt.access-token-valid-time}") long accessTokenValidTime,
-	// 	@Value("${jwt.refresh-token-valid-time}") long refreshTokenValidTime,
-	// 	UserRepository userRepository,
-	// 	RedisUtil redisUtil) {
-	// 	this.accessTokenValidTime = accessTokenValidTime * 1000;
-	// 	this.refreshTokenValidTime = refreshTokenValidTime * 1000;
-	// 	this.userRepository = userRepository;
-	// 	this.redisUtil = redisUtil;
-	// }
+	public JwtTokenProvider(
+		@Value("${jwt.access-token-valid-time}") long accessTokenValidTime,
+		@Value("${jwt.refresh-token-valid-time}") long refreshTokenValidTime,
+		UserRepository userRepository,
+		RedisUtil redisUtil) {
+		this.accessTokenValidTime = accessTokenValidTime * 1000;
+		this.refreshTokenValidTime = refreshTokenValidTime * 1000;
+		this.userRepository = userRepository;
+		this.redisUtil = redisUtil;
+	}
 
 	/**
 	 * secret key 설정
+	 *
 	 * @throws Exception
 	 */
 	@Override
@@ -62,6 +72,7 @@ public class JwtTokenProvider implements InitializingBean {
 
 	/**
 	 * AccessToken 생성
+	 *
 	 * @return AccessToken
 	 */
 	public String createAccessToken(Authentication authentication) {
@@ -72,7 +83,7 @@ public class JwtTokenProvider implements InitializingBean {
 
 		String accessToken = Jwts.builder()
 			.setSubject(userPrincipal.getName()) // user id
-			.claim(ROLE, userPrincipal.getRole()) // ROLE_USER 권한
+			.claim(Utils.ROLE, userPrincipal.getRole()) // ROLE_USER 권한
 			.setIssuedAt(now) // 액세스 토큰 발행 시간
 			.setExpiration(expiration) // 액세스 토큰 유효 시간
 			.signWith(SignatureAlgorithm.HS512, key) // 사용할 암호화 알고리즘 (HS512), signature 에 들어갈 secret key 세팅
@@ -83,6 +94,7 @@ public class JwtTokenProvider implements InitializingBean {
 
 	/**
 	 * RefreshToken 생성
+	 *
 	 * @return RefreshToken
 	 */
 	public void createRefreshToken(Authentication authentication) {
@@ -93,7 +105,7 @@ public class JwtTokenProvider implements InitializingBean {
 
 		String refreshToken = Jwts.builder()
 			.setSubject(userPrincipal.getName()) // user id
-			.claim(ROLE, userPrincipal.getRole()) // ROLE_USER 권한
+			.claim(Utils.ROLE, userPrincipal.getRole()) // ROLE_USER 권한
 			.setIssuedAt(now) // 리프레시 토큰 발행 시간
 			.setExpiration(expiration) // 리프레시 토큰 유효 시간
 			.signWith(SignatureAlgorithm.HS512, secretKey) // 사용할 암호화 알고리즘 (HS512), signature 에 들어갈 secret key 세팅
@@ -103,26 +115,26 @@ public class JwtTokenProvider implements InitializingBean {
 		redisUtil.setDataExpire(key, refreshToken, refreshTokenValidTime);
 	}
 
-	// /**
-	//  * 인증 정보 조회
-	//  */
-	// public Authentication getAuthentication(String token) {
-	// 	Claims claims = parseClaims(token);
-	//
-	// 	if (claims.get(ROLE) == null) {
-	// 		throw new RuntimeException();
-	// 	}
-	// 	UserPrincipal userPrincipal = userRepository.findById(claims.getSubject())
-	// 		.map(UserPrincipal::createUserPrincipal)
-	// 		.orElseThrow(() -> new CustomException(CustomExceptionType.USER_NOT_FOUND));
-	//
-	// 	Collection<? extends GrantedAuthority> authorities =
-	// 		Arrays.stream(userPrincipal.getRole().toString().split(","))
-	// 			.map(SimpleGrantedAuthority::new)
-	// 			.collect(Collectors.toList());
-	//
-	// 	return new UsernamePasswordAuthenticationToken(userPrincipal, token, authorities);
-	// }
+	/**
+	 * 인증 정보 조회
+	 */
+	public Authentication getAuthentication(String token) {
+		Claims claims = parseClaims(token);
+
+		if (claims.get(Utils.ROLE) == null) {
+			throw new CustomException(CustomExceptionType.AUTHORITY_ERROR);
+		}
+		UserPrincipal userPrincipal = userRepository.findById(Long.valueOf(claims.getSubject()))
+			.map(UserPrincipal::createUserPrincipal)
+			.orElseThrow(() -> new CustomException(CustomExceptionType.AUTHORITY_ERROR));
+
+		Collection<? extends GrantedAuthority> authorities =
+			Arrays.stream(userPrincipal.getRole().toString().split(","))
+				.map(SimpleGrantedAuthority::new)
+				.collect(Collectors.toList());
+
+		return new UsernamePasswordAuthenticationToken(userPrincipal, token, authorities);
+	}
 
 	/**
 	 * 토큰 유효성 검사
@@ -176,12 +188,50 @@ public class JwtTokenProvider implements InitializingBean {
 		}
 	}
 
-	public String resolveToken(HttpServletRequest httpServletRequest) {
-		String bearerToken = httpServletRequest.getHeader(AUTHORIZATION);
+	/**
+	 * Jwt 복호화 후 token 만료 시간 가져오기
+	 */
+	public long getExpiration(String token) {
+		try {
+			long expiration = Jwts.parserBuilder()
+				.setSigningKey(secretKey).build()
+				.parseClaimsJws(token)
+				.getBody()
+				.getExpiration()
+				.getTime();
+			long now = new Date().getTime();
+			return expiration - now;
 
-		if (StringUtils.hasText(bearerToken) && bearerToken.startsWith(BEARER_TOKEN_PREFIX)) {
+		} catch (ExpiredJwtException expiredJwtException) {
+			return expiredJwtException.getClaims().getExpiration().getTime();
+		}
+	}
+
+	public String resolveToken(HttpServletRequest httpServletRequest) {
+		String bearerToken = httpServletRequest.getHeader(Utils.AUTHORIZATION);
+
+		if (StringUtils.hasText(bearerToken) && bearerToken.startsWith(Utils.BEARER_TOKEN_PREFIX)) {
 			return bearerToken.substring(7);
 		}
 		return null;
+	}
+
+	public JwtTokenDto reissue(String token) {
+		Authentication authentication = getAuthentication(token);
+		UserPrincipal userPrincipal = (UserPrincipal)authentication.getPrincipal();
+		String email = userPrincipal.getUsername();
+		String key = "RT:" + Encoders.BASE64.encode(email.getBytes());
+		String refreshToken = redisUtil.getData(key);
+		if (refreshToken == null) {
+			throw new CustomException(CustomExceptionType.REFRESH_TOKEN_ERROR);
+		}
+
+		String accessToken = createAccessToken(authentication);
+		SecurityContextHolder.getContext().setAuthentication(authentication);
+
+		return JwtTokenDto.builder()
+			.token(accessToken)
+			.expiration(getExpiration(accessToken))
+			.build();
 	}
 }
