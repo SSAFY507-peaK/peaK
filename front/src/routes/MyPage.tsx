@@ -52,8 +52,16 @@ function MyPage() {
       </TitleFrame>
       <TopFrame>
         <TotalChart userName={userName} setIdolName={setIdolName} />
-        <MyInterest userName={userName} idolName={idolName}/>
-        <MyChat userName={userName} />
+        {
+          idolName
+          ?
+          <>
+            <MyInterest userName={userName} idolName={idolName}/>
+            <MyChat userName={userName} />
+          </>
+          :
+          null
+        }
       </TopFrame>
       {/* <BottomFrame>
         <MyClickChart userName={userName} />
