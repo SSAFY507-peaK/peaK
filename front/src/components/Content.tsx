@@ -5,6 +5,7 @@ const ContentDiv = styled.div`
   display: flex;
   flex-direction: column;
   background-color: white;
+  /* background-color: #f9f7fa; */
   border-radius: 15px;
   box-shadow: 0px 0px 3px rgba(151, 151, 151, 0.25);
   padding: 30px;

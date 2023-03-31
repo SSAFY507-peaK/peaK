@@ -23,9 +23,10 @@ const IdolImg = styled.div<IdolImgType>`
   background-image: url(${props => props.url});
   background-size: cover;
   background-position: center;
-  border-radius: 50%;
-  width: ${props => (props.rank <= 3 ? "11vw" : "8vw")};
-  height: ${props => (props.rank <= 3 ? "11vw" : "8vw")};
+  border-radius: 70px;
+  box-shadow: 0px 0px 10px -5px rgb(28, 28, 28);
+  width: ${props => (props.rank <= 3 ? "12vw" : "8vw")};
+  height: ${props => (props.rank <= 3 ? "12vw" : "8vw")};
   margin: 15px 0px 0px 12px;
   transition: all 100ms ease-in-out;
   &:hover {
