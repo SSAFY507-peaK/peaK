@@ -18,7 +18,16 @@ const InputWrapper = styled.div`
   
 `
 const SelectedSection = styled.div`
+  margin-bottom: 10px;
   display: flex;
+  justify-content: center
+`
+const DescriptionSection = styled.div`
+  flex: 1 0 350px;
+  & button {
+    margin-right: 15px;
+
+  }
 `
 const IdolWrapper = styled.div`
   overflow-y: scroll;
@@ -204,11 +213,11 @@ function SignUpPage() {
 
   /** 좋아하는 아이돌을 선택하자 */
   const handleSelectIdol = (idol: IdolObjectType): void => {
-    if (selectedIdols.length >= 5) {
+    if (idol.isSelected) { return }
+    else if (selectedIdols.length >= 5) {
       alert("최대 5명의 아이돌만 선택할 수 있습니다");
       return
     }
-    if(idol?.isSelected){ return }
     else {
       setIdols(prev => prev.map(idol2 => idol.idolNum === idol2.idolNum? {...idol2, isSelected: true} : idol2))
       setSelectedIdols(prev=> [...prev, {...idol, isSelected: true}]);
@@ -224,19 +233,19 @@ function SignUpPage() {
   const page2 = (
     <>
       <SelectedSection>
-        <div style={{flex: "1", marginRight: "30px"}}>
+        <DescriptionSection>
           <h2>좋아하는 아이돌 선택</h2>
-          <div>좋아하는 아이돌은 최소 한명에서 최대 다섯 명을 선택할 수 있습니다.</div>
+          <Description>좋아하는 아이돌을 한 팀 이상 선택해주세요. <br/>최대 다섯 팀까지 선택 가능합니다.</Description>
           <div>
-            <PurpleButton height="30px" width="150px" onClick={() => setPageIdx(1)}>이전으로</PurpleButton>
-            <RedButton disabled={selectedIdols.length<=0} height="30px" width="150px">회원가입 완료</RedButton>
+            <PurpleButton width="120px" onClick={() => setPageIdx(1)}>이전으로</PurpleButton>
+            <RedButton disabled={selectedIdols.length<=0} width="120px">회원가입 완료</RedButton>
           </div>
-        </div>
+        </DescriptionSection>
         <IdolGrid cols={5}>{ showSelectIdols() }</IdolGrid>
       </SelectedSection>
       <h3>전체 아이돌</h3>
       <IdolWrapper>
-        <IdolGrid cols={6}>
+        <IdolGrid cols={6} gap="20px">
           {idols.map((idol: IdolObjectType) => (
             <IdolImageWrapper >
               <IdolImage url={idol.idolImg} onClick={()=>handleSelectIdol(idol)}/>
@@ -250,8 +259,8 @@ function SignUpPage() {
 
   return (
     <PageWrapper>
-      {/*{ page2 }*/}
-      {pageIdx === 1 ? page1 : page2}
+      { page2 }
+      {/*{pageIdx === 1 ? page1 : page2}*/}
     </PageWrapper>
   );
 }

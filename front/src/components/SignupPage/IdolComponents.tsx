@@ -1,10 +1,14 @@
 import styled from "styled-components";
 
-const IdolGrid = styled.div<{cols: number}>`
+type IdolGridType = {
+  cols: number;
+  gap?: string;
+}
+const IdolGrid = styled.div<IdolGridType>`
   display: grid;
-  //grid-template-columns: repeat(6, 1fr);
+  align-items: center;
   grid-template-columns: repeat(${props => props.cols}, 1fr);
-  gap: 15px;
+  gap: ${props => props.gap || "15px"};
 `;
 
 const IdolImageWrapper = styled.div`
