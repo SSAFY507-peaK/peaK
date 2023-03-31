@@ -1,90 +1,79 @@
-import {
-  CategoryScale,
-  Chart as ChartJS,
-  Filler,
-  Legend,
-  LineElement,
-  LinearScale,
-  PointElement,
-  Title,
-  Tooltip,
-} from 'chart.js';
-
-import { Line } from 'react-chartjs-2';
+import ECharts from 'echarts-for-react';
 import { faker } from '@faker-js/faker';
-
-// import styled from 'styled-components';
-
-
-ChartJS.register(
-  CategoryScale,
-  LinearScale,
-  PointElement,
-  LineElement,
-  Title,
-  Tooltip,
-  Legend,
-  Filler,
-
-);
+import { useState } from 'react';
 
 function IdolEmotionRankChart() {
-  const options = {
-    maintainAspectRatio: false,
-    responsive: true,
-    interaction: {
-      mode: "index" as const,
-      intersect: false,
-    },
-    animations: {
-      tension: {
-        duration: 1000,
-        from: 0.5,
-        to: 0.5,
+  let labels = ['월', '화', '수', '목', '금', '토', '일']
+  const idolName = "세븐틴"
+  const [options, setOptions] = useState({
+    color: "#fff",
+    tooltip: {
+      trigger: 'axis',
+      axisPointer: {
+        type: 'cross',
+        // label: {
+        //   backgroundColor: '#6a7985'
+        // }
       }
     },
-    scales: {
-      y: { // defining min and max so hiding the dataset does not change scale range
-        min: 0,
-        max: 1,
-      }
+    legend: {
+      // data: idolName,
     },
-    elements: {
-      point:{
-          radius: 0
-      }
+    grid: {
+      left: '3%',
+      right: '4%',
+      bottom: '3%',
+      show: true,
+      containLabel: true,
+      backgroundColor: 'rgba(255, 99, 132, 0.5)',
     },
-    plugins: {
-      legend: {
-        position: 'bottom' as const,
-        display: false,
-      },
-      title: {
-        display: false,
-        text: 'Chart.js Line Chart',
-      },
-    },
-  };
-  
-  const labels = ['월', '화', '수', '목', '금', '토', '일'];
-
-  const data = {
-    labels,
-    datasets: [
+    xAxis: [
       {
-        label: '세븐틴',
-        data: labels.map(() => faker.datatype.float({ min: 0, max: 1 })),
-        borderColor: 'rgb(255, 99, 132)',
-        backgroundColor	: 'rgba(255, 99, 132, 0.5)',
-        fill: {
-          target: 'origin',
-          above: 'rgba(255, 99, 132, 0.5)',   // Area will be red above the origin
-        },
-      },
+        type: 'category',
+        boundaryGap: false,
+        data: labels
+      }
     ],
-  };
+    yAxis: [
+      {
+        type: 'value',
+        max: 1,
+        min: 100,
+        interval: 20,
+        inverse: true
+        // splitLine: {
+        //   show: false // 가로선 숨기기
+        // }
+      }
+    ],
+    series: [
+      {
+        name: idolName,
+        type: 'line',
+        // stack: 'Total',
+        smooth: true,
+        lineStyle: {
+          width: 0
+        },
+        showSymbol: false,
+        areaStyle: {
+          opacity: 0.8,
+        },
+        emphasis: {
+          focus: 'series'
+        },
+        data: labels.map(() => faker.datatype.float({ min: 0, max: 100 }))
+      },
+    ]
+  })
 
-  return <Line options={options} data={data} />;
+  return (
+    <ECharts
+			option={options}
+      style={{ height: "100%", width: "100%" }}
+      opts={{ renderer: 'svg'}}
+      />
+  );
 }
 
 export default IdolEmotionRankChart;

@@ -1,10 +1,24 @@
+import IdolChart from "../components/RankingPage/IdolChart";
 import React from "react";
+import styled from "styled-components";
+
+const ChartDiv = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50vw;
+  height: 40vw;
+  background-color: var(--white800-color);
+  border-radius: 15px;
+  box-shadow: 0px 0px 3px rgba(151, 151, 151, 0.25);
+`;
 
 function ChartPage() {
   return (
     <div>
-      <h1>차트 페이지입니다</h1>
-      <h2>아이돌을 선택하여 랭킹 변화 추이를 보여줍니다.</h2>
+      <ChartDiv>
+        <IdolChart />
+      </ChartDiv>
     </div>
   );
 }

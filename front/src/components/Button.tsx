@@ -11,15 +11,15 @@ const Button = styled.button<ButtonType>`
   padding-left: 20px;
   padding-right: 20px;
   border-radius: 100px;
-  height: ${props => (props.height? props.height : "30px")};
+  height: ${props => (props.height? props.height : "35px")};
   width: ${props => (props.width ? props.width : "auto")};
   text-align: center;
-  transition: all 300ms ease-in-out;
+  transition: background 300ms ease-in-out;
   
   // 버튼 비활성화하면 안눌리게 하기
   &[disabled] {
-    background: var(--gray500-color);
-    cursor: not-allowed;
+    background: var(--gray-gradient);
+    cursor: default;
   }
 `;
 
@@ -29,7 +29,7 @@ const PurpleButton = styled(Button)`
     background: var(--purple-gradient-hover);
   }
   &[disabled] {
-    background: var(--gray500-color);
+    background: var(--gray-gradient);
   }
 `
 
@@ -40,7 +40,7 @@ const RedButton = styled(Button)`
     background: var(--red-gradient-hover);
   }
   &[disabled] {
-    background: var(--gray500-color);
+    background: var(--gray-gradient);
   }
 `
 
