@@ -1,32 +1,16 @@
 package com.ssafy.peak.service;
 
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.nio.charset.StandardCharsets;
+import java.io.IOException;
 
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.web.client.RestTemplateBuilder;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
-import org.springframework.util.LinkedMultiValueMap;
-import org.springframework.util.MultiValueMap;
-import org.springframework.web.client.RestTemplate;
-import org.springframework.web.util.UriComponents;
-import org.springframework.web.util.UriComponentsBuilder;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.ssafy.peak.dto.KakaoTokenDto;
-import com.ssafy.peak.dto.KakaoUserInfoDto;
+import com.ssafy.peak.repository.UserRepository;
 import com.ssafy.peak.security.JwtTokenProvider;
-import com.ssafy.peak.util.OAuthKakaoUtil;
+import com.ssafy.peak.util.Utils;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -38,132 +22,40 @@ public class UserService {
 
 	@Value("${redirectUrl}")
 	private String redirectUrl;
+	private static final String SIGN_UP_URI = "/signup";
 	private final JwtTokenProvider jwtTokenProvider;
-	private final OAuthKakaoUtil oAuthKakaoUtil;
+	private final UserRepository userRepository;
 
-	public ResponseEntity loginSuccess(HttpServletResponse response, Authentication authentication) {
+	public void redirectSignupPage(HttpServletResponse response, Authentication authentication) {
 
-		// AccessToken과 RefreshToken 발급
 		String accessToken = jwtTokenProvider.createAccessToken(authentication);
-		jwtTokenProvider.createRefreshToken(authentication);
-
-		// response.setStatus(HttpServletResponse.SC_OK);
-		// response.setHeader("AccessToken", Utils.BEARER_TOKEN_PREFIX + accessToken);
-
-		URI redirectUri = null;
 		try {
-			redirectUri = new URI(redirectUrl + "/signup");
-			HttpHeaders httpHeaders = new HttpHeaders();
-			httpHeaders.setLocation(redirectUri);
-			httpHeaders.setBearerAuth(accessToken);
+			String redirectUri = redirectUrl + SIGN_UP_URI;
+			response.setStatus(HttpServletResponse.SC_OK);
+			response.setHeader(Utils.ACCESS_TOKEN, Utils.BEARER_TOKEN_PREFIX + accessToken);
+			response.sendRedirect(redirectUri);
 
-			return ResponseEntity.ok().headers(httpHeaders).build();
-		} catch (URISyntaxException e) {
+		} catch (IOException e) {
 			throw new RuntimeException(e);
 		}
 	}
 
-	public KakaoTokenDto getKakaoToken(String code) {
+	public void login(HttpServletResponse response, Authentication authentication) {
 
-		RestTemplate restTemplate = new RestTemplateBuilder().build();
+		// AccessToken과 RefreshToken 발급
+		String accessToken = jwtTokenProvider.createAccessToken(authentication);
+		String refreshToken = jwtTokenProvider.createRefreshToken(authentication);
 
-		// uri
-		UriComponents uriComponents = UriComponentsBuilder
-			.fromUriString(oAuthKakaoUtil.TOKEN_URI)
-			.encode(StandardCharsets.UTF_8)
-			.build();
-
-		// header
-		HttpHeaders httpHeaders = new HttpHeaders();
-		MediaType mediaType = new MediaType(MediaType.APPLICATION_FORM_URLENCODED, StandardCharsets.UTF_8);
-		httpHeaders.setContentType(mediaType);
-		// httpHeaders.add("Content-Type", "application/x-www-form-urlencoded;charset=utf-8");
-
-		// body
-		MultiValueMap<String, String> body = new LinkedMultiValueMap<>();
-		body.add("grant_type", oAuthKakaoUtil.AUTHORIZATION_GRANT_TYPE);
-		body.add("code", code);
-		body.add("redirect_uri", oAuthKakaoUtil.REDIRECT_URI);
-		body.add("client_id", oAuthKakaoUtil.CLIENT_ID);
-
-		// header + body => request
-		HttpEntity<MultiValueMap<String, String>> kakaoTokenRequest = new HttpEntity<>(body, httpHeaders);
-
-		log.info("kakaoTokenRequest: {}", kakaoTokenRequest);
-
-		String kakaoTokenResponse = restTemplate
-			.postForObject(
-				uriComponents.toUriString(),
-				kakaoTokenRequest,
-				String.class);
-
-		log.info("kakaoTokenResponse : {}", kakaoTokenResponse);
-
-		ObjectMapper objectMapper = new ObjectMapper();
-		KakaoTokenDto kakaoTokenDto = null;
 		try {
-			kakaoTokenDto = objectMapper.readValue(kakaoTokenResponse, KakaoTokenDto.class);
-		} catch (JsonProcessingException e) {
-			e.printStackTrace();
-		}
+			String redirectUri = redirectUrl + SIGN_UP_URI;
+			response.setHeader(Utils.ACCESS_TOKEN, Utils.BEARER_TOKEN_PREFIX + accessToken);
+			response.setHeader(Utils.REFRESH_TOKEN, Utils.BEARER_TOKEN_PREFIX + refreshToken);
 
-		log.info("kakaoTokenDto : {}", kakaoTokenDto);
+			response.setStatus(HttpServletResponse.SC_OK);
+			response.sendRedirect(redirectUri);
 
-		return kakaoTokenDto;
-	}
-
-	public KakaoUserInfoDto getUserInfo(KakaoTokenDto kakaoTokenDto) {
-
-		RestTemplate restTemplate = new RestTemplateBuilder().build();
-
-		// uri
-		UriComponents uriComponents = UriComponentsBuilder
-			.fromUriString(oAuthKakaoUtil.USER_INFO_URI)
-			.encode(StandardCharsets.UTF_8)
-			.build();
-
-		// header
-		HttpHeaders httpHeaders = new HttpHeaders();
-		MediaType mediaType = new MediaType(MediaType.APPLICATION_FORM_URLENCODED, StandardCharsets.UTF_8);
-		httpHeaders.setContentType(mediaType);
-		httpHeaders.setBearerAuth(kakaoTokenDto.getAccessToken());
-		// httpHeaders.add("Content-Type", "application/x-www-form-urlencoded;charset=utf-8");
-
-		// header => request
-		HttpEntity kakaoUserInfoRequest = new HttpEntity<>(httpHeaders);
-
-		log.info("kakaoUserInfoRequest: {}", kakaoUserInfoRequest);
-
-		ResponseEntity<String> kakaoUserInfoResponse = restTemplate
-			.exchange(
-				uriComponents.toUriString(),
-				HttpMethod.GET,
-				kakaoUserInfoRequest,
-				String.class);
-
-		log.info("kakaoUserInfoResponse.getBody() : {}", kakaoUserInfoResponse.getBody());
-
-		ObjectMapper objectMapper = new ObjectMapper();
-		KakaoUserInfoDto kakaoUserInfoDto = null;
-		try {
-			kakaoUserInfoDto = objectMapper.readValue(kakaoUserInfoResponse.getBody(), KakaoUserInfoDto.class);
-		} catch (JsonProcessingException e) {
-			e.printStackTrace();
-		}
-
-		log.info("kakaoUserInfoDto : {}", kakaoUserInfoDto);
-
-		return kakaoUserInfoDto;
-	}
-
-	public void checkUser(KakaoUserInfoDto kakaoUserInfoDto) {
-		// 유저가 존재하면 로그인
-		if (true) {
-
-		}
-		// 유저가 존재하지 않으면 닉네임 받고 회원가입
-		else {
-
+		} catch (IOException e) {
+			throw new RuntimeException(e);
 		}
 	}
 }
