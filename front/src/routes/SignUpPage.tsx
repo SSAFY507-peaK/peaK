@@ -41,7 +41,6 @@ const ToTop = keyframes`
 
 const Wrapper = styled.div`
   width: 100vw;
-  height: 200vh;
   //height: 100vh;
   padding: 5vh 5vw;
   display: flex;
@@ -50,9 +49,9 @@ const Wrapper = styled.div`
   align-items: center;
 `;
 const PageWrapper = styled.div`
-  width: 100%;
+  width: 100vw;
   height: 100vh;
-  padding: 5vh 5vw;
+  //padding: 5vh 5vw;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -267,7 +266,7 @@ function SignUpPage() {
   }
 
   const page1 = (
-    <PageWrapper ref={page1ref} style={{transform: "scale(1.1, 1.1)"}}>
+    <PageWrapper ref={page1ref} >
       <h2>닉네임 설정</h2>
       <Description>닉네임은 8글자 이하의 한글, 영어, 숫자로만 이루어져야 합니다</Description>
 
@@ -354,49 +353,50 @@ function SignUpPage() {
 
   return (
     <Wrapper>
-      { pageIdx === 1? page1 : page2}
+      {/*{ pageIdx === 1? page1 : page2}*/}
 
-      {/*<PageWrapper ref={page1ref}>*/}
-      {/*  <h2>닉네임 설정</h2>*/}
-      {/*  <Description>닉네임은 8글자 이하의 한글, 영어, 숫자로만 이루어져야 합니다</Description>*/}
-      {/*  <InputWrapper>*/}
-      {/*    <div>*/}
-      {/*      <NicknameInput isValid={isValidNickname} onChange={e => handleNickname(e)} value={nickname} />*/}
-      {/*      <MessageDiv isValid={isValidNickname === "ok"}>*/}
-      {/*        { nicknameMessage() }*/}
-      {/*      </MessageDiv>*/}
-      {/*    </div>*/}
-      {/*    {isValidNickname !== "ok" && <PurpleButton onClick={ handleIsValidNickname } width="100px">중복 확인</PurpleButton>}*/}
-      {/*    /!*{isValidNickname === "ok" && <PurpleButton onClick={() => setPageIdx(2) } width="100px">다음으로</PurpleButton>}*!/*/}
-      {/*    {isValidNickname === "ok" && <BlueButton onClick={() => handleChangePage(1) } width="100px">다음으로</BlueButton>}*/}
-      {/*  </InputWrapper>*/}
-      {/*</PageWrapper>*/}
+      <PageWrapper ref={page1ref}>
+        <h2>닉네임 설정</h2>
+        <Description>닉네임은 8글자 이하의 한글, 영어, 숫자로만 이루어져야 합니다</Description>
 
-      {/*<PageWrapper ref={page2ref}>*/}
-      {/*  <SelectedSection>*/}
-      {/*    <DescriptionSection>*/}
-      {/*      <h2>좋아하는 아이돌 선택</h2>*/}
-      {/*      <Description>좋아하는 아이돌을 한 팀 이상 선택해주세요. <br/>최대 다섯 팀까지 선택 가능합니다.</Description>*/}
-      {/*      <div>*/}
-      {/*        /!*<PurpleButton width="120px" onClick={() => setPageIdx(1)}>이전으로</PurpleButton>*!/*/}
-      {/*        <PurpleButton width="120px" onClick={() => handleChangePage(2)}>이전으로</PurpleButton>*/}
-      {/*        <RedButton disabled={selectedIdols.length<=0} width="120px" onClick={() => navigate("/")}>회원가입 완료</RedButton>*/}
-      {/*      </div>*/}
-      {/*    </DescriptionSection>*/}
-      {/*    <IdolGrid cols={5}>{ showSelectIdols() }</IdolGrid>*/}
-      {/*  </SelectedSection>*/}
-      {/*  <h3>전체 아이돌</h3>*/}
-      {/*  <IdolWrapper>*/}
-      {/*    <IdolGrid cols={6} gap="20px">*/}
-      {/*      {idols.map((idol: IdolObjectType) => (*/}
-      {/*        <IdolImageWrapper >*/}
-      {/*          <IdolImage url={idol.idolImg} onClick={()=> idol.isSelected? handleDeleteSelectedIdol(idol) : handleSelectIdol(idol)} className={`${idol.isSelected && "selected"}`}/>*/}
-      {/*          <IdolName>{idol.idolName}</IdolName>*/}
-      {/*        </IdolImageWrapper>*/}
-      {/*      ))}*/}
-      {/*    </IdolGrid>*/}
-      {/*  </IdolWrapper>*/}
-      {/*</PageWrapper>*/}
+        <InputWrapper>
+          <div>
+            <NicknameInput isValid={isValidNickname} onChange={e => handleNickname(e)} value={nickname} />
+            <MessageDiv isValid={isValidNickname === "ok"}>
+              { nicknameMessage() }
+            </MessageDiv>
+          </div>
+          {isValidNickname !== "ok" && <PurpleButton onClick={ handleIsValidNickname } width="100px">중복 확인</PurpleButton>}
+          {isValidNickname === "ok" && <BlueButton onClick={() => setPageIdx(2) } width="100px">다음으로</BlueButton>}
+          {/*{isValidNickname === "ok" && <BlueButton onClick={() => handleChangePage(1) } width="100px">다음으로</BlueButton>}*/}
+        </InputWrapper>
+      </PageWrapper>
+
+      <PageWrapper ref={page2ref}>
+        <SelectedSection>
+          <DescriptionSection>
+            <h2>좋아하는 아이돌 선택</h2>
+            <Description>좋아하는 아이돌을 한 팀 이상 선택해주세요. <br/>최대 다섯 팀까지 선택 가능합니다.</Description>
+            <div>
+              <PurpleButton width="120px" onClick={() => setPageIdx(1)}>이전으로</PurpleButton>
+              {/*<PurpleButton width="120px" onClick={() => handleChangePage(2)}>이전으로</PurpleButton>*/}
+              <BlueButton disabled={selectedIdols.length<=0} width="120px" onClick={() => navigate("/")}>회원가입 완료</BlueButton>
+            </div>
+          </DescriptionSection>
+          <IdolGrid cols={5}>{ showSelectIdols() }</IdolGrid>
+        </SelectedSection>
+        <h3>전체 아이돌</h3>
+        <IdolWrapper>
+          <IdolGrid cols={6} gap="20px">
+            {idols.map((idol: IdolObjectType) => (
+              <IdolImageWrapper >
+                <IdolImage url={idol.idolImg} onClick={()=> idol.isSelected? handleDeleteSelectedIdol(idol) : handleSelectIdol(idol)} className={`${idol.isSelected && "selected"}`}/>
+                <IdolName>{idol.idolName}</IdolName>
+              </IdolImageWrapper>
+            ))}
+          </IdolGrid>
+        </IdolWrapper>
+      </PageWrapper>
 
     </Wrapper>
   );
