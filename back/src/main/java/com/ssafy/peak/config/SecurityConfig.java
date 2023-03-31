@@ -16,6 +16,8 @@ import com.ssafy.peak.security.JwtAccessDeniedHandler;
 import com.ssafy.peak.security.JwtAuthenticationEntryPoint;
 import com.ssafy.peak.security.JwtAuthenticationFilter;
 import com.ssafy.peak.security.JwtTokenProvider;
+import com.ssafy.peak.security.OAuth2LoginSuccessHandler;
+import com.ssafy.peak.service.CustomOAuth2UserService;
 import com.ssafy.peak.util.RedisUtil;
 
 import lombok.RequiredArgsConstructor;
@@ -25,6 +27,8 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class SecurityConfig {
 
+	private final CustomOAuth2UserService customOAuth2UserService;
+	private final OAuth2LoginSuccessHandler oAuth2LoginSuccessHandler;
 	private final JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
 	private final JwtAccessDeniedHandler jwtAccessDeniedHandler;
 	private final JwtTokenProvider jwtTokenProvider;
@@ -52,6 +56,9 @@ public class SecurityConfig {
 
 			.and()    // OAuth2 로그인 설정
 			.oauth2Login()
+			.userInfoEndpoint().userService(customOAuth2UserService)
+			.and()
+			.successHandler(oAuth2LoginSuccessHandler)
 
 			.and()    // 예외 처리 설정
 			.exceptionHandling()

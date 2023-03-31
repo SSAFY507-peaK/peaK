@@ -1,13 +1,19 @@
 package com.ssafy.peak.service;
 
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.nio.charset.StandardCharsets;
 
+import javax.servlet.http.HttpServletResponse;
+
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
@@ -19,6 +25,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ssafy.peak.dto.KakaoTokenDto;
 import com.ssafy.peak.dto.KakaoUserInfoDto;
+import com.ssafy.peak.security.JwtTokenProvider;
 import com.ssafy.peak.util.OAuthKakaoUtil;
 
 import lombok.RequiredArgsConstructor;
@@ -28,7 +35,33 @@ import lombok.extern.slf4j.Slf4j;
 @RequiredArgsConstructor
 @Slf4j
 public class UserService {
+
+	@Value("${redirectUrl}")
+	private String redirectUrl;
+	private final JwtTokenProvider jwtTokenProvider;
 	private final OAuthKakaoUtil oAuthKakaoUtil;
+
+	public ResponseEntity loginSuccess(HttpServletResponse response, Authentication authentication) {
+
+		// AccessToken과 RefreshToken 발급
+		String accessToken = jwtTokenProvider.createAccessToken(authentication);
+		jwtTokenProvider.createRefreshToken(authentication);
+
+		// response.setStatus(HttpServletResponse.SC_OK);
+		// response.setHeader("AccessToken", Utils.BEARER_TOKEN_PREFIX + accessToken);
+
+		URI redirectUri = null;
+		try {
+			redirectUri = new URI(redirectUrl + "/signup");
+			HttpHeaders httpHeaders = new HttpHeaders();
+			httpHeaders.setLocation(redirectUri);
+			httpHeaders.setBearerAuth(accessToken);
+
+			return ResponseEntity.ok().headers(httpHeaders).build();
+		} catch (URISyntaxException e) {
+			throw new RuntimeException(e);
+		}
+	}
 
 	public KakaoTokenDto getKakaoToken(String code) {
 

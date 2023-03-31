@@ -1,14 +1,17 @@
 package com.ssafy.peak.security;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Map;
 
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Component;
 
+import com.ssafy.peak.entity.User;
 import com.ssafy.peak.enums.Role;
 
 import lombok.AllArgsConstructor;
@@ -27,31 +30,26 @@ public class UserPrincipal implements UserDetails, OAuth2User {
 
 	private long id;
 	private String email;
-	private String nickname;
 	private Role role;
+	private Collection<SimpleGrantedAuthority> authorities;
 	private Map<String, Object> attributes;
 
 	/**
 	 * User -> UserPrincipal
 	 */
-	// public UserPrincipal createUserPrincipal(User user) {
-	//     UserPrincipal userPrincipal = UserPrincipal.builder()
-	//         .id(user.getId())
-	//         .email(user.getEmail())
-	//         .nickname(user.getNickname())
-	//         .attributes(user.getAttributes())
-	//         .build();
-	//
-	//     return userPrincipal;
-	// }
-
-	/**
-	 * @return
-	 */
-	@Override
-	public Map<String, Object> getAttributes() {
-		return attributes;
+	public static UserPrincipal createUserPrincipal(User user) {
+		UserPrincipal userPrincipal = UserPrincipal.builder()
+			.id(user.getId())
+			.email(user.getEmail())
+			.role(user.getRole())
+			.build();
+		userPrincipal.setAuthorities(Arrays.asList(new SimpleGrantedAuthority(user.getRole().toString())));
+		return userPrincipal;
 	}
+
+	// public void setAuthorities(Collection<SimpleGrantedAuthority> authorities) {
+	// 	this.authorities = authorities;
+	// }
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -61,9 +59,12 @@ public class UserPrincipal implements UserDetails, OAuth2User {
 		return authorities;
 	}
 
+	/**
+	 * @return 회원 정보 from Resource Server (Kakao)
+	 */
 	@Override
-	public String getPassword() {
-		return null;
+	public Map<String, Object> getAttributes() {
+		return attributes;
 	}
 
 	/**
@@ -72,6 +73,19 @@ public class UserPrincipal implements UserDetails, OAuth2User {
 	@Override
 	public String getUsername() {
 		return email;
+	}
+
+	/**
+	 * @return id
+	 */
+	@Override
+	public String getName() {
+		return String.valueOf(id);
+	}
+
+	@Override
+	public String getPassword() {
+		return null;
 	}
 
 	@Override
@@ -92,13 +106,5 @@ public class UserPrincipal implements UserDetails, OAuth2User {
 	@Override
 	public boolean isEnabled() {
 		return false;
-	}
-
-	/**
-	 * @return id
-	 */
-	@Override
-	public String getName() {
-		return id + "";
 	}
 }
