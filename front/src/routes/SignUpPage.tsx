@@ -1,4 +1,5 @@
 import React, { useState, useCallback } from "react";
+import { useNavigate } from "react-router-dom"
 import styled from "styled-components";
 import { PurpleButton, RedButton } from "../components/Button";
 import { NicknameInput, MessageDiv } from "../components/SignupPage/NicknameComponents";
@@ -68,6 +69,7 @@ type IdolObjectType = {
 type NicknameType = "long" | "character" | "duplicate" | "ok";
 
 function SignUpPage() {
+  const navigate = useNavigate();
 
   let dummyData: IdolObjectType[] = [
     {
@@ -202,7 +204,7 @@ function SignUpPage() {
   const showSelectIdols = useCallback(() => {
     const returnArr = selectedIdols?.map(idol =>
       <Selected url={idol.idolImg} >
-        <CloseButton onClick={(e)=>handleDeleteSelectedIdol(e, idol)}>X</CloseButton>
+        <CloseButton onClick={()=>handleDeleteSelectedIdol(idol)}>X</CloseButton>
       </Selected>
     )
     for (let i=0; i<5-selectedIdols.length; i++) {
@@ -224,9 +226,9 @@ function SignUpPage() {
     }
   }
   /** 선택한 아이돌을 삭제하자 */
-  const handleDeleteSelectedIdol = (e:any, idol:IdolObjectType): void => {
+  const handleDeleteSelectedIdol = (idol:IdolObjectType): void => {
     // 원본 배열에서 false로 변경하고... 선택된 배열에서도 삭제를 하자궁...
-    setIdols((prev): IdolObjectType[] => prev.map((idol2): IdolObjectType => idol.idolNum === idol2.idolNum? {...idol2, isSelected: false} : idol2))
+    setIdols(prev => prev.map(idol2 => idol.idolNum === idol2.idolNum? {...idol2, isSelected: false} : idol2))
     setSelectedIdols(prev=> prev.filter(idol2 => idol.idolNum !== idol2.idolNum));
   }
 
@@ -238,7 +240,7 @@ function SignUpPage() {
           <Description>좋아하는 아이돌을 한 팀 이상 선택해주세요. <br/>최대 다섯 팀까지 선택 가능합니다.</Description>
           <div>
             <PurpleButton width="120px" onClick={() => setPageIdx(1)}>이전으로</PurpleButton>
-            <RedButton disabled={selectedIdols.length<=0} width="120px">회원가입 완료</RedButton>
+            <RedButton disabled={selectedIdols.length<=0} width="120px" onClick={() => navigate("/")}>회원가입 완료</RedButton>
           </div>
         </DescriptionSection>
         <IdolGrid cols={5}>{ showSelectIdols() }</IdolGrid>
@@ -248,7 +250,7 @@ function SignUpPage() {
         <IdolGrid cols={6} gap="20px">
           {idols.map((idol: IdolObjectType) => (
             <IdolImageWrapper >
-              <IdolImage url={idol.idolImg} onClick={()=>handleSelectIdol(idol)}/>
+              <IdolImage url={idol.idolImg} onClick={()=> idol.isSelected? handleDeleteSelectedIdol(idol) : handleSelectIdol(idol)} className={`${idol.isSelected && "selected"}`}/>
               <IdolName>{idol.idolName}</IdolName>
             </IdolImageWrapper>
           ))}
@@ -259,8 +261,7 @@ function SignUpPage() {
 
   return (
     <PageWrapper>
-      { page2 }
-      {/*{pageIdx === 1 ? page1 : page2}*/}
+      {pageIdx === 1 ? page1 : page2}
     </PageWrapper>
   );
 }

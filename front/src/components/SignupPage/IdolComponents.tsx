@@ -32,7 +32,22 @@ const IdolImage = styled.div<{ url?: string }>`
     transform: scale(1.05, 1.05);
     cursor: pointer;
   }
-
+  
+  &.selected{
+    :after{
+      content: "✔";
+      display: flex;
+      height: 100%;
+      width: 100%;
+      border-radius: 50%;
+      justify-content: center;
+      align-items: center;
+      font-size: 3rem;
+      color: var(--purple600-color);
+      background-color: rgba(0, 0, 0, 0.5);
+    }
+    box-shadow: 0 0 10px -2px var(--purple300-color);
+  }
 `;
 const IdolName = styled.div`
   margin-top: 7px;
