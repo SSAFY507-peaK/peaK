@@ -37,13 +37,13 @@ function Top8() {
       rank: 2,
       name: "IVE",
       score: "15222",
-      url: "https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMjA2MDFfOTgg%2FMDAxNjU0MDQwMTY5MTUx.NlszJe0R0vMxBz3WzJ1RrMbkuPgKjyGXhRQPcUlDcOgg.8gu7uH7x3uSF-5a2eQjH5Sa1R7wyp2P-y14rskFpTbog.JPEG.junpei%2FBTSGQ.jpg&type=a340",
+      url: "https://search.pstatic.net/common/?src=http%3A%2F%2Fimgnews.naver.net%2Fimage%2F445%2F2023%2F01%2F19%2F0000093185_001_20230119205601587.jpg&type=a340",
     },
     {
       rank: 3,
       name: "BTS",
       score: "14114",
-      url: "https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMjA2MDFfOTgg%2FMDAxNjU0MDQwMTY5MTUx.NlszJe0R0vMxBz3WzJ1RrMbkuPgKjyGXhRQPcUlDcOgg.8gu7uH7x3uSF-5a2eQjH5Sa1R7wyp2P-y14rskFpTbog.JPEG.junpei%2FBTSGQ.jpg&type=a340",
+      url: "https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMjA3MzBfMTkz%2FMDAxNjU5MTQ5MzU3MDM1.6fMQIMtuDroBmzIZZhkyyfcNb2HXnt3mKW2PsMJ2RCEg.Qcvt3VnrT7c04VVVkCgym_evilydpHmrSJsUrAmgYNog.JPEG.shinejoshua%2FIMG_6101.JPG&type=a340",
     },
   ];
   const itemsBottom = [
