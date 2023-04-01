@@ -59,6 +59,7 @@ public class SecurityConfig {
 			.authorizeRequests()
 			// .antMatchers("/user/**").hasAnyRole("USER", "GUEST")
 			.anyRequest().authenticated()    // 이외의 모든 요청은 인증 필요
+			// .anyRequest().permitAll()
 
 			.and()    // OAuth2 로그인 설정
 			.oauth2Login()
@@ -88,8 +89,8 @@ public class SecurityConfig {
 
 	@Bean
 	public CorsConfigurationSource corsConfigurationSource() {
-		CorsConfiguration configuration = new CorsConfiguration();
 
+		CorsConfiguration configuration = new CorsConfiguration();
 		configuration.addAllowedOrigin("http://localhost:3000");
 		configuration.addAllowedOrigin("https://j8a507.p.ssafy.io");
 		configuration.addAllowedHeader("*");

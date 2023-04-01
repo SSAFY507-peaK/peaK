@@ -1,6 +1,8 @@
-package com.ssafy.peak.dto.request;
+package com.ssafy.peak.dto;
 
 import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -13,8 +15,10 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class UserRequestDto {
+public class UserDto {
 
 	private String nickname;
+
+	@JsonProperty("interest")
 	private List<String> idols;
 }

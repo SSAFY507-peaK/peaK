@@ -8,7 +8,8 @@ import org.springframework.stereotype.Repository;
 import com.ssafy.peak.domain.User;
 
 @Repository
-public interface UserRepository extends MongoRepository<User, Long> {
+public interface UserRepository extends MongoRepository<User, String> {
+
 	Optional<User> findByEmail(String email);
 
 	Optional<User> findByNickname(String nickname);

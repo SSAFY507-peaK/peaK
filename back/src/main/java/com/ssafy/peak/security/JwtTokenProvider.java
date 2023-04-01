@@ -65,8 +65,6 @@ public class JwtTokenProvider implements InitializingBean {
 
 	/**
 	 * secret key 설정
-	 *
-	 * @throws Exception
 	 */
 	@Override
 	public void afterPropertiesSet() throws Exception {
@@ -90,6 +88,7 @@ public class JwtTokenProvider implements InitializingBean {
 
 		String accessToken = Jwts.builder()
 			.setSubject(customOAuth2User.getName()) // user id
+			.claim(Utils.AUTHENTICATION, authentication) // authentication 저장
 			.claim(Utils.EMAIL, customOAuth2User.getEmail())    // 이메일 정보 저장
 			.claim(Utils.ROLE, customOAuth2User.getRole()) // 권한 정보 저장
 			.setIssuedAt(now) // 액세스 토큰 발행 시간
@@ -118,7 +117,7 @@ public class JwtTokenProvider implements InitializingBean {
 			.claim(Utils.ROLE, customOAuth2User.getRole()) // 권한 정보 저장
 			.setIssuedAt(now) // 리프레시 토큰 발행 시간
 			.setExpiration(expiration) // 리프레시 토큰 유효 시간
-			.signWith(SignatureAlgorithm.HS512, secretKey) // 사용할 암호화 알고리즘 (HS512), signature 에 들어갈 secret key 세팅
+			.signWith(SignatureAlgorithm.HS512, key) // 사용할 암호화 알고리즘 (HS512), signature 에 들어갈 secret key 세팅
 			.compact();
 
 		String key = "RT:" + Encoders.BASE64.encode(customOAuth2User.getName().getBytes());
@@ -141,18 +140,20 @@ public class JwtTokenProvider implements InitializingBean {
 		if (claims.get(Utils.ROLE).equals(Utils.ROLE_GUEST)) {
 			// 게스트 권한 (카카오 로그인 성공 후, 서비스 회원가입 중)이면 토큰 정보 꺼내와서 사용
 			User user = User.builder()
-				.id(Long.valueOf(claims.getSubject()))
-				.email(String.valueOf(claims.get(Utils.EMAIL)))
-				.role(Role.valueOf((String)claims.get(Utils.ROLE)))
+				.id(claims.getSubject())
+				.email(getEmailFromClaims(claims))
+				.role(getRoleFromClaims(claims))
 				.build();
 			userPrincipal = UserPrincipal.createUserPrincipal(user);
 
 		} else if (claims.get(Utils.ROLE).equals(Utils.ROLE_USER)) {
 			// 유저 권한 (카카로 로그인, 서비스 회원가입 완료)이면 db에서 조회해서 사용
-			userPrincipal = userRepository.findById(Long.valueOf(claims.getSubject()))
+			userPrincipal = userRepository.findById(claims.getSubject())
 				.map(UserPrincipal::createUserPrincipal)
 				.orElseThrow(() -> new CustomException(CustomExceptionType.AUTHORITY_ERROR));
 		}
+		log.info("userPrincipal: {}", userPrincipal);
+
 		Collection<? extends GrantedAuthority> authorities =
 			Arrays.stream(userPrincipal.getRole().toString().split(","))
 				.map(SimpleGrantedAuthority::new)
@@ -167,7 +168,7 @@ public class JwtTokenProvider implements InitializingBean {
 	 */
 	public boolean validateToken(String token) {
 		try {
-			Jws<Claims> claims = Jwts.parserBuilder().setSigningKey(secretKey).build().parseClaimsJws(token);
+			Jws<Claims> claims = Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(token);
 			return claims.getBody().getExpiration().after(new Date());
 		} catch (io.jsonwebtoken.security.SecurityException | MalformedJwtException e) {
 			log.info("잘못된 JWT 서명입니다.");
@@ -184,10 +185,10 @@ public class JwtTokenProvider implements InitializingBean {
 	/**
 	 * Jwt 복호화
 	 */
-	private Claims parseClaims(String token) {
+	public Claims parseClaims(String token) {
 		try {
 			return Jwts.parserBuilder()
-				.setSigningKey(secretKey).build()
+				.setSigningKey(key).build()
 				.parseClaimsJws(token)
 				.getBody();
 
@@ -199,18 +200,34 @@ public class JwtTokenProvider implements InitializingBean {
 	/**
 	 * Jwt 복호화 후 user id 가져오기
 	 */
-	public long getUserIdFromJwt(String token) {
+	public String getUserIdFromJwt(String token) {
 		try {
 			String userId = Jwts.parserBuilder()
-				.setSigningKey(secretKey).build()
+				.setSigningKey(key).build()
 				.parseClaimsJws(token)
 				.getBody()
 				.getSubject();
-			return Long.parseLong(userId);
+			return userId;
 
 		} catch (ExpiredJwtException expiredJwtException) {
-			return expiredJwtException.getClaims().getExpiration().getTime();
+			return expiredJwtException.getClaims().getSubject();
 		}
+	}
+
+	/**
+	 * claims에서 email 가져오기
+	 */
+	public String getEmailFromClaims(Claims claims) {
+
+		return claims.get(Utils.EMAIL).toString();
+	}
+
+	/**
+	 * claims에서 role 가져오기
+	 */
+	public Role getRoleFromClaims(Claims claims) {
+
+		return Role.valueOf(claims.get(Utils.ROLE).toString());
 	}
 
 	/**
@@ -219,7 +236,7 @@ public class JwtTokenProvider implements InitializingBean {
 	public long getExpiration(String token) {
 		try {
 			long expiration = Jwts.parserBuilder()
-				.setSigningKey(secretKey).build()
+				.setSigningKey(key).build()
 				.parseClaimsJws(token)
 				.getBody()
 				.getExpiration()

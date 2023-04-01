@@ -19,6 +19,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 @Component
 @Getter
@@ -26,9 +27,10 @@ import lombok.Setter;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString
 public class UserPrincipal implements UserDetails, OAuth2User {
 
-	private long id;
+	private String id;
 	private String email;
 	private Role role;
 	private Collection<SimpleGrantedAuthority> authorities;
