@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
+import com.ssafy.peak.exception.CustomException;
+import com.ssafy.peak.exception.CustomExceptionType;
 import com.ssafy.peak.repository.UserRepository;
 import com.ssafy.peak.security.JwtTokenProvider;
 import com.ssafy.peak.util.Utils;
@@ -56,6 +58,20 @@ public class UserService {
 
 		} catch (IOException e) {
 			throw new RuntimeException(e);
+		}
+	}
+
+	/**
+	 * 닉네임 중복 검사
+	 */
+	public void checkNickname(String nickname) {
+		// 닉네임이 8글자 초과이면 badrequest 예외
+		if (nickname.length() > 8) {
+			throw new CustomException(CustomExceptionType.TO_LONG_NICKNAME);
+		}
+		// 존재하는 닉네임이면 confilct 예외
+		if (userRepository.findByNickname(nickname).isPresent()) {
+			throw new CustomException(CustomExceptionType.USER_CONFLICT);
 		}
 	}
 }

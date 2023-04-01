@@ -15,6 +15,7 @@ public enum CustomExceptionType {
 	USER_CONFLICT(HttpStatus.CONFLICT, "EU006", "이미 가입된 사용자입니다."),
 	PASSWORD_NOT_MATCHED(HttpStatus.UNAUTHORIZED, "EU007", "비밀번호가 일치하지 않습니다."),
 	AUTHORITY_ERROR(HttpStatus.FORBIDDEN, "EU008", "해당 기능을 요청할 권한이 없습니다."),
+	TO_LONG_NICKNAME(HttpStatus.BAD_REQUEST, "EU009", "닉네임은 8자 이하여야 합니다."),
 
 	// DATA
 	NO_CONTENT(HttpStatus.NOT_FOUND, "E011", "데이터가 존재하지 않습니다."),
