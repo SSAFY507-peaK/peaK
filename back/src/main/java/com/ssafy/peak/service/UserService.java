@@ -1,6 +1,7 @@
 package com.ssafy.peak.service;
 
 import java.io.IOException;
+import java.util.regex.Pattern;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -23,8 +24,9 @@ import lombok.extern.slf4j.Slf4j;
 public class UserService {
 
 	@Value("${redirectUrl}")
-	private String redirectUrl;
+	private final String redirectUrl;
 	private static final String SIGN_UP_URI = "/signup";
+	private static final String nicknamePattern = "^[ㄱ-ㅎ가-힣A-Za-z0-9]{1,8}$";    // 1~8자 한글,영어,숫자
 	private final JwtTokenProvider jwtTokenProvider;
 	private final UserRepository userRepository;
 
@@ -62,14 +64,15 @@ public class UserService {
 	}
 
 	/**
-	 * 닉네임 중복 검사
+	 * 닉네임 유효성 검사
 	 */
 	public void checkNickname(String nickname) {
-		// 닉네임이 8글자 초과이면 badrequest 예외
-		if (nickname.length() > 8) {
-			throw new CustomException(CustomExceptionType.TO_LONG_NICKNAME);
+
+		// 조건에 맞지 않는 닉네임이면 예외 발생
+		if (!Pattern.matches(nicknamePattern, nickname)) {
+			throw new CustomException(CustomExceptionType.UNQUALIFIED_NICKNAME);
 		}
-		// 존재하는 닉네임이면 confilct 예외
+		// 존재하는 닉네임이면 예외 발생
 		if (userRepository.findByNickname(nickname).isPresent()) {
 			throw new CustomException(CustomExceptionType.USER_CONFLICT);
 		}

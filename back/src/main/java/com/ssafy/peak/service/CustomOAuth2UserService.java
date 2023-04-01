@@ -41,7 +41,7 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
 			.getUserNameAttributeName();    // 카카오 회원 번호
 
 		Role role = null;
-		if (userRepository.findByEmail(email) == null) {
+		if (userRepository.findByEmail(email).orElse(null) == null) {
 			role = Role.ROLE_GUEST;    // 우리 서비스에 등록되지 않은 카카오 회원이면 GUEST 권한
 		} else {
 			role = Role.ROLE_USER;    // 우리 서비스에 등록된 회원이면 USER 권한

@@ -24,7 +24,7 @@ public class UserController {
 	private final UserService userService;
 
 	/**
-	 * 닉네임 중복 확인
+	 * 닉네임 유효성 검사
 	 */
 	@PreAuthorize("hasRole('ROLE_GUEST')")
 	@GetMapping("/nickname/{nickname}")
