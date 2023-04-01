@@ -97,6 +97,7 @@ const GlobalStyle = createGlobalStyle`
     height: 100%;
     font-family: "Pretendard", -apple-system, Helvetica Neue, sans-serif;
     margin: 0;
+    padding: 0;
     background-color: var(--background-color);
   }
 
