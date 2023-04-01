@@ -34,7 +34,8 @@ public class JwtAuthenticationFilter extends GenericFilterBean {
 		String accessToken = jwtTokenProvider.resolveToken(httpServletRequest);
 		String requestURI = httpServletRequest.getRequestURI();
 
-		if (StringUtils.hasText(accessToken) && redisUtil.getData(accessToken) == null) {
+		// if (StringUtils.hasText(accessToken) && redisUtil.getData(accessToken) == null) {
+		if (StringUtils.hasText(accessToken)) {
 			// 액세스 토큰이 유효하다면, 토큰으로부터 유저 정보를 받아와서 SecurityContext에 저장
 			if (jwtTokenProvider.validateToken(accessToken)) {
 				Authentication authentication = jwtTokenProvider.getAuthentication(accessToken);

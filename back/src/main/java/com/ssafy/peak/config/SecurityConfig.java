@@ -2,6 +2,7 @@ package com.ssafy.peak.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
@@ -24,6 +25,11 @@ import lombok.RequiredArgsConstructor;
 
 @Configuration
 @EnableWebSecurity
+@EnableMethodSecurity(
+	prePostEnabled = true,
+	securedEnabled = true,
+	jsr250Enabled = true
+)
 @RequiredArgsConstructor
 public class SecurityConfig {
 
@@ -51,7 +57,7 @@ public class SecurityConfig {
 
 			.and()    // 요청 권한 설정
 			.authorizeRequests()
-			.antMatchers("/user/**").permitAll()    // 해당 uri로 들어오는 요청 허용
+			// .antMatchers("/user/**").hasAnyRole("USER", "GUEST")
 			.anyRequest().authenticated()    // 이외의 모든 요청은 인증 필요
 
 			.and()    // OAuth2 로그인 설정

@@ -24,7 +24,7 @@ import lombok.extern.slf4j.Slf4j;
 public class UserService {
 
 	@Value("${redirectUrl}")
-	private final String redirectUrl;
+	private String redirectUrl;
 	private static final String SIGN_UP_URI = "/signup";
 	private static final String nicknamePattern = "^[ㄱ-ㅎ가-힣A-Za-z0-9]{1,8}$";    // 1~8자 한글,영어,숫자
 	private final JwtTokenProvider jwtTokenProvider;

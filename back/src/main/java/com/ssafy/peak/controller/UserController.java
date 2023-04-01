@@ -1,7 +1,6 @@
 package com.ssafy.peak.controller;
 
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -26,7 +25,6 @@ public class UserController {
 	/**
 	 * 닉네임 유효성 검사
 	 */
-	@PreAuthorize("hasRole('ROLE_GUEST')")
 	@GetMapping("/nickname/{nickname}")
 	public ResponseEntity checkNickname(@PathVariable("nickname") String nickname) {
 
@@ -37,7 +35,6 @@ public class UserController {
 	/**
 	 * 회원 가입
 	 */
-	@PreAuthorize("hasRole('ROLE_GUEST')")
 	@GetMapping("/signup")
 	public ResponseEntity signup(@RequestBody UserRequestDto userRequestDto) {
 

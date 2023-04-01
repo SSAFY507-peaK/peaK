@@ -47,10 +47,6 @@ public class UserPrincipal implements UserDetails, OAuth2User {
 		return userPrincipal;
 	}
 
-	public void setAuthorities(Collection<SimpleGrantedAuthority> authorities) {
-		this.authorities = authorities;
-	}
-
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		Collection<GrantedAuthority> authorities = new ArrayList<>();
