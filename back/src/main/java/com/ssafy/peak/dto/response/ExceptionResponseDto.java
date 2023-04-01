@@ -11,7 +11,8 @@ import lombok.Setter;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class ExceptionResponse {
+public class ExceptionResponseDto {
+	
 	private String code;
 	private String message;
 }
