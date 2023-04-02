@@ -7,9 +7,9 @@ import TrendKeyword from "../components/mainpage/TrendKeyword";
 import TrendNews from "../components/mainpage/TrendNews";
 import styled from "styled-components";
 
-interface NewCarouselDivType {
+type NewCarouselDivType = {
   ratio: number;
-}
+};
 
 const CarouselDiv = styled.div`
   width: 100%;
