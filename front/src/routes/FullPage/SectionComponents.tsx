@@ -7,8 +7,18 @@ type WrapperType = {
 type ImageType = {
   width?: string;
 }
-const SectionWrapper = styled.div<WrapperType>`
+type HeightType = {
+  height: number;
+}
+
+const Wrapper = styled.div`
   height: 100vh;
+  overflow-y: hidden;
+  border: 0;
+`
+
+const SectionWrapper = styled.div<WrapperType>`
+  height: 100%;
   //height: 100%;
   width: 100%;
   background-color: ${props => props.backgroundColor};
@@ -44,4 +54,4 @@ const ImageSection = styled.div<ImageType>`
   }
 `;
 
-export { SectionWrapper, TextSection, ImageSection };
+export { SectionWrapper, TextSection, ImageSection, Wrapper };

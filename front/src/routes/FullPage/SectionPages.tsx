@@ -11,7 +11,7 @@ type WrapperType = {
 
 function SectionOne({ backgroundColor }: WrapperType): JSX.Element {
   return (
-    <SectionWrapper backgroundColor={backgroundColor}>
+    <SectionWrapper backgroundColor={backgroundColor} >
       <TextSection>
         <h2>나의 아이돌을 분석한다면?</h2>
         <p>
@@ -34,7 +34,7 @@ function SectionOne({ backgroundColor }: WrapperType): JSX.Element {
 
 function SectionTwo({ backgroundColor }: WrapperType): JSX.Element {
   return (
-    <SectionWrapper backgroundColor={backgroundColor}>
+    <SectionWrapper backgroundColor={backgroundColor} >
       <ImageSection width="100%">
         <img src={internetImg} alt="데이터 수집 이미지" />
       </ImageSection>
@@ -55,7 +55,7 @@ function SectionTwo({ backgroundColor }: WrapperType): JSX.Element {
 
 function SectionThree({ backgroundColor }: WrapperType): JSX.Element {
   return (
-    <SectionWrapper backgroundColor={backgroundColor}>
+    <SectionWrapper backgroundColor={backgroundColor} >
       <TextSection>
         <h2>분석 이외에도 다양한 즐거움</h2>
         <p>그밖에 데이터 분석 이외에도 어떤 서비스를 제공하는지 써주자.</p>
@@ -74,7 +74,7 @@ function SectionThree({ backgroundColor }: WrapperType): JSX.Element {
 
 function SectionFour({ backgroundColor }: WrapperType): JSX.Element {
   return (
-    <SectionWrapper backgroundColor={backgroundColor}>
+    <SectionWrapper backgroundColor={backgroundColor} >
       <TextSection>
         <h2>지금 바로 데이터의 바다로 풍덩</h2>
         <p>소셜 로그인으로 간단하게 즐겨보세요</p>
