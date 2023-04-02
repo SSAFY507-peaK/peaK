@@ -1,4 +1,4 @@
-import IdolChart from "../components/RankingPage/IdolChart";
+import RankChart from "../components/rankingpage/RankChart";
 import React from "react";
 import styled from "styled-components";
 
@@ -17,7 +17,7 @@ function ChartPage() {
   return (
     <div>
       <ChartDiv>
-        <IdolChart />
+        <RankChart />
       </ChartDiv>
     </div>
   );
