@@ -15,14 +15,14 @@ interface Type {
   disabled: boolean;
 }
 
-const DayComponent = styled.button<Type>`
+const DayComponent = styled.option<Type>`
   display: flex;
   justify-content: center;
   align-items: center;  
   margin: 5px;
-  font-size: 1.3rem;
+  font-size: 1.2rem;
   height: 3vh;
-  cursor: pointer;
+  cursor: ${props => props.data ? "pointer" : null};
   text-decoration: underline;
   color: ${props => props.click ? "white" : props => props.data ?  `var(--purple400-color)` : null};
   background-color: ${props => props.click ? `var(--purple400-color)` : "white"};
