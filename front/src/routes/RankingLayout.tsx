@@ -6,7 +6,7 @@ import styled from "styled-components";
 const TabDiv = styled.div`
   display: flex;
   width: 7%;
-  justify-content: space-around;
+  justify-content: space-between;
 `;
 
 function RankingLayout() {
