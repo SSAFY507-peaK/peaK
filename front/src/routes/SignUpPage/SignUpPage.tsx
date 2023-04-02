@@ -1,47 +1,23 @@
-import React, { useState, useCallback } from "react";
+import React, {useState, useCallback, useRef} from "react";
 import { useNavigate } from "react-router-dom"
 import styled from "styled-components";
-import { PurpleButton, RedButton } from "../components/Button";
-import { NicknameInput, MessageDiv } from "../components/SignupPage/NicknameComponents";
-import { IdolGrid, IdolImage, IdolImageWrapper, IdolName, EmptySelected, Selected } from "../components/SignupPage/IdolComponents";
+import { PurpleButton, BlueButton } from "../../components/Button";
+import { NicknameInput, MessageDiv } from "../../components/SignupPage/NicknameComponents";
+import { IdolGrid, IdolImage, IdolImageWrapper, IdolName, EmptySelected, Selected } from "../../components/SignupPage/IdolComponents";
 
-const PageWrapper = styled.div`
-  width: 100vw;
+// 컴포넌트들 (추후 옮기자)
+const Wrapper = styled.div`
   height: 100vh;
+  overflow-y: hidden;
+`;
+const PageWrapper = styled.div`
+  width: 100%;
+  height: 100%;
   padding: 5vh 5vw;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-`;
-const InputWrapper = styled.div`
-  display: flex;
-  
-`
-const SelectedSection = styled.div`
-  margin-bottom: 10px;
-  display: flex;
-  justify-content: center
-`
-const DescriptionSection = styled.div`
-  flex: 1 0 350px;
-  & button {
-    margin-right: 15px;
-
-  }
-`
-const IdolWrapper = styled.div`
-  overflow-y: scroll;
-  padding: 15px;
-  &::-webkit-scrollbar {
-    width: 7px;
-    border-radius: 4px;
-    background-color: rgba(255, 255, 255, 0.8);
-  }
-  &::-webkit-scrollbar-thumb {
-    border-radius: 4px;
-    background: var(--gray700-color);
-  }
 `
 const Description = styled.p`
   margin-top: 0;
@@ -58,19 +34,53 @@ const CloseButton = styled.button`
   top: 0;
   right: 0;
 `
+// 첫 번째 페이지
+const InputWrapper = styled.div`
+  display: flex;
+`
+// 두 번째 페이지
+/** 아이돌 선택에 대한 설명을 담은 div */
+const DescriptionSection = styled.div`
+  flex: 1 0 350px;
+  & button {
+    margin-right: 15px;
+  }
+`
+/** 내가 선택한 아이돌 */
+const SelectedSection = styled.div`
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: center
+`
+/** 전체 아이돌 */
+const IdolWrapper = styled.div`
+  overflow-y: scroll;
+  padding: 15px;
+  &::-webkit-scrollbar {
+    width: 7px;
+    border-radius: 4px;
+    background-color: rgba(255, 255, 255, 0.8);
+  }
+  &::-webkit-scrollbar-thumb {
+    border-radius: 4px;
+    background: var(--gray700-color);
+  }
+`
 
-
+// 나중에 진짜 input값 들어오면 변경 예정..
 type IdolObjectType = {
   idolNum?: number;
   idolName?: string;
   idolImg?: string;
   isSelected?: boolean;
 }
+/** 닉네임 중복확인 클릭 시 결과값 */
 type NicknameType = "long" | "character" | "duplicate" | "ok";
 
 function SignUpPage() {
   const navigate = useNavigate();
-
+  const containerRef = useRef<HTMLDivElement>(null);
+  const page1Ref = useRef<HTMLDivElement>(null);
   let dummyData: IdolObjectType[] = [
     {
       idolNum: 1,
@@ -136,7 +146,24 @@ function SignUpPage() {
       idolImg: "http://openimage.interpark.com/goods_image_big/1/9/6/0/9472491960_l.jpg",
     },
   ];  // 더미데이터
-  const [pageIdx, setPageIdx] = useState<number>(1);  // 페이지 기억하기
+
+  /** 페이지 이동 함수 */
+  const handleChangePage = (page:number) => {
+    containerRef.current && (
+      page === 1 ?
+        containerRef.current.scrollBy({
+          left: 0,
+          top: window.innerHeight,
+          behavior: "smooth",
+        }) :
+        containerRef.current.scrollBy({
+          left: 0,
+          top: -window.innerHeight,
+          behavior: "smooth",
+        })
+      // page1Ref.current.display = none;
+    )
+  }
 
   // page 1에 대한 설정들
   const [nickname, setNickname] = useState<string>("");
@@ -178,7 +205,7 @@ function SignUpPage() {
   }
 
   const page1 = (
-    <>
+    <PageWrapper ref={page1Ref}>
       <h2>닉네임 설정</h2>
       <Description>닉네임은 8글자 이하의 한글, 영어, 숫자로만 이루어져야 합니다</Description>
 
@@ -189,11 +216,13 @@ function SignUpPage() {
             { nicknameMessage() }
           </MessageDiv>
         </div>
-        {isValidNickname !== "ok" && <PurpleButton onClick={handleIsValidNickname} width="100px">중복 확인</PurpleButton>}
-        {isValidNickname === "ok" && <PurpleButton onClick={() => setPageIdx(2) } width="100px">다음으로</PurpleButton>}
+        {isValidNickname !== "ok" && <PurpleButton onClick={ handleIsValidNickname } width="100px">중복 확인</PurpleButton>}
+        {isValidNickname === "ok" && <BlueButton onClick={() => handleChangePage(1) } width="100px">다음으로</BlueButton>}
       </InputWrapper>
-    </>
+    </PageWrapper>
   );
+
+
 
 
   // page 2에 대한 정보들
@@ -233,14 +262,14 @@ function SignUpPage() {
   }
 
   const page2 = (
-    <>
+    <PageWrapper>
       <SelectedSection>
         <DescriptionSection>
           <h2>좋아하는 아이돌 선택</h2>
           <Description>좋아하는 아이돌을 한 팀 이상 선택해주세요. <br/>최대 다섯 팀까지 선택 가능합니다.</Description>
           <div>
-            <PurpleButton width="120px" onClick={() => setPageIdx(1)}>이전으로</PurpleButton>
-            <RedButton disabled={selectedIdols.length<=0} width="120px" onClick={() => navigate("/")}>회원가입 완료</RedButton>
+            <PurpleButton width="120px" onClick={() => handleChangePage(2)}>이전으로</PurpleButton>
+            <BlueButton disabled={selectedIdols.length<=0} width="120px" onClick={() => navigate("/")}>회원가입 완료</BlueButton>
           </div>
         </DescriptionSection>
         <IdolGrid cols={5}>{ showSelectIdols() }</IdolGrid>
@@ -256,13 +285,14 @@ function SignUpPage() {
           ))}
         </IdolGrid>
       </IdolWrapper>
-    </>
+    </PageWrapper>
   );
 
   return (
-    <PageWrapper>
-      {pageIdx === 1 ? page1 : page2}
-    </PageWrapper>
+    <Wrapper ref={containerRef}>
+      { page1 }
+      { page2 }
+    </Wrapper>
   );
 }
 
