@@ -42,7 +42,7 @@ const Title = styled.div<TitleType>`
   opacity: ${props => props.opacity || "1"}
 `;
 
-function ScorerComponent({score, title, size, fsize, color, pd, opacity}:FontType) {
+function ScoreComponent({score, title, size, fsize, color, pd, opacity}:FontType) {
   return (
     <Frame pd={pd}>
       <Score color={color} size={size}>{score}</Score>
@@ -51,4 +51,4 @@ function ScorerComponent({score, title, size, fsize, color, pd, opacity}:FontTyp
   )
 }
 
-export default ScorerComponent;
+export default ScoreComponent;
