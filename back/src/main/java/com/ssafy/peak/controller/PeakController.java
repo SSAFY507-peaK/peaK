@@ -25,7 +25,8 @@ public class PeakController {
 
     @GetMapping("/top")
     public IdolListResponseDto top(){
-        return rankByHourService.top();
+        LocalDateTime dateTime = LocalDateTime.now();
+        return rankByHourService.top(dateTime);
     }
 
     @GetMapping("/")

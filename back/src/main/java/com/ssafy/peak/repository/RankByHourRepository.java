@@ -12,14 +12,12 @@ import java.util.List;
 
 @Repository
 public interface RankByHourRepository extends MongoRepository<RankByHour, String> {
-    // Top 8
-    List<RankByHour.RankInfo> findTop8ByOrderByScoreAsc();
 
     // 모든 아이돌 차트
     // 특정 날짜 시간대의 랭킹 정보
     RankByHour findByDateTime(LocalDateTime dateTime);
 
     // 특정 아이돌의 현재 랭킹
-    RankByHour findByDateAndIdolsIdol(LocalDateTime dateTime, String idol);
+    RankByHour findByDateTimeAndIdolsIdol(LocalDateTime dateTime, String idol);
 
 }
