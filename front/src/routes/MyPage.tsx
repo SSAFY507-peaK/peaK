@@ -63,11 +63,17 @@ function MyPage() {
           null
         }
       </TopFrame>
-      {/* <BottomFrame>
-        <MyClickChart userName={userName} />
-        <MyChatChart userName={userName} />
-        <MyVisitChart userName={userName} />
-      </BottomFrame> */}
+      {
+        idolName
+        ?
+        <BottomFrame>
+          <MyClickChart userName={userName} />
+          <MyChatChart userName={userName} />
+          <MyVisitChart userName={userName} />
+        </BottomFrame>
+        :
+        null
+      }
     </Wrapper>
   );
 }
