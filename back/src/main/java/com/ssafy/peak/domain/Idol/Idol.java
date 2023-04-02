@@ -1,4 +1,4 @@
-package com.ssafy.peak.domain;
+package com.ssafy.peak.domain.Idol;
 
 import java.util.List;
 
@@ -29,17 +29,6 @@ public class Idol {
 	private long totalPageStaySeconds;
 	private long totalCommentsCount;
 	private SnsLink snsLink;
-
-	@Getter
-	@Setter
-	@NoArgsConstructor
-	@AllArgsConstructor
-	@Builder
-	public static class SnsLink {
-		private String youtube;
-		private String twitter;
-		private String instagram;
-	}
 }
 
 
