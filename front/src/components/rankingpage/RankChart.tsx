@@ -26,12 +26,12 @@ function RankChart() {
     legend: {
       data: ["세븐틴", "에잇틴", "나인틴", "투엔티", "2NE1"],
       orient: "vertical",
-      top: "200vw",
+      top: "170vw",
       right: "right",
     },
     grid: {
-      left: "3%",
-      right: "15%",
+      left: "5%",
+      right: "20%",
       bottom: "3%",
       containLabel: true,
     },
@@ -92,7 +92,7 @@ function RankChart() {
   });
 
   return (
-    <ECharts option={options} style={{ height: "80%", width: "80%" }} opts={{ renderer: "svg" }} />
+    <ECharts option={options} style={{ height: "90%", width: "90%" }} opts={{ renderer: "svg" }} />
   );
 }
 
