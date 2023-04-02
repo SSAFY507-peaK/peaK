@@ -1,22 +1,14 @@
 package com.ssafy.peak.security;
 
 import java.security.Key;
-import java.util.Arrays;
-import java.util.Collection;
 import java.util.Date;
-import java.util.stream.Collectors;
-
-import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
-import org.springframework.util.StringUtils;
 
 import com.ssafy.peak.domain.User;
 import com.ssafy.peak.dto.CustomOAuth2User;
@@ -73,19 +65,19 @@ public class JwtTokenProvider implements InitializingBean {
 	}
 
 	/**
-	 * AccessToken 생성
-	 *
-	 * @return AccessToken
+	 * 유저 인증 정보로 토큰 생성 (카카오 로그인 시)
 	 */
-	public String createAccessToken(Authentication authentication) {
+	public String createTokensFromAuthentication(Authentication authentication, String tokenType) {
 
 		CustomOAuth2User customOAuth2User = (CustomOAuth2User)authentication.getPrincipal();
-
-		log.info("customOAuth2User: {}", customOAuth2User);
-
 		Date now = new Date();
-		Date expiration = new Date(now.getTime() + accessTokenValidTime);
+		Date expiration = null;
 
+		if (tokenType.equals(Utils.ACCESS_TOKEN)) {
+			expiration = new Date(now.getTime() + accessTokenValidTime);
+		} else if (tokenType.equals(Utils.REFRESH_TOKEN)) {
+			expiration = new Date(now.getTime() + refreshTokenValidTime);
+		}
 		String accessToken = Jwts.builder()
 			.setSubject(customOAuth2User.getName()) // user id
 			.claim(Utils.AUTHENTICATION, authentication) // authentication 저장
@@ -100,30 +92,27 @@ public class JwtTokenProvider implements InitializingBean {
 	}
 
 	/**
-	 * RefreshToken 생성
-	 *
-	 * @return RefreshToken
+	 * 유저 정보로 토큰 생성
 	 */
-	public String createRefreshToken(Authentication authentication) {
-
-		CustomOAuth2User customOAuth2User = (CustomOAuth2User)authentication.getPrincipal();
+	public String createTokensFromUserPrincipal(UserPrincipal userPrincipal, String tokenType) {
 
 		Date now = new Date();
-		Date expiration = new Date(now.getTime() + refreshTokenValidTime);
-
-		String refreshToken = Jwts.builder()
-			.setSubject(customOAuth2User.getName()) // user id
-			.claim(Utils.EMAIL, customOAuth2User.getEmail())    // 이메일 정보 저장
-			.claim(Utils.ROLE, customOAuth2User.getRole()) // 권한 정보 저장
-			.setIssuedAt(now) // 리프레시 토큰 발행 시간
-			.setExpiration(expiration) // 리프레시 토큰 유효 시간
+		Date expiration = null;
+		if (tokenType.equals(Utils.ACCESS_TOKEN)) {
+			expiration = new Date(now.getTime() + accessTokenValidTime);
+		} else if (tokenType.equals(Utils.REFRESH_TOKEN)) {
+			expiration = new Date(now.getTime() + refreshTokenValidTime);
+		}
+		String token = Jwts.builder()
+			.setSubject(userPrincipal.getName()) // user id
+			.claim(Utils.EMAIL, userPrincipal.getEmail())    // 이메일 정보 저장
+			.claim(Utils.ROLE, userPrincipal.getRole()) // 권한 정보 저장
+			.setIssuedAt(now) // 토큰 발행 시간
+			.setExpiration(expiration) // 토큰 유효 시간
 			.signWith(SignatureAlgorithm.HS512, key) // 사용할 암호화 알고리즘 (HS512), signature 에 들어갈 secret key 세팅
 			.compact();
 
-		String key = "RT:" + Encoders.BASE64.encode(customOAuth2User.getName().getBytes());
-		redisUtil.setDataExpire(key, refreshToken, refreshTokenValidTime);
-
-		return refreshToken;
+		return token;
 	}
 
 	/**
@@ -131,8 +120,8 @@ public class JwtTokenProvider implements InitializingBean {
 	 */
 	public Authentication getAuthentication(String token) {
 		UserPrincipal userPrincipal = null;
-		Claims claims = parseClaims(token);
 
+		Claims claims = parseClaims(token);
 		// 권한이 없는 경우 예외 발생
 		if (claims.get(Utils.ROLE) == null) {
 			throw new CustomException(CustomExceptionType.AUTHORITY_ERROR);
@@ -153,13 +142,13 @@ public class JwtTokenProvider implements InitializingBean {
 				.orElseThrow(() -> new CustomException(CustomExceptionType.AUTHORITY_ERROR));
 		}
 		log.info("userPrincipal: {}", userPrincipal);
+		//
+		// Collection<? extends GrantedAuthority> authorities =
+		// 	Arrays.stream(userPrincipal.getRole().toString().split(","))
+		// 		.map(SimpleGrantedAuthority::new)
+		// 		.collect(Collectors.toList());
 
-		Collection<? extends GrantedAuthority> authorities =
-			Arrays.stream(userPrincipal.getRole().toString().split(","))
-				.map(SimpleGrantedAuthority::new)
-				.collect(Collectors.toList());
-
-		return new UsernamePasswordAuthenticationToken(userPrincipal, token, authorities);
+		return new UsernamePasswordAuthenticationToken(userPrincipal, token, userPrincipal.getAuthorities());
 	}
 
 	/**
@@ -249,16 +238,8 @@ public class JwtTokenProvider implements InitializingBean {
 		}
 	}
 
-	public String resolveToken(HttpServletRequest httpServletRequest) {
-		String bearerToken = httpServletRequest.getHeader(Utils.AUTHORIZATION);
-
-		if (StringUtils.hasText(bearerToken) && bearerToken.startsWith(Utils.BEARER_TOKEN_PREFIX)) {
-			return bearerToken.substring(7);
-		}
-		return null;
-	}
-
 	public JwtTokenDto reissue(String token) {
+
 		Authentication authentication = getAuthentication(token);
 		UserPrincipal userPrincipal = (UserPrincipal)authentication.getPrincipal();
 		String email = userPrincipal.getUsername();
@@ -267,8 +248,7 @@ public class JwtTokenProvider implements InitializingBean {
 		if (refreshToken == null) {
 			throw new CustomException(CustomExceptionType.REFRESH_TOKEN_ERROR);
 		}
-
-		String accessToken = createAccessToken(authentication);
+		String accessToken = createTokensFromAuthentication(authentication, Utils.ACCESS_TOKEN);
 		SecurityContextHolder.getContext().setAuthentication(authentication);
 
 		return JwtTokenDto.builder()
