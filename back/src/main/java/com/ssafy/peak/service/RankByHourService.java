@@ -24,12 +24,16 @@ public class RankByHourService {
     private final RankByHourRepository rankByHourRepository;
 
     // Top 8
-    public IdolListResponseDto top() {
-        List<RankByHour.RankInfo> topRankInfoList = rankByHourRepository.findTop8ByOrderByScoreAsc();
+    public IdolListResponseDto top(LocalDateTime dateTime) {
+        RankByHour rankByHour = rankByHourRepository.findByDateTime(dateTime);
         List<String> idols = new ArrayList<>();
-        for (RankByHour.RankInfo info : topRankInfoList) {
+        int count =0;
+        for(RankByHour.RankInfo info: rankByHour.getIdols()){
+            if(count == 8) break;
             idols.add(info.getIdol());
+            count++;
         }
+
         IdolListResponseDto dto = IdolListResponseDto.builder().idols(idols).build();
         return dto;
     }
@@ -69,7 +73,7 @@ public class RankByHourService {
     public RankResponseDto rankByIdol(LocalDateTime dateTime, String idol){
         // 갱신된 시간으로 검색
         LocalDateTime hourDateTime = dateTimeToHour(dateTime);
-        RankByHour rankByHour = rankByHourRepository.findByDateAndIdolsIdol(hourDateTime, idol);
+        RankByHour rankByHour = rankByHourRepository.findByDateTimeAndIdolsIdol(hourDateTime, idol);
 
         // 뭔가 이상해서 안나오면 100으로,,
         int rank=100;
