@@ -30,7 +30,8 @@ public class PeakController {
     }
 
     @GetMapping("/")
-    public TotalRankListResponseDto list(LocalDateTime dateTime){
+    public TotalRankListResponseDto list(){
+        LocalDateTime dateTime = LocalDateTime.now();
         return rankByHourService.list(dateTime);
     }
 
