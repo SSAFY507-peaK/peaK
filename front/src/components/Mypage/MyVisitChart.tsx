@@ -1,6 +1,6 @@
 // import styled from "styled-components";
 import ChartFrameComponent from "./ChartFrameComponent";
-import { ReactComponent as Icon } from "../../assets/mdi_cursor-default-click-outline.svg"
+import { ReactComponent as Icon } from "../../assets/material-symbols_timer-outline-rounded.svg"
 import ChartComponent from "./ChartComponent";
 
 interface Props {
