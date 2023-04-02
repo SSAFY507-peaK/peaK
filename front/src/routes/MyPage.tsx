@@ -27,6 +27,7 @@ const TopFrame = styled.div`
   display: flex;
   flex-direction: row;
   flex: 0.5;
+  margin-bottom: 25px;
 `;
 
 const BottomFrame = styled.div`

@@ -1,7 +1,8 @@
 import TitleComponent from "../idolpage/TitleComponent";
 import styled from "styled-components";
 import MyInterestChart from "./MyInterestChart";
-import ScoreComponent from "./ScoreComponent";
+import ScoreComponent from "./ScoreComponent"
+
 
 interface Props {
   userName: string;
@@ -29,7 +30,7 @@ const ScoreFrame = styled.div`
   justify-content: space-between;
 `;
 
-export default function MyInterest({userName, idolName}:Props) {
+function MyInterest({userName, idolName}:Props) {
   const myScore:number = 67
   const averageScore:number = 57
   return (
@@ -45,3 +46,5 @@ export default function MyInterest({userName, idolName}:Props) {
     </Wrapper>
   )
 }
+
+export default MyInterest;
