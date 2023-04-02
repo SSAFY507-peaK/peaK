@@ -5,9 +5,9 @@ const ChartDiv = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 50vw;
-  height: 40vw;
-  background-color: var(--white800-color);
+  width: 40vw;
+  height: 35vw;
+  background-color: #ffffff;
   border-radius: 15px;
   box-shadow: 0px 0px 3px rgba(151, 151, 151, 0.25);
 `;

@@ -1,5 +1,5 @@
 import DriveFileRenameOutlineOutlinedIcon from '@mui/icons-material/DriveFileRenameOutlineOutlined';
-import MyChat from '../components/Mypage/MyChat';
+import MyChat from '../components/Mypage/MyChat/MyChat';
 import MyChatChart from '../components/Mypage/MyChatChart';
 import MyClickChart from '../components/Mypage/MyClickChart';
 import MyInterest from '../components/Mypage/MyInterest';
@@ -63,11 +63,17 @@ function MyPage() {
           null
         }
       </TopFrame>
-      {/* <BottomFrame>
-        <MyClickChart userName={userName} />
-        <MyChatChart userName={userName} />
-        <MyVisitChart userName={userName} />
-      </BottomFrame> */}
+      {
+        idolName
+        ?
+        <BottomFrame>
+          <MyClickChart userName={userName} />
+          <MyChatChart userName={userName} />
+          <MyVisitChart userName={userName} />
+        </BottomFrame>
+        :
+        null
+      }
     </Wrapper>
   );
 }
