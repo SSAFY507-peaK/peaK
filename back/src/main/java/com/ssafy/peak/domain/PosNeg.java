@@ -3,6 +3,7 @@ package com.ssafy.peak.domain;
 import lombok.*;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Getter
@@ -13,7 +14,7 @@ import java.util.Date;
 @ToString
 @Document(collection = "pos_neg")
 public class PosNeg {
-    private Date date;
+    private LocalDateTime date;
     private String idol;
     private int posNegScore;
 }

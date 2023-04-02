@@ -3,7 +3,7 @@ package com.ssafy.peak.domain.rank;
 import lombok.*;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Getter
@@ -14,7 +14,7 @@ import java.util.List;
 @ToString
 @Document(collection = "rank_by_date")
 public class RankByDate {
-    private Date date;
+    private LocalDateTime date;
     private List<RankInfo> idols;
 
     @Getter

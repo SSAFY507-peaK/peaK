@@ -1,5 +1,6 @@
 package com.ssafy.peak.dto.idol;
 
+import com.ssafy.peak.domain.rank.RankByHour;
 import lombok.*;
 
 import java.util.List;

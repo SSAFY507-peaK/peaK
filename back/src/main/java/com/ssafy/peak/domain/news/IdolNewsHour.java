@@ -4,6 +4,7 @@ import lombok.*;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.MongoId;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
 
@@ -18,8 +19,8 @@ public class IdolNewsHour {
     @MongoId
     private String id;
     private String idol;
-    private String date;
+    private LocalDateTime collectedDateTime;
     private int hour;
-    private List<Map<String, Integer>> popular_keywords;
-    private List<News> news;
+    private List<Map<String, Integer>> popularKeywords;
+    private List<News> newsList;
 }
