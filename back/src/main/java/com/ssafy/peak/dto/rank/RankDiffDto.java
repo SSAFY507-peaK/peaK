@@ -7,7 +7,7 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class TotalRankDto {
+public class RankDiffDto {
     private int rank;
     private String idol;
     private int score;

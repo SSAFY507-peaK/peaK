@@ -10,5 +10,5 @@ import java.util.List;
 @AllArgsConstructor
 @Builder
 public class TotalRankListResponseDto {
-    private List<TotalRankDto> ranksByHour;
+    private List<RankDiffDto> ranksByHour;
 }

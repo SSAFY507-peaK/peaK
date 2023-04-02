@@ -4,6 +4,7 @@ import lombok.*;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Getter
@@ -16,9 +17,9 @@ import java.util.Date;
 public class Comment {
     @Id
     private String id;
-    private String user_id;
+    private String userId;
     private String idol;
-    private Date date;
+    private LocalDateTime dateTime;
     private String content;
     // private String nickname..?
 }

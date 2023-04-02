@@ -1,4 +1,4 @@
-package com.ssafy.peak.dto.idol;
+package com.ssafy.peak.dto.rank;
 
 import lombok.*;
 
@@ -7,7 +7,7 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class IdolRankResponseDto {
+public class RankResponseDto {
     private int rank;
     private int score;
 }

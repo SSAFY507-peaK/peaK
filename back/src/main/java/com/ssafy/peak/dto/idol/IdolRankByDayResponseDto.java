@@ -1,5 +1,6 @@
 package com.ssafy.peak.dto.idol;
 
+import com.ssafy.peak.dto.rank.RankResponseDto;
 import lombok.*;
 
 import java.util.List;
@@ -10,6 +11,6 @@ import java.util.List;
 @AllArgsConstructor
 @Builder
 public class IdolRankByDayResponseDto {
-    private List<IdolRankResponseDto> rankWeek;
-    private IdolRankResponseDto current;
+    private List<RankResponseDto> rankWeek;
+    private RankResponseDto current;
 }

@@ -1,5 +1,7 @@
 package com.ssafy.peak.util;
 
+import java.time.LocalDateTime;
+
 public class Utils {
 
 	public static final String BLANK = " ";
@@ -18,4 +20,14 @@ public class Utils {
 	public static final String KAKAO_ACCOUNT = "kakao_account";
 	public static final String EMAIL = "email";
 	public static final String KAKAO = "kakao";
+
+	public static LocalDateTime dateTimeToHour(LocalDateTime dateTime){
+		LocalDateTime hourDateTime = LocalDateTime.of(dateTime.getYear(), dateTime.getMonth(), dateTime.getDayOfMonth(), dateTime.getHour(), 0);
+		return hourDateTime;
+	}
+
+	public static LocalDateTime dateTimeToDate(LocalDateTime dateTime){
+		LocalDateTime dateDateTime = LocalDateTime.of(dateTime.getYear(), dateTime.getMonth(), dateTime.getDayOfMonth(),0, 0);
+		return dateDateTime;
+	}
 }
