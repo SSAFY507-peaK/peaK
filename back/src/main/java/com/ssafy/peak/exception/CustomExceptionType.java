@@ -17,6 +17,7 @@ public enum CustomExceptionType {
 	AUTHORITY_ERROR(HttpStatus.FORBIDDEN, "EU008", "해당 기능을 요청할 권한이 없습니다."),
 	UNQUALIFIED_NICKNAME(HttpStatus.BAD_REQUEST, "EU009", "닉네임은 8자 이하의 한글, 영문, 숫자만 가능합니다."),
 	TO_MUCH_INTEREST(HttpStatus.BAD_REQUEST, "EU010", "관심 아이돌은 최대 5팀까지 선택 가능합니다."),
+	SIGN_UP_FAIL(HttpStatus.UNAUTHORIZED, "EU011", "회원가입에 실패하였습니다."),
 
 	// DATA
 	NO_CONTENT(HttpStatus.NOT_FOUND, "ED001", "데이터가 존재하지 않습니다."),
