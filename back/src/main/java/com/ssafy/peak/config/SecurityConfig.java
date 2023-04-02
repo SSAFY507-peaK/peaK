@@ -40,6 +40,19 @@ public class SecurityConfig {
 	private final JwtTokenProvider jwtTokenProvider;
 	private final RedisUtil redisUtil;
 
+	private static final String[] PERMIT_URL_ARRAY = {
+			/* swagger v2 */
+			"/v2/api-docs",
+			"/swagger-resources",
+			"/swagger-resources/**",
+			"/configuration/ui",
+			"/configuration/security",
+			"/swagger-ui.html",
+			"/webjars/**",
+			/* swagger v3 */
+			"/v3/api-docs/**",
+			"/swagger-ui/**"
+	};
 	@Bean
 	protected SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
 
@@ -57,6 +70,7 @@ public class SecurityConfig {
 
 			.and()    // 요청 권한 설정
 			.authorizeRequests()
+			.antMatchers(PERMIT_URL_ARRAY).permitAll()
 			// .antMatchers("/user/**").hasAnyRole("USER", "GUEST")
 			.anyRequest().authenticated()    // 이외의 모든 요청은 인증 필요
 			// .anyRequest().permitAll()
