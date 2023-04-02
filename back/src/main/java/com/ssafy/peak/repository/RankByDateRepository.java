@@ -14,8 +14,10 @@ public interface RankByDateRepository extends MongoRepository<RankByDate, String
     // 특정 아이돌의 일주일 간 랭킹 정보
 //    @Query("{'date_time' : {$gte: ?0, $lte: ?1} }")
     @Aggregation(pipeline = {
-            "{ $match: { date_time: { $gte: ?0, $lte: ?1 } } }",
+            "{ $match: { date: { $gte: ?0, $lte: ?1 } } }",
             "{ $project: { filteredIdols: { $filter: { input: '$idols', as: 'idol', cond: { $eq: [ '$$idol.idol', ?2 ] } } } } }",
+            "{ $unwind: '$filteredIdols' }",
+            "{ $replaceRoot: { newRoot: '$filteredIdols' } }"
     })
     List<RankByDate> findByDateTimeBetween(LocalDateTime startDateTime, LocalDateTime endDateTime, String Idol);
 

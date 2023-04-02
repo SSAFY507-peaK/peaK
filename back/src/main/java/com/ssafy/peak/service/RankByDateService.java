@@ -28,6 +28,7 @@ public class RankByDateService {
         List<RankResponseDto> rankByIdolList = new ArrayList<>();
         List<RankByDate> rankList = rankByDateRepository.findByDateTimeBetween(startDate, endDate, idol);
         for(RankByDate rank: rankList){
+            System.out.println(rank);
             RankByDate.RankInfo info = rank.getIdols().get(0);
             RankResponseDto rankDto = RankResponseDto.builder().rank(info.getRank()).score(info.getScore()).build();
             rankByIdolList.add(rankDto);

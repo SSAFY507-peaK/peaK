@@ -23,11 +23,11 @@ public class Utils {
 
 	public static LocalDateTime dateTimeToHour(LocalDateTime dateTime){
 		LocalDateTime hourDateTime = LocalDateTime.of(dateTime.getYear(), dateTime.getMonth(), dateTime.getDayOfMonth(), dateTime.getHour(), 0);
-		return hourDateTime;
+		return hourDateTime.plusHours(9);
 	}
 
 	public static LocalDateTime dateTimeToDate(LocalDateTime dateTime){
 		LocalDateTime dateDateTime = LocalDateTime.of(dateTime.getYear(), dateTime.getMonth(), dateTime.getDayOfMonth(),0, 0);
-		return dateDateTime;
+		return dateDateTime.plusHours(9);
 	}
 }

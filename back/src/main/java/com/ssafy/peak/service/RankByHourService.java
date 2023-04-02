@@ -25,6 +25,7 @@ public class RankByHourService {
 
     // Top 8
     public IdolListResponseDto top(LocalDateTime dateTime) {
+        dateTime = dateTimeToHour(dateTime);
         RankByHour rankByHour = rankByHourRepository.findByDateTime(dateTime);
         List<String> idols = new ArrayList<>();
         int count =0;
@@ -42,9 +43,12 @@ public class RankByHourService {
     // 한시간 전과 비교
     // 레디스에 넣으면 좋을..
     public TotalRankListResponseDto list(LocalDateTime dateTime){
-        LocalDateTime prevHour = dateTime.minusHours(1);
+        LocalDateTime prevHour = dateTimeToHour(dateTime.minusHours(1));
+        dateTime = dateTimeToHour(dateTime);
+
         RankByHour rankByHour = rankByHourRepository.findByDateTime(dateTime);
         RankByHour rankByPrevHour = rankByHourRepository.findByDateTime(prevHour);
+
 
         HashMap<String, Integer> rankDiffMap = new HashMap<>();
 
@@ -59,7 +63,6 @@ public class RankByHourService {
             int prevRank = info.getRank();
             rankDiffMap.put(idol, rankDiffMap.get(idol) - prevRank);
         }
-
         // 현재 아이돌 랭킹정보와 변동을 저장
         List<RankDiffDto> rankDiffDtoList = new ArrayList<>();
         for(RankByHour.RankInfo info: rankByHour.getIdols()){
