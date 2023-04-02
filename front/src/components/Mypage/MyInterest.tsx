@@ -11,7 +11,7 @@ interface Props {
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
-  flex: 0.2;
+  flex: 0.23;
   width: 100%;
   margin-right: 25px;
 `;
@@ -19,6 +19,8 @@ const Wrapper = styled.div`
 const Frame = styled.div`
   background-color: white;
   border-radius: 20px;
+  height: 100%;
+
 `;
 
 const ScoreFrame = styled.div`

@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
@@ -19,6 +18,7 @@ import org.springframework.util.CollectionUtils;
 
 import com.ssafy.peak.domain.Idol.Idol;
 import com.ssafy.peak.domain.User;
+import com.ssafy.peak.dto.CustomOAuth2User;
 import com.ssafy.peak.dto.SignupDto;
 import com.ssafy.peak.dto.UserDto;
 import com.ssafy.peak.enums.Role;
@@ -46,11 +46,13 @@ public class UserService {
 	private final JwtTokenProvider jwtTokenProvider;
 	private final UserRepository userRepository;
 	private final IdolRepository idolRepository;
-	private final AuthenticationManagerBuilder authenticationManagerBuilder;
 
+	/**
+	 * OAuth 로그인 후, 회원 가입에 필요한 추가 정보를 받기 위해 redirect
+	 */
 	public void redirectSignupPage(HttpServletResponse response, Authentication authentication) {
 
-		String accessToken = jwtTokenProvider.createAccessToken(authentication);
+		String accessToken = jwtTokenProvider.createTokensFromAuthentication(authentication, Utils.ACCESS_TOKEN);
 
 		log.info("accessToken: {}", accessToken);
 
@@ -65,12 +67,19 @@ public class UserService {
 		}
 	}
 
+	/**
+	 * 로그인
+	 */
 	public void login(HttpServletResponse response, Authentication authentication) {
 
 		// AccessToken과 RefreshToken 발급
-		String accessToken = jwtTokenProvider.createAccessToken(authentication);
-		String refreshToken = jwtTokenProvider.createRefreshToken(authentication);
+		String accessToken = jwtTokenProvider.createTokensFromAuthentication(authentication, Utils.ACCESS_TOKEN);
+		String refreshToken = jwtTokenProvider.createTokensFromAuthentication(authentication, Utils.REFRESH_TOKEN);
 
+		CustomOAuth2User oAuth2User = (CustomOAuth2User)authentication.getPrincipal();
+		SecurityContextHolder.getContext()
+			.setAuthentication(
+				new UsernamePasswordAuthenticationToken(oAuth2User, accessToken, oAuth2User.getAuthorities()));
 		try {
 			String redirectUri = redirectUrl;
 			response.setHeader(Utils.ACCESS_TOKEN, Utils.BEARER_TOKEN_PREFIX + accessToken);
@@ -100,7 +109,10 @@ public class UserService {
 		}
 	}
 
-	@Transactional
+	/**
+	 * 회원가입
+	 */
+	@Transactional(rollbackFor = Exception.class)
 	public SignupDto signup(String token, UserDto userDto) {
 
 		// 가입되어 있는지 확인
@@ -129,9 +141,11 @@ public class UserService {
 				.commentsCnt(0)
 				.build())
 			.collect(Collectors.toList());
-		
-		// db에 정보 저장
+
+		// token에서 정보 가져오기
 		Claims claims = jwtTokenProvider.parseClaims(token);
+
+		// user 정보 입력
 		User user = User.builder()
 			.id(userId)
 			.email(jwtTokenProvider.getEmailFromClaims(claims))
@@ -142,18 +156,17 @@ public class UserService {
 			.favoriteIdolsCnt(userDto.getIdols().size())
 			.idols(interestIdols)
 			.build();
-		userRepository.save(user);
 
-		UsernamePasswordAuthenticationToken authenticationToken
-			= new UsernamePasswordAuthenticationToken(userId, jwtTokenProvider.getEmailFromClaims(claims));
-		Authentication authentication = authenticationManagerBuilder.getObject().authenticate(authenticationToken);
-
-		String accessToken = jwtTokenProvider.createAccessToken(authentication);
-		String refreshToken = jwtTokenProvider.createRefreshToken(authentication);
-
-		UserPrincipal userPrincipal = (UserPrincipal)authentication.getPrincipal();
+		// 토큰 발급 후 SecurityContext에 인증 정보 저장
+		UserPrincipal userPrincipal = UserPrincipal.createUserPrincipal(user);
+		String accessToken = jwtTokenProvider.createTokensFromUserPrincipal(userPrincipal, Utils.ACCESS_TOKEN);
+		String refreshToken = jwtTokenProvider.createTokensFromUserPrincipal(userPrincipal, Utils.REFRESH_TOKEN);
 		SecurityContextHolder.getContext()
-			.setAuthentication(new UsernamePasswordAuthenticationToken(userPrincipal, ""));
+			.setAuthentication(
+				new UsernamePasswordAuthenticationToken(userPrincipal, accessToken, userPrincipal.getAuthorities()));
+
+		// db에 user 정보 저장
+		userRepository.save(user);
 
 		return SignupDto.builder()
 			.nickname(user.getNickname())
