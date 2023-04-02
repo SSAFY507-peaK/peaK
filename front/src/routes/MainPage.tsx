@@ -1,3 +1,4 @@
+import CarouselVertical from "../components/carouselVertical/CarouselVertical.jsx";
 import CommonDiv from "../components/mainpage/CommonDiv";
 import MainDiv from "../components/MainDiv";
 import NameDiv from "../components/NameDiv";
@@ -104,7 +105,7 @@ function MainPage() {
         <NewCarouselDiv ratio={0.47}>
           <NameDiv type={false} firstWord="트렌딩" secondWord="유튜브" />
           <CarouselDiv>
-            <NewCarousel items={items} />
+            <CarouselVertical items={items} />
           </CarouselDiv>
         </NewCarouselDiv>
       </MainDiv>
