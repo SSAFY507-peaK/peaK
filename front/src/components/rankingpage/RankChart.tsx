@@ -13,7 +13,7 @@ import { useState } from "react";
 //   let D7 = new Date(now.setDate(now.getDate() - 7))
 // }
 
-function IdolChart() {
+function RankChart() {
   let labels = ["D-6", "D-5", "D-4", "D-3", "D-2", "D-1", "오늘"];
   const [options, setOptions] = useState({
     color: ["#93F2A2", "#DAB4B4", "#FFD99E", "#FCA7A7", "#9FC6F4", "#A869CD"],
@@ -96,4 +96,4 @@ function IdolChart() {
   );
 }
 
-export default IdolChart;
+export default RankChart;
