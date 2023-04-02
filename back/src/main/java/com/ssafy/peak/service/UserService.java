@@ -17,7 +17,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 
-import com.ssafy.peak.domain.Idol;
+import com.ssafy.peak.domain.Idol.Idol;
 import com.ssafy.peak.domain.User;
 import com.ssafy.peak.dto.SignupDto;
 import com.ssafy.peak.dto.UserDto;
