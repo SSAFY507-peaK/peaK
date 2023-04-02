@@ -1,19 +1,32 @@
 import { NavLink, Outlet } from "react-router-dom";
 
 import React from "react";
+import styled from "styled-components";
 
-/** 랭킹과 차트 이동을 위한 탭 페이지입니다. 언제든 삭제될 위험이 있음. */
+const TabDiv = styled.div`
+  display: flex;
+  width: 7%;
+  justify-content: space-around;
+`;
+
 function RankingLayout() {
   return (
     <div>
-      <h3>
-        <NavLink to="/ranking" end>
-          랭킹
+      <TabDiv>
+        <NavLink
+          to="/ranking"
+          end
+          style={({ isActive }) => ({ color: isActive ? "#9244C0" : "#383838" })}
+        >
+          <h3>랭킹</h3>
         </NavLink>
-      </h3>
-      <h3>
-        <NavLink to="/ranking/chart">차트</NavLink>
-      </h3>
+        <NavLink
+          to="/ranking/chart"
+          style={({ isActive }) => ({ color: isActive ? " #9244C0" : "#383838" })}
+        >
+          <h3>차트</h3>
+        </NavLink>
+      </TabDiv>
 
       <Outlet />
     </div>

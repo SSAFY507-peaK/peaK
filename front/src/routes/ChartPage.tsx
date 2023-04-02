@@ -1,5 +1,4 @@
 import RankChart from "../components/rankingpage/RankChart";
-import React from "react";
 import styled from "styled-components";
 
 const ChartDiv = styled.div`

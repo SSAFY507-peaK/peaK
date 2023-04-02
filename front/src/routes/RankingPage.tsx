@@ -3,6 +3,14 @@ import { ReactComponent as Stable } from "../assets/stable.svg";
 import { ReactComponent as Up } from "../assets/arrow-up.svg";
 import styled from "styled-components";
 
+type IdolImgDivType = {
+  url: string;
+};
+
+type RankDiffNumType = {
+  sign: "up" | "stable" | "down";
+};
+
 const AllRankDiv = styled.div`
   display: flex;
   flex-direction: column;
@@ -39,10 +47,6 @@ const IdolRankDiv = styled.div`
   }
 `;
 
-interface IdolImgDivType {
-  url: string;
-}
-
 const IdolImgDiv = styled.div<IdolImgDivType>`
   background-image: url(${props => props.url});
   background-size: cover;
@@ -69,11 +73,14 @@ const RankDifferDiv = styled.div`
   justify-content: center;
 `;
 
-type Sign = "up" | "stable" | "down";
-
-interface RankDiffNumType {
-  sign: Sign;
-}
+const ScoreDiv = styled.div`
+  font-size: 0.7rem;
+  display: flex;
+  justify-content: flex-end;
+  width: 65%;
+  /* justify-content: space-around; */
+  color: #b3b3b3;
+`;
 
 const RankDiffNum = styled.div<RankDiffNumType>`
   color: ${props => (props.sign === "up" ? "red" : props.sign === "down" ? "blue" : null)};
@@ -103,15 +110,6 @@ const RankDiffer = (differ: any) => {
     );
   }
 };
-
-const ScoreDiv = styled.div`
-  font-size: 0.7rem;
-  display: flex;
-  justify-content: flex-end;
-  width: 65%;
-  /* justify-content: space-around; */
-  color: #b3b3b3;
-`;
 
 const RankDiv = (props: any) => {
   return (
@@ -382,7 +380,7 @@ function RankingPage() {
       score: 2523,
     },
   ];
-  return <AllRankDiv>{items.map((item, idx) => RankDiv(item))}</AllRankDiv>;
+  return <AllRankDiv>{items.map(item => RankDiv(item))}</AllRankDiv>;
 }
 
 export default RankingPage;
