@@ -6,8 +6,9 @@ import IdolPage from "./routes/IdolPage";
 import Layout from "./routes/Layout";
 import MainPage from "./routes/MainPage";
 import MyPage from "./routes/MyPage";
-import SignUpPage from "./routes/SignUpPage";
+import SignUpPage from "./routes/SignUpPage/SignUpPage";
 import FullPage from "./routes/FullPage/FullPage"
+// import TmpFullPage from "./routes/FullPage/tmpFullPage";
 import RankingLayout from "./routes/RankingLayout";
 import RankingPage from "./routes/RankingPage";
 import TrendingPage from "./routes/TrendingPage";
