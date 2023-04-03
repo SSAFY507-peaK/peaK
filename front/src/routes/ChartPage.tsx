@@ -127,7 +127,7 @@ function ChartPage() {
     },
   ];  // 더미데이터
   const [selectedIdols, setSelectedIdols] = useState<IdolObjectType[]>([]);
-  const [selectedLegends, setSelectedLegends] = useState<string[]>([]);
+  // const [selectedLegends, setSelectedLegends] = useState<string[]>([]);
   const [selectedChart, setSelectedChart] = useState<ChartIdolObjectType[]>([]);
   const [idols, setIdols] = useState<IdolObjectType[]>(dummyData);
 
@@ -154,8 +154,8 @@ function ChartPage() {
     else {
       setIdols(prev => prev.map(idol2 => idol.idolNum === idol2.idolNum? {...idol2, isSelected: true} : idol2))
       setSelectedIdols(prev=> [...prev, {...idol, isSelected: true}]);
-      setSelectedLegends(prev => [...prev, idol.idolName]);
-      setSelectedChart(prev => [...prev, {name: idol.idolName, type: "line", data: idol.idolData, lineStyle: { width: 3} }])
+      // setSelectedLegends(prev => [...prev, idol.idolName]);
+      setSelectedChart(prev => [...prev, {name: idol.idolName, type: "line", data: idol.idolData, lineStyle: { width: 3 } }])
     }
   }
   /** 선택한 아이돌을 삭제하자 */
@@ -163,7 +163,7 @@ function ChartPage() {
     // 원본 배열에서 false로 변경하고... 선택된 배열에서도 삭제를 하자궁...
     setIdols(prev => prev.map(idol2 => idol.idolNum === idol2.idolNum? {...idol2, isSelected: false} : idol2))
     setSelectedIdols(prev=> prev.filter(idol2 => idol.idolNum !== idol2.idolNum));
-    setSelectedLegends(prev => prev.filter(idol2 => idol2 !== idol.idolName));
+    // setSelectedLegends(prev => prev.filter(idol2 => idol2 !== idol.idolName));
     setSelectedChart(prev => prev.filter(idol2 => idol2.name !== idol.idolName))
   }
 
@@ -171,7 +171,7 @@ function ChartPage() {
   return (
     <ChartWrapper>
       <ChartDiv>
-        <RankChart idolLegend={selectedLegends} chartIdol={selectedChart} />
+        <RankChart chartIdol={selectedChart} />
       </ChartDiv>
       <IdolSelectDiv>
         <Search />
