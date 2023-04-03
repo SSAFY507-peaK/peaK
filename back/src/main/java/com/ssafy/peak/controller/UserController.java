@@ -90,10 +90,10 @@ public class UserController {
 	 */
 	@PostMapping("/reissue")
 	@Transactional
-	public ResponseEntity reissue(@RequestHeader("Authorization") String token) {
+	public ResponseEntity reissue(@RequestHeader("Authorization") String authorization) {
 
 		// header에 token 꺼내서 Bearer 떼고 재발급 하러 가기
-		token = token.split(Utils.BLANK)[1];
+		String token = authorization.split(Utils.BLANK)[1];
 		JwtTokenDto tokenDto = jwtTokenProvider.reissue(token);
 
 		// header에도 토큰 넣어주기
