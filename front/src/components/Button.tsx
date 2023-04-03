@@ -55,4 +55,16 @@ const BlueButton = styled(Button)`
   }
 `
 
-export { PurpleButton, RedButton, BlueButton };
+const CloseButton = styled.button`
+  height: 20px;
+  width: 20px;
+  border-radius: 15px;
+  color: white;
+  background-color: var(--gray700-color);
+  
+  position: absolute;
+  top: 0;
+  right: 0;
+`
+
+export { PurpleButton, RedButton, BlueButton, CloseButton };

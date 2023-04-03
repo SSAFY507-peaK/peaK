@@ -4,6 +4,9 @@ type IdolGridType = {
   cols: number;
   gap?: string;
 }
+type SelectedIdolType = {
+  height?: string;
+}
 const IdolGrid = styled.div<IdolGridType>`
   display: grid;
   align-items: center;
@@ -54,16 +57,16 @@ const IdolName = styled.div`
   font-weight: bold;
   text-align: center;
 `
-const Selected = styled(IdolImage)`
-  width: 100px;
-  height: 100px;
+const Selected = styled(IdolImage)<SelectedIdolType>`
+  width: ${props => props.height? props.height : "100px"}
+  height: ${props => props.height? props.height : "100px"}
   //background-color: black;
   
   position: relative;
 `;
-const EmptySelected = styled(IdolImage)`
-  width: 100px;
-  height: 100px;
+const EmptySelected = styled(IdolImage)<SelectedIdolType>`
+  width: ${props => props.height? props.height : "100px"}
+  height: ${props => props.height? props.height : "100px"}
   background: transparent;
   border: 2px dashed var(--gray700-color);
 
@@ -73,4 +76,26 @@ const EmptySelected = styled(IdolImage)`
   }
 `;
 
-export { IdolGrid, IdolImage, IdolName, IdolImageWrapper, EmptySelected, Selected };
+/** 내가 선택한 아이돌 */
+const SelectedSection = styled.div`
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: center
+`
+/** 전체 아이돌 */
+const IdolWrapper = styled.div`
+  overflow-y: scroll;
+  padding: 15px;
+  &::-webkit-scrollbar {
+    width: 7px;
+    border-radius: 4px;
+    background-color: rgba(255, 255, 255, 0.8);
+  }
+  &::-webkit-scrollbar-thumb {
+    border-radius: 4px;
+    background: var(--gray700-color);
+  }
+`
+
+
+export { IdolGrid, IdolImage, IdolName, IdolImageWrapper, EmptySelected, Selected, SelectedSection, IdolWrapper };
