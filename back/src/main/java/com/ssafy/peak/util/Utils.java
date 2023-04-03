@@ -16,6 +16,7 @@ public class Utils {
 	public static final String ACCESS_TOKEN = "AccessToken";
 	public static final String REFRESH_TOKEN = "RefreshToken";
 	public static final String AUTHENTICATION = "Authentication";
+	public static final String TOKEN = "token";
 
 	// KAKAO OAUTH
 	public static final String KAKAO_ACCOUNT = "kakao_account";

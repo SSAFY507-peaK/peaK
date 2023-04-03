@@ -254,12 +254,18 @@ public class JwtTokenProvider implements InitializingBean {
 		}
 	}
 
+	/**
+	 * 토큰 재발급
+	 */
 	public JwtTokenDto reissue(String token) {
 
 		Authentication authentication = getAuthentication(token);
 		UserPrincipal userPrincipal = (UserPrincipal)authentication.getPrincipal();
-		String email = userPrincipal.getUsername();
-		String key = "RT:" + Encoders.BASE64.encode(email.getBytes());
+		String userId = userPrincipal.getId();
+
+		log.info("userId: {}", userId);
+
+		String key = "RT:" + Encoders.BASE64.encode(userId.getBytes());
 		String refreshToken = redisUtil.getData(key);
 		if (refreshToken == null) {
 			throw new CustomException(CustomExceptionType.REFRESH_TOKEN_ERROR);
