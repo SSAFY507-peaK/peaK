@@ -4,9 +4,10 @@ import { useState } from 'react';
 
 function IdolEmotionRankChart() {
   let labels = ['월', '화', '수', '목', '금', '토', '일']
+
   const idolName = "세븐틴"
   const [options, setOptions] = useState({
-    color: "#fff",
+    color: "#F946FF",
     tooltip: {
       trigger: 'axis',
       axisPointer: {
@@ -25,7 +26,7 @@ function IdolEmotionRankChart() {
       bottom: '3%',
       show: true,
       containLabel: true,
-      backgroundColor: 'rgba(255, 99, 132, 0.5)',
+      backgroundColor: "white",
     },
     xAxis: [
       {
@@ -51,7 +52,7 @@ function IdolEmotionRankChart() {
         name: idolName,
         type: 'line',
         // stack: 'Total',
-        smooth: true,
+        // smooth: true,
         lineStyle: {
           width: 0
         },
@@ -62,7 +63,7 @@ function IdolEmotionRankChart() {
         emphasis: {
           focus: 'series'
         },
-        data: labels.map(() => faker.datatype.float({ min: 0, max: 100 }))
+        data: labels.map(() => faker.datatype.number({ min: 0, max: 100 }))
       },
     ]
   })

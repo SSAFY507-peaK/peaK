@@ -1,8 +1,9 @@
+import { useEffect, useState } from "react";
+
+import Calendar from "./Calendar";
+import MyIdolChat from "./MyIdolChat";
 import TitleComponent from "../../idolpage/TitleComponent";
 import styled from "styled-components";
-import MyIdolChat from "./MyIdolChat";
-import Calendar from "./Calendar";
-import { useEffect, useState } from "react";
 
 interface Props {
   userName: string;
@@ -25,7 +26,7 @@ const ChatFrame = styled.div`
   flex-direction: column;
   background-color: white;
   border-radius: 20px;
-  padding: 40px;
+  padding: 30px;
   height: 100%;
 `;
 

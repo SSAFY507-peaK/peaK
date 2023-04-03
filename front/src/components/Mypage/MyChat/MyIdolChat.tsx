@@ -16,8 +16,8 @@ const ChatFrame = styled.div`
 
 const DateFrame = styled.div`
   font-weight: 700;
-  font-size: 1.2rem;
-  margin-bottom: 30px;
+  /* font-size: 1.1rem; */
+  margin-bottom: 10px;
 `;
 
 const CommentFrame = styled.div`
