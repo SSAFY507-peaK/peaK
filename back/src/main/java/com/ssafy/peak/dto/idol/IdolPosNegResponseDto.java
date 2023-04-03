@@ -11,5 +11,4 @@ import java.util.List;
 @Builder
 public class IdolPosNegResponseDto {
     private List<PosNegDto> posNegWeek;
-    private PosNegDto current;
 }
