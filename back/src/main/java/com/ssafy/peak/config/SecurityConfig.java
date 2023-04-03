@@ -70,8 +70,10 @@ public class SecurityConfig {
 
 			.and()    // 요청 권한 설정
 			.authorizeRequests()
-			.antMatchers("/peak/**").permitAll()
 			.antMatchers(PERMIT_URL_ARRAY).permitAll()
+			.antMatchers("/peak/**").permitAll()
+			.antMatchers("/idol/**").permitAll()
+
 			// .antMatchers("/user/**").hasAnyRole("USER", "GUEST")
 			.anyRequest().authenticated()    // 이외의 모든 요청은 인증 필요
 			// .anyRequest().permitAll()

@@ -8,5 +8,8 @@ import com.ssafy.peak.domain.Idol.Idol;
 
 public interface IdolRepository extends MongoRepository<Idol, String> {
 
-	List<Idol> findByIdolIn(List<String> idolIds);
+	List<Idol> findByIdolIn(List<String> idols);
+	// 아이돌 리스트, 아이돌 상세정보
+	List<Idol> findAll();
+	//
 }
