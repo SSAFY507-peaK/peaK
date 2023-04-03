@@ -3,8 +3,8 @@ import { useNavigate } from "react-router-dom"
 import styled from "styled-components";
 import { PurpleButton, BlueButton } from "../../components/Button";
 import { NicknameInput, MessageDiv } from "../../components/SignupPage/NicknameComponents";
-import { IdolGrid, IdolImage, IdolImageWrapper, IdolName, EmptySelected, Selected } from "../../components/SignupPage/IdolComponents";
-
+import { IdolGrid, IdolImage, IdolImageWrapper, IdolName, EmptySelected, Selected, SelectedSection, IdolWrapper } from "../../components/SignupPage/IdolComponents";
+import { CloseButton } from "../../components/Button";
 // 컴포넌트들 (추후 옮기자)
 const Wrapper = styled.div`
   height: 100vh;
@@ -23,17 +23,6 @@ const Description = styled.p`
   margin-top: 0;
   color: var(--gray400-color);
 `
-const CloseButton = styled.button`
-  height: 20px;
-  width: 20px;
-  border-radius: 15px;
-  color: white;
-  background-color: var(--gray700-color);
-  
-  position: absolute;
-  top: 0;
-  right: 0;
-`
 // 첫 번째 페이지
 const InputWrapper = styled.div`
   display: flex;
@@ -46,26 +35,7 @@ const DescriptionSection = styled.div`
     margin-right: 15px;
   }
 `
-/** 내가 선택한 아이돌 */
-const SelectedSection = styled.div`
-  margin-bottom: 10px;
-  display: flex;
-  justify-content: center
-`
-/** 전체 아이돌 */
-const IdolWrapper = styled.div`
-  overflow-y: scroll;
-  padding: 15px;
-  &::-webkit-scrollbar {
-    width: 7px;
-    border-radius: 4px;
-    background-color: rgba(255, 255, 255, 0.8);
-  }
-  &::-webkit-scrollbar-thumb {
-    border-radius: 4px;
-    background: var(--gray700-color);
-  }
-`
+
 
 // 나중에 진짜 input값 들어오면 변경 예정..
 type IdolObjectType = {

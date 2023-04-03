@@ -5,13 +5,23 @@ import styled from "styled-components";
 
 const TabDiv = styled.div`
   display: flex;
-  width: 7%;
-  justify-content: space-between;
+  width: 100%;
+  margin-bottom: 15px;
+  & a {
+    display: block;
+    margin-right: 10px;
+    &.active::after {
+      content: "";
+      display: block;
+      width: 100%;
+      border-top: 3px solid var(--purple500-color);
+    }
+  }
 `;
 
 function RankingLayout() {
   return (
-    <div>
+    <>
       <TabDiv>
         <NavLink
           to="/ranking"
@@ -29,7 +39,7 @@ function RankingLayout() {
       </TabDiv>
 
       <Outlet />
-    </div>
+    </>
   );
 }
 
