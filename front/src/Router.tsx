@@ -13,6 +13,8 @@ import RankingLayout from "./routes/RankingLayout";
 import RankingPage from "./routes/RankingPage";
 import TrendingPage from "./routes/TrendingPage";
 
+// import {action as LoginAction} from "./routes/LoginModal/LoginModal";
+
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -20,7 +22,7 @@ const router = createBrowserRouter(
       <Route path="/intro" element={ <FullPage /> } />
       {/*<Route path="/intro" element={<TmpFullPage />} />*/}
       <Route path="/signup" element={<SignUpPage />} />
-      <Route path="/" element={<Layout />} errorElement={<ErrorPage />}>
+      <Route path="/" element={<Layout />} errorElement={<ErrorPage />} >
         <Route errorElement={<ErrorPage />}>
           <Route index element={<MainPage />} />
 
