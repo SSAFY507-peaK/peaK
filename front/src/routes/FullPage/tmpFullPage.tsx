@@ -13,6 +13,7 @@ function TmpFullPage() {
     const deltaY: number = e.deltaY;                            // 양수면 위를 뜻하고 음수면 아래를 뜻함
     const scrollTop: number = mainWrapperRef.current.scrollTop; // 현재 스크롤 위치(상단 기준)
     const pageHeight: number = mainWrapperRef.current.getBoundingClientRect().height;      // 화면 세로길이 !== 100vh, 미세하게 값이 달라지는 것을 잡아내야 함
+    const scrollToTop: number = Math.ceil(pageHeight);
 
     console.log(pageHeight)
     console.log(`옮겨진 곳 scrollTop : ${mainWrapperRef.current.scrollTop}`)
@@ -23,7 +24,7 @@ function TmpFullPage() {
       // if (scrollIdx === 1) {
         console.log(scrollIdx);
         mainWrapperRef.current.scrollTo({
-          top: pageHeight,
+          top: scrollToTop,
           left: 0,
           behavior: "smooth",
         });
@@ -34,7 +35,7 @@ function TmpFullPage() {
       // else if (scrollIdx === 2) {
         console.log(scrollIdx);
         mainWrapperRef.current.scrollTo({
-          top: pageHeight * 2,
+          top: scrollToTop * 2,
           left: 0,
           behavior: "smooth",
         });
@@ -45,7 +46,7 @@ function TmpFullPage() {
       // else if (scrollIdx === 3) {
         console.log(scrollIdx);
         mainWrapperRef.current.scrollTo({
-          top: pageHeight * 3,
+          top: scrollToTop * 3,
           left: 0,
           behavior: "smooth",
         });
@@ -70,7 +71,7 @@ function TmpFullPage() {
       // else if (scrollIdx === 3) {
         console.log("지금 3페이지야")
         mainWrapperRef.current.scrollTo({
-          top: pageHeight,
+          top: scrollToTop,
           left: 0,
           behavior: "smooth",
         });
@@ -80,7 +81,7 @@ function TmpFullPage() {
       // else if (scrollIdx === 4) {
         console.log("지금 4페이지야")
         mainWrapperRef.current.scrollTo({
-          top: pageHeight * 2,
+          top: scrollToTop * 2,
           left: 0,
           behavior: "smooth",
         });
