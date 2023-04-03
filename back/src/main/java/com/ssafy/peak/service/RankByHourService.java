@@ -25,6 +25,7 @@ public class RankByHourService {
 
     // Top 8
     public IdolListResponseDto top(LocalDateTime dateTime) {
+        dateTime = dateTimeToHour(dateTime);
         RankByHour rankByHour = rankByHourRepository.findByDateTime(dateTime);
         List<String> idols = new ArrayList<>();
         int count =0;
@@ -42,15 +43,18 @@ public class RankByHourService {
     // 한시간 전과 비교
     // 레디스에 넣으면 좋을..
     public TotalRankListResponseDto list(LocalDateTime dateTime){
-        LocalDateTime prevHour = dateTime.minusHours(1);
+        LocalDateTime prevHour = dateTimeToHour(dateTime.minusHours(1));
+        dateTime = dateTimeToHour(dateTime);
+
         RankByHour rankByHour = rankByHourRepository.findByDateTime(dateTime);
         RankByHour rankByPrevHour = rankByHourRepository.findByDateTime(prevHour);
+
 
         HashMap<String, Integer> rankDiffMap = new HashMap<>();
 
         // 현재 아이돌 랭킹 저장
         for(RankByHour.RankInfo info: rankByHour.getIdols()){
-            rankDiffMap.put(info.getIdol(), info.getScore());
+            rankDiffMap.put(info.getIdol(), info.getRank());
         }
 
         // 이전 아이돌 랭킹과의 차이를 저장
@@ -59,7 +63,6 @@ public class RankByHourService {
             int prevRank = info.getRank();
             rankDiffMap.put(idol, rankDiffMap.get(idol) - prevRank);
         }
-
         // 현재 아이돌 랭킹정보와 변동을 저장
         List<RankDiffDto> rankDiffDtoList = new ArrayList<>();
         for(RankByHour.RankInfo info: rankByHour.getIdols()){
@@ -70,7 +73,8 @@ public class RankByHourService {
         return dto;
     }
 
-    public RankResponseDto rankByIdol(LocalDateTime dateTime, String idol){
+    public RankResponseDto rankByIdol(String idol){
+        LocalDateTime dateTime = LocalDateTime.now();
         // 갱신된 시간으로 검색
         LocalDateTime hourDateTime = dateTimeToHour(dateTime);
         RankByHour rankByHour = rankByHourRepository.findByDateTimeAndIdolsIdol(hourDateTime, idol);
@@ -84,7 +88,7 @@ public class RankByHourService {
                 score = info.getScore();
             }
         }
-        RankResponseDto dto = RankResponseDto.builder().rank(rank).score(score).build();
+        RankResponseDto dto = RankResponseDto.builder().idol(idol).rank(rank).score(score).build();
         return dto;
     }
 
