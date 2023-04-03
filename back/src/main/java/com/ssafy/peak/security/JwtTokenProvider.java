@@ -122,8 +122,12 @@ public class JwtTokenProvider implements InitializingBean {
 		UserPrincipal userPrincipal = null;
 
 		Claims claims = parseClaims(token);
+
+		log.info("claims: {}", claims);
+
 		// 권한이 없는 경우 예외 발생
 		if (claims.get(Utils.ROLE) == null) {
+			log.info("claims.get(Utils.ROLE): {}", claims.get(Utils.ROLE));
 			throw new CustomException(CustomExceptionType.AUTHORITY_ERROR);
 		}
 		if (claims.get(Utils.ROLE).equals(Utils.ROLE_GUEST)) {
@@ -135,11 +139,18 @@ public class JwtTokenProvider implements InitializingBean {
 				.build();
 			userPrincipal = UserPrincipal.createUserPrincipal(user);
 
+			log.info("claims.get(Utils.ROLE).equals(Utils.ROLE_GUEST): {}",
+				claims.get(Utils.ROLE).equals(Utils.ROLE_GUEST));
+
 		} else if (claims.get(Utils.ROLE).equals(Utils.ROLE_USER)) {
 			// 유저 권한 (카카로 로그인, 서비스 회원가입 완료)이면 db에서 조회해서 사용
 			userPrincipal = userRepository.findById(claims.getSubject())
 				.map(UserPrincipal::createUserPrincipal)
 				.orElseThrow(() -> new CustomException(CustomExceptionType.AUTHORITY_ERROR));
+
+			log.info("claims.get(Utils.ROLE).equals(Utils.ROLE_USER): {}",
+				claims.get(Utils.ROLE).equals(Utils.ROLE_USER));
+
 		}
 		log.info("userPrincipal: {}", userPrincipal);
 		//
