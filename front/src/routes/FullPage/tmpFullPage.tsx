@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect, useCallback } from "react";
 import { SectionOne, SectionTwo, SectionThree, SectionFour} from "./SectionPages";
 import NavBar from "../../components/LayoutPage/NavBar";
-import {Wrapper} from "./SectionComponents";
+import {FullPageContainer} from "./SectionComponents";
 import DotComponent from "./DotComponent";
 
 function TmpFullPage() {
@@ -16,9 +16,10 @@ function TmpFullPage() {
     const pageHeight: number = mainWrapperRef.current.getBoundingClientRect().height;      // 화면 세로길이 !== 100vh, 미세하게 값이 달라지는 것을 잡아내야 함
     const scrollToTop: number = Math.ceil(pageHeight);
 
-    console.log(pageHeight)
-    console.log(`옮겨진 곳 scrollTop : ${mainWrapperRef.current.scrollTop}`)
-    console.log(`현재 idx : ${scrollIdx}`)
+    // console.log(pageHeight)
+    // console.log(`옮겨진 곳 scrollTop : ${mainWrapperRef.current.scrollTop}`)
+    // console.log(`현재 idx : ${scrollIdx}`)
+
     // 양수 === 스크롤을 내림
     if (deltaY > 0) {
       if (0 <= scrollTop + 0.1 && scrollTop + 0.1 < pageHeight) {  // 1페이지인데 아래로 감 => 2페이지로 이동
@@ -97,17 +98,15 @@ function TmpFullPage() {
     return () => wrapperRefCurrent.removeEventListener("wheel", wheelHandler);
   }, [wheelHandler]);
 
-
-
   return (
-    <Wrapper ref={mainWrapperRef} >
+    <FullPageContainer ref={mainWrapperRef} >
       <NavBar />
       <DotComponent scrollIdx={scrollIdx} />
       <SectionOne />
       <SectionTwo />
       <SectionThree />
       <SectionFour />
-    </Wrapper>
+    </FullPageContainer>
   );
 }
 
