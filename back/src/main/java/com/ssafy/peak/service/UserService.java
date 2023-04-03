@@ -59,9 +59,16 @@ public class UserService {
 		log.info("accessToken: {}", accessToken);
 
 		try {
-			String redirectUri = redirectUrl + SIGN_UP_URI;
+			// String redirectUri = redirectUrl + SIGN_UP_URI;
+			String redirectUri = new StringBuilder()
+				.append(redirectUrl)
+				.append(SIGN_UP_URI)
+				.append(Utils.QUESTION_MARK)
+				.append(Utils.BEARER_TOKEN_PREFIX)
+				.append(accessToken)
+				.toString();
 			response.setStatus(HttpServletResponse.SC_OK);
-			response.setHeader(Utils.ACCESS_TOKEN, Utils.BEARER_TOKEN_PREFIX + accessToken);
+			// response.setHeader(Utils.ACCESS_TOKEN, Utils.BEARER_TOKEN_PREFIX + accessToken);
 			response.sendRedirect(redirectUri);
 
 		} catch (IOException e) {
@@ -194,7 +201,7 @@ public class UserService {
 		User user = securityUtil.getCurrentUserId()
 			.flatMap(userRepository::findById)
 			.orElseThrow(() -> new CustomException(CustomExceptionType.USER_NOT_FOUND));
-		
+
 		// (나를 제외하고) 존재하는 닉네임이면 예외 발생
 		if (userRepository.findByNicknameAndIdNot(nickname, user.getId()).isPresent()) {
 			throw new CustomException(CustomExceptionType.USER_CONFLICT);
