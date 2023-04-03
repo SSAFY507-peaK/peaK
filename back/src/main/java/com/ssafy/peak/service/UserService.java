@@ -28,6 +28,8 @@ import com.ssafy.peak.repository.IdolRepository;
 import com.ssafy.peak.repository.UserRepository;
 import com.ssafy.peak.security.JwtTokenProvider;
 import com.ssafy.peak.security.UserPrincipal;
+import com.ssafy.peak.util.RedisUtil;
+import com.ssafy.peak.util.SecurityUtil;
 import com.ssafy.peak.util.Utils;
 
 import io.jsonwebtoken.Claims;
@@ -46,6 +48,8 @@ public class UserService {
 	private final JwtTokenProvider jwtTokenProvider;
 	private final UserRepository userRepository;
 	private final IdolRepository idolRepository;
+	private final SecurityUtil securityUtil;
+	private final RedisUtil redisUtil;
 
 	/**
 	 * OAuth 로그인 후, 회원 가입에 필요한 추가 정보를 받기 위해 redirect
@@ -57,55 +61,20 @@ public class UserService {
 		log.info("accessToken: {}", accessToken);
 
 		try {
-			String redirectUri = redirectUrl + SIGN_UP_URI;
+			// String redirectUri = redirectUrl + SIGN_UP_URI;
+			String redirectUri = new StringBuilder()
+				.append(redirectUrl)
+				.append(SIGN_UP_URI)
+				.append(Utils.QUESTION_MARK)
+				.append(Utils.BEARER_TOKEN_PREFIX)
+				.append(accessToken)
+				.toString();
 			response.setStatus(HttpServletResponse.SC_OK);
-			response.setHeader(Utils.ACCESS_TOKEN, Utils.BEARER_TOKEN_PREFIX + accessToken);
+			// response.setHeader(Utils.ACCESS_TOKEN, Utils.BEARER_TOKEN_PREFIX + accessToken);
 			response.sendRedirect(redirectUri);
 
 		} catch (IOException e) {
 			throw new RuntimeException(e);
-		}
-	}
-
-	/**
-	 * 로그인
-	 */
-	public void login(HttpServletResponse response, Authentication authentication) {
-
-		// AccessToken과 RefreshToken 발급
-		String accessToken = jwtTokenProvider.createTokensFromAuthentication(authentication, Utils.ACCESS_TOKEN);
-		String refreshToken = jwtTokenProvider.createTokensFromAuthentication(authentication, Utils.REFRESH_TOKEN);
-
-		CustomOAuth2User oAuth2User = (CustomOAuth2User)authentication.getPrincipal();
-		SecurityContextHolder.getContext()
-			.setAuthentication(
-				new UsernamePasswordAuthenticationToken(oAuth2User, accessToken, oAuth2User.getAuthorities()));
-		try {
-			String redirectUri = redirectUrl;
-			response.setHeader(Utils.ACCESS_TOKEN, Utils.BEARER_TOKEN_PREFIX + accessToken);
-			response.setHeader(Utils.REFRESH_TOKEN, Utils.BEARER_TOKEN_PREFIX + refreshToken);
-
-			response.setStatus(HttpServletResponse.SC_OK);
-			response.sendRedirect(redirectUri);
-
-		} catch (IOException e) {
-			throw new RuntimeException(e);
-		}
-
-	}
-
-	/**
-	 * 닉네임 유효성 검사
-	 */
-	public void checkNickname(String nickname) {
-
-		// 조건에 맞지 않는 닉네임이면 예외 발생
-		if (!Pattern.matches(nicknamePattern, nickname)) {
-			throw new CustomException(CustomExceptionType.UNQUALIFIED_NICKNAME);
-		}
-		// 존재하는 닉네임이면 예외 발생
-		if (userRepository.findByNickname(nickname).isPresent()) {
-			throw new CustomException(CustomExceptionType.USER_CONFLICT);
 		}
 	}
 
@@ -174,5 +143,92 @@ public class UserService {
 			.accessToken(accessToken)
 			.refreshToken(refreshToken)
 			.build();
+	}
+
+	/**
+	 * 로그인
+	 */
+	public void login(HttpServletResponse response, Authentication authentication) {
+
+		// AccessToken과 RefreshToken 발급
+		String accessToken = jwtTokenProvider.createTokensFromAuthentication(authentication, Utils.ACCESS_TOKEN);
+		String refreshToken = jwtTokenProvider.createTokensFromAuthentication(authentication, Utils.REFRESH_TOKEN);
+
+		log.info("accessToken: {}", accessToken);
+
+		CustomOAuth2User oAuth2User = (CustomOAuth2User)authentication.getPrincipal();
+		SecurityContextHolder.getContext()
+			.setAuthentication(
+				new UsernamePasswordAuthenticationToken(oAuth2User, accessToken, oAuth2User.getAuthorities()));
+		try {
+			String redirectUri = redirectUrl;
+			response.setHeader(Utils.ACCESS_TOKEN, Utils.BEARER_TOKEN_PREFIX + accessToken);
+			response.setHeader(Utils.REFRESH_TOKEN, Utils.BEARER_TOKEN_PREFIX + refreshToken);
+
+			response.setStatus(HttpServletResponse.SC_OK);
+			response.sendRedirect(redirectUri);
+
+		} catch (IOException e) {
+			throw new RuntimeException(e);
+		}
+
+	}
+
+	/**
+	 * 닉네임 유효성 검사
+	 */
+	public void checkNickname(String nickname) {
+
+		// 조건에 맞지 않는 닉네임이면 예외 발생
+		if (!Pattern.matches(nicknamePattern, nickname)) {
+			throw new CustomException(CustomExceptionType.UNQUALIFIED_NICKNAME);
+		}
+		// 존재하는 닉네임이면 예외 발생
+		if (userRepository.findByNickname(nickname).isPresent()) {
+			throw new CustomException(CustomExceptionType.USER_CONFLICT);
+		}
+	}
+
+	/**
+	 * 닉네임 수정
+	 */
+	@Transactional
+	public void modifyNickname(String nickname) {
+
+		// 조건에 맞지 않는 닉네임이면 예외 발생
+		if (!Pattern.matches(nicknamePattern, nickname)) {
+			throw new CustomException(CustomExceptionType.UNQUALIFIED_NICKNAME);
+		}
+		// user 인증 정보 확인 후 db 조회
+		User user = securityUtil.getCurrentUserId()
+			.flatMap(userRepository::findById)
+			.orElseThrow(() -> new CustomException(CustomExceptionType.USER_NOT_FOUND));
+
+		// (나를 제외하고) 존재하는 닉네임이면 예외 발생
+		if (userRepository.findByNicknameAndIdNot(nickname, user.getId()).isPresent()) {
+			throw new CustomException(CustomExceptionType.USER_CONFLICT);
+		}
+		//db 저장
+		user.setNickname(nickname);
+		userRepository.save(user);
+	}
+
+	public void logout(String token) {
+
+		// user 인증 정보 확인 후 db 조회
+		User user = securityUtil.getCurrentUserId()
+			.flatMap(userRepository::findById)
+			.orElseThrow(() -> new CustomException(CustomExceptionType.USER_NOT_FOUND));
+
+		// String key = "RT:" + Encoders.BASE64.encode(user.getId().getBytes());
+		// if (redisUtil.getData(key) != null) {
+		// 	redisUtil.deleteData(key);
+		// }
+		// long expiration = jwtTokenProvider.getExpiration(token);
+		// Date now = new Date();
+		// redisUtil.setDataExpire(token, token, expiration - now.getTime());
+
+		SecurityContextHolder.getContext().setAuthentication(null);
+		log.info("로그아웃 유저 이메일 : '{}'", user.getEmail());
 	}
 }

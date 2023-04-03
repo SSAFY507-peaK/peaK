@@ -5,6 +5,7 @@ import java.time.LocalDateTime;
 public class Utils {
 
 	public static final String BLANK = " ";
+	public static final String QUESTION_MARK = "?";
 
 	// JWT
 	public static final String ROLE = "role";

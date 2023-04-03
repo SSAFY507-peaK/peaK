@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import kakaoLogin from "../../assets/kakao_round.png";
 import naverLogin from "../../assets/naver_round.png";
+import axios from "axios";
 
 const ButtonWrapper = styled.button`
   width: 250px;
@@ -60,8 +61,14 @@ function NaverLogin() {
 }
 
 function KakaoLogin() {
+  const handleLoginKakao = () => {
+    axios.post("https://j8a507.p.ssafy.io/api/oauth2/authorization/kakao")
+      .then(response => console.log(response))
+      .catch(error => console.log(error))
+  }
+
   return (
-    <ButtonWrapper>
+    <ButtonWrapper onClick={handleLoginKakao}>
       <IconSection src={kakaoLogin} alt="카카오 소셜 로그인"></IconSection>
       <KakaoLoginButton>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;카카오로 로그인</KakaoLoginButton>
     </ButtonWrapper>

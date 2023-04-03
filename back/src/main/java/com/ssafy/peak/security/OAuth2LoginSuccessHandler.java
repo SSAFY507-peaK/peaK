@@ -33,6 +33,8 @@ public class OAuth2LoginSuccessHandler implements AuthenticationSuccessHandler {
 		CustomOAuth2User oAuth2User = (CustomOAuth2User)authentication.getPrincipal();
 		Role role = oAuth2User.getRole();
 
+		log.info("role: {}", role);
+
 		if (role == Role.ROLE_GUEST) {
 			log.info("회원가입 진행");
 			userService.redirectSignupPage(response, authentication);

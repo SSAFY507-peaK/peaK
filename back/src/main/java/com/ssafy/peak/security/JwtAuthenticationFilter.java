@@ -40,9 +40,9 @@ public class JwtAuthenticationFilter extends GenericFilterBean {
 		if (StringUtils.hasText(accessToken) && jwtTokenProvider.validateToken(accessToken)) {
 			Authentication authentication = jwtTokenProvider.getAuthentication(accessToken);
 			SecurityContextHolder.getContext().setAuthentication(authentication);
-			log.debug("Security Context에 '{}' 인증 정보를 저장했습니다, uri: {}", authentication.getName(), requestURI);
+			log.info("Security Context에 '{}' 인증 정보를 저장했습니다, uri: {}", authentication.getName(), requestURI);
 		} else {
-			log.debug("액세스 토큰이 유효하지 않습니다, uri: {}", requestURI);
+			log.info("액세스 토큰이 유효하지 않습니다, uri: {}", requestURI);
 		}
 		filterChain.doFilter(servletRequest, servletResponse);    // filterChain에서 다음 필터를 호출
 	}
