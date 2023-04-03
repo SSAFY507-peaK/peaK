@@ -112,6 +112,7 @@ public class SecurityConfig {
 		CorsConfiguration configuration = new CorsConfiguration();
 		configuration.addAllowedOrigin("http://localhost:3000");
 		configuration.addAllowedOrigin("https://j8a507.p.ssafy.io");
+		configuration.addAllowedOrigin("https://accounts.kakao.com");
 		configuration.addAllowedHeader("*");
 		configuration.addAllowedMethod("*");
 		configuration.setAllowCredentials(true);

@@ -263,6 +263,8 @@ public class JwtTokenProvider implements InitializingBean {
 		UserPrincipal userPrincipal = (UserPrincipal)authentication.getPrincipal();
 		String userId = userPrincipal.getId();
 
+		log.info("userId: {}", userId);
+
 		String key = "RT:" + Encoders.BASE64.encode(userId.getBytes());
 		String refreshToken = redisUtil.getData(key);
 		if (refreshToken == null) {
