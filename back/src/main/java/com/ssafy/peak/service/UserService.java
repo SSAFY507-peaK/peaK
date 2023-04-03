@@ -28,6 +28,7 @@ import com.ssafy.peak.repository.IdolRepository;
 import com.ssafy.peak.repository.UserRepository;
 import com.ssafy.peak.security.JwtTokenProvider;
 import com.ssafy.peak.security.UserPrincipal;
+import com.ssafy.peak.util.RedisUtil;
 import com.ssafy.peak.util.SecurityUtil;
 import com.ssafy.peak.util.Utils;
 
@@ -48,6 +49,7 @@ public class UserService {
 	private final UserRepository userRepository;
 	private final IdolRepository idolRepository;
 	private final SecurityUtil securityUtil;
+	private final RedisUtil redisUtil;
 
 	/**
 	 * OAuth 로그인 후, 회원 가입에 필요한 추가 정보를 받기 위해 redirect
@@ -209,5 +211,24 @@ public class UserService {
 		//db 저장
 		user.setNickname(nickname);
 		userRepository.save(user);
+	}
+
+	public void logout(String token) {
+
+		// user 인증 정보 확인 후 db 조회
+		User user = securityUtil.getCurrentUserId()
+			.flatMap(userRepository::findById)
+			.orElseThrow(() -> new CustomException(CustomExceptionType.USER_NOT_FOUND));
+
+		// String key = "RT:" + Encoders.BASE64.encode(user.getId().getBytes());
+		// if (redisUtil.getData(key) != null) {
+		// 	redisUtil.deleteData(key);
+		// }
+		// long expiration = jwtTokenProvider.getExpiration(token);
+		// Date now = new Date();
+		// redisUtil.setDataExpire(token, token, expiration - now.getTime());
+
+		SecurityContextHolder.getContext().setAuthentication(null);
+		log.info("로그아웃 유저 이메일 : '{}'", user.getEmail());
 	}
 }

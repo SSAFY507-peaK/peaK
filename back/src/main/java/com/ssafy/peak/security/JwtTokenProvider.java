@@ -78,7 +78,7 @@ public class JwtTokenProvider implements InitializingBean {
 		} else if (tokenType.equals(Utils.REFRESH_TOKEN)) {
 			expiration = new Date(now.getTime() + refreshTokenValidTime);
 		}
-		String accessToken = Jwts.builder()
+		String token = Jwts.builder()
 			.setSubject(customOAuth2User.getName()) // user id
 			.claim(Utils.AUTHENTICATION, authentication) // authentication 저장
 			.claim(Utils.EMAIL, customOAuth2User.getEmail())    // 이메일 정보 저장
@@ -88,7 +88,12 @@ public class JwtTokenProvider implements InitializingBean {
 			.signWith(SignatureAlgorithm.HS512, key) // 사용할 암호화 알고리즘 (HS512), signature 에 들어갈 secret key 세팅
 			.compact();
 
-		return accessToken;
+		// // refresh token은 redis에 저장
+		// if (tokenType.equals(Utils.REFRESH_TOKEN)) {
+		// 	String key = "RT:" + Encoders.BASE64.encode(customOAuth2User.getName().getBytes());
+		// 	redisUtil.setDataExpire(key, token, refreshTokenValidTime);
+		// }
+		return token;
 	}
 
 	/**
