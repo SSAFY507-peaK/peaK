@@ -1,4 +1,3 @@
-import CarouselCustom from '../carousel/CarouslCustom';
 import IdolYoutubeCarousel from './IdolYoutubeCarousel';
 import TitleComponent from './TitleComponent';
 import YouTubeIcon from '@mui/icons-material/YouTube';
@@ -67,7 +66,7 @@ function IdolYoutube () {
       <TitleComponent blacktxt="트렌딩" purpletxt="유튜브" />
       <YoutubeCarouselDiv>
           <CarouselDiv>
-            <CarouselCustom items={items} width="250px" height="180px"></CarouselCustom>
+            {/* <CarouselCustom items={items} width="250px" height="180px"></CarouselCustom> */}
           </CarouselDiv>
         </YoutubeCarouselDiv>
     </Frame>

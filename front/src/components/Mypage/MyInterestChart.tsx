@@ -2,6 +2,7 @@ import ReactEcharts from 'echarts-for-react';
 import styled from 'styled-components';
 
 const ChartFrame = styled.div`
+  padding: 15px 0px;
   /* background-color: white; */
   /* border-radius: 20px; */
 `;
@@ -11,7 +12,7 @@ function MyInterestChart() {
   const gaugeData = [
     {
       value: 67,
-      name: "Perfect",
+      name: "Perfect",      // 이 부분은 점수에 따라 다른 데이터 보여주자
       // title: {
       //   offsetCenter: ["0%", "-30%"]
       // },
@@ -79,7 +80,7 @@ function MyInterestChart() {
       <ReactEcharts
         option={option}
         notMerge={true}
-        style={{ height: "30vh" }}
+        style={{ height: "25vh" }}
         lazyUpdate={true}
       />
     </ChartFrame>

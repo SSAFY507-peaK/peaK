@@ -1,6 +1,7 @@
-import styled from "styled-components";
 import { useEffect, useState } from "react";
+
 import CalendarItem from "./CalendarItem";
+import styled from "styled-components";
 
 interface Props {
   setClickIndex: React.Dispatch<React.SetStateAction<number>>;
@@ -8,12 +9,12 @@ interface Props {
 
 const CalendartFrame = styled.div`
   display: grid;
-  grid-template-columns: 3fr 3fr 3fr 3fr 3fr 3fr 3fr;
+  grid-template-columns: 2fr 2fr 2fr 2fr 2fr 2fr 2fr;
   width: 100%;
   height: 30%;
   background-color: white;
   margin-bottom: 40px;
-  margin-top: 30px
+  margin-top: 20px;
 `;
 
 function Calendar({setClickIndex}:Props) {
@@ -57,7 +58,7 @@ function Calendar({setClickIndex}:Props) {
     }
   },[sellectList])
 
-  console.log(sellectList)
+  // console.log(sellectList)
   return (
     <div>
       <CalendartFrame>

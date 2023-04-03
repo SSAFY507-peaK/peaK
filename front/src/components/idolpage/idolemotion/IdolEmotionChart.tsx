@@ -6,7 +6,7 @@ function IdolEmotionChart() {
   let labels = ['월', '화', '수', '목', '금', '토', '일']
 
   const [options, setOptions] = useState({
-    color: ['rgba(255, 99, 132, 0.5)', 'rgba(53, 162, 235, 0.5)'],
+    color: ['rgba(230, 35, 77, 0.5)', 'rgba(57, 17, 232, 0.5)'],
     tooltip: {
       trigger: 'axis',
       axisPointer: {
@@ -44,7 +44,7 @@ function IdolEmotionChart() {
         name: '긍정',
         type: 'line',
         // stack: 'Total',
-        smooth: true,
+        // smooth: true,
         lineStyle: {
           width: 0
         },
@@ -61,7 +61,7 @@ function IdolEmotionChart() {
         name: '부정',
         type: 'line',
         // stack: 'Total',
-        smooth: true,
+        // smooth: true,
         lineStyle: {
           width: 0
         },

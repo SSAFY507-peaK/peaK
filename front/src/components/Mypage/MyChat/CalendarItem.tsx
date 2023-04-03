@@ -20,8 +20,8 @@ const DayComponent = styled.option<Type>`
   justify-content: center;
   align-items: center;  
   margin: 5px;
-  font-size: 1.2rem;
-  height: 3vh;
+  font-size: 1.1rem;
+  /* height: 2vh; */
   cursor: ${props => props.data ? "pointer" : null};
   text-decoration: underline;
   color: ${props => props.click ? "white" : props => props.data ?  `var(--purple400-color)` : null};
