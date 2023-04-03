@@ -29,12 +29,13 @@ const ChartFrame = styled.div`
 
 function TotalChart({userName, setIdolName}:Props) {
   const [selectedData, setSelectedData] = useState<SelecteType>();
+  const color:string[] = ["#4CD7F6","#6DBFFF","#7166F9", "#C74BF6", "#F946FF"]
   const chartData = [
-    { value: 45, name: "세븐틴" },
-    { value: 30, name: "방탄소년단" },      
-    { value: 15, name: "블랙핑크" },      
-    { value: 5, name: "트와이스" },      
-    { value: 5, name: "아이브" },
+    { value: 45, name: "세븐틴", itemStyle: { color: color[0]} },
+    { value: 30, name: "방탄소년단" ,itemStyle: { color: color[1]} },      
+    { value: 15, name: "블랙핑크" ,itemStyle: { color: color[2]} },      
+    { value: 5, name: "트와이스" ,itemStyle: { color: color[3]} },      
+    { value: 5, name: "아이브" ,itemStyle: { color: color[4]} },
   ];
   
   const options = useMemo(() => {
