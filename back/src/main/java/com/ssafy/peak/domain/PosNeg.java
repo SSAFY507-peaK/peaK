@@ -1,5 +1,6 @@
 package com.ssafy.peak.domain;
 
+import com.ssafy.peak.dto.idol.PosNegDto;
 import lombok.*;
 import org.springframework.data.mongodb.core.mapping.Document;
 

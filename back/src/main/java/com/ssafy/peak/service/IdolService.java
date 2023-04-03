@@ -41,8 +41,5 @@ public class IdolService {
         return dto;
     }
 
-    public IdolPosNegResponseDto posNegWeekly(){
-
-    }
 
 }
