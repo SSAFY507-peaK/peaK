@@ -62,6 +62,8 @@ function NaverLogin() {
 
 function KakaoLogin() {
   const handleLoginKakao = () => {
+    axios.defaults.withCredentials = true; // 쿠키 데이터를 전송받기 위해
+    axios.defaults.headers['Access-Control-Allow-Origin'] = '*';
     axios.post("https://j8a507.p.ssafy.io/api/oauth2/authorization/kakao")
       .then(response => console.log(response))
       .catch(error => console.log(error))
