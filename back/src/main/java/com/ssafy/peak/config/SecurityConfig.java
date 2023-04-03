@@ -17,6 +17,7 @@ import com.ssafy.peak.security.JwtAccessDeniedHandler;
 import com.ssafy.peak.security.JwtAuthenticationEntryPoint;
 import com.ssafy.peak.security.JwtAuthenticationFilter;
 import com.ssafy.peak.security.JwtTokenProvider;
+import com.ssafy.peak.security.OAuth2LoginFailureHandler;
 import com.ssafy.peak.security.OAuth2LoginSuccessHandler;
 import com.ssafy.peak.service.CustomOAuth2UserService;
 import com.ssafy.peak.util.RedisUtil;
@@ -35,24 +36,26 @@ public class SecurityConfig {
 
 	private final CustomOAuth2UserService customOAuth2UserService;
 	private final OAuth2LoginSuccessHandler oAuth2LoginSuccessHandler;
+	private final OAuth2LoginFailureHandler oAuth2LoginFailureHandler;
 	private final JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
 	private final JwtAccessDeniedHandler jwtAccessDeniedHandler;
 	private final JwtTokenProvider jwtTokenProvider;
 	private final RedisUtil redisUtil;
 
 	private static final String[] PERMIT_URL_ARRAY = {
-			/* swagger v2 */
-			"/v2/api-docs",
-			"/swagger-resources",
-			"/swagger-resources/**",
-			"/configuration/ui",
-			"/configuration/security",
-			"/swagger-ui.html",
-			"/webjars/**",
-			/* swagger v3 */
-			"/v3/api-docs/**",
-			"/swagger-ui/**"
+		/* swagger v2 */
+		"/v2/api-docs",
+		"/swagger-resources",
+		"/swagger-resources/**",
+		"/configuration/ui",
+		"/configuration/security",
+		"/swagger-ui.html",
+		"/webjars/**",
+		/* swagger v3 */
+		"/v3/api-docs/**",
+		"/swagger-ui/**"
 	};
+
 	@Bean
 	protected SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
 
@@ -80,6 +83,7 @@ public class SecurityConfig {
 			.userInfoEndpoint().userService(customOAuth2UserService)
 			.and()
 			.successHandler(oAuth2LoginSuccessHandler)
+			.failureHandler(oAuth2LoginFailureHandler)
 
 			.and()    // 예외 처리 설정
 			.exceptionHandling()
