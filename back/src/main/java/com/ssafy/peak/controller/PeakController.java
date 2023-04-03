@@ -44,6 +44,6 @@ public class PeakController {
 
     @GetMapping("/current/{idol}")
     public RankResponseDto rankByIdol(@PathVariable("idol") String idol){
-        return rankByHourService.rankByIdol(LocalDateTime.now(), idol);
+        return rankByHourService.rankByIdol(idol);
     }
 }

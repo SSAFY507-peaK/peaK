@@ -8,6 +8,7 @@ import lombok.*;
 @AllArgsConstructor
 @Builder
 public class RankResponseDto {
+    private String idol;
     private int rank;
     private int score;
 }

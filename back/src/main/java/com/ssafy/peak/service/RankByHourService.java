@@ -54,7 +54,7 @@ public class RankByHourService {
 
         // 현재 아이돌 랭킹 저장
         for(RankByHour.RankInfo info: rankByHour.getIdols()){
-            rankDiffMap.put(info.getIdol(), info.getScore());
+            rankDiffMap.put(info.getIdol(), info.getRank());
         }
 
         // 이전 아이돌 랭킹과의 차이를 저장
@@ -73,7 +73,8 @@ public class RankByHourService {
         return dto;
     }
 
-    public RankResponseDto rankByIdol(LocalDateTime dateTime, String idol){
+    public RankResponseDto rankByIdol(String idol){
+        LocalDateTime dateTime = LocalDateTime.now();
         // 갱신된 시간으로 검색
         LocalDateTime hourDateTime = dateTimeToHour(dateTime);
         RankByHour rankByHour = rankByHourRepository.findByDateTimeAndIdolsIdol(hourDateTime, idol);
@@ -87,7 +88,7 @@ public class RankByHourService {
                 score = info.getScore();
             }
         }
-        RankResponseDto dto = RankResponseDto.builder().rank(rank).score(score).build();
+        RankResponseDto dto = RankResponseDto.builder().idol(idol).rank(rank).score(score).build();
         return dto;
     }
 

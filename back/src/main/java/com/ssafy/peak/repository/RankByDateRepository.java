@@ -1,6 +1,7 @@
 package com.ssafy.peak.repository;
 
 import com.ssafy.peak.domain.rank.RankByDate;
+import com.ssafy.peak.dto.rank.RankResponseDto;
 import org.springframework.data.mongodb.repository.Aggregation;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.mongodb.repository.Query;
@@ -19,6 +20,6 @@ public interface RankByDateRepository extends MongoRepository<RankByDate, String
             "{ $unwind: '$filteredIdols' }",
             "{ $replaceRoot: { newRoot: '$filteredIdols' } }"
     })
-    List<RankByDate> findByDateTimeBetween(LocalDateTime startDateTime, LocalDateTime endDateTime, String Idol);
+    List<RankResponseDto> findByDateTimeBetween(LocalDateTime startDateTime, LocalDateTime endDateTime, String Idol);
 
 }
