@@ -12,7 +12,7 @@ function MyInterestChart() {
   const gaugeData = [
     {
       value: 67,
-      name: "Perfect",
+      name: "Perfect",      // 이 부분은 점수에 따라 다른 데이터 보여주자
       // title: {
       //   offsetCenter: ["0%", "-30%"]
       // },

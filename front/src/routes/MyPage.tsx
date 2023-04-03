@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { MouseEvent, useEffect, useState } from 'react';
 
 import DriveFileRenameOutlineOutlinedIcon from '@mui/icons-material/DriveFileRenameOutlineOutlined';
 import MyChat from '../components/Mypage/MyChat/MyChat';
@@ -37,6 +37,11 @@ const BottomFrame = styled.div`
   /* flex: 0.4; */
 `;
 
+/** 클릭시 닉네임 변경 모달창과 함께 닉네임 변경  */
+function handleClick(event: MouseEvent<SVGSVGElement>) {
+  console.log('닉네임 변경 구현할 예정');
+}
+
 function MyPage() {
   const params = useParams();
   const userName:string = params.userName || "";
@@ -49,8 +54,8 @@ function MyPage() {
   return (
     <Wrapper>
       <TitleFrame>
-        <TitleComponent id="2" blacktxt="어서오세요, " purpletxt={userName} addtxt=" 님"></TitleComponent>
-        <DriveFileRenameOutlineOutlinedIcon sx={{ fontSize: "1.2rem" }}></DriveFileRenameOutlineOutlinedIcon>
+        <TitleComponent id="2" blacktxt="어서오세요, " purpletxt={userName} addtxt=" 님" />
+        <DriveFileRenameOutlineOutlinedIcon sx={{ fontSize: "1.2rem", cursor: "pointer" }} onClick={handleClick} />
       </TitleFrame>
       <TopFrame>
         <TotalChart userName={userName} setIdolName={setIdolName} />

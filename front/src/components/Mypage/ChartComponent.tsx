@@ -9,6 +9,7 @@ interface Props {
 const Frame = styled.div`
   height: 26.5vh;  
 `;
+
 // const color:string[] = ["#4CD7F6","#6DBFFF","#7166F9", "#C74BF6", "#F946FF"]
 function ChartComponent({idoldata}:Props) {
   const option = {

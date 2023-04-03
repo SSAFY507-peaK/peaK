@@ -4,6 +4,22 @@ export type Idoldata = {
   dataAvg: Array<number>;
 }
 
+// export type MyIdolDetail = {
+//   name: string;
+//   myScore: number;
+//   averageScore: number;
+//   comments: Object<CommentList>;
+// }
+
+// export type CommentList = {
+//  comments: Array<Comments>;
+// }
+
+// export type Comments = {
+//   content: string;
+//   datetime: string;
+// }
+
 // type GetData = {
 //   // id: number;
 //   data: number;
