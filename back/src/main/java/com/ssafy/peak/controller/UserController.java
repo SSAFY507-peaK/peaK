@@ -44,6 +44,7 @@ public class UserController {
 
 	/**
 	 * 회원 가입
+	 * (OAuth2 login 성공 후)
 	 */
 	@GetMapping("/sign-up")
 	public ResponseEntity signup(
@@ -91,11 +92,13 @@ public class UserController {
 	@Transactional
 	public ResponseEntity reissue(@RequestHeader("Authorization") String token) {
 
-		token = token.split(" ")[1];
+		// header에 token 꺼내서 Bearer 떼고 재발급 하러 가기
+		token = token.split(Utils.BLANK)[1];
 		JwtTokenDto tokenDto = jwtTokenProvider.reissue(token);
 
+		// header에도 토큰 넣어주기
 		HttpHeaders httpHeaders = new HttpHeaders();
-		httpHeaders.add(Utils.TOKEN, Utils.BEARER_TOKEN_PREFIX + tokenDto.getToken());
+		httpHeaders.add(Utils.AUTHORIZATION, Utils.BEARER_TOKEN_PREFIX + tokenDto.getToken());
 
 		return ResponseEntity.ok().headers(httpHeaders).body(tokenDto);
 	}
