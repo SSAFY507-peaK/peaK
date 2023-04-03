@@ -131,8 +131,6 @@ function ChartPage() {
   const [selectedChart, setSelectedChart] = useState<ChartIdolObjectType[]>([]);
   const [idols, setIdols] = useState<IdolObjectType[]>(dummyData);
 
-
-
   /** 내가 선택한 아이돌 팀을 보여주자 */
   const showSelectIdols = useCallback(() => {
     const returnArr = selectedIdols?.map(idol =>
