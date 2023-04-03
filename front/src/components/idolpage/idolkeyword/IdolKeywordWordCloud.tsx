@@ -9,9 +9,10 @@ interface Props {
 const WordCloudFrame = styled.div`
   /* height: 15vh; */
   width: 80%;
-  border-radius: 200px;
+  border-radius: 70px;
   margin-left: 20px;
-  background-color: var(--purple800-color);
+  background-color: #f4f2f5;
+  box-shadow: 1px 3px 1px #cfcdcd;
   opacity: 0.5;
 `;
 
@@ -19,8 +20,8 @@ const WordCloudFrame = styled.div`
 function IdolKeywordWordCloud ({chooseKeyword}:Props){
   
   const data = []
-  for (let i=0;  i < 50; i++) {
-    const tmp = {text: faker.datatype.string(5), value: faker.datatype.number({ min: 0, max: 300})}
+  for (let i=0;  i < 30; i++) {
+    const tmp = {text: faker.datatype.string(5), value: faker.datatype.number({ min: 0, max: 200})}
     data.push(tmp)
   }
 
@@ -30,8 +31,8 @@ function IdolKeywordWordCloud ({chooseKeyword}:Props){
         data={data}
         fontSize={(word) => Math.log2(word.value) * 4}
         spiral="rectangular"
-        width={400} 
-        height={300}
+        width={300} 
+        height={150}
         rotate={(word) => {
           if (word.value % 2) {
             return (0)

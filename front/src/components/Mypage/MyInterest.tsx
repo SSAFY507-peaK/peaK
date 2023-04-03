@@ -1,7 +1,8 @@
 import TitleComponent from "../idolpage/TitleComponent";
 import styled from "styled-components";
 import MyInterestChart from "./MyInterestChart";
-import ScorerComponent from "./ScorerComponent";
+import ScoreComponent from "./ScoreComponent"
+
 
 interface Props {
   userName: string;
@@ -29,7 +30,7 @@ const ScoreFrame = styled.div`
   justify-content: space-between;
 `;
 
-export default function MyInterest({userName, idolName}:Props) {
+function MyInterest({userName, idolName}:Props) {
   const myScore:number = 67
   const averageScore:number = 57
   return (
@@ -38,10 +39,12 @@ export default function MyInterest({userName, idolName}:Props) {
       <Frame>
         <MyInterestChart />
         <ScoreFrame>
-          <ScorerComponent pd="0px 0px 30px 40px" title="나의 점수" score= {`${myScore}점`} size="1.4rem" fsize="0.9rem" color={`var(--purple400-color)`} />
-          <ScorerComponent pd="5px 40px 20px 0px" title="평균점수" score= {`${averageScore}점`} size="1.2rem" fsize="0.8rem" opacity="0.7" color={`var(--purple700-color)`} />
+          <ScoreComponent pd="0px 0px 30px 40px" title="나의 점수" score= {`${myScore}점`} size="1.4rem" fsize="0.9rem" color={`var(--purple400-color)`} />
+          <ScoreComponent pd="5px 40px 20px 0px" title="평균점수" score= {`${averageScore}점`} size="1.2rem" fsize="0.8rem" opacity="0.7" color={`var(--purple700-color)`} />
         </ScoreFrame>
       </Frame>
     </Wrapper>
   )
 }
+
+export default MyInterest;
