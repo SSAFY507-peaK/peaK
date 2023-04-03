@@ -2,7 +2,7 @@ import ReactEcharts from 'echarts-for-react';
 import styled from 'styled-components';
 
 const Frame = styled.div`
-  height: 30vh;  
+  height: 26.5vh;  
 `;
 
 function ChartComponent() {

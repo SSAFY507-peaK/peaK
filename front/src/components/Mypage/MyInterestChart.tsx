@@ -2,6 +2,7 @@ import ReactEcharts from 'echarts-for-react';
 import styled from 'styled-components';
 
 const ChartFrame = styled.div`
+  padding: 15px 0px;
   /* background-color: white; */
   /* border-radius: 20px; */
 `;
@@ -79,7 +80,7 @@ function MyInterestChart() {
       <ReactEcharts
         option={option}
         notMerge={true}
-        style={{ height: "30vh" }}
+        style={{ height: "25vh" }}
         lazyUpdate={true}
       />
     </ChartFrame>

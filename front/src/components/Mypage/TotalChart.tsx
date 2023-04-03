@@ -1,7 +1,8 @@
+import { useCallback, useMemo, useState } from 'react';
+
 import ReactEcharts from 'echarts-for-react';
 import TitleComponent from "../idolpage/TitleComponent";
 import styled from "styled-components";
-import { useState, useMemo, useCallback } from 'react';
 
 interface Props {
   userName: string;
@@ -17,8 +18,8 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   flex: 0.5;
-  width: 100%;
-  height: 100%;
+  /* width: 100%;
+  height: 100%; */
 `;
 
 const ChartFrame = styled.div`
@@ -52,7 +53,7 @@ function TotalChart({userName, setIdolName}:Props) {
         {
           name: '나의 아이돌 관심도',
           type: 'pie',
-          radius: ['30%', '70%'],
+          radius: ['40%', '80%'],
           avoidLabelOverlap: false,
           selectedMode: 'single',
           selectedOffset: 10,
@@ -122,8 +123,8 @@ function TotalChart({userName, setIdolName}:Props) {
       <ChartFrame>
         <ReactEcharts
           option={options}
-          style={{ height: "100%", width: "100%" }}
-          opts={{ renderer: 'canvas'}}
+          // style={{ height: "90%", width: "90%" }}
+          opts={{ renderer: 'svg'}}
           onEvents={{ 'click': onChartClick }}
         />
       </ChartFrame>

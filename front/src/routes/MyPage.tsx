@@ -1,3 +1,5 @@
+import { useEffect, useState } from 'react';
+
 import DriveFileRenameOutlineOutlinedIcon from '@mui/icons-material/DriveFileRenameOutlineOutlined';
 import MyChat from '../components/Mypage/MyChat/MyChat';
 import MyChatChart from '../components/Mypage/MyChatChart';
@@ -8,7 +10,6 @@ import TitleComponent from "../components/idolpage/TitleComponent";
 import TotalChart from '../components/Mypage/TotalChart';
 import styled from "styled-components";
 import { useParams } from "react-router-dom";
-import { useEffect, useState } from 'react';
 
 const Wrapper = styled.div`
   display: flex;
@@ -26,14 +27,14 @@ const TitleFrame = styled.div`
 const TopFrame = styled.div`
   display: flex;
   flex-direction: row;
-  flex: 0.5;
+  flex: 0.4;
   margin-bottom: 25px;
 `;
 
 const BottomFrame = styled.div`
   display: flex;
   flex-direction: row;
-  flex: 0.4;
+  /* flex: 0.4; */
 `;
 
 function MyPage() {
