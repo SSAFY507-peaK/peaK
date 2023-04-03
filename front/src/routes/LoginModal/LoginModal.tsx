@@ -1,6 +1,5 @@
 import React, {useRef} from 'react';
 import styled from 'styled-components'
-
 import { ReactComponent as Logo } from "../../assets/logo.svg";
 import { KakaoLogin, NaverLogin } from "../../components/LoginModal/LoginButton";
 import useOnClickOutside from "../../_hooks/useOnClickOutside";
@@ -72,10 +71,17 @@ const ButtonWrapper = styled.div`
     margin-top: 5px;
   }
 `;
+// export async function action () {
+//   await axios.post("https://j8a507.p.ssafy.io/api/oauth2/authorization/kakao")
+//     .then(response => console.log(response))
+//     .catch(error => console.log(error))
+// }
 
 function LoginModal({ setLoginOpen }:LoginModalProps) {
   const ref = useRef<HTMLDivElement>(null);
-  useOnClickOutside(ref, () => {setLoginOpen(false)})
+  useOnClickOutside(ref, () => {setLoginOpen(false)});
+
+
 
   return (
     <ModalBackground>
@@ -86,7 +92,7 @@ function LoginModal({ setLoginOpen }:LoginModalProps) {
           <h2>로그인하기</h2>
         </LogoWrapper>
         <ButtonWrapper>
-          <NaverLogin />
+          <NaverLogin/>
           <KakaoLogin />
         </ButtonWrapper>
       </ModalWrapper>

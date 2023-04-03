@@ -23,15 +23,14 @@ public class Utils {
 	public static final String EMAIL = "email";
 	public static final String KAKAO = "kakao";
 
-	public static LocalDateTime dateTimeToHour(LocalDateTime dateTime) {
-		LocalDateTime hourDateTime = LocalDateTime.of(dateTime.getYear(), dateTime.getMonth(), dateTime.getDayOfMonth(),
-			dateTime.getHour(), 0);
-		return hourDateTime;
+	public static LocalDateTime dateTimeToHour(LocalDateTime dateTime){
+		LocalDateTime hourDateTime = dateTime.withMinute(0).withSecond(0).withNano(0);
+		return hourDateTime.plusHours(9);
 	}
 
-	public static LocalDateTime dateTimeToDate(LocalDateTime dateTime) {
-		LocalDateTime dateDateTime = LocalDateTime.of(dateTime.getYear(), dateTime.getMonth(), dateTime.getDayOfMonth(),
-			0, 0);
+	public static LocalDateTime dateTimeToDate(LocalDateTime dateTime){
+		dateTime = dateTime.plusHours(9);
+		LocalDateTime dateDateTime =  dateTime.withHour(0).withMinute(0).withSecond(0).withNano(0);
 		return dateDateTime;
 	}
 }
