@@ -7,14 +7,15 @@ type WrapperType = {
 type ImageType = {
   width?: string;
 }
-type HeightType = {
-  height: number;
-}
+// type HeightType = {
+//   height: number;
+// }
 
 const Wrapper = styled.div`
   height: 100vh;
   overflow-y: hidden;
   border: 0;
+  position: relative;
 `
 
 const SectionWrapper = styled.div<WrapperType>`

@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect, useCallback } from "react";
 import { SectionOne, SectionTwo, SectionThree, SectionFour} from "./SectionPages";
 import NavBar from "../../components/LayoutPage/NavBar";
 import {Wrapper} from "./SectionComponents";
+import DotComponent from "./DotComponent";
 
 function TmpFullPage() {
   const [scrollIdx, setScrollIdx] = useState<number>(1);  // 현재 내 위치를 알기 위함
@@ -101,6 +102,7 @@ function TmpFullPage() {
   return (
     <Wrapper ref={mainWrapperRef} >
       <NavBar />
+      <DotComponent scrollIdx={scrollIdx} />
       <SectionOne />
       <SectionTwo />
       <SectionThree />
