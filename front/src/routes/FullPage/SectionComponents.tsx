@@ -1,20 +1,35 @@
 import styled from "styled-components";
 
-type WrapperType = {
+type PageContainerType = {
   backgroundColor?: string;
 };
 
 type ImageType = {
   width?: string;
 }
-const SectionWrapper = styled.div<WrapperType>`
+// type HeightType = {
+//   height: number;
+// }
+
+const FullPageContainer = styled.div`
   height: 100vh;
+  overflow-y: hidden;
+  border: 0;
+  position: relative;
+`
+
+const PageContainer = styled.div<PageContainerType>`
+  height: 100%;
   //height: 100%;
-  width: 100%;
+  //width: 100%;
+  width: var(--content-space);
   background-color: ${props => props.backgroundColor};
+  position: relative;
   display: flex;
-  padding-left: 15%;
-  padding-right: 15%;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 5%;
+  padding-right: 5%;
 `;
 
 const TextSection = styled.div`
@@ -40,8 +55,8 @@ const ImageSection = styled.div<ImageType>`
   align-items: center;
 
   img {
-    width: ${props => props.width || "70%"};
+    width: ${props => props.width || "100%"};
   }
 `;
 
-export { SectionWrapper, TextSection, ImageSection };
+export { PageContainer, TextSection, ImageSection, FullPageContainer };
