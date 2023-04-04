@@ -19,7 +19,10 @@ export async function loader() {
   let RankList: any;
   await axios
     .get(`${BASE_URL}peak/`)
-    .then(response => (RankList = response.data.ranksByHour))
+    .then(response => {
+      RankList = response.data.ranksByHour;
+      console.log(response.data.ranksByHour);
+    })
     .catch(error => console.log(error));
 
   return RankList;
@@ -72,6 +75,7 @@ const IdolImgDiv = styled.div<IdolImgDivType>`
 
 const IdolNameDiv = styled.div`
   font-size: 1rem;
+  width: 15%;
 `;
 
 const RankNumDiv = styled.div`
@@ -95,8 +99,9 @@ const ScoreDiv = styled.div`
 `;
 
 const RankDiffNum = styled.div<RankDiffNumType>`
+  width: 5%;
   color: ${props => (props.sign === "up" ? "red" : props.sign === "down" ? "blue" : null)};
-  font-size: 1.1rem;
+  font-size: 15px;
 `;
 
 const RankDiffer = (diff: any) => {
@@ -129,7 +134,7 @@ const RankDiv = (props: any) => {
     <IdolRankDiv>
       <RankNumDiv>{props.rank}</RankNumDiv>
       {RankDiffer(props.diff)}
-      <IdolImgDiv url={props.url} />
+      <IdolImgDiv url={`https://j8a507.p.ssafy.io/img/${props.idol}.webp`} />
       <IdolNameDiv>{props.idol}</IdolNameDiv>
       <ScoreDiv>
         <div>{props.score}</div>
