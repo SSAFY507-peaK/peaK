@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.ssafy.peak.dto.idol.IdolListResponseDto;
+import com.ssafy.peak.dto.idol.response.IdolListResponseDto;
 import com.ssafy.peak.dto.response.SuccessResponseDto;
 import com.ssafy.peak.service.InterestService;
 
