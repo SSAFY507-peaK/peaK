@@ -6,6 +6,7 @@ build/
 !**/src/test/**/build/
 application.yml
 application.yaml
+src/main/resources/google-analytics-key.json
 
 ### STS ###
 .apt_generated
