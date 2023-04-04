@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ssafy.peak.dto.idol.request.PosNegRequestDto;
+import com.ssafy.peak.dto.idol.response.IdolCommentResponseDto;
 import com.ssafy.peak.dto.idol.response.IdolDetailResponseDto;
 import com.ssafy.peak.dto.idol.response.IdolListResponseDto;
 import com.ssafy.peak.dto.idol.response.IdolPosNegResponseDto;
@@ -28,29 +29,33 @@ public class IdolController {
 	private final PosNegService posNegService;
 
 	@GetMapping("/list")
-	public IdolListResponseDto list() {
-		IdolListResponseDto dto = idolService.listName();
+	public IdolListResponseDto getIdolList() {
+		IdolListResponseDto dto = idolService.getIdolList();
 		return dto;
 	}
 
 	@GetMapping("/{idol-name}")
-	public IdolDetailResponseDto detailByIdol(@PathVariable("idol-name") String idolName) {
-		IdolDetailResponseDto dto = idolService.detailByIdol(idolName);
+	public IdolDetailResponseDto getDetailByIdol(@PathVariable("idol-name") String idolName) {
+		IdolDetailResponseDto dto = idolService.getDetailByIdol(idolName);
 		return dto;
 	}
 
 	@GetMapping("/{idol-name}/pos-neg")
-	public IdolPosNegResponseDto posNegWeekly(@PathVariable("idol-name") String idolName) {
-		IdolPosNegResponseDto dto = posNegService.posNegWeeklyByIdol(idolName);
+	public IdolPosNegResponseDto getPosNegWeekly(@PathVariable("idol-name") String idolName) {
+		IdolPosNegResponseDto dto = posNegService.getPosNegWeeklyByIdol(idolName);
+		return dto;
+	}
+
+	@GetMapping("/{idol-name}/comment")
+	public IdolCommentResponseDto getCommentByIdol(@PathVariable("idol-name") String idolName) {
+		IdolCommentResponseDto dto = idolService.getCommentByIdol(idolName);
 		return dto;
 	}
 
 	@PostMapping("/pos-neg")
 	public ResponseEntity insertPosNeg(@RequestBody PosNegRequestDto dto) {
-
 		posNegService.insertPosNeg(dto);
 		return ResponseEntity.ok(new SuccessResponseDto("데이터 삽입 완료"));
-
 	}
 
 }
