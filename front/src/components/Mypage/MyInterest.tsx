@@ -33,7 +33,6 @@ function MyInterest({userName, idolName, idolScoreData}:Props) {
 
   const myScore:number = idolScoreData[0]
   const averageScore:number = idolScoreData[1]
-  console.log(myScore, averageScore)
   
   return (
     <Wrapper>

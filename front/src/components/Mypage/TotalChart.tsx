@@ -21,8 +21,6 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   flex: 0.5;
-  /* width: 100%;
-  height: 100%; */
 `;
 
 const ChartFrame = styled.div`
@@ -115,7 +113,6 @@ function TotalChart({userName, setIdolName}:Props) {
 
   const onChartClick = useCallback((params:any) => {
     if (params.componentType === 'series') {
-      // console.log('Selected pie index:', params.seriesIndex);
       console.log('Selected pie data:', params.data.name);
       setSelectedData(params.data);
       setIdolName(params.data.name);
@@ -128,7 +125,6 @@ function TotalChart({userName, setIdolName}:Props) {
       <ChartFrame>
         <ReactEcharts
           option={options}
-          // style={{ height: "90%", width: "90%" }}
           opts={{ renderer: 'svg'}}
           onEvents={{ 'click': onChartClick }}
         />

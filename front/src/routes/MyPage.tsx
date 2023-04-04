@@ -80,11 +80,11 @@ function MyPage() {
       <TopFrame>
         <TotalChart userName={userName} setIdolName={setIdolName} />
         {
-          idolName && idolScoreData
+          idolName && index > -1
           ?
           <>
             <MyInterest userName={userName} idolName={idolName} idolScoreData={idolScoreData} />
-            <MyChat userName={userName} />
+            <MyChat userName={userName} idolChatData={sampleData[index].comments}/>
           </>
           :
           null

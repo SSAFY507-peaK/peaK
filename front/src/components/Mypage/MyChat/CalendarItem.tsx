@@ -1,4 +1,6 @@
+import { Comment } from "../../../_utils/Types";
 import styled from "styled-components";
+import { useEffect } from "react";
 
 interface Props {
   day: string;
@@ -6,12 +8,12 @@ interface Props {
   children?: React.ReactNode;
   setSellectList: React.Dispatch<React.SetStateAction<boolean[]>>;
   sellectList: boolean[];
-  isChat: boolean[];
+  isChat: Array<Comment | boolean>;
 }
 
 interface Type {
   click: boolean;
-  data: boolean;
+  data: Comment | boolean;
   disabled: boolean;
 }
 
@@ -21,7 +23,6 @@ const DayComponent = styled.option<Type>`
   align-items: center;  
   margin: 5px;
   font-size: 1.1rem;
-  /* height: 2vh; */
   cursor: ${props => props.data ? "pointer" : null};
   text-decoration: underline;
   color: ${props => props.click ? "white" : props => props.data ?  `var(--purple400-color)` : null};
@@ -33,10 +34,12 @@ const DayComponent = styled.option<Type>`
 
 function CalendarItem({idx, day, children, sellectList, isChat, setSellectList}:Props) {
   
+  useEffect(() => {
+    setSellectList([false, false, false, false, false, false, false, false, false, false, false, false, false, false])
+  },[isChat])
   return (
     <DayComponent
       onClick={() => {
-        // setSellect(idx)
         let checkList:boolean[] = [false, false, false, false, false, false, false, false, false, false, false, false, false, false]
         checkList[idx] = true
         setSellectList(checkList)

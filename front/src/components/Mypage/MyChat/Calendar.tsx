@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
 
 import CalendarItem from "./CalendarItem";
+import { Comment } from "../../../_utils/Types";
 import styled from "styled-components";
 
 interface Props {
   setClickIndex: React.Dispatch<React.SetStateAction<number>>;
+  idolChatData: Array<Comment | boolean>;
 }
 
 const CalendartFrame = styled.div`
@@ -17,15 +19,12 @@ const CalendartFrame = styled.div`
   margin-top: 20px;
 `;
 
-function Calendar({setClickIndex}:Props) {
+function Calendar({setClickIndex, idolChatData}:Props) {
+  // let now_year = new Date().getFullYear()
   let now_month = new Date().getMonth() + 1
   let now_day = new Date().getDate()
   const [dayList, setDayList] = useState<string[]>([])
   const [sellectList, setSellectList] = useState<boolean[]>([true, false, false, false, false, false, false, false, false, false, false, false, false, false])
-
-  // 데이터 들어오면 수정해야함 
-  // datetime: "2022-12-23" 으로 들어올 예정 => 뒤에 두 글자 긁고 daylist와 비교해서 일치하면 true로 바꾸는 로직 구현해야함
-  const [isChat, setIsChat] = useState<boolean[]>([true, false, true, false, false, true, false, false, true, false, false, false, true, false])
   
   let tmp_lst:string[] = [] 
   for (let j = 0, i = now_day; j < 14; j += 1) {
@@ -58,7 +57,6 @@ function Calendar({setClickIndex}:Props) {
     }
   },[sellectList])
 
-  // console.log(sellectList)
   return (
     <div>
       <CalendartFrame>
@@ -68,9 +66,8 @@ function Calendar({setClickIndex}:Props) {
               key={idx}
               day={day}
               idx={idx}
-              // setSellect={setSellect}
               setSellectList={setSellectList}
-              isChat={isChat}
+              isChat={idolChatData}
               sellectList={sellectList}
               ></CalendarItem>
               ))

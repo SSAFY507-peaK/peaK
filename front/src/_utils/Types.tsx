@@ -42,9 +42,10 @@ export interface MyIdolDetail {
   value: number;
   interestScore: number;
   interestAverage: number;
-  comments: CommentList[];
+  comments: Array<Comment> | boolean[];
 }
 
-export interface CommentList {
+export interface Comment {
   content: string;
+  datetime: string;
 }
