@@ -9,7 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.ssafy.peak.domain.Idol.Idol;
 import com.ssafy.peak.domain.User;
-import com.ssafy.peak.dto.idol.IdolListResponseDto;
+import com.ssafy.peak.dto.idol.response.IdolListResponseDto;
 import com.ssafy.peak.exception.CustomException;
 import com.ssafy.peak.exception.CustomExceptionType;
 import com.ssafy.peak.repository.CommentRepository;
