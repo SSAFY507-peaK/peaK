@@ -5,6 +5,7 @@ import { PurpleButton, BlueButton } from "../../components/Button";
 import { NicknameInput, MessageDiv } from "../../components/SignupPage/NicknameComponents";
 import { IdolGrid, IdolImage, IdolImageWrapper, IdolName, EmptySelected, Selected, SelectedSection, IdolWrapper } from "../../components/SignupPage/IdolComponents";
 import { CloseButton } from "../../components/Button";
+import axios from "axios";
 // 컴포넌트들 (추후 옮기자)
 const Wrapper = styled.div`
   height: 100vh;
@@ -49,7 +50,7 @@ type NicknameType = "long" | "character" | "duplicate" | "ok";
 
 function SignUpPage() {
   const location= useLocation();
-  const TOKEN = decodeURI(location.search.slice(1));
+  const TOKEN = decodeURI(location.search.slice(1));  // 토큰
   const containerRef = useRef<HTMLDivElement>(null);
   const page1Ref = useRef<HTMLDivElement>(null);
   let dummyData: IdolObjectType[] = [
@@ -156,6 +157,13 @@ function SignUpPage() {
     }
     // 여기서 유효성 체크를 하고 온 결과에 따라 "ok"와 "duplicate"로 나눠야함
     else {
+      axios.get(`https://j8a507.p.ssafy.io/api/user/nickname/${nickname}`, {
+        headers: {
+          AccessToken: TOKEN
+        }
+      })
+        .then(response => console.log(response.data))
+        .catch(error => console.log(error))
       setIsValidNickname("ok");
     }
   };
