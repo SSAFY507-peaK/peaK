@@ -64,6 +64,7 @@ function MyPage() {
     setIndex(newIndex)
   },[idolName])
   
+  console.log(sampleData)
   // 선택된 아이돌의 점수 저장
   useEffect(() => {
     if (index >= 0) { // index 값이 올바른지 확인
