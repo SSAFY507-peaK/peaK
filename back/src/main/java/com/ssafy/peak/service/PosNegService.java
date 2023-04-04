@@ -26,7 +26,7 @@ public class PosNegService {
 	private final PosNegRepository posNegRepository;
 
 	// 3 2 1 31 30 29 28 27
-	public IdolPosNegResponseDto posNegWeeklyByIdol(String idol) {
+	public IdolPosNegResponseDto getPosNegWeeklyByIdol(String idol) {
 		LocalDateTime now = LocalDateTime.now();
 		LocalDateTime startDateTime = dateTimeToDate(now).minusDays(7);
 		LocalDateTime endDateTime = dateTimeToDate(now).minusDays(1);

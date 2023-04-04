@@ -181,6 +181,26 @@ public class InterestService {
 	}
 
 	/**
+	 * 관심 아이돌인지 확인하기
+	 */
+	public boolean isInterestIdol(String idolName) {
+		// user 인증 정보 확인 후 db 조회
+		User user = securityUtil.getCurrentUserId()
+			.flatMap(userRepository::findById)
+			.orElseThrow(() -> new CustomException(CustomExceptionType.USER_NOT_FOUND));
+		List<User.Idol> idols = user.getIdols();
+		Boolean isInterest = false;
+
+		for (User.Idol idol : idols) {
+			if (idol.getIdol().equals(idolName)) {
+				isInterest = true;
+				break;
+			}
+		}
+		return isInterest;
+	}
+
+	/**
 	 * 나의 관심 아이돌의 수 세기
 	 */
 	private static int getInterestIdolCount(List<User.Idol> idols) {
@@ -192,5 +212,6 @@ public class InterestService {
 		}
 		return interestIdolCount;
 	}
+
 }
 
