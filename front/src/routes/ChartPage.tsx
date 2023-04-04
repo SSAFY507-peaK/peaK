@@ -6,7 +6,7 @@ import {
   IdolName,
   IdolWrapper,
   Selected,
-} from "../components/SignupPage/IdolComponents";
+} from "../components/SignUpPage/IdolComponents";
 import { useCallback, useState } from "react";
 
 import { CloseButton } from "../components/Button";

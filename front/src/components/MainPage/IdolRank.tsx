@@ -7,6 +7,7 @@ import Rank6 from "../../assets/6.png";
 import Rank7 from "../../assets/7.png";
 import Rank8 from "../../assets/8.png";
 import styled from "styled-components";
+import { useNavigate } from "react-router";
 
 type IdolImgType = {
   url: string;
@@ -71,8 +72,9 @@ function Logo(rank: number) {
 
 /** rank, name, img 필요 */
 function IdolRank(props: IdolRankType) {
+  const navigate = useNavigate();
   return (
-    <WrapperDiv>
+    <WrapperDiv onClick={() => navigate(`/${props.name}`)}>
       {Logo(props.rank)}
       <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
         <IdolImg url={props.url} rank={props.rank} />

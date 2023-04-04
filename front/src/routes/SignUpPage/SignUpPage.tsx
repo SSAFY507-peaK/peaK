@@ -1,44 +1,24 @@
 import React, {useState, useCallback, useRef} from "react";
-import { useLocation, useLoaderData } from "react-router-dom"
-import styled from "styled-components";
+import {useLocation, useLoaderData, useNavigate} from "react-router-dom"
+// import styled from "styled-components";
 import { PurpleButton, BlueButton } from "../../components/Button";
-import { NicknameInput, MessageDiv } from "../../components/SignupPage/NicknameComponents";
-import { IdolGrid, IdolImage, IdolImageWrapper, IdolName, EmptySelected, Selected, SelectedSection, IdolWrapper } from "../../components/SignupPage/IdolComponents";
+import { NicknameInput, MessageDiv } from "../../components/SignUpPage/NicknameComponents";
+import { IdolGrid, IdolImage, IdolImageWrapper, IdolName, EmptySelected, Selected, SelectedSection, IdolWrapper } from "../../components/SignUpPage/IdolComponents";
 import { CloseButton } from "../../components/Button";
 import axios from "axios";
 import {IdolListsType} from "../../_utils/Types";
+// import SignUp1 from "./SignUp1";
+import {
+  Description,
+  DescriptionSection,
+  InputWrapper,
+  PageWrapper,
+  Wrapper
+} from "../../components/SignUpPage/SignUpComponents";
 
 
 // 컴포넌트들 (추후 옮기자)
-const Wrapper = styled.div`
-  height: 100vh;
-  overflow-y: hidden;
-`;
-const PageWrapper = styled.div`
-  width: 100%;
-  height: 100%;
-  padding: 5vh 5vw;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-`
-const Description = styled.p`
-  margin-top: 0;
-  color: var(--gray400-color);
-`
-// 첫 번째 페이지
-const InputWrapper = styled.div`
-  display: flex;
-`
-// 두 번째 페이지
-/** 아이돌 선택에 대한 설명을 담은 div */
-const DescriptionSection = styled.div`
-  flex: 1 0 350px;
-  & button {
-    margin-right: 15px;
-  }
-`
+
 
 /** 닉네임 중복확인 클릭 시 결과값 */
 type NicknameType = "EU006" | "EU009" | "200" ;
@@ -46,10 +26,11 @@ type NicknameType = "EU006" | "EU009" | "200" ;
 function SignUpPage() {
   const location= useLocation();
   const idolLists = useLoaderData() as IdolListsType;
-  // console.log(idolLists)
+  console.log(idolLists);
+  // const [nickname, setNickname] = useState<string>("");
 
   const TOKEN = decodeURI(location.search.slice(1));  // 토큰
-  // const TOKEN = "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIyNzM0MTU1ODM2IiwiQXV0aGVudGljYXRpb24iOnsiYXV0aG9yaXRpZXMiOlt7ImF1dGhvcml0eSI6IlJPTEVfR1VFU1QifV0sImRldGFpbHMiOnsicmVtb3RlQWRkcmVzcyI6IjMuMzguOTIuMTExIiwic2Vzc2lvbklkIjoiOTQwRjBGNUMxMURFM0ZFMTVEMUI0NEVDMEE2ODUwQzgifSwiYXV0aGVudGljYXRlZCI6dHJ1ZSwicHJpbmNpcGFsIjp7ImF1dGhvcml0aWVzIjpbeyJhdXRob3JpdHkiOiJST0xFX0dVRVNUIn1dLCJhdHRyaWJ1dGVzIjp7ImlkIjoyNzM0MTU1ODM2LCJjb25uZWN0ZWRfYXQiOiIyMDIzLTA0LTAzVDEzOjU2OjE5WiIsImtha2FvX2FjY291bnQiOnsiaGFzX2VtYWlsIjp0cnVlLCJlbWFpbF9uZWVkc19hZ3JlZW1lbnQiOmZhbHNlLCJpc19lbWFpbF92YWxpZCI6dHJ1ZSwiaXNfZW1haWxfdmVyaWZpZWQiOnRydWUsImVtYWlsIjoicXJpOThAbmF2ZXIuY29tIn19LCJlbWFpbCI6InFyaTk4QG5hdmVyLmNvbSIsInJvbGUiOiJST0xFX0dVRVNUIiwibmFtZSI6IjI3MzQxNTU4MzYifSwiYXV0aG9yaXplZENsaWVudFJlZ2lzdHJhdGlvbklkIjoia2FrYW8iLCJjcmVkZW50aWFscyI6IiIsIm5hbWUiOiIyNzM0MTU1ODM2In0sImVtYWlsIjoicXJpOThAbmF2ZXIuY29tIiwicm9sZSI6IlJPTEVfR1VFU1QiLCJpYXQiOjE2ODA1OTEyMzgsImV4cCI6MTY4MDU5MzAzOH0.dxKlA5Zx2lnIp-TzkWykPA_FEtg3qz3CEJM7ZtkkYbUorUQqyr_xql7PP3Fdzsvu3aWDL14yROsuGRtXlKGinA"
+  // const TOKEN = "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIyNzM0MTU1ODM2IiwiQXV0aGVudGljYXRpb24iOnsiYXV0aG9yaXRpZXMiOlt7ImF1dGhvcml0eSI6IlJPTEVfR1VFU1QifV0sImRldGFpbHMiOnsicmVtb3RlQWRkcmVzcyI6IjMuMzguOTIuMTExIiwic2Vzc2lvbklkIjoiRTRGRUNFMzk2QTZDNkU0MEZDNDBBOTYzOUU0NzZBMEMifSwiYXV0aGVudGljYXRlZCI6dHJ1ZSwicHJpbmNpcGFsIjp7ImF1dGhvcml0aWVzIjpbeyJhdXRob3JpdHkiOiJST0xFX0dVRVNUIn1dLCJhdHRyaWJ1dGVzIjp7ImlkIjoyNzM0MTU1ODM2LCJjb25uZWN0ZWRfYXQiOiIyMDIzLTA0LTAzVDEzOjU2OjE5WiIsImtha2FvX2FjY291bnQiOnsiaGFzX2VtYWlsIjp0cnVlLCJlbWFpbF9uZWVkc19hZ3JlZW1lbnQiOmZhbHNlLCJpc19lbWFpbF92YWxpZCI6dHJ1ZSwiaXNfZW1haWxfdmVyaWZpZWQiOnRydWUsImVtYWlsIjoicXJpOThAbmF2ZXIuY29tIn19LCJlbWFpbCI6InFyaTk4QG5hdmVyLmNvbSIsInJvbGUiOiJST0xFX0dVRVNUIiwibmFtZSI6IjI3MzQxNTU4MzYifSwiYXV0aG9yaXplZENsaWVudFJlZ2lzdHJhdGlvbklkIjoia2FrYW8iLCJjcmVkZW50aWFscyI6IiIsIm5hbWUiOiIyNzM0MTU1ODM2In0sImVtYWlsIjoicXJpOThAbmF2ZXIuY29tIiwicm9sZSI6IlJPTEVfR1VFU1QiLCJpYXQiOjE2ODA1OTQ2NjAsImV4cCI6MTY4MDU5NjQ2MH0.D0YwiqM4expmSqrsswWm6VrJLZNjw3jq6zahS1JTTbTTM3C6khrg5ZJAlWFuiPHbKV_MlYwedc9UObS6NOYKUQ"
   const containerRef = useRef<HTMLDivElement>(null);
 
   /** 페이지 이동 함수 */
@@ -71,7 +52,7 @@ function SignUpPage() {
   }
 
 
-  // page 1에 대한 설정들
+  // // page 1에 대한 설정들
   const [nickname, setNickname] = useState<string>("");
   const [message, setMessage] = useState<string>("");
   const [nicknameCode, setNicknameCode] = useState<NicknameType | undefined>(undefined);
@@ -124,14 +105,13 @@ function SignUpPage() {
   );
 
   // page 2에 대한 정보들
+  const navigate = useNavigate();
   const [selectedIdols, setSelectedIdols] = useState<string[]>([]);
-  const [idols, setIdols] = useState<string[]>(idolLists.idols.map(idol => idol === "CLASS:y" ? "CLASSy" : idol));
 
-  console.log(idols);
   /** 내가 선택한 아이돌 팀을 보여주자 */
   const showSelectIdols = useCallback(() => {
     const returnArr = selectedIdols?.map(idol =>
-      <Selected url={`https://j8a507.p.ssafy.io/img/${idol}.webp`} >
+      <Selected url={`https://j8a507.p.ssafy.io/img/${encodeURI(idol)}.webp`} >
         <CloseButton onClick={()=>handleDeleteSelectedIdol(idol)}>X</CloseButton>
       </Selected>
     )
@@ -153,7 +133,6 @@ function SignUpPage() {
   }
   /** 선택한 아이돌을 삭제하자 */
   const handleDeleteSelectedIdol = (idol: string): void => {
-    console.log("삭제햇")
     // 선택된 배열에서 삭제를 하자궁...
     setSelectedIdols(prev=> prev.filter(selectedIdol => selectedIdol !== idol));
   }
@@ -171,6 +150,8 @@ function SignUpPage() {
     })
       .then(response => console.log(response.data))
       .catch(error => console.log(error))
+
+    navigate('/')
   }
 
   const page2 = (
@@ -189,9 +170,9 @@ function SignUpPage() {
       <h3>전체 아이돌</h3>
       <IdolWrapper>
         <IdolGrid cols={6} gap="20px">
-          {idols.map((idol: string) => (
+          {idolLists.idols.map((idol: string) => (
             <IdolImageWrapper>
-              <IdolImage url={`https://j8a507.p.ssafy.io/img/${idol}.webp`} onClick={()=> selectedIdols.includes(idol) ? handleDeleteSelectedIdol(idol) : handleSelectIdol(idol)} className={`${selectedIdols.includes(idol) && "selected"}`}/>
+              <IdolImage url={`https://j8a507.p.ssafy.io/img/${encodeURI(idol)}.webp`} onClick={()=> selectedIdols.includes(idol) ? handleDeleteSelectedIdol(idol) : handleSelectIdol(idol)} className={`${selectedIdols.includes(idol) && "selected"}`}/>
               <IdolName>{idol}</IdolName>
             </IdolImageWrapper>
           ))}
@@ -203,6 +184,7 @@ function SignUpPage() {
   return (
     <Wrapper ref={containerRef}>
       { page1 }
+      {/*<SignUp1 TOKEN={TOKEN} pageIdx={1}  setNickname={setNickname} />*/}
       { page2 }
     </Wrapper>
   );
