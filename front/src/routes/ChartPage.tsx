@@ -1,17 +1,19 @@
-import RankChart from "../components/rankingpage/RankChart";
-import styled from "styled-components";
-import ContentDiv from "../components/Content";
-import Search from "../components/Search";
 import {
   EmptySelected,
   IdolGrid,
   IdolImage,
   IdolImageWrapper,
-  IdolName, IdolWrapper,
-  Selected
+  IdolName,
+  IdolWrapper,
+  Selected,
 } from "../components/SignupPage/IdolComponents";
-import React, {useCallback, useState} from "react";
-import {CloseButton} from "../components/Button";
+import React, { useCallback, useState } from "react";
+
+import { CloseButton } from "../components/Button";
+import ContentDiv from "../components/Content";
+import RankChart from "../components/RankingPage/RankChart";
+import Search from "../components/Search";
+import styled from "styled-components";
 
 // 나중에 진짜 input값 들어오면 변경 예정..
 type IdolObjectType = {
@@ -20,20 +22,20 @@ type IdolObjectType = {
   idolImg?: string;
   isSelected?: boolean;
   idolData?: number[];
-}
+};
 type ChartIdolObjectType = {
   name?: string;
   data?: number[];
   type: string;
-  lineStyle: {width: number};
-}
+  lineStyle: { width: number };
+};
 
 const ChartWrapper = styled.div`
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 25px;
   height: 90%;
-`
+`;
 const ChartDiv = styled(ContentDiv)`
   justify-content: center;
   align-items: center;
@@ -44,9 +46,7 @@ const ChartDiv = styled(ContentDiv)`
 
 const IdolSelectDiv = styled(ContentDiv)`
   flex: 1;
-`
-
-
+`;
 
 function ChartPage() {
   let dummyData: IdolObjectType[] = [
@@ -99,7 +99,6 @@ function ChartPage() {
       idolNum: 8,
       idolName: "아이돌8",
       idolImg: "http://openimage.interpark.com/goods_image_big/1/9/6/0/9472491960_l.jpg",
-
     },
     {
       idolNum: 9,
@@ -125,7 +124,7 @@ function ChartPage() {
       idolImg: "http://openimage.interpark.com/goods_image_big/1/9/6/0/9472491960_l.jpg",
       idolData: [25, 11, 23, 3, 12, 56, 45],
     },
-  ];  // 더미데이터
+  ]; // 더미데이터
   const [selectedIdols, setSelectedIdols] = useState<IdolObjectType[]>([]);
   // const [selectedLegends, setSelectedLegends] = useState<string[]>([]);
   const [selectedChart, setSelectedChart] = useState<ChartIdolObjectType[]>([]);
@@ -133,38 +132,46 @@ function ChartPage() {
 
   /** 내가 선택한 아이돌 팀을 보여주자 */
   const showSelectIdols = useCallback(() => {
-    const returnArr = selectedIdols?.map(idol =>
-      <Selected url={idol.idolImg} height="90px" >
-        <CloseButton onClick={()=>handleDeleteSelectedIdol(idol)}>X</CloseButton>
+    const returnArr = selectedIdols?.map(idol => (
+      <Selected url={idol.idolImg} height="90px">
+        <CloseButton onClick={() => handleDeleteSelectedIdol(idol)}>X</CloseButton>
       </Selected>
-    )
-    for (let i=0; i<5-selectedIdols.length; i++) {
-      returnArr.push(<EmptySelected height="90px"/>)
+    ));
+    for (let i = 0; i < 5 - selectedIdols.length; i++) {
+      returnArr.push(<EmptySelected height="90px" />);
     }
     return returnArr;
   }, [selectedIdols]);
   const handleSelectIdol = (idol: IdolObjectType): void => {
-    if (idol.isSelected) { return }
-    else if (selectedIdols.length >= 5) {
+    if (idol.isSelected) {
+      return;
+    } else if (selectedIdols.length >= 5) {
       alert("최대 5명의 아이돌만 선택할 수 있습니다");
-      return
-    }
-    else {
-      setIdols(prev => prev.map(idol2 => idol.idolNum === idol2.idolNum? {...idol2, isSelected: true} : idol2))
-      setSelectedIdols(prev=> [...prev, {...idol, isSelected: true}]);
+      return;
+    } else {
+      setIdols(prev =>
+        prev.map(idol2 =>
+          idol.idolNum === idol2.idolNum ? { ...idol2, isSelected: true } : idol2,
+        ),
+      );
+      setSelectedIdols(prev => [...prev, { ...idol, isSelected: true }]);
       // setSelectedLegends(prev => [...prev, idol.idolName]);
-      setSelectedChart(prev => [...prev, {name: idol.idolName, type: "line", data: idol.idolData, lineStyle: { width: 3 } }])
+      setSelectedChart(prev => [
+        ...prev,
+        { name: idol.idolName, type: "line", data: idol.idolData, lineStyle: { width: 3 } },
+      ]);
     }
-  }
+  };
   /** 선택한 아이돌을 삭제하자 */
-  const handleDeleteSelectedIdol = (idol:IdolObjectType): void => {
+  const handleDeleteSelectedIdol = (idol: IdolObjectType): void => {
     // 원본 배열에서 false로 변경하고... 선택된 배열에서도 삭제를 하자궁...
-    setIdols(prev => prev.map(idol2 => idol.idolNum === idol2.idolNum? {...idol2, isSelected: false} : idol2))
-    setSelectedIdols(prev=> prev.filter(idol2 => idol.idolNum !== idol2.idolNum));
+    setIdols(prev =>
+      prev.map(idol2 => (idol.idolNum === idol2.idolNum ? { ...idol2, isSelected: false } : idol2)),
+    );
+    setSelectedIdols(prev => prev.filter(idol2 => idol.idolNum !== idol2.idolNum));
     // setSelectedLegends(prev => prev.filter(idol2 => idol2 !== idol.idolName));
-    setSelectedChart(prev => prev.filter(idol2 => idol2.name !== idol.idolName))
-  }
-
+    setSelectedChart(prev => prev.filter(idol2 => idol2.name !== idol.idolName));
+  };
 
   return (
     <ChartWrapper>
@@ -173,12 +180,19 @@ function ChartPage() {
       </ChartDiv>
       <IdolSelectDiv>
         <Search />
-        <IdolGrid cols={5}>{ showSelectIdols() }</IdolGrid>
+        <IdolGrid cols={5}>{showSelectIdols()}</IdolGrid>
         <IdolWrapper>
           <IdolGrid cols={4} gap="10px">
             {idols.map((idol: IdolObjectType) => (
-              <IdolImageWrapper >
-                <IdolImage height="100px" url={idol.idolImg} onClick={()=> idol.isSelected? handleDeleteSelectedIdol(idol) : handleSelectIdol(idol)} className={`${idol.isSelected && "selected"}`}/>
+              <IdolImageWrapper>
+                <IdolImage
+                  height="100px"
+                  url={idol.idolImg}
+                  onClick={() =>
+                    idol.isSelected ? handleDeleteSelectedIdol(idol) : handleSelectIdol(idol)
+                  }
+                  className={`${idol.isSelected && "selected"}`}
+                />
                 <IdolName>{idol.idolName}</IdolName>
               </IdolImageWrapper>
             ))}

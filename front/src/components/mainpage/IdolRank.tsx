@@ -8,16 +8,22 @@ import Rank7 from "../../assets/7.png";
 import Rank8 from "../../assets/8.png";
 import styled from "styled-components";
 
+type IdolImgType = {
+  url: string;
+  rank: number;
+};
+
+type IdolRankType = {
+  url: string;
+  name: string;
+  rank: number;
+};
+
 const WrapperDiv = styled.div`
   display: flex;
   flex-direction: column;
   margin: auto 0;
 `;
-
-interface IdolImgType {
-  url: string;
-  rank: number;
-}
 
 const IdolImg = styled.div<IdolImgType>`
   background-image: url(${props => props.url});
@@ -41,7 +47,7 @@ const NameDiv = styled.div`
   font-size: 15px;
 `;
 
-function Logo(rank: any) {
+function Logo(rank: number) {
   switch (rank) {
     case 1:
       return <img src={Rank1} alt="" width="60vw" style={{ position: "absolute" }} />;
@@ -63,7 +69,7 @@ function Logo(rank: any) {
 }
 
 /** rank, name, img 필요 */
-function IdolRank(props: any) {
+function IdolRank(props: IdolRankType) {
   return (
     <WrapperDiv>
       {Logo(props.rank)}

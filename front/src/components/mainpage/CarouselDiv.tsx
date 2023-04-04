@@ -1,6 +1,23 @@
 import NameDiv from "../NameDiv";
 import styled from "styled-components";
 
+type WrapperDivType = {
+  ratio?: number;
+  mr?: boolean;
+  ml?: boolean;
+  mt?: boolean;
+  mb?: boolean;
+};
+
+type CarouselDivType = {
+  ratio?: number;
+  type?: boolean;
+  mr?: boolean;
+  firstWord?: string;
+  secondWord?: string;
+  data?: any;
+};
+
 /** 그림자 있고 흰 색 배경 div 태그 */
 const ContentDiv = styled.div`
   display: flex;
@@ -8,14 +25,6 @@ const ContentDiv = styled.div`
   border-radius: 15px;
   height: 100%;
 `;
-
-interface WrapperDivType {
-  ratio: number;
-  mr?: boolean;
-  ml?: boolean;
-  mt?: boolean;
-  mb?: boolean;
-}
 
 /** NameDiv와 ContentDiv를 감싸는 역할 */
 const WrapperDiv = styled.div<WrapperDivType>`
@@ -29,7 +38,7 @@ const WrapperDiv = styled.div<WrapperDivType>`
 `;
 
 /** type이 true이면 purple이 왼쪽, false이면 오른쪽 */
-function CarouselDiv(props: any) {
+function CarouselDiv(props: CarouselDivType) {
   return (
     <WrapperDiv ratio={props.ratio} mr={props.mr}>
       {NameDiv(props)}

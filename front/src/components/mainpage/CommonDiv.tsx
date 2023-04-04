@@ -2,14 +2,27 @@ import ContentDiv from "../Content";
 import NameDiv from "../NameDiv";
 import styled from "styled-components";
 
-interface WrapperDivType {
+type WrapperDivType = {
   ratio: number;
   mr?: boolean;
   ml?: boolean;
   mt?: boolean;
   mb?: boolean;
   h?: boolean;
-}
+};
+
+type CommonDivType = {
+  type?: boolean;
+  mr?: boolean;
+  ml?: boolean;
+  mt?: boolean;
+  mb?: boolean;
+  h?: boolean;
+  firstWord?: string;
+  secondWord?: string;
+  ratio?: string;
+  data?: any;
+};
 
 /** NameDiv와 ContentDiv를 감싸는 역할 */
 const WrapperDiv = styled.div<WrapperDivType>`
@@ -24,9 +37,9 @@ const WrapperDiv = styled.div<WrapperDivType>`
 `;
 
 /** type이 true이면 purple이 왼쪽, false이면 오른쪽 */
-function CommonDiv(props: any) {
+function CommonDiv(props: CommonDivType) {
   return (
-    <WrapperDiv ratio={props.ratio} mr={props.mr} h={props.h || false}>
+    <WrapperDiv ratio={Number(props.ratio)} mr={props.mr} h={props.h || false}>
       {NameDiv(props)}
       <ContentDiv>{props.data}</ContentDiv>
     </WrapperDiv>
