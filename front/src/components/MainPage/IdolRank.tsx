@@ -6,9 +6,7 @@ import Rank5 from "../../assets/5.png";
 import Rank6 from "../../assets/6.png";
 import Rank7 from "../../assets/7.png";
 import Rank8 from "../../assets/8.png";
-import { redirect } from "react-router";
 import styled from "styled-components";
-import { useNavigate } from "react-router";
 
 type IdolImgType = {
   url: string;
@@ -45,7 +43,8 @@ const IdolImg = styled.div<IdolImgType>`
 `;
 
 const NameDiv = styled.div`
-  margin: 3px auto 0;
+  margin-left: 20px;
+  margin-top: 5px;
   font-size: 15px;
 `;
 
@@ -72,12 +71,13 @@ function Logo(rank: number) {
 
 /** rank, name, img 필요 */
 function IdolRank(props: IdolRankType) {
-  const navigate = useNavigate();
   return (
-    <WrapperDiv onClick={() => navigate(`/${props.name}`)}>
+    <WrapperDiv>
       {Logo(props.rank)}
-      <IdolImg url={props.url} rank={props.rank} />
-      <NameDiv>{props.name}</NameDiv>
+      <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
+        <IdolImg url={props.url} rank={props.rank} />
+        <NameDiv>{props.name}</NameDiv>
+      </div>
     </WrapperDiv>
   );
 }
