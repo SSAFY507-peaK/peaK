@@ -1,5 +1,6 @@
 import React from "react";
 import { PageContainer, TextSection, ImageSection } from "./SectionComponents";
+import { KakaoLogin } from "../../components/LoginModal/LoginButton";
 import chartImg from "../../assets/chart.png";
 import internetImg from "../../assets/internet.png";
 import contentsImg from "../../assets/contents.png";
@@ -78,10 +79,9 @@ function SectionFour({ backgroundColor }: WrapperType): JSX.Element {
       <TextSection>
         <h2>지금 바로 데이터의 바다로 풍덩</h2>
         <p>소셜 로그인으로 간단하게 즐겨보세요</p>
-        <div>
-          <button>카카오</button>
-          <button>네이버</button>
-        </div>
+
+        <KakaoLogin />
+
       </TextSection>
       <ImageSection width="100%">
         <img src={swimImg} alt="수영 이미지" />

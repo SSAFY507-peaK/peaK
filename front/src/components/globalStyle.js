@@ -67,6 +67,13 @@ const GlobalStyle = createGlobalStyle`
     --blue-gradient-hover: linear-gradient(to bottom right, #8fb2db 0%, #1668c7 100%);
     --yellow-gradient: linear-gradient(to bottom right, #FFD99E 0%, #FF9B05 100%);
     --green-gradient: linear-gradient(to bottom right, #93F2A2 0%, #1AD138 100%);
+    
+    /* Graph color */
+    --graph1-color: #4CD7F6;
+    --graph2-color: #6DBFFF;
+    --graph3-color: #7166F9;
+    --graph4-color: #C74BF6;
+    --graph5-color: #F946FF;
 
     /* background color */
     --background-color: #F9F7FA;
@@ -128,6 +135,10 @@ const GlobalStyle = createGlobalStyle`
   button,
   textarea {
     font-family: inherit;
+  }
+  
+  h1, h2, h3 {
+    margin: 0 0 10px;
   }
 `;
 
