@@ -13,5 +13,5 @@ public interface CommentRepository extends MongoRepository<Comment, String> {
 
 	int countByEmailAndIdol(String email, String idol);
 
-	Optional<List<Comment>> findByIdol(String idol);
+	Optional<List<Comment>> findTop30ByIdol(String idol);
 }

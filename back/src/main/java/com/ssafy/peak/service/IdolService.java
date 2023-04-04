@@ -58,7 +58,7 @@ public class IdolService {
 	}
 
 	public IdolCommentResponseDto getCommentByIdol(String idolName) {
-		List<Comment> commentList = commentRepository.findByIdol(idolName)
+		List<Comment> commentList = commentRepository.findTop30ByIdol(idolName)
 			.orElseGet(ArrayList::new);
 		List<CommentDto> commentDtoList = new ArrayList<>();
 
@@ -67,8 +67,6 @@ public class IdolService {
 				.orElseThrow(() -> new CustomException(CustomExceptionType.USER_NOT_FOUND));
 			String nickname = user.getNickname();
 			commentDtoList.add(CommentDto.of(comment, nickname));
-			if (commentDtoList.size() >= 30)
-				break;
 		}
 
 		IdolCommentResponseDto dto = IdolCommentResponseDto.builder().comments(commentDtoList).build();
