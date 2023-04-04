@@ -1,5 +1,6 @@
 import { MouseEvent, useEffect, useState } from 'react';
 
+import { CreateMyInterest } from '../_store/slices/InterestSlice';
 import DriveFileRenameOutlineOutlinedIcon from '@mui/icons-material/DriveFileRenameOutlineOutlined';
 import MyChat from '../components/Mypage/MyChat/MyChat';
 import MyChatChart from '../components/Mypage/MyChatChart';
@@ -8,7 +9,9 @@ import MyInterest from '../components/Mypage/MyInterest';
 import MyVisitChart from '../components/Mypage/MyVisitChart';
 import TitleComponent from "../components/idolpage/TitleComponent";
 import TotalChart from '../components/Mypage/TotalChart';
+import sampleData from "../components/Mypage/sampleData.json"
 import styled from "styled-components";
+import { useAppDispatch } from '../_hooks/hooks';
 import { useParams } from "react-router-dom";
 
 const Wrapper = styled.div`
@@ -37,19 +40,26 @@ const BottomFrame = styled.div`
   /* flex: 0.4; */
 `;
 
+
 /** 클릭시 닉네임 변경 모달창과 함께 닉네임 변경  */
 function handleClick(event: MouseEvent<SVGSVGElement>) {
   console.log('닉네임 변경 구현할 예정');
 }
+
 
 function MyPage() {
   const params = useParams();
   const userName:string = params.userName || "";
   const [idolName, setIdolName] = useState<string>("")
   
+  const dispatch = useAppDispatch()
+  dispatch(CreateMyInterest(sampleData))
+
   useEffect(() => {
     console.log(idolName)
   },[idolName])
+
+  // userName을 params로 읽어서 마이 데이터를 불러서 Store에 저장해준다. 
 
   return (
     <Wrapper>
