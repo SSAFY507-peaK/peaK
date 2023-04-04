@@ -2,6 +2,7 @@ package com.ssafy.peak.controller;
 
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,8 +16,10 @@ import org.springframework.web.bind.annotation.RestController;
 import com.ssafy.peak.dto.JwtTokenDto;
 import com.ssafy.peak.dto.SignupDto;
 import com.ssafy.peak.dto.UserDto;
+import com.ssafy.peak.dto.request.WriteCommentRequestDto;
 import com.ssafy.peak.dto.response.SuccessResponseDto;
 import com.ssafy.peak.security.JwtTokenProvider;
+import com.ssafy.peak.security.UserPrincipal;
 import com.ssafy.peak.service.UserService;
 import com.ssafy.peak.util.Utils;
 
@@ -100,5 +103,18 @@ public class UserController {
 		httpHeaders.add(Utils.AUTHORIZATION, Utils.BEARER_TOKEN_PREFIX + tokenDto.getToken());
 
 		return ResponseEntity.ok().headers(httpHeaders).body(tokenDto);
+	}
+
+	/**
+	 * 아이돌에게 응원 한 마디
+	 */
+	@PostMapping("/comment/{idol-name}")
+	public ResponseEntity createCheeringMessage(
+		@AuthenticationPrincipal UserPrincipal loginUser,
+		@PathVariable("idol-name") String idolName,
+		@RequestBody WriteCommentRequestDto writeCommentRequestDto) {
+
+		userService.createCheeringMessage(loginUser, idolName, writeCommentRequestDto.getContent());
+		return ResponseEntity.ok().body(new SuccessResponseDto("응원 메시지를 남겼습니다"));
 	}
 }

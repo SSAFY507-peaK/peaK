@@ -1,7 +1,9 @@
 package com.ssafy.peak.service;
 
 import java.io.IOException;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.List;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
@@ -15,7 +17,9 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
+import org.springframework.util.StringUtils;
 
+import com.ssafy.peak.domain.Comment;
 import com.ssafy.peak.domain.Idol.Idol;
 import com.ssafy.peak.domain.User;
 import com.ssafy.peak.dto.CustomOAuth2User;
@@ -24,6 +28,7 @@ import com.ssafy.peak.dto.UserDto;
 import com.ssafy.peak.enums.Role;
 import com.ssafy.peak.exception.CustomException;
 import com.ssafy.peak.exception.CustomExceptionType;
+import com.ssafy.peak.repository.CommentRepository;
 import com.ssafy.peak.repository.IdolRepository;
 import com.ssafy.peak.repository.UserRepository;
 import com.ssafy.peak.security.JwtTokenProvider;
@@ -48,6 +53,7 @@ public class UserService {
 	private final JwtTokenProvider jwtTokenProvider;
 	private final UserRepository userRepository;
 	private final IdolRepository idolRepository;
+	private final CommentRepository commentRepository;
 	private final SecurityUtil securityUtil;
 	private final RedisUtil redisUtil;
 
@@ -104,7 +110,7 @@ public class UserService {
 			.map(idol -> User.Idol.builder()
 				.idol(idol.getIdol())
 				.like(true)
-				.modifiedDatetime(LocalDateTime.now())
+				.modifiedDatetime(LocalDateTime.now().plusHours(9))
 				.pageClicksCnt(0)
 				.pageStaySec(0)
 				.commentsCnt(0)
@@ -121,7 +127,7 @@ public class UserService {
 			.role(Role.ROLE_USER)
 			.nickname(userDto.getNickname())
 			.provider(Utils.KAKAO)
-			.lastLoginDatetime(LocalDateTime.now())
+			.lastLoginDatetime(LocalDateTime.now().plusHours(9))
 			.favoriteIdolsCnt(userDto.getIdols().size())
 			.idols(interestIdols)
 			.build();
@@ -211,6 +217,9 @@ public class UserService {
 		userRepository.save(user);
 	}
 
+	/**
+	 * 로그아웃
+	 */
 	public void logout(String token) {
 
 		// user 인증 정보 확인 후 db 조회
@@ -228,5 +237,80 @@ public class UserService {
 
 		SecurityContextHolder.getContext().setAuthentication(null);
 		log.info("로그아웃 유저 이메일 : '{}'", user.getEmail());
+	}
+
+	/**
+	 * 아이돌에게 응원 한 마디
+	 */
+	@Transactional
+	public void createCheeringMessage(UserPrincipal loginUser, String idolName, String content) {
+
+		log.info("[{}] {}님 : {}", idolName, loginUser.getEmail(), content);
+
+		// 내용이 존재하지 않으면 예외 처리
+		if (!StringUtils.hasText(content)) {
+			throw new CustomException(CustomExceptionType.WRITE_COMMENT);
+		}
+		// 오늘 해당 아이돌에게 쓴 응원 메시지가 있다면 예외 처리 (하루에 하나만 작성 가능)
+		LocalDateTime start = LocalDateTime.of(LocalDate.now(), LocalTime.MIN).plusHours(9);    // 오늘 날짜 시작 시간
+		LocalDateTime end = LocalDateTime.of(LocalDate.now(), LocalTime.MAX).plusHours(9);    // 오늘 날짜 끝 시간
+		Comment comment = commentRepository
+			.findByEmailAndIdolAndDateTimeBetween(loginUser.getEmail(), idolName, start, end).orElse(null);
+		if (comment != null) {
+			throw new CustomException(CustomExceptionType.DO_NOT_WRITE_MESSAGE);
+		}
+
+		log.info("start / end / comment : {} / {} / {}", start, end, comment);
+
+		// 아이돌 조회
+		Idol idol = idolRepository.findByIdol(idolName)
+			.orElseThrow(() -> new CustomException(CustomExceptionType.IDOL_NOT_FOUND));
+
+		// 유저 조회
+		User user = userRepository.findById(loginUser.getId())
+			.orElseThrow(() -> new CustomException(CustomExceptionType.USER_NOT_FOUND));
+
+		log.info("idol: {}", idol);
+		log.info("user: {}", user);
+
+		// // 유저의 아이돌 기록 조회
+		// User.Idol userIdolInfo = userRepository.findByIdAndIdols_Idol(loginUser.getId(), idol).orElse(null);
+
+		User.Idol userIdolInfo = null;
+		for (int i = 0; i < user.getIdols().size(); i++) {
+			if (idolName.equals(user.getIdols().get(i).getIdol())) {
+				userIdolInfo = user.getIdols().get(i);
+			}
+		}
+
+		log.info("userIdolInfo: {}", userIdolInfo);
+
+		if (userIdolInfo != null) {
+			// 기록이 있는 아이돌이면 comment count 갱신
+			userIdolInfo.setCommentsCnt(userIdolInfo.getCommentsCnt() + 1);
+		} else {
+			// 기록이 없는 아이돌이면 생성
+			userIdolInfo = User.Idol.builder()
+				.idol(idolName)
+				.like(false)
+				.modifiedDatetime(LocalDateTime.now().plusHours(9))
+				.commentsCnt(1)
+				.build();
+			user.getIdols().add(userIdolInfo);
+		}
+		// comment 생성
+		comment = Comment.builder()
+			.email(loginUser.getEmail())
+			.idol(idol.getIdol())
+			.dateTime(LocalDateTime.now().plusHours(9))
+			.content(content)
+			.build();
+
+		// 아이돌 total comments count 갱신
+		idol.setTotalCommentsCount(idol.getTotalCommentsCount() + 1);
+
+		commentRepository.save(comment);
+		userRepository.save(user);
+		idolRepository.save(idol);
 	}
 }

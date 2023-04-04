@@ -89,7 +89,7 @@ public class InterestService {
 			if (!idols.get(existIdol).isLike()) {
 				// 관심 기록이 false 상태이면 기록 갱신
 				idols.get(existIdol).setLike(true);
-				idols.get(existIdol).setModifiedDatetime(LocalDateTime.now());
+				idols.get(existIdol).setModifiedDatetime(LocalDateTime.now().plusHours(9));
 
 			} else {
 				// 관심 기록이 true 상태이면 예외 처리
@@ -106,7 +106,7 @@ public class InterestService {
 			User.Idol interestIdol = User.Idol.builder()
 				.idol(idol.getIdol())
 				.like(true)
-				.modifiedDatetime(LocalDateTime.now())
+				.modifiedDatetime(LocalDateTime.now().plusHours(9))
 				.commentsCnt(commentsCount)
 				.build();
 			// 나의 관심 아이돌 리스트에 추가
@@ -158,7 +158,7 @@ public class InterestService {
 			if (idols.get(existIdol).isLike()) {
 				// 관심 기록이 true 상태이면 관심 false
 				idols.get(existIdol).setLike(false);
-				idols.get(existIdol).setModifiedDatetime(LocalDateTime.now());
+				idols.get(existIdol).setModifiedDatetime(LocalDateTime.now().plusHours(9));
 
 				// 나의 관심 아이돌 정보 갱신
 				user.setFavoriteIdolsCnt(interestIdolCount - 1);
@@ -176,7 +176,7 @@ public class InterestService {
 			}
 		} else {
 			// 관심 기록이 없으면 관심 삭제 불가
-			throw new CustomException(CustomExceptionType.DO_NOT_DELETE_INTEREST);
+			throw new CustomException(CustomExceptionType.NOT_INTEREST);
 		}
 	}
 
