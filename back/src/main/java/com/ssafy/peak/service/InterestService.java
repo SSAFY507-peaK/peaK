@@ -1,6 +1,8 @@
 package com.ssafy.peak.service;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -31,7 +33,24 @@ public class InterestService {
 	 */
 	public IdolListResponseDto getInterestIdols() {
 
-		return IdolListResponseDto.builder().build();
+		// user 인증 정보 확인 후 db 조회
+		User user = securityUtil.getCurrentUserId()
+			.flatMap(userRepository::findById)
+			.orElseThrow(() -> new CustomException(CustomExceptionType.USER_NOT_FOUND));
+
+		log.info("user: {}", user);
+		
+		List<User.Idol> interestIdols = user.getIdols();
+		List<String> interestIdolNameList = new ArrayList<>();
+		for (int i = 0; i < interestIdols.size(); i++) {
+			interestIdolNameList.add(interestIdols.get(i).getIdol());
+		}
+
+		log.info("interestIdolNameList: {}", interestIdolNameList.toString());
+
+		return IdolListResponseDto.builder()
+			.idols(interestIdolNameList)
+			.build();
 	}
 
 	/**
