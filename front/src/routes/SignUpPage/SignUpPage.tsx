@@ -159,7 +159,7 @@ function SignUpPage() {
     else {
       axios.get(`https://j8a507.p.ssafy.io/api/user/nickname/${nickname}`, {
         headers: {
-          AccessToken: TOKEN
+          Authorization: TOKEN
         }
       })
         .then(response => console.log(response.data))
