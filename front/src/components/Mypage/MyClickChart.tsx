@@ -7,21 +7,16 @@ import { Idoldata } from "../../_utils/Types";
 
 interface Props {
   userName: string;
+  userClick: Idoldata;
 }
 
-const idoldata:Idoldata = {
-  myTotaldata: 87,
-  dataLst: [ 30, 45, 66, 11, 98, 100, 53],
-  dataAvg: [ 60, 43, 6, 47, 98, 100, 78]
-}
-
-function MyClickChart({userName}:Props) {
+function MyClickChart({userName, userClick}:Props) {
   return (
     <ChartFrameComponent
-      score={`${idoldata.myTotaldata}회`}
+      score={`${userClick.myTotaldata}회`}
       title="클릭 수"
       icon={<Icon />}
-      data={<ChartComponent idoldata={idoldata} />}
+      data={<ChartComponent idoldata={userClick} />}
     />
   )
 }

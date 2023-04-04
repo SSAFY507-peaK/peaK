@@ -94,9 +94,9 @@ function MyPage() {
         idolName
         ?
         <BottomFrame>
-          <MyClickChart userName={userName} />
-          <MyChatChart userName={userName} />
-          <MyVisitChart userName={userName} />
+          <MyClickChart userName={userName} userClick={sampleData[index].click}/>
+          <MyChatChart userName={userName} userChat={sampleData[index].chat}/>
+          <MyVisitChart userName={userName} userTime={sampleData[index].time}/>
         </BottomFrame>
         :
         null
