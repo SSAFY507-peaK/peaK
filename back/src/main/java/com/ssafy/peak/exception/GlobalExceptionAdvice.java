@@ -37,4 +37,5 @@ public class GlobalExceptionAdvice {
 				.message(exceptionType.getMessage())
 				.build());
 	}
+
 }
