@@ -161,11 +161,16 @@ public class UserService {
 			.setAuthentication(
 				new UsernamePasswordAuthenticationToken(oAuth2User, accessToken, oAuth2User.getAuthorities()));
 		try {
-			String redirectUri = redirectUrl;
-			response.setHeader(Utils.ACCESS_TOKEN, Utils.BEARER_TOKEN_PREFIX + accessToken);
-			response.setHeader(Utils.REFRESH_TOKEN, Utils.BEARER_TOKEN_PREFIX + refreshToken);
-
+			// String redirectUri = redirectUrl + SIGN_UP_URI;
+			String redirectUri = new StringBuilder()
+				.append(redirectUrl)
+				.append(SIGN_UP_URI)
+				.append(Utils.QUESTION_MARK)
+				.append(Utils.BEARER_TOKEN_PREFIX)
+				.append(accessToken)
+				.toString();
 			response.setStatus(HttpServletResponse.SC_OK);
+			// response.setHeader(Utils.ACCESS_TOKEN, Utils.BEARER_TOKEN_PREFIX + accessToken);
 			response.sendRedirect(redirectUri);
 
 		} catch (IOException e) {
