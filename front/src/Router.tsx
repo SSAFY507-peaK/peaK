@@ -3,7 +3,6 @@ import { Route, createBrowserRouter, createRoutesFromElements } from "react-rout
 
 import ChartPage from "./routes/ChartPage";
 import ErrorPage from "./routes/ErrorPage";
-import FullPage from "./routes/FullPage/FullPage";
 import IdolPage from "./routes/IdolPage";
 import Layout from "./routes/Layout";
 import MainPage from "./routes/MainPage";
@@ -12,7 +11,6 @@ import SignUpPage from "./routes/SignUpPage/SignUpPage";
 // import FullPage from "./routes/FullPage/FullPage"
 import TmpFullPage from "./routes/FullPage/tmpFullPage";
 import RankingLayout from "./routes/RankingLayout";
-import SignUpPage from "./routes/SignUpPage/SignUpPage";
 import TrendingPage from "./routes/TrendingPage";
 
 // import TmpFullPage from "./routes/FullPage/tmpFullPage";
