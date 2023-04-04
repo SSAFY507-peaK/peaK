@@ -1,7 +1,6 @@
 package com.ssafy.peak.controller;
 
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -36,7 +35,7 @@ public class InterestController {
 	/**
 	 * 관심 아이돌 등록
 	 */
-	@PostMapping("/{idol-name}")
+	@PostMapping("/{idol-name}/love")
 	public ResponseEntity addInterestIdol(@PathVariable("idol-name") String idolName) {
 
 		interestService.addInterestIdol(idolName);
@@ -46,7 +45,7 @@ public class InterestController {
 	/**
 	 * 관심 아이돌 삭제
 	 */
-	@DeleteMapping("/{idol-name}")
+	@PostMapping("/{idol-name}/hate")
 	public ResponseEntity deleteInterestIdol(@PathVariable("idol-name") String idolName) {
 
 		interestService.deleteInterestIdol(idolName);
