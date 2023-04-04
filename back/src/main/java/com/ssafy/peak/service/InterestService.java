@@ -12,6 +12,7 @@ import com.ssafy.peak.domain.User;
 import com.ssafy.peak.dto.idol.IdolListResponseDto;
 import com.ssafy.peak.exception.CustomException;
 import com.ssafy.peak.exception.CustomExceptionType;
+import com.ssafy.peak.repository.CommentRepository;
 import com.ssafy.peak.repository.IdolRepository;
 import com.ssafy.peak.repository.UserRepository;
 import com.ssafy.peak.util.SecurityUtil;
@@ -27,6 +28,7 @@ public class InterestService {
 	private final SecurityUtil securityUtil;
 	private final UserRepository userRepository;
 	private final IdolRepository idolRepository;
+	private final CommentRepository commentRepository;
 
 	/**
 	 * 나의 관심 아이돌 리스트
@@ -39,7 +41,7 @@ public class InterestService {
 			.orElseThrow(() -> new CustomException(CustomExceptionType.USER_NOT_FOUND));
 
 		log.info("user: {}", user);
-		
+
 		List<User.Idol> interestIdols = user.getIdols();
 		List<String> interestIdolNameList = new ArrayList<>();
 		for (int i = 0; i < interestIdols.size(); i++) {
@@ -64,27 +66,48 @@ public class InterestService {
 			.flatMap(userRepository::findById)
 			.orElseThrow(() -> new CustomException(CustomExceptionType.USER_NOT_FOUND));
 
+		List<User.Idol> idols = user.getIdols();
+		int interestIdolCount = getInterestIdolCount(idols);
 		// 관심 아이돌 최대 5팀 제한 체크
-		if (user.getIdols().size() > 5) {
+		if (interestIdolCount >= 5) {
 			throw new CustomException(CustomExceptionType.TO_MUCH_INTEREST);
 		}
 		// 아이돌 이름으로 db 조회
 		Idol idol = idolRepository.findByIdol(idolName)
 			.orElseThrow(() -> new CustomException(CustomExceptionType.IDOL_NOT_FOUND));
 
-		// 관심 아이돌 정보
-		User.Idol interestIdol = User.Idol.builder()
-			.idol(idol.getIdol())
-			.like(true)
-			.modifiedDatetime(LocalDateTime.now())
-			// .pageClicksCnt()
-			// .pageStaySec()
-			// .commentsCnt()
-			.build();
+		// 내가 해당 아이돌에게 쓴 comment 조회
+		int commentsCount = commentRepository.countByEmailAndIdol(user.getEmail(), idol.getIdol());
 
-		// 나의 관심 아이돌 리스트에 추가하고 나의 관심 아이돌 수 갱신
-		user.getIdols().add(interestIdol);
-		user.setFavoriteIdolsCnt(user.getIdols().size());
+		log.info("commentsCount: {}", commentsCount);
+
+		// 관심 아이돌 기록이 있는지 체크
+		int existIdol = -1;
+		for (int i = 0; i < idols.size(); i++) {
+			if (idols.get(i).getIdol().equals(idol.getIdol())) {
+				existIdol = i;
+			}
+		}
+		if (existIdol > 0) {
+			// 관심 기록이 있으면
+			idols.get(existIdol).setLike(true);
+			idols.get(existIdol).setModifiedDatetime(LocalDateTime.now());
+			idols.get(existIdol).setCommentsCnt(commentsCount);
+			
+		} else {
+			// 관심 기록이 없으면
+			User.Idol interestIdol = User.Idol.builder()
+				.idol(idol.getIdol())
+				.like(true)
+				.modifiedDatetime(LocalDateTime.now())
+				.commentsCnt(commentsCount)
+				.build();
+			// 나의 관심 아이돌 리스트에 추가
+			idols.add(interestIdol);
+		}
+		// 나의 관심 아이돌 갱신
+		user.setFavoriteIdolsCnt(interestIdolCount + 1);
+		user.setIdols(idols);
 
 		// 아이돌의 총 팬 수 증가
 		idol.setFanCount(idol.getFanCount() + 1);
@@ -92,6 +115,19 @@ public class InterestService {
 		// db 저장
 		userRepository.save(user);
 		idolRepository.save(idol);
+	}
+
+	/**
+	 * 나의 관심 아이돌의 수 세기
+	 */
+	private static int getInterestIdolCount(List<User.Idol> idols) {
+		int interestIdolCount = 0;
+		for (int i = 0; i < idols.size(); i++) {
+			if (idols.get(i).isLike() == true) {
+				interestIdolCount++;
+			}
+		}
+		return interestIdolCount;
 	}
 
 	/**
