@@ -23,6 +23,8 @@ public enum CustomExceptionType {
 	IDOL_NOT_FOUND(HttpStatus.NOT_FOUND, "EI002", "존재하지 않는 아이돌입니다."),
 	TO_LITTLE_INTEREST(HttpStatus.BAD_REQUEST, "EI003", "관심 아이돌은 최소 1팀 이상 있어야 합니다."),
 	DO_NOT_DELETE_INTEREST(HttpStatus.BAD_REQUEST, "EI004", "관심 등록이 되어있지 않습니다."),
+	ALREADY_LOVE(HttpStatus.CONFLICT, "EI005", "이미 관심이 등록 되었습니다."),
+	ALREADY_HATE(HttpStatus.CONFLICT, "EI006", "이미 관심이 취소 되었습니다."),
 
 	// DATA
 	NO_CONTENT(HttpStatus.NOT_FOUND, "ED001", "데이터가 존재하지 않습니다."),
