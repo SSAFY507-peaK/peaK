@@ -88,7 +88,7 @@ function MainPage() {
       press: "CNN",
     },
   ];
-  const items = [
+  const TrendYoutubeList = [
     {
       title: "4 시간 지브리 메들리 피아노 💖 ..",
       content:
@@ -167,7 +167,7 @@ function MainPage() {
         <CarouselCustomDiv ratio={0.47}>
           <NameDiv type={false} firstWord="트렌딩" secondWord="유튜브" />
           <CarouselDiv>
-            <CarouselCustom items={items} />
+            <CarouselCustom items={TrendYoutubeList} />
           </CarouselDiv>
         </CarouselCustomDiv>
       </MainDiv>
