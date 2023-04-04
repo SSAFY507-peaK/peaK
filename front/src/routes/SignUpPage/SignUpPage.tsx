@@ -225,14 +225,19 @@ function SignUpPage() {
     setSelectedIdols(prev=> prev.filter(idol2 => idol.idolNum !== idol2.idolNum));
   }
   const handleSignUp = () => {
-    const header = {
+    const headers = {
       Authorization: TOKEN,
     };
     const body = {
       nickname: nickname,
       interest: selectedIdols.map(idol => idol.idolName),
     }
-    console.log({header, body})
+    console.log({headers, body});
+    axios.post(`https://j8a507.p.ssafy.io/api/user/sign-up`, body, {
+      headers: headers
+    })
+      .then(response => console.log(response.data))
+      .catch(error => console.log(error))
   }
 
   const page2 = (
