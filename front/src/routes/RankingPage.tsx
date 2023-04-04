@@ -49,7 +49,7 @@ const AllRankDiv = styled.div`
 const IdolRankDiv = styled.div`
   display: flex;
   width: 90%;
-  height: 14vh;
+  height: 15vh;
   align-items: center;
   padding: 30px 30px;
   font-size: 1.8rem;
@@ -67,8 +67,10 @@ const IdolImgDiv = styled.div<IdolImgDivType>`
   background-image: url(${props => props.url});
   background-size: cover;
   background-position: center;
-  width: 11vh;
-  height: 11vh;
+  width: 10%;
+  height: 12vh;
+  /* width: 11vh;
+  height: 11vh; */
   border-radius: 5px;
   margin: 0vh 10vh 0vh 5vh;
 `;
@@ -81,6 +83,8 @@ const IdolNameDiv = styled.div`
 const RankNumDiv = styled.div`
   width: 5%;
   font-size: 1.4rem;
+  display: flex;
+  justify-content: space-around;
 `;
 
 const RankDifferDiv = styled.div`
@@ -91,11 +95,12 @@ const RankDifferDiv = styled.div`
 `;
 
 const ScoreDiv = styled.div`
-  font-size: 0.7rem;
+  font-size: 1rem;
   display: flex;
   justify-content: flex-end;
-  width: 65%;
+  width: 55%;
   color: #b3b3b3;
+  padding-right: 10vh;
 `;
 
 const RankDiffNum = styled.div<RankDiffNumType>`
