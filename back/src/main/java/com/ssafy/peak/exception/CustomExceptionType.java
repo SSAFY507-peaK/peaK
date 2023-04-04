@@ -26,7 +26,9 @@ public enum CustomExceptionType {
 
 	// DATA
 	NO_CONTENT(HttpStatus.NOT_FOUND, "ED001", "데이터가 존재하지 않습니다."),
-	DO_NOT_DELETE(HttpStatus.BAD_REQUEST, "ED002", "삭제할 수 없습니다.");
+	DO_NOT_DELETE(HttpStatus.BAD_REQUEST, "ED002", "삭제할 수 없습니다."),
+
+	ALREADY_EXIST(HttpStatus.CONFLICT, "ED003", "중복된 데이터입니다.");
 
 	private final HttpStatus httpStatus;
 	private final String code;
