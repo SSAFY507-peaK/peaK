@@ -40,6 +40,7 @@ export interface IdolInterest {
 export interface MyIdolDetail {
   idol: string;
   value: number;
+  interestScore: number;
   interestAverage: number;
   comments: CommentList[];
 }

@@ -51,15 +51,25 @@ function MyPage() {
   const params = useParams();
   const userName:string = params.userName || "";
   const [idolName, setIdolName] = useState<string>("")
-  
+  const [index, setIndex] = useState<number>(0)
+  const [idolScoreData, setIdolScoreData] = useState<number[]>([0, 0])
   const dispatch = useAppDispatch()
+
+  // 스토어에 데이터 저장
   dispatch(CreateMyInterest(sampleData))
 
+  // 선택된 아이돌의 index 구하기
   useEffect(() => {
-    console.log(idolName)
+    const newIndex = sampleData.findIndex((item) => item.idol === idolName)
+    setIndex(newIndex)
   },[idolName])
-
-  // userName을 params로 읽어서 마이 데이터를 불러서 Store에 저장해준다. 
+  
+  // 선택된 아이돌의 점수 저장
+  useEffect(() => {
+    if (index >= 0) { // index 값이 올바른지 확인
+      setIdolScoreData([sampleData[index].interestScore, sampleData[index].interestAverage])
+    }
+  }, [index])
 
   return (
     <Wrapper>
@@ -70,10 +80,10 @@ function MyPage() {
       <TopFrame>
         <TotalChart userName={userName} setIdolName={setIdolName} />
         {
-          idolName
+          idolName && idolScoreData
           ?
           <>
-            <MyInterest userName={userName} idolName={idolName}/>
+            <MyInterest userName={userName} idolName={idolName} idolScoreData={idolScoreData} />
             <MyChat userName={userName} />
           </>
           :

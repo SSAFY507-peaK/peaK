@@ -2,6 +2,7 @@
   {
     "idol": "세븐틴",
     "value": 45,
+    "interestScore": 67,
     "interestAverage": 54,
     "comments": [
       {
@@ -48,6 +49,7 @@
   {
     "idol": "BLACKPINK",
     "value": 30,
+    "interestScore": 50,
     "interestAverage": 60,
     "comments": [
       {
@@ -94,6 +96,7 @@
   {
     "idol": "BTS",
     "value": 15,
+    "interestScore": 40,
     "interestAverage": 73,
     "comments": [
       {
@@ -138,6 +141,7 @@
   {
     "idol": "트와이스",
     "value": 5,
+    "interestScore": 34,
     "interestAverage": 73,
     "comments": [
       {
@@ -186,6 +190,7 @@
   {
     "idol": "아이브",
     "value": 5,
+    "interestScore": 20,
     "interestAverage": 67,
     "comments": [
       {

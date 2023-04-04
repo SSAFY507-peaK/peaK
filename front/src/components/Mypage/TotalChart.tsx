@@ -5,7 +5,6 @@ import ReactEcharts from 'echarts-for-react';
 import TitleComponent from "../idolpage/TitleComponent";
 import styled from "styled-components";
 import { useAppSelector } from '../../_hooks/hooks';
-import { useSelector } from 'react-redux';
 
 interface Props {
   userName: string;
@@ -35,7 +34,7 @@ function TotalChart({userName, setIdolName}:Props) {
   let chartData:SelecteType[] = [];
   const color:string[] = ["#4CD7F6","#6DBFFF","#7166F9", "#C74BF6", "#F946FF"]
 
-    const idolData = useAppSelector<IdolInterest>(state => state.myinterest)
+  const idolData = useAppSelector<IdolInterest>(state => state.myinterest)
   const [selectedData, setSelectedData] = useState<SelecteType>();
 
   for (let i = 0; i < idolData.idols.length; i++ ) {
