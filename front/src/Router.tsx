@@ -12,18 +12,14 @@ import SignUpPage from "./routes/SignUpPage/SignUpPage";
 import TmpFullPage from "./routes/FullPage/tmpFullPage";
 import TrendingPage from "./routes/TrendingPage";
 
-// import FullPage from "./routes/FullPage/FullPage"
-
-// import TmpFullPage from "./routes/FullPage/tmpFullPage";
-
-// import {action as LoginAction} from "./routes/LoginModal/LoginModal";
+import { IdolLists } from "./_utils/loader";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route>
       {/*<Route path="/intro" element={ <FullPage /> } />*/}
       <Route path="/intro" element={<TmpFullPage />} />
-      <Route path="/signup" element={<SignUpPage />} />
+      <Route path="/signup" element={<SignUpPage />} loader={IdolLists}/>
       <Route path="/" element={<Layout />} errorElement={<ErrorPage />}>
         <Route errorElement={<ErrorPage />}>
           <Route index element={<MainPage />} loader={MainLoader} />
