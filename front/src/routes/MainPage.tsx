@@ -43,7 +43,7 @@ function MainPage() {
   // const [TrendNewsList, TrendYoutubeList] = useLoaderData();
   const TrendNewsList = [
     {
-      title: "(4K UHD) [최초공개] KF-21 무장분리・기..",
+      title: "(4K UHD) [최초공개최초공개최초공개최초공개최초공개최초공개] KF-21 무장분리・기..",
       summary:
         "대한민국의 KF-21이 공군 비행단에서 이륙하여 남해 상공에서 공대공 무장여 남해 상공에서 공대공 무장여 남해 상공에서 공대공 무장분리 시험과 공중 .. ",
       thumbnail_link:
