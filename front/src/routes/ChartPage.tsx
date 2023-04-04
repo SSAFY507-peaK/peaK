@@ -7,7 +7,7 @@ import {
   IdolWrapper,
   Selected,
 } from "../components/SignupPage/IdolComponents";
-import React, { useCallback, useState } from "react";
+import { useCallback, useState } from "react";
 
 import { CloseButton } from "../components/Button";
 import ContentDiv from "../components/Content";
