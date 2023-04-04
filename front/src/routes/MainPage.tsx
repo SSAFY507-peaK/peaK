@@ -4,7 +4,6 @@ import NameDiv from "../components/NameDiv";
 import NewCarousel from "../components/newcarousel/NewCarousel.jsx";
 import Top8 from "../components/mainpage/Top8";
 import TrendKeyword from "../components/mainpage/TrendKeyword";
-import TrendNews from "../components/mainpage/TrendNews";
 import styled from "styled-components";
 
 type NewCarouselDivType = {

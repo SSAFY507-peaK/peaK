@@ -1,4 +1,5 @@
 import { ReactComponent as Down } from "../assets/arrow-down.svg";
+import { RankListType } from "../_utils/Types";
 import { ReactComponent as Stable } from "../assets/stable.svg";
 import { ReactComponent as Up } from "../assets/arrow-up.svg";
 import axios from "axios";
@@ -15,16 +16,21 @@ type RankDiffNumType = {
   sign: "up" | "stable" | "down";
 };
 
+type RankDivType = {
+  idol: string;
+  rank: number;
+  diff: number;
+  score: number;
+};
+
 export async function loader() {
-  let RankList: any;
+  let RankList = null;
   await axios
     .get(`${BASE_URL}peak/`)
     .then(response => {
       RankList = response.data.ranksByHour;
-      console.log(response.data.ranksByHour);
     })
     .catch(error => console.log(error));
-
   return RankList;
 }
 
@@ -69,8 +75,6 @@ const IdolImgDiv = styled.div<IdolImgDivType>`
   background-position: center;
   width: 10%;
   height: 12vh;
-  /* width: 11vh;
-  height: 11vh; */
   border-radius: 5px;
   margin: 0vh 10vh 0vh 5vh;
 `;
@@ -109,7 +113,7 @@ const RankDiffNum = styled.div<RankDiffNumType>`
   font-size: 15px;
 `;
 
-const RankDiffer = (diff: any) => {
+const RankDiffer = (diff: number) => {
   if (diff > 0) {
     return (
       <RankDifferDiv>
@@ -134,7 +138,7 @@ const RankDiffer = (diff: any) => {
 };
 
 /** 아이돌 1팀의 순위, 순위변동, 사진, 점수, 이름 */
-const RankDiv = (props: any) => {
+const RankDiv = (props: RankDivType) => {
   return (
     <IdolRankDiv>
       <RankNumDiv>{props.rank}</RankNumDiv>
@@ -150,9 +154,8 @@ const RankDiv = (props: any) => {
 
 /** 모든 아이돌의 순위, 순위변동, 사진, 점수, 이름 */
 function RankingPage() {
-  const RankList = useLoaderData();
-  const items: any = RankList;
-  return <AllRankDiv>{items.map((item: any) => RankDiv(item))}</AllRankDiv>;
+  const RankList = useLoaderData() as RankListType[];
+  return <AllRankDiv>{RankList.map((item: RankListType) => RankDiv(item))}</AllRankDiv>;
 }
 
 export default RankingPage;
