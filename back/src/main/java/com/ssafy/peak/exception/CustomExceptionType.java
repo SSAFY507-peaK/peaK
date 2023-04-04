@@ -16,12 +16,19 @@ public enum CustomExceptionType {
 	PASSWORD_NOT_MATCHED(HttpStatus.UNAUTHORIZED, "EU007", "비밀번호가 일치하지 않습니다."),
 	AUTHORITY_ERROR(HttpStatus.FORBIDDEN, "EU008", "해당 기능을 요청할 권한이 없습니다."),
 	UNQUALIFIED_NICKNAME(HttpStatus.BAD_REQUEST, "EU009", "닉네임은 8자 이하의 한글, 영문, 숫자만 가능합니다."),
-	TO_MUCH_INTEREST(HttpStatus.BAD_REQUEST, "EU010", "관심 아이돌은 최대 5팀까지 선택 가능합니다."),
-	SIGN_UP_FAIL(HttpStatus.UNAUTHORIZED, "EU011", "회원가입에 실패하였습니다."),
+	SIGN_UP_FAIL(HttpStatus.UNAUTHORIZED, "EU010", "회원가입에 실패하였습니다."),
+
+	// IDOL
+	TO_MUCH_INTEREST(HttpStatus.BAD_REQUEST, "EI001", "관심 아이돌은 최대 5팀까지 선택 가능합니다."),
+	IDOL_NOT_FOUND(HttpStatus.NOT_FOUND, "EI002", "존재하지 않는 아이돌입니다."),
+	TO_LITTLE_INTEREST(HttpStatus.BAD_REQUEST, "EI003", "관심 아이돌은 최소 1팀 이상 있어야 합니다."),
+	DO_NOT_DELETE_INTEREST(HttpStatus.BAD_REQUEST, "EI004", "관심 등록이 되어있지 않습니다."),
 
 	// DATA
 	NO_CONTENT(HttpStatus.NOT_FOUND, "ED001", "데이터가 존재하지 않습니다."),
-	DO_NOT_DELETE(HttpStatus.BAD_REQUEST, "ED002", "삭제할 수 없습니다.");
+	DO_NOT_DELETE(HttpStatus.BAD_REQUEST, "ED002", "삭제할 수 없습니다."),
+
+	ALREADY_EXIST(HttpStatus.CONFLICT, "ED003", "중복된 데이터입니다.");
 
 	private final HttpStatus httpStatus;
 	private final String code;

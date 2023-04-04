@@ -46,7 +46,7 @@ public class UserController {
 	 * 회원 가입
 	 * (OAuth2 login 성공 후)
 	 */
-	@GetMapping("/sign-up")
+	@PostMapping("/sign-up")
 	public ResponseEntity signup(
 		@RequestHeader("Authorization") String token,
 		@RequestBody UserDto userRequestDto) {
@@ -54,8 +54,7 @@ public class UserController {
 		token = token.split(Utils.BLANK)[1];
 		SignupDto signupDto = userService.signup(token, userRequestDto);
 		HttpHeaders httpHeaders = new HttpHeaders();
-		httpHeaders.set(Utils.ACCESS_TOKEN, Utils.BEARER_TOKEN_PREFIX + signupDto.getAccessToken());
-		httpHeaders.set(Utils.REFRESH_TOKEN, Utils.BEARER_TOKEN_PREFIX + signupDto.getRefreshToken());
+		httpHeaders.set(Utils.AUTHENTICATION, Utils.BEARER_TOKEN_PREFIX + signupDto.getAccessToken());
 
 		UserDto userResponseDto = UserDto.builder()
 			.nickname(signupDto.getNickname())

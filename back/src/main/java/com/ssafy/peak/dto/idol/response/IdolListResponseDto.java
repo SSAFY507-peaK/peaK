@@ -1,4 +1,6 @@
-package com.ssafy.peak.dto.response;
+package com.ssafy.peak.dto.idol.response;
+
+import java.util.List;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -8,11 +10,9 @@ import lombok.Setter;
 
 @Getter
 @Setter
-@Builder
-@AllArgsConstructor
 @NoArgsConstructor
-public class SuccessResponseDto {
-
-	private final String code = "200";
-	private String message;
+@AllArgsConstructor
+@Builder
+public class IdolListResponseDto {
+	private List<String> idols;
 }

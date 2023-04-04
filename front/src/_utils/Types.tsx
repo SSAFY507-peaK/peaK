@@ -11,6 +11,10 @@ export type RankListType = {
   diff: number;
 };
 
+export type IdolListsType = {
+  idols: string[];
+}
+
 // export type MyIdolDetail = {
 //   name: string;
 //   myScore: number;

@@ -79,7 +79,7 @@ public class UserService {
 	}
 
 	/**
-	 * 회원가입
+	 * peaK 회원가입과 동시에 로그인
 	 */
 	@Transactional(rollbackFor = Exception.class)
 	public SignupDto signup(String token, UserDto userDto) {
@@ -146,7 +146,7 @@ public class UserService {
 	}
 
 	/**
-	 * 로그인
+	 * peak 회원 카카오 로그인
 	 */
 	public void login(HttpServletResponse response, Authentication authentication) {
 
@@ -162,10 +162,8 @@ public class UserService {
 				new UsernamePasswordAuthenticationToken(oAuth2User, accessToken, oAuth2User.getAuthorities()));
 		try {
 			String redirectUri = redirectUrl;
-			response.setHeader(Utils.ACCESS_TOKEN, Utils.BEARER_TOKEN_PREFIX + accessToken);
-			response.setHeader(Utils.REFRESH_TOKEN, Utils.BEARER_TOKEN_PREFIX + refreshToken);
-
 			response.setStatus(HttpServletResponse.SC_OK);
+			response.setHeader(Utils.ACCESS_TOKEN, Utils.BEARER_TOKEN_PREFIX + accessToken);
 			response.sendRedirect(redirectUri);
 
 		} catch (IOException e) {
