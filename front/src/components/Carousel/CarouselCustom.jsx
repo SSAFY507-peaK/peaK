@@ -78,7 +78,10 @@ const CarouselCustom = props => (
         return (
           <Card
             title={item.title}
-            content={item.content || item.summary}
+            content={
+              item.content ||
+              (item.summary.length <= 70 ? item.summary : item.summary.substr(0, 70) + "...")
+            }
             src={item.src || item.thumbnail_link}
             link={item.link}
           />
