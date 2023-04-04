@@ -83,11 +83,18 @@ public class InterestService {
 				existIdol = i;
 			}
 		}
+		boolean alreadyLove = false;
 		if (existIdol > 0) {
-			// 관심 기록이 있으면 기록 갱신
-			idols.get(existIdol).setLike(true);
-			idols.get(existIdol).setModifiedDatetime(LocalDateTime.now());
+			// 관심 기록이 있고
+			if (!idols.get(existIdol).isLike()) {
+				// 관심 기록이 false 상태이면 기록 갱신
+				idols.get(existIdol).setLike(true);
+				idols.get(existIdol).setModifiedDatetime(LocalDateTime.now());
 
+			} else {
+				// 관심 기록이 true 상태이면 예외 처리
+				throw new CustomException(CustomExceptionType.ALREADY_LOVE);
+			}
 		} else {
 			// 관심 기록이 없으면 정보를 생성해서 넣기
 
@@ -105,6 +112,7 @@ public class InterestService {
 			// 나의 관심 아이돌 리스트에 추가
 			idols.add(interestIdol);
 		}
+
 		// 나의 관심 아이돌 정보 갱신
 		user.setFavoriteIdolsCnt(interestIdolCount + 1);
 		user.setIdols(idols);
@@ -115,19 +123,6 @@ public class InterestService {
 		// db 저장
 		userRepository.save(user);
 		idolRepository.save(idol);
-	}
-
-	/**
-	 * 나의 관심 아이돌의 수 세기
-	 */
-	private static int getInterestIdolCount(List<User.Idol> idols) {
-		int interestIdolCount = 0;
-		for (int i = 0; i < idols.size(); i++) {
-			if (idols.get(i).isLike() == true) {
-				interestIdolCount++;
-			}
-		}
-		return interestIdolCount;
 	}
 
 	/**
@@ -158,25 +153,44 @@ public class InterestService {
 				existIdol = i;
 			}
 		}
-		if (existIdol > 0) {
-			// 관심 기록이 있으면 관심 상태 false
-			idols.get(existIdol).setLike(false);
-			idols.get(existIdol).setModifiedDatetime(LocalDateTime.now());
+		if (existIdol >= 0) {
+			// 관심 기록이 있고
+			if (idols.get(existIdol).isLike()) {
+				// 관심 기록이 true 상태이면 관심 false
+				idols.get(existIdol).setLike(false);
+				idols.get(existIdol).setModifiedDatetime(LocalDateTime.now());
 
+				// 나의 관심 아이돌 정보 갱신
+				user.setFavoriteIdolsCnt(interestIdolCount - 1);
+				user.setIdols(idols);
+
+				// 아이돌의 총 팬 수 감소
+				idol.setFanCount(idol.getFanCount() - 1);
+
+				// db 저장
+				userRepository.save(user);
+				idolRepository.save(idol);
+			} else {
+				// 관심 기록이 false 상태이면 예외 처리
+				throw new CustomException(CustomExceptionType.ALREADY_HATE);
+			}
 		} else {
 			// 관심 기록이 없으면 관심 삭제 불가
 			throw new CustomException(CustomExceptionType.DO_NOT_DELETE_INTEREST);
 		}
-		// 나의 관심 아이돌 정보 갱신
-		user.setFavoriteIdolsCnt(interestIdolCount - 1);
-		user.setIdols(idols);
+	}
 
-		// 아이돌의 총 팬 수 감소
-		idol.setFanCount(idol.getFanCount() - 1);
-
-		// db 저장
-		userRepository.save(user);
-		idolRepository.save(idol);
+	/**
+	 * 나의 관심 아이돌의 수 세기
+	 */
+	private static int getInterestIdolCount(List<User.Idol> idols) {
+		int interestIdolCount = 0;
+		for (int i = 0; i < idols.size(); i++) {
+			if (idols.get(i).isLike() == true) {
+				interestIdolCount++;
+			}
+		}
+		return interestIdolCount;
 	}
 }
 
