@@ -24,7 +24,7 @@ const PageContainer = styled.div<PageContainerType>`
   //width: 100%;
   width: var(--content-space);
   background-color: ${props => props.backgroundColor};
-  position: relative;
+  //position: relative;
   display: flex;
   margin-left: auto;
   margin-right: auto;

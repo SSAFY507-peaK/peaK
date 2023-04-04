@@ -1,5 +1,5 @@
 import React, {useState, useCallback, useRef} from "react";
-import { useNavigate } from "react-router-dom"
+import { useLocation } from "react-router-dom"
 import styled from "styled-components";
 import { PurpleButton, BlueButton } from "../../components/Button";
 import { NicknameInput, MessageDiv } from "../../components/SignupPage/NicknameComponents";
@@ -48,7 +48,8 @@ type IdolObjectType = {
 type NicknameType = "long" | "character" | "duplicate" | "ok";
 
 function SignUpPage() {
-  const navigate = useNavigate();
+  const location= useLocation();
+  const TOKEN = decodeURI(location.search.slice(1));
   const containerRef = useRef<HTMLDivElement>(null);
   const page1Ref = useRef<HTMLDivElement>(null);
   let dummyData: IdolObjectType[] = [
@@ -230,6 +231,16 @@ function SignUpPage() {
     setIdols(prev => prev.map(idol2 => idol.idolNum === idol2.idolNum? {...idol2, isSelected: false} : idol2))
     setSelectedIdols(prev=> prev.filter(idol2 => idol.idolNum !== idol2.idolNum));
   }
+  const handleSignUp = () => {
+    const header = {
+      Authorization: TOKEN,
+    };
+    const body = {
+      nickname: nickname,
+      interest: selectedIdols.map(idol => idol.idolName),
+    }
+    console.log({header, body})
+  }
 
   const page2 = (
     <PageWrapper>
@@ -239,7 +250,7 @@ function SignUpPage() {
           <Description>좋아하는 아이돌을 한 팀 이상 선택해주세요. <br/>최대 다섯 팀까지 선택 가능합니다.</Description>
           <div>
             <PurpleButton width="120px" onClick={() => handleChangePage(2)}>이전으로</PurpleButton>
-            <BlueButton disabled={selectedIdols.length<=0} width="120px" onClick={() => navigate("/")}>회원가입 완료</BlueButton>
+            <BlueButton disabled={selectedIdols.length<=0} width="120px" onClick={handleSignUp}>회원가입 완료</BlueButton>
           </div>
         </DescriptionSection>
         <IdolGrid cols={5}>{ showSelectIdols() }</IdolGrid>
@@ -248,7 +259,7 @@ function SignUpPage() {
       <IdolWrapper>
         <IdolGrid cols={6} gap="20px">
           {idols.map((idol: IdolObjectType) => (
-            <IdolImageWrapper >
+            <IdolImageWrapper>
               <IdolImage url={idol.idolImg} onClick={()=> idol.isSelected? handleDeleteSelectedIdol(idol) : handleSelectIdol(idol)} className={`${idol.isSelected && "selected"}`}/>
               <IdolName>{idol.idolName}</IdolName>
             </IdolImageWrapper>

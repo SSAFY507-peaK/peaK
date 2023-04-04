@@ -100,12 +100,12 @@ function TmpFullPage() {
 
   return (
     <FullPageContainer ref={mainWrapperRef} >
-      <NavBar />
-      <DotComponent scrollIdx={scrollIdx} />
       <SectionOne />
       <SectionTwo />
       <SectionThree />
       <SectionFour />
+      <NavBar />
+      <DotComponent scrollIdx={scrollIdx} />
     </FullPageContainer>
   );
 }
