@@ -67,6 +67,8 @@ public class IdolService {
 				.orElseThrow(() -> new CustomException(CustomExceptionType.USER_NOT_FOUND));
 			String nickname = user.getNickname();
 			commentDtoList.add(CommentDto.of(comment, nickname));
+			if (commentDtoList.size() >= 30)
+				break;
 		}
 
 		IdolCommentResponseDto dto = IdolCommentResponseDto.builder().comments(commentDtoList).build();
