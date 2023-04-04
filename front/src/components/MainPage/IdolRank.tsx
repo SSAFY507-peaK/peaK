@@ -43,7 +43,8 @@ const IdolImg = styled.div<IdolImgType>`
 `;
 
 const NameDiv = styled.div`
-  margin: 3px auto 0;
+  margin-left: 20px;
+  margin-top: 5px;
   font-size: 15px;
 `;
 
@@ -73,8 +74,10 @@ function IdolRank(props: IdolRankType) {
   return (
     <WrapperDiv>
       {Logo(props.rank)}
-      <IdolImg url={props.url} rank={props.rank} />
-      <NameDiv>{props.name}</NameDiv>
+      <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
+        <IdolImg url={props.url} rank={props.rank} />
+        <NameDiv>{props.name}</NameDiv>
+      </div>
     </WrapperDiv>
   );
 }

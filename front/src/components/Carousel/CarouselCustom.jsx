@@ -23,6 +23,11 @@ const Card = props => (
       backgroundImage: `url(${props.src})`,
       backgroundSize: "cover",
       backgroundPosition: "center",
+      cursor: "pointer",
+    }}
+    onClick={event => {
+      event.preventDefault();
+      window.open(props.link);
     }}
   >
     <h3>{props.title}</h3>
@@ -70,7 +75,14 @@ const CarouselCustom = props => (
   <AlignDiv>
     <Carousel>
       {props.items.map((item, idx) => {
-        return <Card title={item.title} content={item.content} src={item.src} />;
+        return (
+          <Card
+            title={item.title}
+            content={item.content || item.summary}
+            src={item.src || item.thumbnail_link}
+            link={item.link}
+          />
+        );
       })}
     </Carousel>
   </AlignDiv>

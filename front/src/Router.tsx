@@ -1,3 +1,4 @@
+import MainPage, { loader as MainLoader } from "./routes/MainPage";
 import RankingPage, { loader as RankingLoader } from "./routes/RankingPage";
 import { Route, createBrowserRouter, createRoutesFromElements } from "react-router-dom";
 
@@ -5,28 +6,23 @@ import ChartPage from "./routes/ChartPage";
 import ErrorPage from "./routes/ErrorPage";
 import IdolPage from "./routes/IdolPage";
 import Layout from "./routes/Layout";
-import MainPage from "./routes/MainPage";
 import MyPage from "./routes/MyPage";
 import RankingLayout from "./routes/RankingLayout";
 import SignUpPage from "./routes/SignUpPage/SignUpPage";
 import TmpFullPage from "./routes/FullPage/tmpFullPage";
 import TrendingPage from "./routes/TrendingPage";
 
-// import FullPage from "./routes/FullPage/FullPage"
-
-// import TmpFullPage from "./routes/FullPage/tmpFullPage";
-
-// import {action as LoginAction} from "./routes/LoginModal/LoginModal";
+import { IdolLists } from "./_utils/loader";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route>
       {/*<Route path="/intro" element={ <FullPage /> } />*/}
       <Route path="/intro" element={<TmpFullPage />} />
-      <Route path="/signup" element={<SignUpPage />} />
+      <Route path="/signup" element={<SignUpPage />} loader={IdolLists}/>
       <Route path="/" element={<Layout />} errorElement={<ErrorPage />}>
         <Route errorElement={<ErrorPage />}>
-          <Route index element={<MainPage />} />
+          <Route index element={<MainPage />} loader={MainLoader} />
 
           <Route path="ranking" element={<RankingLayout />}>
             <Route index element={<RankingPage />} loader={RankingLoader} />
