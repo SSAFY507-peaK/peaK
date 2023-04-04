@@ -35,7 +35,13 @@ const DayComponent = styled.option<Type>`
 function CalendarItem({idx, day, children, sellectList, isChat, setSellectList}:Props) {
   
   useEffect(() => {
-    setSellectList([false, false, false, false, false, false, false, false, false, false, false, false, false, false])
+    for (let i = 0; i<14; i++) {
+      if (isChat[i]) {
+        let tmpList = [false, false, false, false, false, false, false, false, false, false, false, false, false, false]
+        tmpList[i] = true
+        setSellectList(tmpList)
+      }
+    }
   },[isChat])
   return (
     <DayComponent
