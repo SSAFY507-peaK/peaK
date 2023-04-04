@@ -1,5 +1,6 @@
+import { useEffect, useState } from "react";
+
 import ECharts from "echarts-for-react";
-import {useEffect, useState} from "react";
 
 // function f() {
 //   // 나중을 위해 함수로 묶어서 주석 처리한 것
@@ -18,9 +19,9 @@ type ChartIdolObjectType = {
   data?: number[];
   type?: string;
   lineStyle?: { width: number };
-}
+};
 
-function RankChart({chartIdol}:any) {
+function RankChart({ chartIdol }: any) {
   let labels = ["D-6", "D-5", "D-4", "D-3", "D-2", "D-1", "오늘"];
 
   const [options, setOptions] = useState({
@@ -32,7 +33,7 @@ function RankChart({chartIdol}:any) {
       },
     },
     legend: {
-      data: chartIdol.map((idol:ChartIdolObjectType) => idol.name),
+      data: chartIdol.map((idol: ChartIdolObjectType) => idol.name),
       orient: "vertical",
       top: "170vw",
       right: "right",
@@ -57,13 +58,12 @@ function RankChart({chartIdol}:any) {
     ],
     series: chartIdol,
     graphic: {
-      type: 'line',
-      $action: 'merge',
-    }
-  }
-  );
+      type: "line",
+      $action: "merge",
+    },
+  });
 
-  useEffect(()=>{
+  useEffect(() => {
     setOptions({
       color: ["#4CD7F6", "#6DBFFF", "#7166F9", "#C74BF6", "#F946FF"],
       tooltip: {
@@ -73,7 +73,7 @@ function RankChart({chartIdol}:any) {
         },
       },
       legend: {
-        data: chartIdol.map((idol:ChartIdolObjectType) => idol.name),
+        data: chartIdol.map((idol: ChartIdolObjectType) => idol.name),
         orient: "vertical",
         top: "170vw",
         right: "right",
@@ -98,14 +98,19 @@ function RankChart({chartIdol}:any) {
       ],
       series: chartIdol,
       graphic: {
-        type: 'line',
-        $action: 'merge',
-      }
-    })
-  }, [chartIdol])
+        type: "line",
+        $action: "merge",
+      },
+    });
+  }, [chartIdol]);
 
   return (
-    <ECharts option={options} style={{ height: "90%", width: "90%" }} opts={{ renderer: "svg" }} notMerge />
+    <ECharts
+      option={options}
+      style={{ height: "90%", width: "90%" }}
+      opts={{ renderer: "svg" }}
+      notMerge
+    />
   );
 }
 
