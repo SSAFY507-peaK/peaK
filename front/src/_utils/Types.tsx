@@ -35,3 +35,21 @@ export type IdolListsType = {
 //   // id: number;
 //   data: number;
 // }
+
+
+export interface IdolInterest {
+  idols: MyIdolDetail[];
+}
+
+export interface MyIdolDetail {
+  idol: string;
+  value: number;
+  interestScore: number;
+  interestAverage: number;
+  comments: Array<Comment> | boolean[];
+}
+
+export interface Comment {
+  content: string;
+  datetime: string;
+}

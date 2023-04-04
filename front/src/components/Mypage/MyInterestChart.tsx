@@ -1,6 +1,10 @@
 import ReactEcharts from 'echarts-for-react';
 import styled from 'styled-components';
 
+interface Props {
+  myScore: number
+}
+
 const ChartFrame = styled.div`
   padding: 15px 0px;
   /* background-color: white; */
@@ -8,10 +12,10 @@ const ChartFrame = styled.div`
 `;
 
 
-function MyInterestChart() {
+function MyInterestChart({myScore}:Props) {
   const gaugeData = [
     {
-      value: 67,
+      value: myScore,
       name: "Perfect",      // 이 부분은 점수에 따라 다른 데이터 보여주자
       // title: {
       //   offsetCenter: ["0%", "-30%"]

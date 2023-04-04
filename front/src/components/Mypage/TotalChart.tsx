@@ -1,8 +1,10 @@
 import { useCallback, useMemo, useState } from 'react';
 
+import { IdolInterest } from '../../_utils/Types';
 import ReactEcharts from 'echarts-for-react';
 import TitleComponent from "../idolpage/TitleComponent";
 import styled from "styled-components";
+import { useAppSelector } from '../../_hooks/hooks';
 
 interface Props {
   userName: string;
@@ -12,14 +14,13 @@ interface Props {
 interface SelecteType {
   name: string;
   value: number;
+  itemStyle?: any;
 }
 
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   flex: 0.5;
-  /* width: 100%;
-  height: 100%; */
 `;
 
 const ChartFrame = styled.div`
@@ -28,15 +29,16 @@ const ChartFrame = styled.div`
 `;
 
 function TotalChart({userName, setIdolName}:Props) {
-  const [selectedData, setSelectedData] = useState<SelecteType>();
+  let chartData:SelecteType[] = [];
   const color:string[] = ["#4CD7F6","#6DBFFF","#7166F9", "#C74BF6", "#F946FF"]
-  const chartData = [
-    { value: 45, name: "세븐틴", itemStyle: { color: color[0]} },
-    { value: 30, name: "방탄소년단" ,itemStyle: { color: color[1]} },      
-    { value: 15, name: "블랙핑크" ,itemStyle: { color: color[2]} },      
-    { value: 5, name: "트와이스" ,itemStyle: { color: color[3]} },      
-    { value: 5, name: "아이브" ,itemStyle: { color: color[4]} },
-  ];
+
+  const idolData = useAppSelector<IdolInterest>(state => state.myinterest)
+  const [selectedData, setSelectedData] = useState<SelecteType>();
+
+  for (let i = 0; i < idolData.idols.length; i++ ) {
+    // console.log(idolData.idols[i].idol)
+    chartData.push( { name: idolData.idols[i].idol, value: idolData.idols[i].value, itemStyle: {color: color[i]}})
+  }
   
   const options = useMemo(() => {
     return {
@@ -111,7 +113,6 @@ function TotalChart({userName, setIdolName}:Props) {
 
   const onChartClick = useCallback((params:any) => {
     if (params.componentType === 'series') {
-      // console.log('Selected pie index:', params.seriesIndex);
       console.log('Selected pie data:', params.data.name);
       setSelectedData(params.data);
       setIdolName(params.data.name);
@@ -124,7 +125,6 @@ function TotalChart({userName, setIdolName}:Props) {
       <ChartFrame>
         <ReactEcharts
           option={options}
-          // style={{ height: "90%", width: "90%" }}
           opts={{ renderer: 'svg'}}
           onEvents={{ 'click': onChartClick }}
         />

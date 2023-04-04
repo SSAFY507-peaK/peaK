@@ -6,6 +6,7 @@ import styled from "styled-components";
 interface Props {
   userName: string;
   idolName: string;
+  idolScoreData: number[];
 }
 
 const Wrapper = styled.div`
@@ -28,14 +29,16 @@ const ScoreFrame = styled.div`
   justify-content: space-between;
 `;
 
-function MyInterest({userName, idolName}:Props) {
-  const myScore:number = 67
-  const averageScore:number = 57
+function MyInterest({userName, idolName, idolScoreData}:Props) {
+
+  const myScore:number = idolScoreData[0]
+  const averageScore:number = idolScoreData[1]
+  
   return (
     <Wrapper>
       <TitleComponent id="1" blacktxt="관심도" purpletxt={idolName} />
       <Frame>
-        <MyInterestChart />
+        <MyInterestChart myScore={myScore} />
         <ScoreFrame>
           <ScoreComponent pd="0px 0px 20px 40px" title="나의 점수" score= {`${myScore}점`} size="1.4rem" fsize="0.9rem" color={`var(--purple400-color)`} />
           <ScoreComponent pd="5px 40px 20px 0px" title="평균점수" score= {`${averageScore}점`} size="1.2rem" fsize="0.8rem" opacity="0.7" color={`var(--purple700-color)`} />
