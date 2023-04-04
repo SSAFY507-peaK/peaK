@@ -3,14 +3,16 @@ import { Route, createBrowserRouter, createRoutesFromElements } from "react-rout
 
 import ChartPage from "./routes/ChartPage";
 import ErrorPage from "./routes/ErrorPage";
-import FullPage from "./routes/FullPage/FullPage";
 import IdolPage from "./routes/IdolPage";
 import Layout from "./routes/Layout";
 import MainPage from "./routes/MainPage";
 import MyPage from "./routes/MyPage";
 import RankingLayout from "./routes/RankingLayout";
 import SignUpPage from "./routes/SignUpPage/SignUpPage";
+import TmpFullPage from "./routes/FullPage/tmpFullPage";
 import TrendingPage from "./routes/TrendingPage";
+
+// import FullPage from "./routes/FullPage/FullPage"
 
 // import TmpFullPage from "./routes/FullPage/tmpFullPage";
 
@@ -19,8 +21,8 @@ import TrendingPage from "./routes/TrendingPage";
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route>
-      <Route path="/intro" element={<FullPage />} />
-      {/*<Route path="/intro" element={<TmpFullPage />} />*/}
+      {/*<Route path="/intro" element={ <FullPage /> } />*/}
+      <Route path="/intro" element={<TmpFullPage />} />
       <Route path="/signup" element={<SignUpPage />} />
       <Route path="/" element={<Layout />} errorElement={<ErrorPage />}>
         <Route errorElement={<ErrorPage />}>

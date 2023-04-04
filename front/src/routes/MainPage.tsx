@@ -1,13 +1,12 @@
-import CommonDiv from "../components/mainpage/CommonDiv";
+import CarouselCustom from "../components/Carousel/CarouselCustom.jsx";
+import CommonDiv from "../components/MainPage/CommonDiv";
 import MainDiv from "../components/MainDiv";
 import NameDiv from "../components/NameDiv";
-import NewCarousel from "../components/newcarousel/NewCarousel.jsx";
-import Top8 from "../components/mainpage/Top8";
-import TrendKeyword from "../components/mainpage/TrendKeyword";
-import TrendNews from "../components/mainpage/TrendNews";
+import Top8 from "../components/MainPage/Top8";
+import TrendKeyword from "../components/MainPage/TrendKeyword";
 import styled from "styled-components";
 
-type NewCarouselDivType = {
+type CarouselCustomDivType = {
   ratio: number;
 };
 
@@ -16,7 +15,7 @@ const CarouselDiv = styled.div`
   margin: 0 auto;
 `;
 
-const NewCarouselDiv = styled.div<NewCarouselDivType>`
+const CarouselCustomDiv = styled.div<CarouselCustomDivType>`
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -95,18 +94,18 @@ function MainPage() {
         />
       </MainDiv>
       <MainDiv>
-        <NewCarouselDiv ratio={0.47}>
+        <CarouselCustomDiv ratio={0.47}>
           <NameDiv type={false} firstWord="트렌딩" secondWord="뉴스" />
           <CarouselDiv>
-            <NewCarousel items={items} />
+            <CarouselCustom items={items} />
           </CarouselDiv>
-        </NewCarouselDiv>
-        <NewCarouselDiv ratio={0.47}>
+        </CarouselCustomDiv>
+        <CarouselCustomDiv ratio={0.47}>
           <NameDiv type={false} firstWord="트렌딩" secondWord="유튜브" />
           <CarouselDiv>
-            <NewCarousel items={items} />
+            <CarouselCustom items={items} />
           </CarouselDiv>
-        </NewCarouselDiv>
+        </CarouselCustomDiv>
       </MainDiv>
     </>
   );

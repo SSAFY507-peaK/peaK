@@ -1,10 +1,11 @@
 import React, {useState, useCallback, useRef} from "react";
-import { useNavigate } from "react-router-dom"
+import { useLocation } from "react-router-dom"
 import styled from "styled-components";
 import { PurpleButton, BlueButton } from "../../components/Button";
 import { NicknameInput, MessageDiv } from "../../components/SignupPage/NicknameComponents";
 import { IdolGrid, IdolImage, IdolImageWrapper, IdolName, EmptySelected, Selected, SelectedSection, IdolWrapper } from "../../components/SignupPage/IdolComponents";
 import { CloseButton } from "../../components/Button";
+import axios from "axios";
 // 컴포넌트들 (추후 옮기자)
 const Wrapper = styled.div`
   height: 100vh;
@@ -36,7 +37,6 @@ const DescriptionSection = styled.div`
   }
 `
 
-
 // 나중에 진짜 input값 들어오면 변경 예정..
 type IdolObjectType = {
   idolNum?: number;
@@ -44,13 +44,14 @@ type IdolObjectType = {
   idolImg?: string;
   isSelected?: boolean;
 }
+
 /** 닉네임 중복확인 클릭 시 결과값 */
-type NicknameType = "long" | "character" | "duplicate" | "ok";
+type NicknameType = "EU006" | "EU009" | "success" ;
 
 function SignUpPage() {
-  const navigate = useNavigate();
+  const location= useLocation();
+  const TOKEN = decodeURI(location.search.slice(1));  // 토큰
   const containerRef = useRef<HTMLDivElement>(null);
-  const page1Ref = useRef<HTMLDivElement>(null);
   let dummyData: IdolObjectType[] = [
     {
       idolNum: 1,
@@ -131,69 +132,62 @@ function SignUpPage() {
           top: -window.innerHeight,
           behavior: "smooth",
         })
-      // page1Ref.current.display = none;
+      // pageRef.current.display = none;
     )
   }
 
+
   // page 1에 대한 설정들
   const [nickname, setNickname] = useState<string>("");
-  const [isValidNickname, setIsValidNickname] = useState<NicknameType | undefined>(undefined);
-  const regex = /^[ㄱ-ㅎ가-힣a-zA-Z0-9]+$/;  // 닉네임 정규표현식
+  const [message, setMessage] = useState<string>("");
+  const [nicknameCode, setNicknameCode] = useState<NicknameType | undefined>(undefined);
+  // const regex = /^[ㄱ-ㅎ가-힣a-zA-Z0-9]+$/;  // 닉네임 정규표현식
 
   /** 닉네임을 받자 */
   const handleNickname = (e: React.ChangeEvent<HTMLInputElement>): void => {
     setNickname(e.target.value);
-    setIsValidNickname(undefined);
+    setNicknameCode(undefined);
+    setMessage("");
   };
   /** 닉네임 유효성을 체크하자 */
   const handleIsValidNickname = (): void => {
-    if (nickname.length > 8) {
-      setIsValidNickname("long")
-    }
-    else if (!regex.test(nickname)) {
-      setIsValidNickname("character");
-    }
-    // 여기서 유효성 체크를 하고 온 결과에 따라 "ok"와 "duplicate"로 나눠야함
-    else {
-      setIsValidNickname("ok");
-    }
+    axios.get(`https://j8a507.p.ssafy.io/api/user/nickname/${nickname}`, {
+      headers: {
+        Authorization: TOKEN
+      }
+    })
+      .then(response => {
+        console.log(response.data)
+          const CODE = response.data.code;
+          const MESSAGE = response.data.message;
+          setNicknameCode(CODE);
+          setMessage(MESSAGE);
+        })
+      .catch(error => {
+        console.log(error);
+        const CODE = error.response.data.code;
+        const MESSAGE = error.response.data.message;
+        setNicknameCode(CODE);
+        setMessage(MESSAGE);
+      })
   };
-  /** 닉네임 유효성에 대한 메시지를 보여주자 */
-  const nicknameMessage = () => {
-    switch (isValidNickname) {
-      case "long":
-        return "닉네임은 8자 이하여야 합니다."
-      case 'character' :
-        return "닉네임은 한글, 영어, 숫자로만 이루어져야 합니다."
-      case "duplicate" :
-        return "중복된 닉네임입니다."
-      case "ok" :
-        return "사용 가능한 닉네임입니다."
-      default :
-        return ""
-    }
-  }
 
   const page1 = (
-    <PageWrapper ref={page1Ref}>
+    <PageWrapper>
       <h2>닉네임 설정</h2>
       <Description>닉네임은 8글자 이하의 한글, 영어, 숫자로만 이루어져야 합니다</Description>
-
       <InputWrapper>
         <div>
-          <NicknameInput isValid={isValidNickname} onChange={e => handleNickname(e)} value={nickname} />
-          <MessageDiv isValid={isValidNickname === "ok"}>
-            { nicknameMessage() }
+          <NicknameInput isValid={nicknameCode} onChange={e => handleNickname(e)} value={nickname} />
+          <MessageDiv isValid={nicknameCode === "success"}>
+            { message }
           </MessageDiv>
         </div>
-        {isValidNickname !== "ok" && <PurpleButton onClick={ handleIsValidNickname } width="100px">중복 확인</PurpleButton>}
-        {isValidNickname === "ok" && <BlueButton onClick={() => handleChangePage(1) } width="100px">다음으로</BlueButton>}
+        {nicknameCode !== "success" && <PurpleButton onClick={ handleIsValidNickname } width="100px">중복 확인</PurpleButton>}
+        {nicknameCode === "success" && <BlueButton onClick={() => handleChangePage(1) } width="100px">다음으로</BlueButton>}
       </InputWrapper>
     </PageWrapper>
   );
-
-
-
 
   // page 2에 대한 정보들
   const [selectedIdols, setSelectedIdols] = useState<IdolObjectType[]>([]);
@@ -230,6 +224,21 @@ function SignUpPage() {
     setIdols(prev => prev.map(idol2 => idol.idolNum === idol2.idolNum? {...idol2, isSelected: false} : idol2))
     setSelectedIdols(prev=> prev.filter(idol2 => idol.idolNum !== idol2.idolNum));
   }
+  const handleSignUp = () => {
+    const headers = {
+      Authorization: TOKEN,
+    };
+    const body = {
+      nickname: nickname,
+      interest: selectedIdols.map(idol => idol.idolName),
+    }
+    console.log({headers, body});
+    axios.post(`https://j8a507.p.ssafy.io/api/user/sign-up`, body, {
+      headers: headers
+    })
+      .then(response => console.log(response.data))
+      .catch(error => console.log(error))
+  }
 
   const page2 = (
     <PageWrapper>
@@ -239,7 +248,7 @@ function SignUpPage() {
           <Description>좋아하는 아이돌을 한 팀 이상 선택해주세요. <br/>최대 다섯 팀까지 선택 가능합니다.</Description>
           <div>
             <PurpleButton width="120px" onClick={() => handleChangePage(2)}>이전으로</PurpleButton>
-            <BlueButton disabled={selectedIdols.length<=0} width="120px" onClick={() => navigate("/")}>회원가입 완료</BlueButton>
+            <BlueButton disabled={selectedIdols.length<=0} width="120px" onClick={handleSignUp}>회원가입 완료</BlueButton>
           </div>
         </DescriptionSection>
         <IdolGrid cols={5}>{ showSelectIdols() }</IdolGrid>
@@ -248,7 +257,7 @@ function SignUpPage() {
       <IdolWrapper>
         <IdolGrid cols={6} gap="20px">
           {idols.map((idol: IdolObjectType) => (
-            <IdolImageWrapper >
+            <IdolImageWrapper>
               <IdolImage url={idol.idolImg} onClick={()=> idol.isSelected? handleDeleteSelectedIdol(idol) : handleSelectIdol(idol)} className={`${idol.isSelected && "selected"}`}/>
               <IdolName>{idol.idolName}</IdolName>
             </IdolImageWrapper>
