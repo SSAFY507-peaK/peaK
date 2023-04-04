@@ -1,4 +1,4 @@
-import { useCallback, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 
 import { IdolInterest } from '../../_utils/Types';
 import ReactEcharts from 'echarts-for-react';
@@ -15,6 +15,7 @@ interface SelecteType {
   name: string;
   value: number;
   itemStyle?: any;
+  selected?: boolean;
 }
 
 const Wrapper = styled.div`
@@ -33,12 +34,15 @@ function TotalChart({userName, setIdolName}:Props) {
   const color:string[] = ["#4CD7F6","#6DBFFF","#7166F9", "#C74BF6", "#F946FF"]
 
   const idolData = useAppSelector<IdolInterest>(state => state.myinterest)
-  const [selectedData, setSelectedData] = useState<SelecteType>();
-
   for (let i = 0; i < idolData.idols.length; i++ ) {
     // console.log(idolData.idols[i].idol)
-    chartData.push( { name: idolData.idols[i].idol, value: idolData.idols[i].value, itemStyle: {color: color[i]}})
+    if (i === 0) {
+      chartData.push( { name: idolData.idols[i].idol, value: idolData.idols[i].value, itemStyle: {color: color[i]}, selected: true})
+    } else {
+      chartData.push( { name: idolData.idols[i].idol, value: idolData.idols[i].value, itemStyle: {color: color[i]}})
+    }
   }
+  const [selectedData, setSelectedData] = useState<SelecteType>(chartData[0]);
   
   const options = useMemo(() => {
     return {
@@ -88,9 +92,6 @@ function TotalChart({userName, setIdolName}:Props) {
             show: false
           },
           data: chartData,
-          selected: {
-            [setSelectedData.name]: true,
-          },
         }
       ],
       graphic: selectedData

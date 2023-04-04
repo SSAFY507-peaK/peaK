@@ -50,7 +50,7 @@ function handleClick(event: MouseEvent<SVGSVGElement>) {
 function MyPage() {
   const params = useParams();
   const userName:string = params.userName || "";
-  const [idolName, setIdolName] = useState<string>("")
+  const [idolName, setIdolName] = useState<string>(sampleData[0].idol)
   const [index, setIndex] = useState<number>(0)
   const [idolScoreData, setIdolScoreData] = useState<number[]>([0, 0])
   const dispatch = useAppDispatch()
@@ -61,10 +61,14 @@ function MyPage() {
   // 선택된 아이돌의 index 구하기
   useEffect(() => {
     const newIndex = sampleData.findIndex((item) => item.idol === idolName)
-    setIndex(newIndex)
+    if (newIndex === -1) {
+      setIndex(0)
+    } else {
+      setIndex(newIndex)
+    }
   },[idolName])
   
-  console.log(sampleData)
+
   // 선택된 아이돌의 점수 저장
   useEffect(() => {
     if (index >= 0) { // index 값이 올바른지 확인
@@ -78,9 +82,28 @@ function MyPage() {
         <TitleComponent id="2" blacktxt="어서오세요, " purpletxt={userName} addtxt=" 님" />
         <DriveFileRenameOutlineOutlinedIcon sx={{ fontSize: "1.2rem", cursor: "pointer" }} onClick={handleClick} />
       </TitleFrame>
-      <TopFrame>
+      {
+        index > -1
+        ?
+        <>
+        <TopFrame>
+          <TotalChart userName={userName} setIdolName={setIdolName} />
+          <MyInterest userName={userName} idolName={idolName} idolScoreData={idolScoreData} />
+          <MyChat userName={userName} idolChatData={sampleData[index].comments}/>
+        </TopFrame>
+        <BottomFrame>
+          <MyClickChart userName={userName} userClick={sampleData[index].click}/>
+          <MyChatChart userName={userName} userChat={sampleData[index].chat}/>
+          <MyVisitChart userName={userName} userTime={sampleData[index].time}/>
+        </BottomFrame>
+        </>
+        : null
+      }
+      {/* <TopFrame>
         <TotalChart userName={userName} setIdolName={setIdolName} />
-        {
+        <MyInterest userName={userName} idolName={idolName} idolScoreData={idolScoreData} />
+        <MyChat userName={userName} idolChatData={sampleData[index].comments}/> */}
+        {/* {
           idolName && index > -1
           ?
           <>
@@ -89,10 +112,15 @@ function MyPage() {
           </>
           :
           null
-        }
-      </TopFrame>
-      {
-        idolName
+        } */}
+      {/* </TopFrame>
+      <BottomFrame>
+        <MyClickChart userName={userName} userClick={sampleData[index].click}/>
+        <MyChatChart userName={userName} userChat={sampleData[index].chat}/>
+        <MyVisitChart userName={userName} userTime={sampleData[index].time}/>
+      </BottomFrame> */}
+      {/* {
+        idolName && index > -1
         ?
         <BottomFrame>
           <MyClickChart userName={userName} userClick={sampleData[index].click}/>
@@ -101,7 +129,7 @@ function MyPage() {
         </BottomFrame>
         :
         null
-      }
+      } */}
     </Wrapper>
   );
 }
