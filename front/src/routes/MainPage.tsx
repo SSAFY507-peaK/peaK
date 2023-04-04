@@ -1,9 +1,9 @@
-import CommonDiv from "../components/mainpage/CommonDiv";
+import CommonDiv from "../components/MainPage/CommonDiv";
 import MainDiv from "../components/MainDiv";
 import NameDiv from "../components/NameDiv";
-import NewCarousel from "../components/newcarousel/NewCarousel.jsx";
-import Top8 from "../components/mainpage/Top8";
-import TrendKeyword from "../components/mainpage/TrendKeyword";
+import NewCarousel from "../components/Carousel/CarouselCustom.jsx";
+import Top8 from "../components/MainPage/Top8";
+import TrendKeyword from "../components/MainPage/TrendKeyword";
 import styled from "styled-components";
 
 type NewCarouselDivType = {

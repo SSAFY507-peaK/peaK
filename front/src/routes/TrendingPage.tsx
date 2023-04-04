@@ -1,7 +1,7 @@
-import CommonDiv from "../components/mainpage/CommonDiv";
+import CommonDiv from "../components/MainPage/CommonDiv";
 import MainDiv from "../components/MainDiv";
-import TrendingNews from "../components/trendingpage/TrendingNews";
-import TrendingYoutube from "../components/trendingpage/TrendingYoutube";
+import TrendingNews from "../components/TrendingPage/TrendingNews";
+import TrendingYoutube from "../components/TrendingPage/TrendingYoutube";
 
 function TrendingPage() {
   return (

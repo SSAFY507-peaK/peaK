@@ -66,7 +66,7 @@ const Carousel = ({ children }) => {
   );
 };
 
-const NewCarousel = props => (
+const CarouselCustom = props => (
   <AlignDiv>
     <Carousel>
       {props.items.map((item, idx) => {
@@ -76,4 +76,4 @@ const NewCarousel = props => (
   </AlignDiv>
 );
 
-export default NewCarousel;
+export default CarouselCustom;
