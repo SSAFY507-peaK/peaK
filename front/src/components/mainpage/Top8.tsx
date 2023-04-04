@@ -1,5 +1,4 @@
 import IdolRank from "./IdolRank";
-import React from "react";
 import styled from "styled-components";
 
 const RankDiv = styled.div`
