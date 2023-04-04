@@ -13,6 +13,6 @@ import lombok.Setter;
 @NoArgsConstructor
 public class SuccessResponseDto {
 
-	private final String code = "success";
+	private final String code = "200";
 	private String message;
 }

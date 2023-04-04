@@ -1,4 +1,5 @@
 import { ReactComponent as Down } from "../assets/arrow-down.svg";
+import { RankListType } from "../_utils/Types";
 import { ReactComponent as Stable } from "../assets/stable.svg";
 import { ReactComponent as Up } from "../assets/arrow-up.svg";
 import axios from "axios";
@@ -15,13 +16,21 @@ type RankDiffNumType = {
   sign: "up" | "stable" | "down";
 };
 
+type RankDivType = {
+  idol: string;
+  rank: number;
+  diff: number;
+  score: number;
+};
+
 export async function loader() {
-  let RankList: any;
+  let RankList = null;
   await axios
     .get(`${BASE_URL}peak/`)
-    .then(response => (RankList = response.data.ranksByHour))
+    .then(response => {
+      RankList = response.data.ranksByHour;
+    })
     .catch(error => console.log(error));
-
   return RankList;
 }
 
@@ -46,7 +55,7 @@ const AllRankDiv = styled.div`
 const IdolRankDiv = styled.div`
   display: flex;
   width: 90%;
-  height: 14vh;
+  height: 15vh;
   align-items: center;
   padding: 30px 30px;
   font-size: 1.8rem;
@@ -64,19 +73,22 @@ const IdolImgDiv = styled.div<IdolImgDivType>`
   background-image: url(${props => props.url});
   background-size: cover;
   background-position: center;
-  width: 11vh;
-  height: 11vh;
+  width: 10%;
+  height: 12vh;
   border-radius: 5px;
   margin: 0vh 10vh 0vh 5vh;
 `;
 
 const IdolNameDiv = styled.div`
   font-size: 1rem;
+  width: 15%;
 `;
 
 const RankNumDiv = styled.div`
   width: 5%;
   font-size: 1.4rem;
+  display: flex;
+  justify-content: space-around;
 `;
 
 const RankDifferDiv = styled.div`
@@ -87,19 +99,21 @@ const RankDifferDiv = styled.div`
 `;
 
 const ScoreDiv = styled.div`
-  font-size: 0.7rem;
+  font-size: 1rem;
   display: flex;
   justify-content: flex-end;
-  width: 65%;
+  width: 55%;
   color: #b3b3b3;
+  padding-right: 10vh;
 `;
 
 const RankDiffNum = styled.div<RankDiffNumType>`
+  width: 5%;
   color: ${props => (props.sign === "up" ? "red" : props.sign === "down" ? "blue" : null)};
-  font-size: 1.1rem;
+  font-size: 15px;
 `;
 
-const RankDiffer = (diff: any) => {
+const RankDiffer = (diff: number) => {
   if (diff > 0) {
     return (
       <RankDifferDiv>
@@ -124,12 +138,12 @@ const RankDiffer = (diff: any) => {
 };
 
 /** 아이돌 1팀의 순위, 순위변동, 사진, 점수, 이름 */
-const RankDiv = (props: any) => {
+const RankDiv = (props: RankDivType) => {
   return (
     <IdolRankDiv>
       <RankNumDiv>{props.rank}</RankNumDiv>
       {RankDiffer(props.diff)}
-      <IdolImgDiv url={props.url} />
+      <IdolImgDiv url={`https://j8a507.p.ssafy.io/img/${props.idol}.webp`} />
       <IdolNameDiv>{props.idol}</IdolNameDiv>
       <ScoreDiv>
         <div>{props.score}</div>
@@ -140,9 +154,8 @@ const RankDiv = (props: any) => {
 
 /** 모든 아이돌의 순위, 순위변동, 사진, 점수, 이름 */
 function RankingPage() {
-  const RankList = useLoaderData();
-  const items: any = RankList;
-  return <AllRankDiv>{items.map((item: any) => RankDiv(item))}</AllRankDiv>;
+  const RankList = useLoaderData() as RankListType[];
+  return <AllRankDiv>{RankList.map((item: RankListType) => RankDiv(item))}</AllRankDiv>;
 }
 
 export default RankingPage;

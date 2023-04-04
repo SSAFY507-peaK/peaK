@@ -2,6 +2,17 @@ export type Idoldata = {
   myTotaldata: number;
   dataLst: Array<number>;
   dataAvg: Array<number>;
+};
+
+export type RankListType = {
+  idol: string;
+  rank: number;
+  score: number;
+  diff: number;
+};
+
+export type IdolListsType = {
+  idols: string[];
 }
 
 // export type MyIdolDetail = {

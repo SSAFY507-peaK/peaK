@@ -1,7 +1,6 @@
 import styled from "styled-components";
 import kakaoLogin from "../../assets/kakao_round.png";
 import naverLogin from "../../assets/naver_round.png";
-import axios from "axios";
 
 const ButtonWrapper = styled.button`
   width: 250px;
@@ -62,11 +61,12 @@ function NaverLogin() {
 
 function KakaoLogin() {
   const handleLoginKakao = () => {
-    axios.defaults.withCredentials = true; // 쿠키 데이터를 전송받기 위해
-    axios.defaults.headers['Access-Control-Allow-Origin'] = '*';
-    axios.post("https://j8a507.p.ssafy.io/api/oauth2/authorization/kakao")
-      .then(response => console.log(response))
-      .catch(error => console.log(error))
+    // axios.defaults.withCredentials = true; // 쿠키 데이터를 전송받기 위해
+    // axios.defaults.headers['Access-Control-Allow-Origin'] = '*';
+    // axios.post("https://j8a507.p.ssafy.io/api/oauth2/authorization/kakao")
+    //   .then(response => console.log(response))
+    //   .catch(error => console.log(error))
+    window.location.href='https://j8a507.p.ssafy.io/api/oauth2/authorization/kakao'
   }
 
   return (

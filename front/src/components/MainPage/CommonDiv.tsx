@@ -1,21 +1,28 @@
+import ContentDiv from "../Content";
 import NameDiv from "../NameDiv";
 import styled from "styled-components";
 
-/** 그림자 있고 흰 색 배경 div 태그 */
-const ContentDiv = styled.div`
-  display: flex;
-  flex-direction: column;
-  border-radius: 15px;
-  height: 100%;
-`;
-
-interface WrapperDivType {
+type WrapperDivType = {
   ratio: number;
   mr?: boolean;
   ml?: boolean;
   mt?: boolean;
   mb?: boolean;
-}
+  h?: boolean;
+};
+
+type CommonDivType = {
+  type?: boolean;
+  mr?: boolean;
+  ml?: boolean;
+  mt?: boolean;
+  mb?: boolean;
+  h?: boolean;
+  firstWord?: string;
+  secondWord?: string;
+  ratio?: string;
+  data?: any;
+};
 
 /** NameDiv와 ContentDiv를 감싸는 역할 */
 const WrapperDiv = styled.div<WrapperDivType>`
@@ -26,16 +33,17 @@ const WrapperDiv = styled.div<WrapperDivType>`
   margin-left: ${props => (props.ml ? "25px" : "0px")};
   margin-top: ${props => (props.mt ? "25px" : "0px")};
   margin-bottom: ${props => (props.mb ? "25px" : "0px")};
+  height: ${props => (props.h ? "90vh" : null)};
 `;
 
 /** type이 true이면 purple이 왼쪽, false이면 오른쪽 */
-function CarouselDiv(props: any) {
+function CommonDiv(props: CommonDivType) {
   return (
-    <WrapperDiv ratio={props.ratio} mr={props.mr}>
+    <WrapperDiv ratio={Number(props.ratio)} mr={props.mr} h={props.h || false}>
       {NameDiv(props)}
       <ContentDiv>{props.data}</ContentDiv>
     </WrapperDiv>
   );
 }
 
-export default CarouselDiv;
+export default CommonDiv;

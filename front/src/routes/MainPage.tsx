@@ -1,13 +1,28 @@
-import CommonDiv from "../components/mainpage/CommonDiv";
+import CarouselCustom from "../components/Carousel/CarouselCustom.jsx";
+import CommonDiv from "../components/MainPage/CommonDiv";
 import MainDiv from "../components/MainDiv";
 import NameDiv from "../components/NameDiv";
-import NewCarousel from "../components/newcarousel/NewCarousel.jsx";
-import Top8 from "../components/mainpage/Top8";
-import TrendKeyword from "../components/mainpage/TrendKeyword";
-import TrendNews from "../components/mainpage/TrendNews";
+import Top8 from "../components/MainPage/Top8";
+import TrendKeyword from "../components/MainPage/TrendKeyword";
+import axios from "axios";
 import styled from "styled-components";
+import { useLoaderData } from "react-router";
 
-type NewCarouselDivType = {
+const BASE_URL = process.env.REACT_APP_BASE_URL;
+
+export async function loader() {
+  let TrendNewsList,
+    TrendYoutubeList = null;
+
+  axios
+    .get(`${BASE_URL}news/list/all-idol`)
+    .then(response => console.log(response))
+    .catch(error => console.log(error));
+
+  return [TrendNewsList, TrendYoutubeList];
+}
+
+type CarouselCustomDivType = {
   ratio: number;
 };
 
@@ -16,7 +31,7 @@ const CarouselDiv = styled.div`
   margin: 0 auto;
 `;
 
-const NewCarouselDiv = styled.div<NewCarouselDivType>`
+const CarouselCustomDiv = styled.div<CarouselCustomDivType>`
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -25,7 +40,55 @@ const NewCarouselDiv = styled.div<NewCarouselDivType>`
 `;
 
 function MainPage() {
-  const items = [
+  // const [TrendNewsList, TrendYoutubeList] = useLoaderData();
+  const TrendNewsList = [
+    {
+      title: "(4K UHD) [최초공개] KF-21 무장분리・기..",
+      summary:
+        "대한민국의 KF-21이 공군 비행단에서 이륙하여 남해 상공에서 공대공 무장분리 시험과 공중 .. ",
+      thumbnail_link:
+        "https://i.ytimg.com/vi/ff68QPAI6YI/hq720.jpg?sqp=-oaymwEcCNAFEJQDSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLB-eVctdC6EbDG7T7D0SHV5yCWYRw",
+      link: "https://entertain.naver.com/ranking/read?oid=109&aid=0004821621",
+      press: "CNN",
+    },
+    {
+      title: "(4K UHD) [최초공개] KF-21 무장분리・기..",
+      summary:
+        "대한민국의 KF-21이 공군 비행단에서 이륙하여 남해 상공에서 공대공 무장분리 시험과 공중 .. ",
+      thumbnail_link:
+        "https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMzAzMjFfMTg3%2FMDAxNjc5MzYxODM4ODEz.1gk9I-p4CMBhaaz07OpLOz01dgBOrt1MIvPCmlo_QL0g.b-hZ_GIG12yacGqn-dNszEhWwEq-fu9B0KGoxtCadhQg.JPEG.has37014%2F%25B4%25D9%25BF%25EE%25B7%25CE%25B5%25E5_%252811%2529.jpg&type=a340",
+      link: "https://entertain.naver.com/ranking/read?oid=109&aid=0004821621",
+      press: "CNN",
+    },
+    {
+      title: "(4K UHD) [최초공개] KF-21 무장분리・기..",
+      summary:
+        "대한민국의 KF-21이 공군 비행단에서 이륙하여 남해 상공에서 공대공 무장분리 시험과 공중 .. ",
+      thumbnail_link:
+        "https://i.ytimg.com/vi/ff68QPAI6YI/hq720.jpg?sqp=-oaymwEcCNAFEJQDSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLB-eVctdC6EbDG7T7D0SHV5yCWYRw",
+      link: "https://entertain.naver.com/ranking/read?oid=109&aid=0004821621",
+      press: "CNN",
+    },
+    {
+      title: "(4K UHD) [최초공개] KF-21 무장분리・기..",
+      summary:
+        "대한민국의 KF-21이 공군 비행단에서 이륙하여 남해 상공에서 공대공 무장분리 시험과 공중 .. ",
+      thumbnail_link:
+        "https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMzAzMjFfMTg3%2FMDAxNjc5MzYxODM4ODEz.1gk9I-p4CMBhaaz07OpLOz01dgBOrt1MIvPCmlo_QL0g.b-hZ_GIG12yacGqn-dNszEhWwEq-fu9B0KGoxtCadhQg.JPEG.has37014%2F%25B4%25D9%25BF%25EE%25B7%25CE%25B5%25E5_%252811%2529.jpg&type=a340",
+      link: "https://entertain.naver.com/ranking/read?oid=109&aid=0004821621",
+      press: "CNN",
+    },
+    {
+      title: "(4K UHD) [최초공개] KF-21 무장분리・기..",
+      summary:
+        "대한민국의 KF-21이 공군 비행단에서 이륙하여 남해 상공에서 공대공 무장분리 시험과 공중 .. ",
+      thumbnail_link:
+        "https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMzAzMjFfMTg3%2FMDAxNjc5MzYxODM4ODEz.1gk9I-p4CMBhaaz07OpLOz01dgBOrt1MIvPCmlo_QL0g.b-hZ_GIG12yacGqn-dNszEhWwEq-fu9B0KGoxtCadhQg.JPEG.has37014%2F%25B4%25D9%25BF%25EE%25B7%25CE%25B5%25E5_%252811%2529.jpg&type=a340",
+      link: "https://entertain.naver.com/ranking/read?oid=109&aid=0004821621",
+      press: "CNN",
+    },
+  ];
+  const TrendYoutubeList = [
     {
       title: "4 시간 지브리 메들리 피아노 💖 ..",
       content:
@@ -95,18 +158,18 @@ function MainPage() {
         />
       </MainDiv>
       <MainDiv>
-        <NewCarouselDiv ratio={0.47}>
+        <CarouselCustomDiv ratio={0.47}>
           <NameDiv type={false} firstWord="트렌딩" secondWord="뉴스" />
           <CarouselDiv>
-            <NewCarousel items={items} />
+            <CarouselCustom items={TrendNewsList} />
           </CarouselDiv>
-        </NewCarouselDiv>
-        <NewCarouselDiv ratio={0.47}>
+        </CarouselCustomDiv>
+        <CarouselCustomDiv ratio={0.47}>
           <NameDiv type={false} firstWord="트렌딩" secondWord="유튜브" />
           <CarouselDiv>
-            <NewCarousel items={items} />
+            <CarouselCustom items={TrendYoutubeList} />
           </CarouselDiv>
-        </NewCarouselDiv>
+        </CarouselCustomDiv>
       </MainDiv>
     </>
   );

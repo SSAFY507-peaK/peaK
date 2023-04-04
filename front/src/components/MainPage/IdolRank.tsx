@@ -7,17 +7,24 @@ import Rank6 from "../../assets/6.png";
 import Rank7 from "../../assets/7.png";
 import Rank8 from "../../assets/8.png";
 import styled from "styled-components";
+import { useNavigate } from "react-router";
+
+type IdolImgType = {
+  url: string;
+  rank: number;
+};
+
+type IdolRankType = {
+  url: string;
+  name: string;
+  rank: number;
+};
 
 const WrapperDiv = styled.div`
   display: flex;
   flex-direction: column;
   margin: auto 0;
 `;
-
-interface IdolImgType {
-  url: string;
-  rank: number;
-}
 
 const IdolImg = styled.div<IdolImgType>`
   background-image: url(${props => props.url});
@@ -37,11 +44,12 @@ const IdolImg = styled.div<IdolImgType>`
 `;
 
 const NameDiv = styled.div`
-  margin: 3px auto 0;
+  margin-left: 20px;
+  margin-top: 5px;
   font-size: 15px;
 `;
 
-function Logo(rank: any) {
+function Logo(rank: number) {
   switch (rank) {
     case 1:
       return <img src={Rank1} alt="" width="60vw" style={{ position: "absolute" }} />;
@@ -63,12 +71,15 @@ function Logo(rank: any) {
 }
 
 /** rank, name, img 필요 */
-function IdolRank(props: any) {
+function IdolRank(props: IdolRankType) {
+  const navigate = useNavigate();
   return (
-    <WrapperDiv>
+    <WrapperDiv onClick={() => navigate(`/${props.name}`)}>
       {Logo(props.rank)}
-      <IdolImg url={props.url} rank={props.rank} />
-      <NameDiv>{props.name}</NameDiv>
+      <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
+        <IdolImg url={props.url} rank={props.rank} />
+        <NameDiv>{props.name}</NameDiv>
+      </div>
     </WrapperDiv>
   );
 }
