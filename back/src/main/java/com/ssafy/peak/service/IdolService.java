@@ -58,7 +58,7 @@ public class IdolService {
 	}
 
 	public IdolCommentResponseDto getCommentByIdol(String idolName) {
-		List<Comment> commentList = commentRepository.findByIdol(idolName)
+		List<Comment> commentList = commentRepository.findTop30ByIdol(idolName)
 			.orElseGet(ArrayList::new);
 		List<CommentDto> commentDtoList = new ArrayList<>();
 
