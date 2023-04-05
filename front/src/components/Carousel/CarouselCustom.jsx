@@ -31,7 +31,7 @@ const Card = props => (
     }}
   >
     <h3>{props.title}</h3>
-    <p>{props.summary}</p>
+    <p>{props.content}</p>
   </div>
 );
 
@@ -80,8 +80,7 @@ const CarouselCustom = props => {
             <Card
               title={item.title.length <= 23 ? item.title : item.title.substr(0, 23) + "..."}
               content={
-                item.content ||
-                (item.summary.length <= 70 ? item.summary : item.summary.substr(0, 70) + "...")
+                item.summary.length <= 70 ? item.summary : item.summary.substr(0, 70) + "..."
               }
               src={item.thumbnailLink || item.thumbnail_link}
               link={item.link}
