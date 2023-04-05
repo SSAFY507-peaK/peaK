@@ -1,7 +1,7 @@
 package com.ssafy.peak.repository;
 
-import java.util.List;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.mongodb.repository.MongoRepository;
@@ -16,6 +16,6 @@ public interface CommentRepository extends MongoRepository<Comment, String> {
 
 	Optional<List<Comment>> findTop30ByIdol(String idol);
 
-	Optional<Comment> findByEmailAndIdolAndDateTimeBetween(String email, String idol, LocalDateTime start,
+	Optional<List<Comment>> findByEmailAndIdolAndDateTimeBetween(String email, String idol, LocalDateTime start,
 		LocalDateTime end);
 }

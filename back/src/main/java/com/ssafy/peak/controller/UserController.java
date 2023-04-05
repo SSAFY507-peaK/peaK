@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.ssafy.peak.dto.JwtTokenDto;
 import com.ssafy.peak.dto.SignupDto;
 import com.ssafy.peak.dto.UserDto;
+import com.ssafy.peak.dto.idol.response.IdolCommentResponseDto;
 import com.ssafy.peak.dto.request.WriteCommentRequestDto;
 import com.ssafy.peak.dto.response.SuccessResponseDto;
 import com.ssafy.peak.security.JwtTokenProvider;
@@ -116,5 +117,20 @@ public class UserController {
 
 		userService.createCheeringMessage(loginUser, idolName, writeCommentRequestDto.getContent());
 		return ResponseEntity.ok().body(new SuccessResponseDto("응원 메시지를 남겼습니다"));
+	}
+
+	/**
+	 * 최근 2주 동안 내가 남긴 관심 아이돌 별 응원 메시지
+	 */
+	@GetMapping("/comment/{idol-name}")
+	public ResponseEntity getMyCheeingMessages(
+		@AuthenticationPrincipal UserPrincipal loginUser, @PathVariable("idol-name") String idolName) {
+
+		IdolCommentResponseDto idolCommentResponseDto = userService.getMyCheeingMessages(loginUser, idolName);
+		if (idolCommentResponseDto == null) {
+			return ResponseEntity.ok().body(new SuccessResponseDto("최근 2주 동안의 응원 메시지가 없습니다."));
+		} else {
+			return ResponseEntity.ok().body(idolCommentResponseDto);
+		}
 	}
 }
