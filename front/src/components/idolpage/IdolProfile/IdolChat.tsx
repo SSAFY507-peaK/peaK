@@ -1,12 +1,13 @@
 import { MouseEvent, useState } from "react";
 
 import { ClickTracker } from "../ClickTracker";
-import { Comments } from "../../../_utils/Types";
+import { Comments, UserInfo } from "../../../_utils/Types";
 import { PurpleButton } from "../../Button";
 import TitleComponent from "../TitleComponent";
 import { request } from "../../../_utils/axios";
 import styled from "styled-components";
 import { useParams } from "react-router";
+import { useAppSelector } from "../../../_hooks/hooks";
 
 const Wrapper = styled.div`
   display: flex;
@@ -68,25 +69,49 @@ const ChatInput = styled.input`
 
 
 function IdolChat() {
-  const comments = []
+  const [comments, setComments] = useState<any[]>([])
   const params = useParams();
   const idolName:string = params.idolName || "";
-  // const [oneChat, setOneChat] = 
-  const tmp = {
-    nickname: "사랑아럿뜰해",
-    content: "와 고잉은 따라올 수가 없다. 진짜 최고인듯"
-  }
-  for (let i=0 ; i < 30; i++) {
-    comments.push(tmp)
-  }
+  const [todayComment, setTodayComment] = useState<string>("")
+  const userInfo:UserInfo = useAppSelector(state => state.userInfo)
 
+  let tmp = []
+  for (let i=0 ; i < 30; i++) {
+    tmp.push({
+      nickname: "사랑아럿뜰해",
+      content: "와 고잉은 따라올 수가 없다. 진짜 최고인듯"
+    })
+  }
+  if(comments.length === 0) {
+    setComments(tmp)
+  }
   // // 아이돌 채팅 목록 가자오기
   // const [comments, setComments] = useState<Comments>(null)
   // request("get", `/${idolName}/comment`).then(res => comments ? null :setComments(res.comments))
   
   // 아이돌 입력 채팅 등록
-  function handleClick(event: MouseEvent<SVGSVGElement>) {
-    console.log('닉네임 변경 구현할 예정');
+  const handleSubmit = async (e:any) => {
+    e.preventDefault()
+
+    // 더미 데이터
+    const data = { nickname:userInfo.nickname, content:todayComment }
+    const tmp = [data, ...comments]
+    setComments(tmp)
+
+    // const data = {
+    //   Header: {Authorization: userInfo.TOKEN},
+    //   Body: {content: todayComment} 
+    // }
+    // request("post", `/user/comment/${idolName}`, data)
+    //   .then(res => {
+    //     setComments([])
+    //     alert(res.message)
+    //     request("get", `/${idolName}/comment`).then(res => comments ? null :setComments(res.comments))
+    //   })
+    //   .catch(err => console.log(err))
+
+    ClickTracker(idolName)
+    setTodayComment("")
   }
   
   return (
@@ -104,19 +129,12 @@ function IdolChat() {
           })
         }
       </ChatFrame>
-      <ChatInputFrame>      
-        <ChatInput placeholder="댓글을 입력해주세요." 
-          onSubmit={(e) => {
-            e.preventDefault()
-            console.log(e)
-          } }></ChatInput>
-        <PurpleButton width="100px" 
-          onClick={(e) => {
-            // e.preventDefault()
-            ClickTracker(idolName,"chohm1223@naver.com")
-            // return handleClick
-        }}
-        >응원</PurpleButton>
+      <ChatInputFrame onSubmit={handleSubmit}>      
+        <ChatInput 
+          placeholder="댓글을 입력해주세요." 
+          value={todayComment}
+          onChange={e => setTodayComment(e.target.value)} />
+        <PurpleButton width="100px" >응원</PurpleButton>
       </ChatInputFrame>
     </Wrapper>
   )

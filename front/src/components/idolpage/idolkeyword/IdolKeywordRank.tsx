@@ -6,6 +6,7 @@ import IdolKeywordRankBtn from "./IdolKeywordRankBtn";
 import TitleComponent from "../TitleComponent";
 import styled from "styled-components";
 import { useParams } from 'react-router';
+import { useAppSelector } from '../../../_hooks/hooks';
 
 interface Props {
   setChooseKeyword: React.Dispatch<React.SetStateAction<number>>;
@@ -60,7 +61,7 @@ function IdolKeywordRank({setChooseKeyword, chooseKeyword}:Props) {
                   tmp[idx] = true
                   setCheck(tmp)
                   setChooseKeyword(idx)
-                  ClickTracker(idolName,"chohm1223@naver.com")
+                  ClickTracker(idolName)
                 }
               }
               isClick={check[idx]}

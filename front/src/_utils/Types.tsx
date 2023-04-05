@@ -10,7 +10,7 @@ export type RankListType = {
   score: number;
   diff: number;
 };
-type RankData = {
+export type RankData = {
   rank: number;
   score: number;
 };
@@ -85,4 +85,18 @@ export interface SnsLink {
 /** 디테일 페이지 아이돌 채팅목록 타입*/ 
 export interface Comments {
   comments: Comment[];
+}
+
+/** Store에 저장할 userinfo 타입 */
+export interface UserInfo {
+  userId: number;
+  nickname: string;
+  TOKEN: string;
+  idols: string[];
+}
+
+/** 긍부정 주간 리스트 타입 */
+export interface PosNeg {
+  pos: number;
+  neg: number;
 }
