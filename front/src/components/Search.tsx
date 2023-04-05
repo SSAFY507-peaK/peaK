@@ -1,8 +1,12 @@
 import { useEffect, useRef, useState } from "react";
 
+import { IdolLists } from "../_utils/loader";
+import { IdolListsType } from "../_utils/Types";
 import SearchIcon from "@mui/icons-material/Search";
 import UseOnClickOutside from "../_hooks/useOnClickOutside";
 import styled from "styled-components";
+import { useLoaderData } from "react-router";
+import { useNavigate } from "react-router";
 
 type WrapperType = {
   width?: string;
@@ -63,6 +67,8 @@ function Search({ width }: WrapperType) {
   const [search, setSearch] = useState("");
   const [isClicked, setIsClicked] = useState(false);
   const searchRef = useRef<any>();
+  const idolLists = useLoaderData() as IdolListsType;
+  const navigate = useNavigate();
 
   const onChange = (e: any) => {
     console.log(search);
@@ -77,23 +83,10 @@ function Search({ width }: WrapperType) {
   UseOnClickOutside(searchRef, () => {
     setIsClicked(false);
   });
-
-  const idols = [
-    { name: "세븐틴" },
-    { name: "세꼬시" },
-    { name: "재산세" },
-    { name: "설날세배" },
-    { name: "Exo" },
-    { name: "트와이스" },
-    { name: "아이브" },
-    { name: "있지" },
-    { name: "(아이들)" },
-    { name: "뉴진스" },
-    { name: "BTS" },
-  ];
+  const idols = idolLists.idols;
 
   const filterIdol = idols.filter(idol => {
-    return idol.name.toLocaleLowerCase().includes(search.toLocaleLowerCase());
+    return idol.toLocaleLowerCase().includes(search.toLocaleLowerCase());
   });
 
   return (
@@ -113,11 +106,11 @@ function Search({ width }: WrapperType) {
             <SearchResultDiv
               onClick={e => {
                 e.preventDefault();
-                alert(idol.name);
+                navigate(`/${idol}`);
                 setSearch("");
               }}
             >
-              {idol.name}
+              {idol}
             </SearchResultDiv>
           ))}
         </SearchAllResult>
