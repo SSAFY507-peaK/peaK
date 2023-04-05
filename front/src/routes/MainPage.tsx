@@ -9,7 +9,11 @@ import { TrendNewsListType } from "../_utils/Types.js";
 import axios from "axios";
 import styled from "styled-components";
 import { useEffect } from "react";
-import { useLoaderData } from "react-router";
+import {useLoaderData, useNavigate} from "react-router";
+import {useSearchParams} from "react-router-dom";
+import {useDispatch, useSelector} from "react-redux";
+import {CreateNickname, CreateTOKEN, CreateUserId} from "../_store/slices/UserSlice";
+import {RootState} from "../_store/store";
 
 const BASE_URL = process.env.REACT_APP_BASE_URL;
 
@@ -46,9 +50,39 @@ const CarouselCustomDiv = styled.div<CarouselCustomDivType>`
 `;
 
 function MainPage() {
+  /*
+   * 로그인을 하면 params로 token, nickname, userid가 넘어와,,,
+   * 만약 메인에 왔는데 params가 있다? 그럼 이 값들을 redux에 저장하고 pushState를 이용해서 url을 깨끗하게 해.
+   *
+   * 메인에 왔는데 params가 없어? 그럼 리덕스에 이 값이 있는지 찾아봐...
+   * 이 값이 있으면 나는 로그인했던 사용자인거지..(사실 여기서도 토큰 유효성 검사를 해야할 듯 하다)
+   *
+   * 리덕스에도 토큰이 없어? 그러면 나는 로그인을 안 한 사람이야 => imtro로 보내버리자...
+   */
+
+  const [query, setQuery] = useSearchParams();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  let userId = useSelector((state:RootState) => state.userInfo.userId);
+  let token = useSelector((state:RootState) => state.userInfo.TOKEN);
+
   useEffect(() => {
-    ReactGA.set({ userId: "chohm1223@naver.com" });
-  }, []);
+    if (query.get('token')) {
+      dispatch(CreateTOKEN(query.get('token')));
+      dispatch(CreateUserId(query.get('userId')));
+      dispatch(CreateNickname(query.get('nickname')));
+      ReactGA.set({ userId: userId });
+      window.history.pushState({}, "", "/")
+    }
+    else {
+      if (token !== "") {
+        ReactGA.set({ userId: userId });
+      }
+      else {
+        navigate('/intro');
+      }
+    }
+  }, [dispatch, navigate, query, token, userId]);
   const TrendNewsList = useLoaderData() as TrendNewsListType[];
   // const TrendYoutubeList = [
   //   {
