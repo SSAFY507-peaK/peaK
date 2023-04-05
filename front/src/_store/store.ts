@@ -1,11 +1,11 @@
 import { Action, ThunkAction, configureStore } from '@reduxjs/toolkit';
 
 import { myinterest } from './slices/InterestSlice';
-import { userinfo } from './slices/UserSlice';
+import userInfoReducer from './slices/UserSlice';
 
 export const store = configureStore({
   reducer: {
-    userinfo: userinfo.reducer,
+    userInfo: userInfoReducer,
     myinterest: myinterest.reducer,
   },
 });

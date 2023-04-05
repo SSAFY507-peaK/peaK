@@ -1,15 +1,23 @@
-import React, {useState} from 'react';
+import React, { useState} from 'react';
 import axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
+import { CreateNickname } from "../../_store/slices/UserSlice";
 import {Description, InputWrapper, PageWrapper} from "../../components/SignUpPage/SignUpComponents";
 import {MessageDiv, NicknameInput} from "../../components/SignUpPage/NicknameComponents";
 import {BlueButton, PurpleButton} from "../../components/Button";
 
 type NicknameType = "EU006" | "EU009" | "200" ;
 type SignUp1Type = {
-  TOKEN: string;
+  TOKEN?: string;
   handleChangePage: (value: number) => void;
 }
-function SignUp1({TOKEN, handleChangePage}: SignUp1Type) {
+
+function SignUp1({handleChangePage}: SignUp1Type) {
+  let TOKEN = useSelector((state:any) => state.userInfo.TOKEN);
+  // 이제 얘기 막 찍힘
+  console.log(TOKEN);
+
+  let dispatch = useDispatch();
   const [nickname, setNickname] = useState<string>("");
   const [message, setMessage] = useState<string>("");
   const [nicknameCode, setNicknameCode] = useState<NicknameType | undefined>(undefined);
@@ -20,6 +28,7 @@ function SignUp1({TOKEN, handleChangePage}: SignUp1Type) {
     setMessage("");
   };
 
+  // 여기 AXIOS 요청은 나중에 변경 예정..
   const handleIsValidNickname = (): void => {
     axios.get(`https://j8a507.p.ssafy.io/api/user/nickname/${nickname}`, {
       headers: {
@@ -32,6 +41,7 @@ function SignUp1({TOKEN, handleChangePage}: SignUp1Type) {
         const MESSAGE = response.data.message;
         setNicknameCode(CODE);
         setMessage(MESSAGE);
+        dispatch(CreateNickname(nickname));
       })
       .catch(error => {
         console.log(error);
