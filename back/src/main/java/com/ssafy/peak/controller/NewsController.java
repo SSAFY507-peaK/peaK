@@ -1,10 +1,8 @@
 package com.ssafy.peak.controller;
 
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
 
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,9 +13,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.ssafy.peak.dto.news.AllIdolNewsListByTimeRequestDto;
 import com.ssafy.peak.dto.news.IdolNewsListByTimeRequestDto;
+import com.ssafy.peak.dto.news.KeywordCounterRequestDto;
 import com.ssafy.peak.dto.news.KeywordRelatedWordCounterResponseDto;
 import com.ssafy.peak.dto.news.NewsRequestDto;
 import com.ssafy.peak.dto.news.NewsResponseDto;
+import com.ssafy.peak.dto.news.NewsSearchRequestDto;
 import com.ssafy.peak.dto.news.WordCounterRequestDto;
 import com.ssafy.peak.service.AllIdolNewsListByTimeService;
 import com.ssafy.peak.service.IdolNewsListByTimeService;
@@ -45,18 +45,18 @@ public class NewsController {
 	}
 
 	@PostMapping("/list/idol")
-	public ResponseEntity<Void> addIdolNewsListByTime(
+	public ResponseEntity<Void> addIdolNewsList(
 		@RequestBody IdolNewsListByTimeRequestDto idolNewsListByTimeRequestDto
 	) {
-		idolNewsListByTimeService.addIdolNewsListByTime(idolNewsListByTimeRequestDto);
+		idolNewsListByTimeService.addIdolNewsList(idolNewsListByTimeRequestDto);
 		return ResponseEntity.ok().build();
 	}
 
 	@PostMapping("/list/all-idol")
-	public ResponseEntity<Void> addAllIdolNewsListByTime(
+	public ResponseEntity<Void> addAllIdolNewsList(
 		@RequestBody AllIdolNewsListByTimeRequestDto allIdolNewsListByTimeRequestDto
 	) {
-		allIdolNewsListByTimeService.addAllIdolNewsListByTime(allIdolNewsListByTimeRequestDto);
+		allIdolNewsListByTimeService.addAllIdolNewsList(allIdolNewsListByTimeRequestDto);
 		return ResponseEntity.ok().build();
 	}
 
@@ -89,13 +89,35 @@ public class NewsController {
 		return ResponseEntity.ok().build();
 	}
 
-	// @PostMapping("/list/article/all-idol")
-	// public ResponseEntity<Void> addNewsListToAllIdolNewsListByTime(LocalDateTime ) {
-	//
-	// }
-	//
-	// @PostMapping("/list/article/idol")
-	// public ResponseEntity<Void> addNewsListToIdolNewsListByTime() {
-	//
-	// }
+	@PostMapping("/list/article/all-idol")
+	public ResponseEntity<Void> addNewsListToAllIdolNewsList(
+		@RequestBody NewsSearchRequestDto newsSearchRequestDto
+	) {
+		allIdolNewsListByTimeService.addNewsToAllIdolNewsList(newsSearchRequestDto);
+		return ResponseEntity.ok().build();
+	}
+
+	@PostMapping("/list/article/idol")
+	public ResponseEntity<Void> addNewsListToIdolNewsList(
+		@RequestBody NewsSearchRequestDto newsSearchRequestDto
+	) {
+		idolNewsListByTimeService.addNewsToIdolNewsList(newsSearchRequestDto);
+		return ResponseEntity.ok().build();
+	}
+
+	@PostMapping("/list/all-idol/keywords")
+	public ResponseEntity<Void> addKeywordCounterToAllIdolNewsList(
+		@RequestBody KeywordCounterRequestDto keywordCounterRequestDto
+	) {
+		allIdolNewsListByTimeService.addKeywordCounterToAllIdolNewsList(keywordCounterRequestDto);
+		return ResponseEntity.ok().build();
+	}
+
+	@PostMapping("/list/idol/keywords")
+	public ResponseEntity<Void> addKeywordCounterToIdolNewsList(
+		@RequestBody KeywordCounterRequestDto keywordCounterRequestDto
+	) {
+		idolNewsListByTimeService.addKeywordCounterToIdolNewsList(keywordCounterRequestDto);
+		return ResponseEntity.ok().build();
+	}
 }

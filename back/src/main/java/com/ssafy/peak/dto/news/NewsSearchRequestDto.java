@@ -1,7 +1,6 @@
 package com.ssafy.peak.dto.news;
 
 import java.time.LocalDateTime;
-import java.util.Map;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -12,17 +11,14 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Getter
 @NoArgsConstructor
-public class WordCounterRequestDto {
+public class NewsSearchRequestDto {
 
 	@JsonProperty("index")
-	long index;
+	private long index;
 
 	@JsonProperty("date_time")
 	private LocalDateTime dateTime;
 
 	@JsonProperty("idol")
-	String idol;
-
-	@JsonProperty("word_counter")
-	Map<String, Integer> wordCounter;
+	private String idol;
 }

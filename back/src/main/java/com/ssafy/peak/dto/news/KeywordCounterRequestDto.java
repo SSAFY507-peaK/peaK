@@ -12,10 +12,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Getter
 @NoArgsConstructor
-public class WordCounterRequestDto {
-
-	@JsonProperty("index")
-	long index;
+public class KeywordCounterRequestDto {
 
 	@JsonProperty("date_time")
 	private LocalDateTime dateTime;
@@ -23,6 +20,6 @@ public class WordCounterRequestDto {
 	@JsonProperty("idol")
 	String idol;
 
-	@JsonProperty("word_counter")
-	Map<String, Integer> wordCounter;
+	@JsonProperty("keyword_counter")
+	Map<String, Integer> keywordCounter;
 }

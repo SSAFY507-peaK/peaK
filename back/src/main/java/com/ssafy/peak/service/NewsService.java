@@ -1,5 +1,6 @@
 package com.ssafy.peak.service;
 
+import java.time.LocalDateTime;
 import java.util.Map;
 
 import org.springframework.stereotype.Service;
@@ -34,11 +35,12 @@ public class NewsService {
 	@Transactional
 	public void addWordCounterToNews(WordCounterRequestDto wordCounterRequestDto) {
 		Map<String, Integer> wordCounter = wordCounterRequestDto.getWordCounter();
-		String idol = wordCounterRequestDto.getIdol();
 		long index = wordCounterRequestDto.getIndex();
+		LocalDateTime dateTime = wordCounterRequestDto.getDateTime();
+		String idol = wordCounterRequestDto.getIdol();
 		News news = newsRepository
-			.findByIndexAndIdol(index, idol)
+			.findByIndexAndDateTimeAndIdol(index, dateTime, idol)
 			.orElseThrow(() -> new CustomException(CustomExceptionType.NEWS_NOT_FOUND));
-		news.updateWordCounter(wordCounter);
+		news.getWordCounter().putAll(wordCounter);
 	}
 }
