@@ -1,5 +1,5 @@
 import React, {useCallback, useState} from 'react';
-// import {useNavigate} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { CreateFavIdols } from "../../_store/slices/UserSlice";
 import {
@@ -10,7 +10,7 @@ import {
   SelectedSection
 } from "../../components/SignUpPage/IdolComponents";
 import {BlueButton, CloseButton, PurpleButton} from "../../components/Button";
-// import axios from "axios";
+import axios from "axios";
 import {Description, DescriptionSection, PageWrapper} from "../../components/SignUpPage/SignUpComponents";
 import {IdolListsType} from "../../_utils/Types";
 import {RootState} from "../../_store/store";
@@ -23,7 +23,7 @@ type SignUp2Type = {
 }
 
 function SignUp2({handleChangePage, idolLists}: SignUp2Type) {
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
   let dispatch = useDispatch();
   const TOKEN = useSelector((state:RootState) => state.userInfo.TOKEN);
   const NICKNAME = useSelector((state:RootState) => state.userInfo.nickname)
@@ -59,8 +59,7 @@ function SignUp2({handleChangePage, idolLists}: SignUp2Type) {
   /** 회원가입을 하자 */
   const handleSignUp = () => {
     dispatch(CreateFavIdols(selectedIdols));
-    // eslint-disable-next-line react-hooks/rules-of-hooks
-    // eslint-disable-next-line react-hooks/rules-of-hooks
+
     const headers = {
       Authorization: TOKEN,
     };
@@ -69,13 +68,13 @@ function SignUp2({handleChangePage, idolLists}: SignUp2Type) {
       interest: selectedIdols,
     }
     console.log({headers, body});
-    // axios.post(`https://j8a507.p.ssafy.io/api/user/sign-up`, body, {
-    //   headers: headers
-    // })
-    //   .then(response => console.log(response.data))
-    //   .catch(error => console.log(error))
-    //
-    // navigate('/')
+    axios.post(`https://j8a507.p.ssafy.io/api/user/sign-up`, body, {
+      headers: headers
+    })
+      .then(response => console.log(response.data))
+      .catch(error => console.log(error))
+
+    navigate('/')
   }
 
   return (

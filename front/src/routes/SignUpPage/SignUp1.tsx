@@ -2,9 +2,9 @@ import React, { useState} from 'react';
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { CreateNickname } from "../../_store/slices/UserSlice";
-import {Description, InputWrapper, PageWrapper} from "../../components/SignUpPage/SignUpComponents";
-import {MessageDiv, NicknameInput} from "../../components/SignUpPage/NicknameComponents";
-import {BlueButton, PurpleButton} from "../../components/Button";
+import { Description, InputWrapper, PageWrapper } from "../../components/SignUpPage/SignUpComponents";
+import { MessageDiv, NicknameInput } from "../../components/SignUpPage/NicknameComponents";
+import { BlueButton, PurpleButton } from "../../components/Button";
 
 type NicknameType = "EU006" | "EU009" | "200" ;
 type SignUp1Type = {
