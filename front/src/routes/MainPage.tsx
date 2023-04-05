@@ -2,7 +2,7 @@ import CarouselCustom from "../components/Carousel/CarouselCustom.jsx";
 import CommonDiv from "../components/MainPage/CommonDiv";
 import MainDiv from "../components/MainDiv";
 import NameDiv from "../components/NameDiv";
-import ReactGA from 'react-ga';
+import ReactGA from "react-ga";
 import Top8 from "../components/MainPage/Top8";
 import TrendKeyword from "../components/MainPage/TrendKeyword";
 import { TrendNewsListType } from "../_utils/Types.js";
@@ -20,7 +20,6 @@ export async function loader() {
   await axios
     .get(`${BASE_URL}news/list/all-idol`)
     .then(response => {
-      console.log(response.data);
       TrendNewsList = response.data;
     })
     .catch(error => console.log(error));
@@ -48,10 +47,9 @@ const CarouselCustomDiv = styled.div<CarouselCustomDivType>`
 
 function MainPage() {
   const TrendNewsList = useLoaderData() as TrendNewsListType[];
-
   useEffect(() => {
-    ReactGA.set({ userId: 'chohm1223@naver.com' });
-  },[])
+    ReactGA.set({ userId: "chohm1223@naver.com" });
+  }, []);
   // const TrendYoutubeList = [
   //   {
   //     title: "4 시간 지브리 메들리 피아노 💖 ..",
@@ -125,7 +123,7 @@ function MainPage() {
         <CarouselCustomDiv ratio={0.47}>
           <NameDiv type={false} firstWord="트렌딩" secondWord="뉴스" />
           <CarouselDiv>
-            <CarouselCustom items={TrendNewsList[0]} />
+            <CarouselCustom data={TrendNewsList[0]} />
           </CarouselDiv>
         </CarouselCustomDiv>
         <CarouselCustomDiv ratio={0.47}>

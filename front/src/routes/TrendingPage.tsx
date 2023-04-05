@@ -14,13 +14,14 @@ export async function loader() {
   await axios
     .get(`${BASE_URL}news/list/all-idol`)
     .then(response => {
-      console.log(response.data);
       TrendNewsList = response.data;
+      console.log(TrendNewsList);
     })
     .catch(error => console.log(error));
 
   return TrendNewsList;
 }
+
 function TrendingPage() {
   const TrendNewsList = useLoaderData() as TrendNewsListType[];
   return (
