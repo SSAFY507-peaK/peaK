@@ -88,11 +88,13 @@ public class JwtTokenProvider implements InitializingBean {
 			.signWith(SignatureAlgorithm.HS512, key) // 사용할 암호화 알고리즘 (HS512), signature 에 들어갈 secret key 세팅
 			.compact();
 
-		// // refresh token은 redis에 저장
-		// if (tokenType.equals(Utils.REFRESH_TOKEN)) {
-		// 	String key = "RT:" + Encoders.BASE64.encode(customOAuth2User.getName().getBytes());
-		// 	redisUtil.setDataExpire(key, token, refreshTokenValidTime);
-		// }
+		// refresh token은 redis에 저장
+		if (tokenType.equals(Utils.REFRESH_TOKEN)) {
+			String key = "RT:" + Encoders.BASE64.encode(customOAuth2User.getName().getBytes());
+			redisUtil.setDataExpire(key, token, refreshTokenValidTime);
+
+			log.info("createTokensFromAuthentication | key: {}", key);
+		}
 		return token;
 	}
 
@@ -117,6 +119,13 @@ public class JwtTokenProvider implements InitializingBean {
 			.signWith(SignatureAlgorithm.HS512, key) // 사용할 암호화 알고리즘 (HS512), signature 에 들어갈 secret key 세팅
 			.compact();
 
+		// refresh token은 redis에 저장
+		if (tokenType.equals(Utils.REFRESH_TOKEN)) {
+			String key = "RT:" + Encoders.BASE64.encode(userPrincipal.getName().getBytes());
+			redisUtil.setDataExpire(key, token, refreshTokenValidTime);
+
+			log.info("createTokensFromUserPrincipal | key: {}", key);
+		}
 		return token;
 	}
 
@@ -267,6 +276,10 @@ public class JwtTokenProvider implements InitializingBean {
 
 		String key = "RT:" + Encoders.BASE64.encode(userId.getBytes());
 		String refreshToken = redisUtil.getData(key);
+
+		log.info("reissue key: {}", key);
+		log.info("reissue refreshToken: {}", refreshToken);
+
 		if (refreshToken == null) {
 			throw new CustomException(CustomExceptionType.REFRESH_TOKEN_ERROR);
 		}
