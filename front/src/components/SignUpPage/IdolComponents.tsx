@@ -14,21 +14,10 @@ const IdolGrid = styled.div<IdolGridType>`
   gap: ${props => props.gap || "15px"};
 `;
 
-const IdolImageWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-`;
-
-const IdolName = styled.div`
-  margin-top: 7px;
-  font-weight: bold;
-  text-align: center;
-`
-const IdolImage = styled.div<{ url?: string, height?: string, width?: string }>`
-  height: ${props => props.height? props.height : "150px"};
-  width: ${props => props.height? props.height : "150px"};
-  background-image: url(${props => props.url});
+const IdolImage = styled.div<{ url?: string, width?: string }>`
+  width: ${props => props.width? props.width : "150px"};
+  aspect-ratio: 1;
+  background-image: url(${props => props.url || "none"});
   background-size: cover;
   background-position: center;
   border-radius: 50%;
@@ -40,10 +29,10 @@ const IdolImage = styled.div<{ url?: string, height?: string, width?: string }>`
   &.selected{
     :after{
       content: "✔";
-      display: flex;
       height: 100%;
       width: 100%;
       border-radius: 50%;
+      display: flex;
       justify-content: center;
       align-items: center;
       font-size: 3rem;
@@ -54,13 +43,13 @@ const IdolImage = styled.div<{ url?: string, height?: string, width?: string }>`
   }
 `;
 const Selected = styled(IdolImage)<SelectedIdolType>`
-  height: ${props => props.height? props.height : "150px"};
-  width: ${props => props.height? props.height : "150px"};
   position: relative;
+  &:hover {
+    transform: none;
+    cursor: default;
+  }
 `;
-const EmptySelected = styled(IdolImage)<SelectedIdolType>`
-  height: ${props => props.height? props.height : "150px"};
-  width: ${props => props.height? props.height : "150px"};
+const NotSelected = styled(IdolImage)<SelectedIdolType>`
   background: transparent;
   border: 2px dashed var(--gray700-color);
   &:hover {
@@ -72,12 +61,14 @@ const EmptySelected = styled(IdolImage)<SelectedIdolType>`
 /** 내가 선택한 아이돌 */
 const SelectedSection = styled.div`
   margin-bottom: 10px;
+  width: 100%;
   display: flex;
   justify-content: center
 `
 /** 전체 아이돌 */
-const IdolWrapper = styled.div`
+const IdolSection = styled.div`
   overflow-y: scroll;
+  width: 100%;
   padding: 15px;
   &::-webkit-scrollbar {
     width: 7px;
@@ -91,4 +82,4 @@ const IdolWrapper = styled.div`
 `
 
 
-export { IdolGrid, IdolImage, IdolName, IdolImageWrapper, EmptySelected, Selected, SelectedSection, IdolWrapper };
+export { IdolGrid, IdolImage, NotSelected, Selected, SelectedSection, IdolSection };

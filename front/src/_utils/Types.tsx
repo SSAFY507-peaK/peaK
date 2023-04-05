@@ -10,6 +10,14 @@ export type RankListType = {
   score: number;
   diff: number;
 };
+type RankData = {
+  rank: number;
+  score: number;
+};
+export type WeeklyRankingType = {
+  current: RankData;
+  rankWeek: RankData[];
+}
 
 export type IdolListsType = {
   idols: string[];

@@ -4,10 +4,10 @@ const Container = styled.div`
   height: 100vh;
   overflow-y: hidden;
 `;
-const PageWrapper = styled.div`
+const PageContainer = styled.div`
   width: 100%;
   height: 100%;
-  padding: 5vh 5vw;
+  padding: 5vh 5vw 8vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -30,4 +30,4 @@ const DescriptionSection = styled.div`
   }
 `
 
-export { Container, PageWrapper, Description, InputWrapper, DescriptionSection};
+export { Container, PageContainer, Description, InputWrapper, DescriptionSection};
