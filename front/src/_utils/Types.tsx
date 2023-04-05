@@ -57,6 +57,7 @@ export interface MyIdolDetail {
 }
 
 export interface Comment {
+  nickname?: string;
   content: string;
   datetime: string;
 }
@@ -71,4 +72,9 @@ export interface SnsLink {
   instagram: string;
   youtube: string;
   twitter: string;
+}
+
+/** 디테일 페이지 아이돌 채팅목록 타입*/ 
+export interface Comments {
+  comments: Comment[];
 }
