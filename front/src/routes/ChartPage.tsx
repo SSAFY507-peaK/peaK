@@ -1,10 +1,10 @@
 import {
-  EmptySelected,
+  NotSelected,
   IdolGrid,
   IdolImage,
   IdolImageWrapper,
   IdolName,
-  IdolWrapper,
+  IdolSection,
   Selected,
 } from "../components/SignUpPage/IdolComponents";
 import { useCallback, useState } from "react";
@@ -138,7 +138,7 @@ function ChartPage() {
       </Selected>
     ));
     for (let i = 0; i < 5 - selectedIdols.length; i++) {
-      returnArr.push(<EmptySelected height="90px" />);
+      returnArr.push(<NotSelected height="90px" />);
     }
     return returnArr;
   }, [selectedIdols]);
@@ -181,7 +181,7 @@ function ChartPage() {
       <IdolSelectDiv>
         <Search />
         <IdolGrid cols={5}>{showSelectIdols()}</IdolGrid>
-        <IdolWrapper>
+        <IdolSection>
           <IdolGrid cols={4} gap="10px">
             {idols.map((idol: IdolObjectType) => (
               <IdolImageWrapper>
@@ -197,7 +197,7 @@ function ChartPage() {
               </IdolImageWrapper>
             ))}
           </IdolGrid>
-        </IdolWrapper>
+        </IdolSection>
       </IdolSelectDiv>
     </ChartWrapper>
   );

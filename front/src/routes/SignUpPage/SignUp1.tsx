@@ -2,7 +2,7 @@ import React, { useState} from 'react';
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { CreateNickname } from "../../_store/slices/UserSlice";
-import { Description, InputWrapper, PageWrapper } from "../../components/SignUpPage/SignUpComponents";
+import { Description, InputWrapper, PageContainer } from "../../components/SignUpPage/SignUpComponents";
 import { MessageDiv, NicknameInput } from "../../components/SignUpPage/NicknameComponents";
 import { BlueButton, PurpleButton } from "../../components/Button";
 
@@ -53,7 +53,7 @@ function SignUp1({handleChangePage}: SignUp1Type) {
   };
 
   return (
-    <PageWrapper>
+    <PageContainer>
       <h2>닉네임 설정</h2>
       <Description>닉네임은 8글자 이하의 한글, 영어, 숫자로만 이루어져야 합니다</Description>
       <InputWrapper>
@@ -66,7 +66,7 @@ function SignUp1({handleChangePage}: SignUp1Type) {
         {nicknameCode !== "200" && <PurpleButton onClick={ handleIsValidNickname } width="100px">중복 확인</PurpleButton>}
         {nicknameCode === "200" && <BlueButton onClick={() => handleChangePage(1) } width="100px">다음으로</BlueButton>}
       </InputWrapper>
-    </PageWrapper>
+    </PageContainer>
   );
 }
 
