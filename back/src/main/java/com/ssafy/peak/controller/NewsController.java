@@ -1,5 +1,6 @@
 package com.ssafy.peak.controller;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
 
@@ -87,4 +88,14 @@ public class NewsController {
 		newsService.addWordCounterToNews(wordCounterRequestDto);
 		return ResponseEntity.ok().build();
 	}
+
+	// @PostMapping("/list/article/all-idol")
+	// public ResponseEntity<Void> addNewsListToAllIdolNewsListByTime(LocalDateTime ) {
+	//
+	// }
+	//
+	// @PostMapping("/list/article/idol")
+	// public ResponseEntity<Void> addNewsListToIdolNewsListByTime() {
+	//
+	// }
 }
