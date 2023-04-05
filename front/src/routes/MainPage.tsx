@@ -1,7 +1,7 @@
-import CarouselCustom from "../components/Carousel/CarouselCustom.jsx";
-import CommonDiv from "../components/MainPage/CommonDiv";
-import MainDiv from "../components/MainDiv";
-import NameDiv from "../components/NameDiv";
+// import CarouselCustom from "../components/Carousel/CarouselCustom.jsx";
+// import CommonDiv from "../components/MainPage/CommonDiv";
+// import MainDiv from "../components/MainDiv";
+// import NameDiv from "../components/NameDiv";
 // import ReactGA from "react-ga";
 import Top8 from "../components/MainPage/Top8";
 import TrendKeyword from "../components/MainPage/TrendKeyword";
@@ -14,6 +14,7 @@ import {useLoaderData } from "react-router";
 // import {useDispatch, useSelector} from "react-redux";
 // import {CreateNickname, CreateTOKEN, CreateUserId} from "../_store/slices/UserSlice";
 // import {RootState} from "../_store/store";
+import TitleContent from "../components/TitleContent"
 
 const BASE_URL = process.env.REACT_APP_BASE_URL;
 
@@ -48,6 +49,17 @@ const CarouselCustomDiv = styled.div<CarouselCustomDivType>`
   margin: 0 auto;
   flex: ${props => props.ratio};
 `;
+
+const MainGrid = styled.div`
+  display: grid;
+  width: 100%;
+  height: 100%;
+  
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: 60vh auto;
+  gap: 25px;
+`
+
 
 function MainPage() {
   /*
@@ -135,37 +147,43 @@ function MainPage() {
   //   },
   // ];
   return (
-    <>
-      <MainDiv style={{ marginBottom: "2vh" }}>
-        <CommonDiv
-          type={true}
-          firstWord="랭킹"
-          secondWord="Top 8"
-          ratio="0.7"
-          mr={true}
-          data={Top8()}
-        />
-        <CommonDiv
-          type={false}
-          firstWord="인기"
-          secondWord="키워드"
-          ratio="0.3"
-          data={<TrendKeyword />}
-        />
-      </MainDiv>
-      <MainDiv>
-        <CarouselCustomDiv ratio={0.47}>
-          <NameDiv type={false} firstWord="트렌딩" secondWord="뉴스" />
-          <CarouselDiv>
-            <CarouselCustom data={TrendNewsList[0]} />
-          </CarouselDiv>
-        </CarouselCustomDiv>
-        <CarouselCustomDiv ratio={0.47}>
-          <NameDiv type={false} firstWord="트렌딩" secondWord="유튜브" />
-          <CarouselDiv>{/* <CarouselCustom items={TrendYoutubeList} /> */}</CarouselDiv>
-        </CarouselCustomDiv>
-      </MainDiv>
-    </>
+    // <>
+    //   <MainDiv style={{ marginBottom: "2vh" }}>
+    //     <CommonDiv
+    //       type={true}
+    //       firstWord="랭킹"
+    //       secondWord="Top 8"
+    //       ratio="0.7"
+    //       mr={true}
+    //       data={Top8()}
+    //     />
+    //     <CommonDiv
+    //       type={false}
+    //       firstWord="인기"
+    //       secondWord="키워드"
+    //       ratio="0.3"
+    //       data={<TrendKeyword />}
+    //     />
+    //   </MainDiv>
+    //   <MainDiv>
+    //     <CarouselCustomDiv ratio={0.47}>
+    //       <NameDiv type={false} firstWord="트렌딩" secondWord="뉴스" />
+    //       <CarouselDiv>
+    //         <CarouselCustom data={TrendNewsList[0]} />
+    //       </CarouselDiv>
+    //     </CarouselCustomDiv>
+    //     <CarouselCustomDiv ratio={0.47}>
+    //       <NameDiv type={false} firstWord="트렌딩" secondWord="유튜브" />
+    //       <CarouselDiv>{/* <CarouselCustom items={TrendYoutubeList} /> */}</CarouselDiv>
+    //     </CarouselCustomDiv>
+    //   </MainDiv>
+    // </>
+    <MainGrid>
+      <TitleContent data={Top8()} gridColumn="1 / 4" title={<h3>랭킹 <span style={{color: "var(--purple400-color)"}}>Top8</span></h3>} />
+      <TitleContent data={<TrendKeyword />} gridColumn="4 / 5" title={<h3>인기 <span style={{color: "var(--purple400-color)"}}>키워드</span></h3>} />
+      <TitleContent gridColumn="1 / 3" noContentBackground={true} title={<h3>트렌딩 <span style={{color: "var(--purple400-color)"}}>뉴스</span></h3>} />
+      <TitleContent gridColumn="3 / 5" noContentBackground={true} title={<h3>트렌딩 <span style={{color: "var(--purple400-color)"}}>유튜브</span></h3>} />
+    </MainGrid>
   );
 }
 
