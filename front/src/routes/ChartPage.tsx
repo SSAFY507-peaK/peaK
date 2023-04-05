@@ -1,21 +1,22 @@
+import React, { useCallback, useState } from "react";
+import {useLoaderData} from "react-router-dom";
+// import axios from "axios";
+import styled from "styled-components";
+
+import { IdolListsType } from "../_utils/Types";
 import {
-  NotSelected,
-  IdolGrid,
   IdolSection,
+  IdolGrid,
+  NotSelected,
   Selected,
 } from "../components/SignUpPage/IdolComponents";
-import React, { useCallback, useState } from "react";
-import { IdolListsType } from "../_utils/Types";
-
 import { CloseButton } from "../components/Button";
 import ContentDiv from "../components/Content";
 import RankChart from "../components/RankingPage/RankChart";
 import Search from "../components/Search";
-import styled from "styled-components";
-import {useLoaderData} from "react-router-dom";
 import IdolImgNameContainer from "../components/IdolImgNameContainer";
-// import axios from "axios";
 
+const BASE_URL = process.env.REACT_APP_BASE_URL;
 type ChartIdolObjectType = {
   name?: string;
   data?: number[];
@@ -81,7 +82,7 @@ function ChartPage() {
       ]);
 
       // 이렇게 요청 보내야하지 않을까
-      // axios.get(`https://j8a507.p.ssafy.io/api/peak/weekly/${idol}`)
+      // axios.get(`${BASE_URL}/api/peak/weekly/${idol}`)
       //   .then(response => {
       //     const responseData = response.data;
       //     console.log(responseData);
@@ -104,7 +105,7 @@ function ChartPage() {
   /** 선택된 아이돌을 보여주자 */
   const showSelectIdols = useCallback(() => {
     const returnArr = selectedIdols?.map(idol =>
-      <Selected url={`https://j8a507.p.ssafy.io/img/${encodeURI(idol)}.webp`} width="100px" >
+      <Selected url={`${BASE_URL}/img/${encodeURIComponent(idol)}.webp`} width="100px" >
         <CloseButton onClick={()=>handleDeleteSelectedIdol(idol)}>X</CloseButton>
       </Selected>
     )
@@ -124,10 +125,10 @@ function ChartPage() {
         <Search />
         <IdolGrid cols={5}>{showSelectIdols()}</IdolGrid>
         <IdolSection>
-          <IdolGrid cols={3} gap="20px">
+          <IdolGrid cols={4} gap="20px">
             {idolLists.idols.map((idol: string) =>
               <IdolImgNameContainer
-                url={`https://j8a507.p.ssafy.io/img/${encodeURIComponent(`${idol}`)}.webp`}
+                url={`${BASE_URL}/img/${encodeURIComponent(`${idol}`)}.webp`}
                 width="100%"
                 idol={ idol }
                 onClick={()=> selectedIdols.includes(idol) ? handleDeleteSelectedIdol(idol) : handleSelectIdol(idol)}

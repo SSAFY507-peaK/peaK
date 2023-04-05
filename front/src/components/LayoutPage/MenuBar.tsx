@@ -1,3 +1,4 @@
+import React from "react";
 import { Link, NavLink } from "react-router-dom";
 
 import BarChartIcon from "@mui/icons-material/BarChart";
@@ -7,7 +8,6 @@ import HomeIcon from "@mui/icons-material/Home";
 import { ReactComponent as Logo } from "../../assets/peaK.svg";
 import LogoutIcon from "@mui/icons-material/Logout";
 import PersonIcon from "@mui/icons-material/Person";
-import React from "react";
 import Search from "../Search";
 import TrendingUpIcon from "@mui/icons-material/TrendingUp";
 import styled from "styled-components";
@@ -70,7 +70,10 @@ const Menu = styled.div`
 
 const style = { marginRight: "10px", fontSize: "medium" };
 
-function MenuBar() {
+type MenuBarProps = {
+  nickname: string;
+}
+function MenuBar({ nickname }: MenuBarProps) {
   return (
     <MenuBackground>
       <MenuSection>
@@ -103,7 +106,7 @@ function MenuBar() {
             </NavLink>
           </Menu>
           <Menu>
-            <NavLink to="/mypage/hanbin" className={({ isActive }) => (isActive ? "active" : "")}>
+            <NavLink to={`/mypage/${nickname}`} className={({ isActive }) => (isActive ? "active" : "")}>
               <PersonIcon style={style} />
               마이페이지
             </NavLink>
@@ -119,7 +122,7 @@ function MenuBar() {
             </NavLink>
           </Menu>
           <Menu>
-            <Link to="/">
+            <Link onClick={() => localStorage.clear()} to="/intro">
               <LogoutIcon style={style} />
               로그아웃
             </Link>

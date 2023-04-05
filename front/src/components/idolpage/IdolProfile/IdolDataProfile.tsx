@@ -1,6 +1,7 @@
 import IdolDataProfileSns from './IdolDataProfileSns';
 import styled from "styled-components";
-import { useParams } from 'react-router';
+import { IdolNameProps } from "../../../routes/IdolPage";
+// import { useParams } from 'react-router';
 
 interface ImageType {
   backgroundImg: string;
@@ -16,7 +17,7 @@ const Wrapper = styled.div`
 `;
 
 const ProfileImg = styled.div<ImageType>`
-  border-radius: 100px;
+  border-radius: 80px;
   width: 200px;
   height: 200px;
   background-image: url(${props => props.backgroundImg});
@@ -24,17 +25,17 @@ const ProfileImg = styled.div<ImageType>`
   background-size: cover;
   background-position: center;
   margin: 30px;
+  box-shadow: 0 0 10px -1px rgba(151, 151, 151, 0.25);
 `;
 
-function IdolDataProfile () {
+function IdolDataProfile ({idolName}: IdolNameProps) {
   // const params = useParams();
   // const idolName:string = params.idolName || "";
-  const idolName:string = "세븐틴"
   const DOMAIN = process.env.REACT_APP_BASE_URL
   return (
     <Wrapper>
       {/* <ProfileImg backgroundImg= { `${DOMAIN}/img/${idolName}.webp`} /> */}
-      <ProfileImg backgroundImg= { `https://j8a507.p.ssafy.io/img/${idolName}.webp`} />
+      <ProfileImg backgroundImg= { `${DOMAIN}/img/${encodeURIComponent(idolName)}.webp`} />
       <IdolDataProfileSns />
     </Wrapper>
   )

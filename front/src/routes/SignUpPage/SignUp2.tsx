@@ -1,7 +1,8 @@
 import React, {useCallback, useState} from 'react';
+import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { CreateUserId, CreateNickname, CreateTOKEN, CreateFavIdols } from "../../_store/slices/UserSlice";
+import { CreateUserId, CreateNickname, CreateTOKEN } from "../../_store/slices/UserSlice";
 import {
   NotSelected,
   IdolGrid,
@@ -11,24 +12,23 @@ import {
 } from "../../components/SignUpPage/IdolComponents";
 import IdolImgNameContainer from "../../components/IdolImgNameContainer";
 import {BlueButton, CloseButton, PurpleButton} from "../../components/Button";
-import axios from "axios";
 import {Description, DescriptionSection, PageContainer} from "../../components/SignUpPage/SignUpComponents";
 import {IdolListsType} from "../../_utils/Types";
 import {RootState} from "../../_store/store";
 
+const BASE_URL = process.env.REACT_APP_BASE_URL
 
-type SignUp2Type = {
+type SignUp2Props = {
   TOKEN: string | null;
   handleChangePage: (value: number) => void;
   idolLists: IdolListsType;
 }
 
-function SignUp2({TOKEN, handleChangePage, idolLists}: SignUp2Type) {
+function SignUp2({TOKEN, handleChangePage, idolLists}: SignUp2Props) {
   const navigate = useNavigate();
   let dispatch = useDispatch();
   const NICKNAME = useSelector((state:RootState) => state.userInfo.nickname)
   const [selectedIdols, setSelectedIdols] = useState<string[]>([]);
-
 
   /** 좋아하는 아이돌을 선택하자 */
   const handleSelectIdol = useCallback((idol: string): void => {
@@ -49,7 +49,7 @@ function SignUp2({TOKEN, handleChangePage, idolLists}: SignUp2Type) {
   /** 선택된 아이돌을 보여주자 */
   const showSelectIdols = useCallback(() => {
     const returnArr = selectedIdols?.map(idol =>
-      <Selected url={`https://j8a507.p.ssafy.io/img/${encodeURI(idol)}.webp`} width="100px" >
+      <Selected url={`${BASE_URL}/img/${encodeURIComponent(idol)}.webp`} width="100px" >
         <CloseButton onClick={()=>handleDeleteSelectedIdol(idol)}>X</CloseButton>
       </Selected>
     )
@@ -62,7 +62,6 @@ function SignUp2({TOKEN, handleChangePage, idolLists}: SignUp2Type) {
   /** 회원가입을 하자 */
   // 여기 axios 나중에 수정하자..
   const handleSignUp = () => {
-    dispatch(CreateFavIdols(selectedIdols));
     const headers = {
       Authorization: TOKEN,
     };
@@ -71,7 +70,7 @@ function SignUp2({TOKEN, handleChangePage, idolLists}: SignUp2Type) {
       interest: selectedIdols,
     }
     console.log({headers, body});
-    axios.post(`https://j8a507.p.ssafy.io/api/user/sign-up`, body, {
+    axios.post(`${BASE_URL}/api/user/sign-up`, body, {
       headers: headers
     })
       .then(response => {
@@ -105,7 +104,7 @@ function SignUp2({TOKEN, handleChangePage, idolLists}: SignUp2Type) {
         <IdolGrid cols={6} gap="20px">
           {idolLists.idols.map((idol: string) =>
             <IdolImgNameContainer
-              url={`https://j8a507.p.ssafy.io/img/${encodeURIComponent(`${idol}`)}.webp`}
+              url={`${BASE_URL}/img/${encodeURIComponent(idol)}.webp`}
               width="100%"
               idol={ idol }
               onClick={()=> selectedIdols.includes(idol) ? handleDeleteSelectedIdol(idol) : handleSelectIdol(idol)}

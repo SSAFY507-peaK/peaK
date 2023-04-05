@@ -1,25 +1,31 @@
-import { GlobalStyle } from "./components/globalStyle.js";
-import { Provider } from "react-redux";
-import ReactGA from 'react-ga'
+import router from "./Router";
 import { RouterProvider } from "react-router";
 import { createRoot } from "react-dom/client";
+import ReactGA from 'react-ga'
 import reportWebVitals from "./reportWebVitals";
-import router from "./Router";
+
+import { Provider } from "react-redux";
 import { store } from "./_store/store";
+import { PersistGate } from "redux-persist/integration/react";
+import { persistStore } from "redux-persist"
+
+import { GlobalStyle } from "./components/globalStyle.js";
 
 // import FullPage from "./routes/FullPage/FullPage"
 
 if (process.env.REACT_APP_GOOGLE_ANALYTICS_TRANKING_ID) {
   ReactGA.initialize(process.env.REACT_APP_GOOGLE_ANALYTICS_TRANKING_ID);
 }
-
+const persistor = persistStore(store);
 const container = document.getElementById("root")!;
 const root = createRoot(container);
 
 root.render(
   <Provider store={store}>
-    <GlobalStyle />
-    <RouterProvider router={router} />
+    <PersistGate persistor={persistor} loading={null}>
+      <GlobalStyle />
+      <RouterProvider router={router} />
+    </PersistGate>
   </Provider>,
 );
 

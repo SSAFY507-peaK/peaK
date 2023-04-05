@@ -1,15 +1,28 @@
-import { Action, ThunkAction, configureStore } from '@reduxjs/toolkit';
+import {Action, ThunkAction, configureStore, combineReducers} from '@reduxjs/toolkit';
+import { persistReducer } from 'redux-persist';
+import storage from 'redux-persist/lib/storage';
 
-import { myinterest } from './slices/InterestSlice';
+import myInterestReducer from './slices/InterestSlice';
 import userInfoReducer from './slices/UserSlice';
-import { idolDetail } from './slices/IdolDetailSlice';
+import idolDetailReducer from './slices/IdolDetailSlice';
+
+// storage에 저장할거야
+const persistConfig = {
+  key: 'root',
+  storage,
+};
+
+// 이게 진짜 우리의 리듀서
+const rootReducers = combineReducers({
+  userInfo: userInfoReducer,
+  myInterest: myInterestReducer,
+  idolDetail: idolDetailReducer,
+})
+
+const persistedReducer = persistReducer(persistConfig, rootReducers);
 
 export const store = configureStore({
-  reducer: {
-    userInfo: userInfoReducer,
-    myinterest: myinterest.reducer,
-    idolDetail: idolDetail.reducer
-  },
+  reducer: persistedReducer
 });
 
 export type AppDispatch = typeof store.dispatch;

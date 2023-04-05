@@ -6,6 +6,8 @@ import { Description, InputWrapper, PageContainer } from "../../components/SignU
 import { MessageDiv, NicknameInput } from "../../components/SignUpPage/NicknameComponents";
 import { BlueButton, PurpleButton } from "../../components/Button";
 
+const BASE_URL = process.env.REACT_APP_BASE_URL;
+
 type NicknameType = "EU006" | "EU009" | "200" ;
 type SignUp1Type = {
   TOKEN: string | null;
@@ -27,9 +29,8 @@ function SignUp1({TOKEN, handleChangePage}: SignUp1Type) {
     setMessage("");
   };
 
-  // 여기 AXIOS 요청은 나중에 변경 예정..
   const handleIsValidNickname = (): void => {
-    axios.get(`https://j8a507.p.ssafy.io/api/user/nickname/${nickname}`, {
+    axios.get(`${BASE_URL}/api/user/nickname/${nickname}`, {
       headers: {
         Authorization: TOKEN
       }
