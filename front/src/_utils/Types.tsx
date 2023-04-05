@@ -17,7 +17,7 @@ export type RankData = {
 export type WeeklyRankingType = {
   current: RankData;
   rankWeek: RankData[];
-}
+};
 
 export type IdolListsType = {
   idols: string[];
@@ -82,17 +82,16 @@ export interface SnsLink {
   twitter: string;
 }
 
-/** 디테일 페이지 아이돌 채팅목록 타입*/ 
+/** 디테일 페이지 아이돌 채팅목록 타입*/
 export interface Comments {
   comments: Comment[];
 }
 
 /** Store에 저장할 userinfo 타입 */
 export interface UserInfo {
-  userId: number;
+  userId: string;
   nickname: string;
   TOKEN: string;
-  idols: string[];
 }
 
 /** 긍부정 주간 리스트 타입 */
