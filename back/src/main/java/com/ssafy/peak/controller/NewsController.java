@@ -3,6 +3,7 @@ package com.ssafy.peak.controller;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,6 +17,7 @@ import com.ssafy.peak.dto.news.IdolNewsListByTimeRequestDto;
 import com.ssafy.peak.dto.news.KeywordRelatedWordCounterResponseDto;
 import com.ssafy.peak.dto.news.NewsRequestDto;
 import com.ssafy.peak.dto.news.NewsResponseDto;
+import com.ssafy.peak.dto.news.WordCounterRequestDto;
 import com.ssafy.peak.service.AllIdolNewsListByTimeService;
 import com.ssafy.peak.service.IdolNewsListByTimeService;
 import com.ssafy.peak.service.NewsService;
@@ -77,5 +79,12 @@ public class NewsController {
 		Map<String, Object> idolKeywordRelatedElements
 			= idolNewsListByTimeService.findIdolKeywordRelatedElements(idol);
 		return ResponseEntity.ok(idolKeywordRelatedElements);
+	}
+
+	@PostMapping("/word-counter")
+	public ResponseEntity<Void> addWordCounterToNews(
+		@RequestBody WordCounterRequestDto wordCounterRequestDto) {
+		newsService.addWordCounterToNews(wordCounterRequestDto);
+		return ResponseEntity.ok().build();
 	}
 }

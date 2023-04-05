@@ -61,7 +61,7 @@ function IdolEmotionChart() {
         name: '부정',
         type: 'line',
         // stack: 'Total',
-        // smooth: true,
+        smooth: true,
         lineStyle: {
           width: 0
         },
