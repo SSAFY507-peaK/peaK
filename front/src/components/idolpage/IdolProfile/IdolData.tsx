@@ -1,6 +1,7 @@
 import IdolChat from "./IdolChat";
 import IdolDataProfile from "./IdolDataProfile";
 import styled from "styled-components";
+import { IdolNameProps } from "../../../routes/IdolPage";
 
 const Frame = styled.div`
   display: flex;
@@ -9,10 +10,10 @@ const Frame = styled.div`
   flex: 0.35;
 `;
 
-function IdolData() {
+function IdolData({ idolName }: IdolNameProps) {
   return (
     <Frame>
-      <IdolDataProfile />
+      <IdolDataProfile idolName={idolName} />
       <IdolChat />
     </Frame>
   )
