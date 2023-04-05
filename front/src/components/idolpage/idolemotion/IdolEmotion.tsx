@@ -50,8 +50,10 @@ function IdolEmotion() {
           changenum={3} 
           title="종합랭킹" 
           onClick={() => {
-            !check ? setCheck(true) : null
             ClickTracker(idolName,"chohm1223@naver.com")
+            return (
+              !check ? setCheck(true) : null
+            )
           }} />
         <IdolEmotionChartBtn 
           isTab = {!check} 
@@ -61,8 +63,10 @@ function IdolEmotion() {
           changenum={3} 
           title="긍정지수" 
           onClick={() => {
-            check? setCheck(false) : null
             ClickTracker(idolName,"chohm1223@naver.com")
+            return (
+              check? setCheck(false) : null
+            )
           }}/>
       </ChartBtnFrame>
       <ChartFrame>
