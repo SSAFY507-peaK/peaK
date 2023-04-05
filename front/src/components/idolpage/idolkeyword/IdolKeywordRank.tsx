@@ -1,3 +1,4 @@
+import ReactGA, { EventArgs } from 'react-ga';
 import { useEffect, useState } from "react";
 
 import IdolKeywordRankBtn from "./IdolKeywordRankBtn";
@@ -7,6 +8,10 @@ import styled from "styled-components";
 interface Props {
   setChooseKeyword: React.Dispatch<React.SetStateAction<number>>;
   chooseKeyword: number;
+}
+
+interface CustomEventArgs extends EventArgs {
+  userId: string;
 }
 
 const RankFrame = styled.div`
@@ -54,6 +59,13 @@ function IdolKeywordRank({setChooseKeyword, chooseKeyword}:Props) {
                   tmp[idx] = true
                   setCheck(tmp)
                   setChooseKeyword(idx)
+                  ReactGA.event({
+                    category: 'Button',
+                    action: 'Click',
+                    label: 'Buy Now',
+                    value: 1,
+                    userId: "chohm1223@naver.com",
+                  } as CustomEventArgs);
                 }
                 }
               isClick={check[idx]}
