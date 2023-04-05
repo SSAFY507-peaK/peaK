@@ -2,7 +2,7 @@ import React, {useState, useCallback, useRef} from "react";
 import {useLocation, useLoaderData, useNavigate} from "react-router-dom"
 // import styled from "styled-components";
 import { PurpleButton, BlueButton } from "../../components/Button";
-import { NicknameInput, MessageDiv } from "../../components/SignUpPage/NicknameComponents";
+// import { NicknameInput, MessageDiv } from "../../components/SignUpPage/NicknameComponents";
 import { IdolGrid, IdolImage, IdolImageWrapper, IdolName, EmptySelected, Selected, SelectedSection, IdolWrapper } from "../../components/SignUpPage/IdolComponents";
 import { CloseButton } from "../../components/Button";
 import axios from "axios";
@@ -11,17 +11,18 @@ import {IdolListsType} from "../../_utils/Types";
 import {
   Description,
   DescriptionSection,
-  InputWrapper,
+  // InputWrapper,
   PageWrapper,
   Wrapper
 } from "../../components/SignUpPage/SignUpComponents";
+import SignUp1 from "./SignUp1";
 
 
 // 컴포넌트들 (추후 옮기자)
 
 
 /** 닉네임 중복확인 클릭 시 결과값 */
-type NicknameType = "EU006" | "EU009" | "200" ;
+// type NicknameType = "EU006" | "EU009" | "200" ;
 
 function SignUpPage() {
   const location= useLocation();
@@ -30,7 +31,7 @@ function SignUpPage() {
   // const [nickname, setNickname] = useState<string>("");
 
   const TOKEN = decodeURI(location.search.slice(1));  // 토큰
-  // const TOKEN = "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIyNzM0MTU1ODM2IiwiQXV0aGVudGljYXRpb24iOnsiYXV0aG9yaXRpZXMiOlt7ImF1dGhvcml0eSI6IlJPTEVfR1VFU1QifV0sImRldGFpbHMiOnsicmVtb3RlQWRkcmVzcyI6IjMuMzguOTIuMTExIiwic2Vzc2lvbklkIjoiRTRGRUNFMzk2QTZDNkU0MEZDNDBBOTYzOUU0NzZBMEMifSwiYXV0aGVudGljYXRlZCI6dHJ1ZSwicHJpbmNpcGFsIjp7ImF1dGhvcml0aWVzIjpbeyJhdXRob3JpdHkiOiJST0xFX0dVRVNUIn1dLCJhdHRyaWJ1dGVzIjp7ImlkIjoyNzM0MTU1ODM2LCJjb25uZWN0ZWRfYXQiOiIyMDIzLTA0LTAzVDEzOjU2OjE5WiIsImtha2FvX2FjY291bnQiOnsiaGFzX2VtYWlsIjp0cnVlLCJlbWFpbF9uZWVkc19hZ3JlZW1lbnQiOmZhbHNlLCJpc19lbWFpbF92YWxpZCI6dHJ1ZSwiaXNfZW1haWxfdmVyaWZpZWQiOnRydWUsImVtYWlsIjoicXJpOThAbmF2ZXIuY29tIn19LCJlbWFpbCI6InFyaTk4QG5hdmVyLmNvbSIsInJvbGUiOiJST0xFX0dVRVNUIiwibmFtZSI6IjI3MzQxNTU4MzYifSwiYXV0aG9yaXplZENsaWVudFJlZ2lzdHJhdGlvbklkIjoia2FrYW8iLCJjcmVkZW50aWFscyI6IiIsIm5hbWUiOiIyNzM0MTU1ODM2In0sImVtYWlsIjoicXJpOThAbmF2ZXIuY29tIiwicm9sZSI6IlJPTEVfR1VFU1QiLCJpYXQiOjE2ODA1OTQ2NjAsImV4cCI6MTY4MDU5NjQ2MH0.D0YwiqM4expmSqrsswWm6VrJLZNjw3jq6zahS1JTTbTTM3C6khrg5ZJAlWFuiPHbKV_MlYwedc9UObS6NOYKUQ"
+  // const TOKEN = "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIyNzM0MTU1ODM2IiwiQXV0aGVudGljYXRpb24iOnsiYXV0aG9yaXRpZXMiOlt7ImF1dGhvcml0eSI6IlJPTEVfR1VFU1QifV0sImRldGFpbHMiOnsicmVtb3RlQWRkcmVzcyI6IjMuMzguOTIuMTExIiwic2Vzc2lvbklkIjoiMzQ2NUVFQ0M3MTlCNjdGRjQyN0VFMkY5NTgyNEY1MTgifSwiYXV0aGVudGljYXRlZCI6dHJ1ZSwicHJpbmNpcGFsIjp7ImF1dGhvcml0aWVzIjpbeyJhdXRob3JpdHkiOiJST0xFX0dVRVNUIn1dLCJhdHRyaWJ1dGVzIjp7ImlkIjoyNzM0MTU1ODM2LCJjb25uZWN0ZWRfYXQiOiIyMDIzLTA0LTAzVDEzOjU2OjE5WiIsImtha2FvX2FjY291bnQiOnsiaGFzX2VtYWlsIjp0cnVlLCJlbWFpbF9uZWVkc19hZ3JlZW1lbnQiOmZhbHNlLCJpc19lbWFpbF92YWxpZCI6dHJ1ZSwiaXNfZW1haWxfdmVyaWZpZWQiOnRydWUsImVtYWlsIjoicXJpOThAbmF2ZXIuY29tIn19LCJlbWFpbCI6InFyaTk4QG5hdmVyLmNvbSIsInJvbGUiOiJST0xFX0dVRVNUIiwibmFtZSI6IjI3MzQxNTU4MzYifSwiYXV0aG9yaXplZENsaWVudFJlZ2lzdHJhdGlvbklkIjoia2FrYW8iLCJjcmVkZW50aWFscyI6IiIsIm5hbWUiOiIyNzM0MTU1ODM2In0sImVtYWlsIjoicXJpOThAbmF2ZXIuY29tIiwicm9sZSI6IlJPTEVfR1VFU1QiLCJpYXQiOjE2ODA2NTcxMjgsImV4cCI6MTY4MDY1ODkyOH0.80z6X0ErA0O3Gx_3Bv_8h2e5sn5EF8hv_uvlVKWkovdq7S7irLQuXB1X3OdrY6bPoaHHTh0EgjQM0RoMfGN1lA"
   const containerRef = useRef<HTMLDivElement>(null);
 
   /** 페이지 이동 함수 */
@@ -53,56 +54,57 @@ function SignUpPage() {
 
 
   // // page 1에 대한 설정들
-  const [nickname, setNickname] = useState<string>("");
-  const [message, setMessage] = useState<string>("");
-  const [nicknameCode, setNicknameCode] = useState<NicknameType | undefined>(undefined);
+  // const [nickname, setNickname] = useState<string>("");
+  // const [message, setMessage] = useState<string>("");
+  // const [nicknameCode, setNicknameCode] = useState<NicknameType | undefined>(undefined);
   // const regex = /^[ㄱ-ㅎ가-힣a-zA-Z0-9]+$/;  // 닉네임 정규표현식
 
   /** 닉네임을 받자 */
-  const handleNickname = (e: React.ChangeEvent<HTMLInputElement>): void => {
-    setNickname(e.target.value);
-    setNicknameCode(undefined);
-    setMessage("");
-  };
-  /** 닉네임 유효성을 체크하자 */
-  const handleIsValidNickname = (): void => {
-    axios.get(`https://j8a507.p.ssafy.io/api/user/nickname/${nickname}`, {
-      headers: {
-        Authorization: TOKEN
-      }
-    })
-      .then(response => {
-        console.log(response.data)
-          const CODE = response.data.code;
-          const MESSAGE = response.data.message;
-          setNicknameCode(CODE);
-          setMessage(MESSAGE);
-        })
-      .catch(error => {
-        console.log(error);
-        const CODE = error.response.data.code;
-        const MESSAGE = error.response.data.message;
-        setNicknameCode(CODE);
-        setMessage(MESSAGE);
-      })
-  };
+  // const handleNickname = (e: React.ChangeEvent<HTMLInputElement>): void => {
+  //   setNickname(e.target.value);
+  //   setNicknameCode(undefined);
+  //   setMessage("");
+  // };
 
-  const page1 = (
-    <PageWrapper>
-      <h2>닉네임 설정</h2>
-      <Description>닉네임은 8글자 이하의 한글, 영어, 숫자로만 이루어져야 합니다</Description>
-      <InputWrapper>
-        <div>
-          <NicknameInput isValid={nicknameCode} onChange={e => handleNickname(e)} value={nickname} />
-          <MessageDiv isValid={nicknameCode === "200"}>
-            { message }
-          </MessageDiv>
-        </div>
-        {nicknameCode !== "200" && <PurpleButton onClick={ handleIsValidNickname } width="100px">중복 확인</PurpleButton>}
-        {nicknameCode === "200" && <BlueButton onClick={() => handleChangePage(1) } width="100px">다음으로</BlueButton>}
-      </InputWrapper>
-    </PageWrapper>
-  );
+  /** 닉네임 유효성을 체크하자 */
+  // const handleIsValidNickname = (): void => {
+  //   axios.get(`https://j8a507.p.ssafy.io/api/user/nickname/${nickname}`, {
+  //     headers: {
+  //       Authorization: TOKEN
+  //     }
+  //   })
+  //     .then(response => {
+  //       console.log(response.data)
+  //         const CODE = response.data.code;
+  //         const MESSAGE = response.data.message;
+  //         setNicknameCode(CODE);
+  //         setMessage(MESSAGE);
+  //       })
+  //     .catch(error => {
+  //       console.log(error);
+  //       const CODE = error.response.data.code;
+  //       const MESSAGE = error.response.data.message;
+  //       setNicknameCode(CODE);
+  //       setMessage(MESSAGE);
+  //     })
+  // };
+
+  // const page1 = (
+  //   <PageWrapper>
+  //     <h2>닉네임 설정</h2>
+  //     <Description>닉네임은 8글자 이하의 한글, 영어, 숫자로만 이루어져야 합니다</Description>
+  //     <InputWrapper>
+  //       <div>
+  //         <NicknameInput isValid={nicknameCode} onChange={e => handleNickname(e)} value={nickname} />
+  //         <MessageDiv isValid={nicknameCode === "200"}>
+  //           { message }
+  //         </MessageDiv>
+  //       </div>
+  //       {nicknameCode !== "200" && <PurpleButton onClick={ handleIsValidNickname } width="100px">중복 확인</PurpleButton>}
+  //       {nicknameCode === "200" && <BlueButton onClick={() => handleChangePage(1) } width="100px">다음으로</BlueButton>}
+  //     </InputWrapper>
+  //   </PageWrapper>
+  // );
 
   // page 2에 대한 정보들
   const navigate = useNavigate();
@@ -141,7 +143,7 @@ function SignUpPage() {
       Authorization: TOKEN,
     };
     const body = {
-      nickname: nickname,
+      // nickname: nickname,
       interest: selectedIdols,
     }
     console.log({headers, body});
@@ -183,8 +185,8 @@ function SignUpPage() {
 
   return (
     <Wrapper ref={containerRef}>
-      { page1 }
-      {/*<SignUp1 TOKEN={TOKEN} pageIdx={1}  setNickname={setNickname} />*/}
+      {/*{ page1 }*/}
+      <SignUp1 TOKEN={TOKEN} handleChangePage={handleChangePage} />
       { page2 }
     </Wrapper>
   );
