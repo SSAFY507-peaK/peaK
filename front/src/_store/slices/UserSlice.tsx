@@ -3,31 +3,26 @@ import { createSlice } from "@reduxjs/toolkit";
 export let userInfo = createSlice({
   name: "userInfo",
   initialState: {
-    // id: "",
-    // email:"",
-    // role: "",
+    userId: 0,
     nickname: "",
-    // provider: "",
-    // last_login_datatime: "",
-    // favorite_idols_cnt: "",
-    idols: [],
     TOKEN: "",
+    idols: [],
   },
   reducers: {
-    CreateUserInfo(state, action){
-      state = action.payload
-    },
     CreateNickname(state, action) {
       state.nickname = action.payload
     },
     CreateFavIdols(state, action) {
-      state.idols = action.payload
+      state.idols = [...state.idols, ...action.payload]
     },
     CreateTOKEN(state, action) {
       state.TOKEN = action.payload
+    },
+    CreateUserId(state, action) {
+      state.userId = action.payload
     }
   }
 })
 
-export let { CreateUserInfo, CreateNickname, CreateFavIdols, CreateTOKEN } = userInfo.actions
+export let { CreateUserId, CreateNickname, CreateFavIdols, CreateTOKEN } = userInfo.actions
 export default userInfo.reducer

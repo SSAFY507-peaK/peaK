@@ -1,6 +1,6 @@
 import React, { useState} from 'react';
 import axios from "axios";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch, } from "react-redux";
 import { CreateNickname } from "../../_store/slices/UserSlice";
 import { Description, InputWrapper, PageContainer } from "../../components/SignUpPage/SignUpComponents";
 import { MessageDiv, NicknameInput } from "../../components/SignUpPage/NicknameComponents";
@@ -8,12 +8,11 @@ import { BlueButton, PurpleButton } from "../../components/Button";
 
 type NicknameType = "EU006" | "EU009" | "200" ;
 type SignUp1Type = {
-  TOKEN?: string;
+  TOKEN: string;
   handleChangePage: (value: number) => void;
 }
 
-function SignUp1({handleChangePage}: SignUp1Type) {
-  let TOKEN = useSelector((state:any) => state.userInfo.TOKEN);
+function SignUp1({TOKEN, handleChangePage}: SignUp1Type) {
   // 이제 얘기 막 찍힘
   console.log(TOKEN);
 
