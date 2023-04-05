@@ -1,4 +1,4 @@
-import { Link, useParams } from "react-router-dom";
+import {useParams } from "react-router-dom";
 
 import IdolData from "../components/idolpage/IdolProfile/IdolData";
 import IdolEmotion from "../components/idolpage/idolemotion/IdolEmotion";
@@ -28,16 +28,18 @@ const TopRightFrame = styled.div`
 
 const BottomFrame = styled.div`
 `;
-
+export type IdolNameProps = {
+  idolName: string;
+}
 function IdolPage() {
   const params = useParams();
-  const idolName = params.idolName;
+  const idolName = params.idolName || "";
   TimeTracker(`/${idolName}`)
   return (
     <Wrapper>
-      <IdolList />
+      <IdolList idolName={idolName} />
       <TopFrame>
-        <IdolData />
+        <IdolData idolName={idolName} />
         <TopRightFrame>
           <IdolEmotion />
           <IdolKeyword />
