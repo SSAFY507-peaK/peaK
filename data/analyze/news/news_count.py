@@ -1,4 +1,3 @@
-%%time 
 import pyspark
 from pyspark.sql import SparkSession
 import string
@@ -15,7 +14,7 @@ import re
 import subprocess
 import sys
 import json
-
+import pyspark.sql.functions as F
 # local[*] : 모든 코어를 사용하겠다, local[4] : 4개의 코어를 사용하겠다.
 
 spark = SparkSession.builder.getOrCreate()
@@ -118,7 +117,7 @@ local_path_keyword = f"file:///home/j8a507/watcher/analyzed/news/NK/{date}_{hour
 local_path_total = f"file:///home/j8a507/watcher/analyzed/news/TK/{date}_{hour}_TK.txt"
 local_path_count = f"file:///home/j8a507/watcher/analyzed/news/IDK/{date}_{hour}_IDK.txt"
 
-total_dict = dict(total_rdd.collect())
+total_dict = total_rdd.collect()
 total_json = json.dumps(total_dict, ensure_ascii=False)
 
 words_rdd = words_rdd.map(lambda x: {"index": x[1], "idol": x[0][0], "keywords": x[0][1]})
@@ -137,6 +136,32 @@ cdf.write.option("header", True).csv(hdfs_path_count)
 subprocess.check_call(["hdfs", "dfs", "-getmerge", hdfs_path_count, local_path_count])
 subprocess.check_call(["hdfs", "dfs", "-getmerge", hdfs_path_keyword, local_path_keyword])
 subprocess.check_call(["hdfs", "dfs", "-getmerge", hdfs_path_total, local_path_total])
+
+
+words_df = words_rdd.toDF(["idol","index", "keywords"])
+df_exploded = words_df.select(col("idol"), explode(col("keywords")).alias("keyword"))
+
+idol_keyword_counts = df_exploded.groupBy(col("idol"), col("keyword._1").alias("keyword")).agg(F.sum(col("keyword._2")).alias("count"))
+
+result = (
+    idol_keyword_counts
+    .sort(F.desc("count"))
+    .groupBy("idol")
+    .agg(F.collect_list(F.struct(col("keyword"), col("count"))).alias("keywords"))
+    .withColumn("keywords", F.expr("slice(keywords, 1, 10)"))
+)
+
+hdfs_path_in = f"output/IN/{date}_{hour}_IN.txt"
+local_path_in = f"file:///home/j8a507/watcher/analyzed/news/IN/{date}_{hour}_IN.txt"
+
+
+result_rdd = result.rdd.map(lambda x: {"idol": x[0], "keywords": x[1]})
+result_json = result_rdd.collect()
+result_json = json.dumps(result_json, ensure_ascii=False)
+final_result_rdd = sc.parallelize([result_json])
+final_result_rdd.saveAsTextFile(hdfs_path_in)
+
+subprocess.check_call(["hdfs", "dfs", "-getmerge", hdfs_path_in, local_path_in])
 
 local_complete_path = f"file:///home/j8a507/watcher/sync/{date}_{hour}_sync_n.txt"
 

@@ -1,14 +1,17 @@
 # Import Libraries
 import pyspark
 from pyspark import SQLContext
-from pyspark.sql import SparkSession
 from pyspark.sql.types import IntegerType, StructType, StructField, StringType
 from pyspark.sql.functions import pandas_udf, monotonically_increasing_id , from_json,col, avg
 import pandas as pd
 import pyspark.sql.functions as F
 from tqdm import trange, notebook
-import subprocess
+import time
+import datetime
+import re
 import sys
+import subprocess
+import json
 
 spark = SparkSession.builder..config("spark.sql.legacy.json.allowEmptyString.enabled", True).getOrCreate()
 
@@ -56,10 +59,16 @@ pdf = result.groupBy("idol").agg((avg("score")*100).cast("int").alias("pos_neg")
                               
 final_df = pdf.join(adf, adf.idol_a == pdf.idol, "inner").select("idol","pos_neg","action_count")
 
+
+final_rdd = final_df.rdd.map(lambda x: {"index": x[0], "idol": x[1], "keywords": x[2]})
+final_list = final_rdd.collect()
+final_json = json.dumps(final_list, ensure_ascii=False)
+final_json_rdd = sc.parallelize([final_json])
+
 hdfs_path_pn = f"output/PN/{date}_{hour}_PN.txt"
 local_path_pn = f"file:///home/j8a507/watcher/analyzed/twitter/PN/{date}_{hour}_PN.txt"
 
-final_df.write.json(hdfs_path_pn)
+final_json_rdd.saveAsTextFile(hdfs_path_pn)
 subprocess.check_call(["hdfs", "dfs", "-getmerge", hdfs_path_pn, local_path_pn])
 
 local_complete_path = f"file:///home/j8a507/watcher/sync/{date}_{hour}_sync_t.txt"

@@ -26,14 +26,17 @@ def sftptransfer(src_path):
     
     with pysftp.Connection(hostname, username=username, private_key=pem_path, cnopts=cnopts) as sftp:
         if filename.find("PN") >= 0:  
-            sftp.put(src_path, f'watcher/analyzed/twitter/PN/{date}_{hour}_PN.txt') # target dirctory path is optional
-
+            sftp.put(src_path, f'watcher/analyzed/twitter/PN/{date}_{hour}_PN.txt')
         elif filename.find("TK") >= 0:
             sftp.put(src_path, f'watcher/analyzed/news/TK/{date}_{hour}_TK.txt')
-
         elif filename.find("NK") >= 0:
             sftp.put(src_path, f'watcher/analyzed/news/NK/{date}_{hour}_NK.txt')   
-
+        elif filename.find("RH") >= 0:
+            sftp.put(src_path, f'watcher/analyzed/rank/RH/{date}_{hour}_RH.txt')
+        elif filename.find("RD") >= 0:   
+            sftp.put(src_path, f'watcher/analyzed/rank/RD/{date}_RD.txt')
+        elif filename.find("PD") >= 0:
+            sftp.put(src_path, f'watcher/analyzed/twitter/PD/{date}_PD.txt')
         print(f'Successfully sent {filename}!!')     
         sftp.close()
 
@@ -100,10 +103,11 @@ class TestEventHandler(PatternMatchingEventHandler):
                 count = len(files)
 
                 if count == 2:
-                    with open('rank_submit.sh', 'r') as f:
+                    with open('date_analyze.sh', 'r') as f:
                         bash_script = f.read()
-                    bash_script = f"{bash_script} \ {date} \ {hour}"
+                    bash_script = f"{bash_script} \ {date}"
                     subprocess.run(['bash', '-c', bash_script])
+                    count = 0
                     
             else:
                 sftptransfer(event.src_path)
