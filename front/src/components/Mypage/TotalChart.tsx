@@ -11,7 +11,7 @@ interface Props {
   setIdolName: React.Dispatch<React.SetStateAction<string>>;
 }
 
-interface SelecteType {
+interface SelectType {
   name: string;
   value: number;
   itemStyle?: any;
@@ -30,10 +30,10 @@ const ChartFrame = styled.div`
 `;
 
 function TotalChart({userName, setIdolName}:Props) {
-  let chartData:SelecteType[] = [];
+  let chartData:SelectType[] = [];
   const color:string[] = ["#4CD7F6","#6DBFFF","#7166F9", "#C74BF6", "#F946FF"]
 
-  const idolData = useAppSelector<IdolInterest>(state => state.myinterest)
+  const idolData = useAppSelector<IdolInterest>(state => state.myInterest)
   for (let i = 0; i < idolData.idols.length; i++ ) {
     // console.log(idolData.idols[i].idol)
     if (i === 0) {
@@ -42,7 +42,7 @@ function TotalChart({userName, setIdolName}:Props) {
       chartData.push( { name: idolData.idols[i].idol, value: idolData.idols[i].value, itemStyle: {color: color[i]}})
     }
   }
-  const [selectedData, setSelectedData] = useState<SelecteType>(chartData[0]);
+  const [selectedData, setSelectedData] = useState<SelectType>(chartData[0]);
   
   const options = useMemo(() => {
     return {
