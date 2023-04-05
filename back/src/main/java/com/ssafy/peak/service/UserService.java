@@ -177,7 +177,8 @@ public class UserService {
 
 			String tokenParameter = Utils.getQueryParameter(Utils.TOKEN, Utils.BEARER_TOKEN_PREFIX + accessToken);
 			String userIdParameter = Utils.getQueryParameter(Utils.USER_ID, oAuth2User.getName());
-			String nicknameParameter = Utils.getQueryParameter(Utils.NICKNAME, user.getNickname());
+			String nicknameParameter = Utils.getQueryParameter(Utils.NICKNAME,
+				URLEncoder.encode(user.getNickname(), Utils.UTF_8));
 
 			log.info("login | oAuth2User.getName(): {}", oAuth2User.getName());
 
@@ -188,7 +189,7 @@ public class UserService {
 				.append(Utils.AMPERSAND)       // &
 				.append(userIdParameter)       // userId=qwerty@kakao.com
 				.append(Utils.AMPERSAND)       // &
-				.append(URLEncoder.encode(nicknameParameter, Utils.UTF_8))     // nickname=닉네임
+				.append(nicknameParameter)     // nickname=닉네임
 				.toString();
 
 			response.setStatus(HttpServletResponse.SC_OK);
