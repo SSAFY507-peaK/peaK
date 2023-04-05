@@ -1,3 +1,4 @@
+import { ClickTracker } from "../components/idolpage/ClickTracker";
 import { ReactComponent as Down } from "../assets/arrow-down.svg";
 import { RankListType } from "../_utils/Types";
 import { ReactComponent as Stable } from "../assets/stable.svg";
@@ -5,6 +6,7 @@ import { ReactComponent as Up } from "../assets/arrow-up.svg";
 import axios from "axios";
 import styled from "styled-components";
 import { useLoaderData } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const BASE_URL = process.env.REACT_APP_BASE_URL;
 
@@ -139,8 +141,14 @@ const RankDiffer = (diff: number) => {
 
 /** 아이돌 1팀의 순위, 순위변동, 사진, 점수, 이름 */
 const RankDiv = (props: RankDivType) => {
+  const navigate = useNavigate();
   return (
-    <IdolRankDiv>
+    <IdolRankDiv
+      onClick={() => {
+        ClickTracker(props.idol, "chohm1223@naver.com");
+        navigate(`/${props.idol}`);
+      }}
+    >
       <RankNumDiv>{props.rank}</RankNumDiv>
       {RankDiffer(props.diff)}
       <IdolImgDiv url={`https://j8a507.p.ssafy.io/img/${props.idol}.webp`} />
