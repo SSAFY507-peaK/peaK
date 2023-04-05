@@ -7,7 +7,7 @@ const Container = styled.div`
 const PageWrapper = styled.div`
   width: 100%;
   height: 100%;
-  padding: 5vh 5vw;
+  padding: 5vh 5vw 8vh;
   display: flex;
   flex-direction: column;
   justify-content: center;

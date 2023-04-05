@@ -4,11 +4,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { CreateFavIdols } from "../../_store/slices/UserSlice";
 import {
   EmptySelected,
-  IdolGrid, IdolImage, IdolImageWrapper, IdolName,
+  IdolGrid,
   IdolWrapper,
   Selected,
   SelectedSection
 } from "../../components/SignUpPage/IdolComponents";
+import IdolImgNameContainer from "../../components/IdolImgNameContainer";
 import {BlueButton, CloseButton, PurpleButton} from "../../components/Button";
 import axios from "axios";
 import {Description, DescriptionSection, PageWrapper} from "../../components/SignUpPage/SignUpComponents";
@@ -29,6 +30,23 @@ function SignUp2({handleChangePage, idolLists}: SignUp2Type) {
   const NICKNAME = useSelector((state:RootState) => state.userInfo.nickname)
   const [selectedIdols, setSelectedIdols] = useState<string[]>([]);
 
+
+  /** 좋아하는 아이돌을 선택하자 */
+  const handleSelectIdol = useCallback((idol: string): void => {
+    if (selectedIdols.length >= 5) {
+      alert("최대 5명의 아이돌만 선택할 수 있습니다");
+      return;
+    }
+    else {
+      setSelectedIdols(prev => [...prev, idol]);
+    }
+  }, [selectedIdols]);
+
+  /** 선택한 아이돌을 삭제하자 */
+  const handleDeleteSelectedIdol = useCallback((idol: string): void => {
+    // 선택된 배열에서 삭제를 하자궁...
+    setSelectedIdols(prev=> prev.filter(selectedIdol => selectedIdol !== idol));
+  }, []);
   // /** 선택된 아이돌을 보여주자 */
   const showSelectIdols = useCallback(() => {
     const returnArr = selectedIdols?.map(idol =>
@@ -40,26 +58,11 @@ function SignUp2({handleChangePage, idolLists}: SignUp2Type) {
       returnArr.push(<EmptySelected />)
     }
     return returnArr;
-  }, [selectedIdols]);
-  /** 좋아하는 아이돌을 선택하자 */
-  const handleSelectIdol = (idol: string): void => {
-    if (selectedIdols.length >= 5) {
-      alert("최대 5명의 아이돌만 선택할 수 있습니다");
-      return;
-    }
-    else {
-      setSelectedIdols(prev => [...prev, idol]);
-    }
-  }
-  /** 선택한 아이돌을 삭제하자 */
-  const handleDeleteSelectedIdol = (idol: string): void => {
-    // 선택된 배열에서 삭제를 하자궁...
-    setSelectedIdols(prev=> prev.filter(selectedIdol => selectedIdol !== idol));
-  }
+  }, [selectedIdols, handleDeleteSelectedIdol]);
+
   /** 회원가입을 하자 */
   const handleSignUp = () => {
     dispatch(CreateFavIdols(selectedIdols));
-
     const headers = {
       Authorization: TOKEN,
     };
@@ -73,7 +76,6 @@ function SignUp2({handleChangePage, idolLists}: SignUp2Type) {
     })
       .then(response => console.log(response.data))
       .catch(error => console.log(error))
-
     navigate('/')
   }
 
@@ -93,12 +95,15 @@ function SignUp2({handleChangePage, idolLists}: SignUp2Type) {
       <h3>전체 아이돌</h3>
       <IdolWrapper>
         <IdolGrid cols={6} gap="20px">
-          {idolLists.idols.map((idol: string) => (
-            <IdolImageWrapper>
-              <IdolImage url={`https://j8a507.p.ssafy.io/img/${encodeURIComponent(idol)}.webp`} onClick={()=> selectedIdols.includes(idol) ? handleDeleteSelectedIdol(idol) : handleSelectIdol(idol)} className={`${selectedIdols.includes(idol) && "selected"}`}/>
-              <IdolName>{idol}</IdolName>
-            </IdolImageWrapper>
-          ))}
+          {idolLists.idols.map((idol: string) =>
+            <IdolImgNameContainer
+              url={`https://j8a507.p.ssafy.io/img/${encodeURIComponent(`${idol}`)}.webp`}
+              width="100%"
+              idol={ idol }
+              onClick={()=> selectedIdols.includes(idol) ? handleDeleteSelectedIdol(idol) : handleSelectIdol(idol)}
+              className={`${selectedIdols.includes(idol) && "selected"}`}
+            />
+          )}
         </IdolGrid>
       </IdolWrapper>
     </PageWrapper>
