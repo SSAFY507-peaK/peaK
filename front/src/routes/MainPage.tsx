@@ -46,10 +46,10 @@ const CarouselCustomDiv = styled.div<CarouselCustomDivType>`
 `;
 
 function MainPage() {
-  const TrendNewsList = useLoaderData() as TrendNewsListType[];
   useEffect(() => {
     ReactGA.set({ userId: "chohm1223@naver.com" });
   }, []);
+  const TrendNewsList = useLoaderData() as TrendNewsListType[];
   // const TrendYoutubeList = [
   //   {
   //     title: "4 시간 지브리 메들리 피아노 💖 ..",
