@@ -6,7 +6,9 @@ public class Utils {
 
 	public static final String BLANK = " ";
 	public static final String QUESTION_MARK = "?";
-
+	public static final String EQUALS_SIGN = "=";
+	public static final String AMPERSAND = "&";
+	public static final String UTF_8 = "UTF-8";
 	// JWT
 	public static final String ROLE = "role";
 	public static final String ROLE_GUEST = "ROLE_GUEST";
@@ -23,13 +25,25 @@ public class Utils {
 	public static final String EMAIL = "email";
 	public static final String KAKAO = "kakao";
 
-	public static LocalDateTime dateTimeToHour(LocalDateTime dateTime){
+	// USER
+	public static final String NICKNAME = "nickname";
+	public static final String USER_ID = "userId";
+
+	public static LocalDateTime dateTimeToHour(LocalDateTime dateTime) {
 		LocalDateTime hourDateTime = dateTime.withMinute(0).withSecond(0).withNano(0);
 		return hourDateTime.plusHours(9);
 	}
 
-	public static LocalDateTime dateTimeToDate(LocalDateTime dateTime){
-		LocalDateTime dateDateTime =  dateTime.withHour(0).withMinute(0).withSecond(0).withNano(0);
+	public static LocalDateTime dateTimeToDate(LocalDateTime dateTime) {
+		LocalDateTime dateDateTime = dateTime.withHour(0).withMinute(0).withSecond(0).withNano(0);
 		return dateDateTime.plusHours(9);
+	}
+
+	public static String getQueryParameter(String key, String value) {
+		return new StringBuilder()
+			.append(key)
+			.append(Utils.EQUALS_SIGN)
+			.append(value)
+			.toString();
 	}
 }
