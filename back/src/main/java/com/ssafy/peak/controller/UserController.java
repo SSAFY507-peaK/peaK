@@ -57,15 +57,10 @@ public class UserController {
 
 		token = token.split(Utils.BLANK)[1];
 		SignupDto signupDto = userService.signup(token, userRequestDto);
-		HttpHeaders httpHeaders = new HttpHeaders();
-		httpHeaders.set(Utils.AUTHENTICATION, Utils.BEARER_TOKEN_PREFIX + signupDto.getAccessToken());
+		// HttpHeaders httpHeaders = new HttpHeaders();
+		// httpHeaders.set(Utils.AUTHENTICATION, Utils.BEARER_TOKEN_PREFIX + signupDto.getToken());
 
-		UserDto userResponseDto = UserDto.builder()
-			.nickname(signupDto.getNickname())
-			.idols(signupDto.getIdolIds())
-			.build();
-
-		return ResponseEntity.ok().headers(httpHeaders).body(userResponseDto);
+		return ResponseEntity.ok().body(signupDto);
 	}
 
 	/**
