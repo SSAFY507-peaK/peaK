@@ -78,7 +78,7 @@ function IdolRank(props: IdolRankType) {
     <WrapperDiv
       onClick={() => {
         navigate(`/${props.name}`);
-        ClickTracker(props.name, "chohm1223@naver.com");
+        ClickTracker(props.name);
       }}
     >
       {Logo(props.rank)}

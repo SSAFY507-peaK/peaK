@@ -145,7 +145,7 @@ const RankDiv = (props: RankDivType) => {
   return (
     <IdolRankDiv
       onClick={() => {
-        ClickTracker(props.idol, "chohm1223@naver.com");
+        ClickTracker(props.idol);
         navigate(`/${props.idol}`);
       }}
     >

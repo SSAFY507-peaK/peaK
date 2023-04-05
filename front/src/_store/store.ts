@@ -2,11 +2,13 @@ import { Action, ThunkAction, configureStore } from '@reduxjs/toolkit';
 
 import { myinterest } from './slices/InterestSlice';
 import userInfoReducer from './slices/UserSlice';
+import { idolDetail } from './slices/IdolDetailSlice';
 
 export const store = configureStore({
   reducer: {
     userInfo: userInfoReducer,
     myinterest: myinterest.reducer,
+    idolDetail: idolDetail.reducer
   },
 });
 

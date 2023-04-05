@@ -1,11 +1,15 @@
 import ReactGA, { EventArgs } from 'react-ga';
+import { useAppSelector } from '../../_hooks/hooks';
 
 interface CustomEventArgs extends EventArgs {
-  userId: string;
+  userId: number;
 }
 
 /** User의 활동을 Google Analytics */
-export function ClickTracker(idolName:string, userId:string) {
+export function ClickTracker(idolName:string) {
+  // const userId:number = useAppSelector(state => state.userInfo.userId)
+  const userId:number = 2737090856
+
   ReactGA.event({
     category: idolName,
     action: 'Click',

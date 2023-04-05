@@ -10,6 +10,7 @@ import { request } from '../../../_utils/axios';
 import styled from "styled-components"
 import { useParams } from 'react-router';
 import { useState } from "react";
+import { useAppSelector } from '../../../_hooks/hooks';
 
 const Wrapper = styled.div`
   display: flex;
@@ -60,9 +61,6 @@ function IdolDataProfileSns() {
 
   // const {idol, snsLink}: IdolSns =  request("get", `idol/${idolName}/pos-neg`)
   const {idol, snsLink, interest} = userData
-  // let instagramUrl : string = "https://www.instagram.com/saythename_17/";
-  // let twitterUrl: string = "https://twitter.com/pledis_17?ref_src=twsrc%5Egoogle%7Ctwcamp%5Eserp%7Ctwgr%5Eauthor";
-  // let youtubeUrl: string = "https://www.youtube.com/user/pledis17/videos?app=desktop";
 
   const [like, setLike] = useState<boolean>(interest);
 
@@ -74,7 +72,7 @@ function IdolDataProfileSns() {
             sx={{ fontSize: "1.3rem", cursor: "pointer", color: `var(--purple500-color)` }}
             onClick={()=> {
               window.open(snsLink.instagram)
-              ClickTracker(idolName,"chohm1223@naver.com")
+              ClickTracker(idolName)
             }}
           />
         </IconFrame>
@@ -86,7 +84,7 @@ function IdolDataProfileSns() {
             sx={{ fontSize: "1.3rem", cursor: "pointer", color: `var(--purple500-color)` }} 
             onClick={()=> {
               window.open(snsLink.twitter)
-              ClickTracker(idolName,"chohm1223@naver.com")
+              ClickTracker(idolName)
           }} />
         </IconFrame>
         <IconText>트위터</IconText>
@@ -97,8 +95,8 @@ function IdolDataProfileSns() {
           sx={{ fontSize: "1.3rem", cursor: "pointer", color: `var(--purple500-color)` }}
           onClick={()=> {
             window.open(snsLink.youtube)
-            ClickTracker(idolName,"chohm1223@naver.com")
-        }} />
+            ClickTracker(idolName)
+          }} />
         </IconFrame>
         <IconText>유튜브</IconText>
         </SnsFrame>
@@ -110,14 +108,14 @@ function IdolDataProfileSns() {
             sx={{ fontSize: "1.3rem", cursor: "pointer", color: `var(--red600-color)` }} 
             onClick={() => {
               setLike(false)
-              ClickTracker(idolName,"chohm1223@naver.com")
+              ClickTracker(idolName)
             }} />
           :
           <FavoriteBorderIcon 
             sx={{ fontSize: "1.3rem", cursor: "pointer", color: `var(--red600-color)` }} 
             onClick={() => {
               setLike(true)
-              ClickTracker(idolName,"chohm1223@naver.com")
+              ClickTracker(idolName)
             }}/>
         } 
         </IconFrame>
