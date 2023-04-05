@@ -12,7 +12,7 @@ export async function loader() {
   let TrendNewsList = null;
 
   await axios
-    .get(`${BASE_URL}news/list/all-idol`)
+    .get(`${BASE_URL}/api/news/list/all-idol`)
     .then(response => {
       TrendNewsList = response.data;
       console.log(TrendNewsList);
