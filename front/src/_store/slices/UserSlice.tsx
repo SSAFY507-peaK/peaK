@@ -13,7 +13,7 @@ export let userInfo = createSlice({
       state.nickname = action.payload
     },
     CreateFavIdols(state, action) {
-      state.idols = [...state.idols, ...action.payload]
+      state.idols = action.payload
     },
     CreateTOKEN(state, action) {
       state.TOKEN = action.payload
