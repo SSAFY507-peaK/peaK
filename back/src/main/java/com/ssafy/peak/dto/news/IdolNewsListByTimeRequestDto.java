@@ -25,7 +25,7 @@ public class IdolNewsListByTimeRequestDto {
 	@JsonProperty("date_time")
 	private LocalDateTime dateTime;
 
-	@JsonProperty("popular_keywords")
+	@JsonProperty("keyword_counter")
 	private Map<String, Integer> keywordCounter;
 
 	@JsonProperty("news_list")
