@@ -12,15 +12,15 @@ export async function loader() {
   let TrendNewsList = null;
 
   await axios
-    .get(`${BASE_URL}news/list/all-idol`)
+    .get(`${BASE_URL}/api/news/list/all-idol`)
     .then(response => {
-      console.log(response.data);
       TrendNewsList = response.data;
     })
     .catch(error => console.log(error));
 
   return TrendNewsList;
 }
+
 function TrendingPage() {
   const TrendNewsList = useLoaderData() as TrendNewsListType[];
   return (
@@ -29,7 +29,7 @@ function TrendingPage() {
         type={false}
         firstWord="트렌딩"
         secondWord="뉴스"
-        ratio="0.65"
+        ratio="0.7"
         mr={true}
         h={true}
         data={<TrendingNews data={TrendNewsList} />}
@@ -38,7 +38,7 @@ function TrendingPage() {
         type={false}
         firstWord="트렌딩"
         secondWord="유튜브"
-        ratio="0.35"
+        ratio="0.3"
         h={true}
         data={<TrendingYoutube />}
       />

@@ -52,7 +52,7 @@ function IdolEmotionRankChart() {
         name: idolName,
         type: 'line',
         // stack: 'Total',
-        // smooth: true,
+        smooth: true,
         lineStyle: {
           width: 0
         },

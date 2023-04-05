@@ -44,7 +44,7 @@ function IdolEmotionChart() {
         name: '긍정',
         type: 'line',
         // stack: 'Total',
-        // smooth: true,
+        smooth: true,
         lineStyle: {
           width: 0
         },

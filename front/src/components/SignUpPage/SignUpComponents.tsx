@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const Wrapper = styled.div`
+const Container = styled.div`
   height: 100vh;
   overflow-y: hidden;
 `;
@@ -30,4 +30,4 @@ const DescriptionSection = styled.div`
   }
 `
 
-export { Wrapper, PageWrapper, Description, InputWrapper, DescriptionSection};
+export { Container, PageWrapper, Description, InputWrapper, DescriptionSection};

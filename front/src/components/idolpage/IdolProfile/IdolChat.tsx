@@ -1,6 +1,8 @@
+import { ClickTracker } from "../ClickTracker";
 import { PurpleButton } from "../../Button";
 import TitleComponent from "../TitleComponent";
 import styled from "styled-components";
+import { useParams } from "react-router";
 
 const Wrapper = styled.div`
   display: flex;
@@ -61,7 +63,9 @@ const ChatInput = styled.input`
 
 function IdolChat() {
   const chat = []
-
+  const params = useParams();
+  const idolName:string = params.idolName || "";
+  
   const tmp = {
     name: "사랑아럿뜰해",
     data: "와 고잉은 따라올 수가 없다. 진짜 최고인듯"
@@ -87,7 +91,9 @@ function IdolChat() {
       </ChatFrame>
       <ChatInputFrame>      
         <ChatInput placeholder="댓글을 입력해주세요."></ChatInput>
-        <PurpleButton width="100px">응원</PurpleButton>
+        <PurpleButton width="100px" onClick={() => {
+          ClickTracker(idolName,"chohm1223@naver.com")
+        }}>응원</PurpleButton>
       </ChatInputFrame>
     </Wrapper>
   )

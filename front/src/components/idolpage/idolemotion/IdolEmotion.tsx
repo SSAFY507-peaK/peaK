@@ -1,8 +1,10 @@
 import ArrowDropUpIcon from '@mui/icons-material/ArrowDropUp';
+import { ClickTracker } from '../ClickTracker';
 import IdolEmotionChart from "./IdolEmotionChart";
 import IdolEmotionChartBtn from "./IdolEmotionChartBtn";
 import IdolEmotionRankChart from "./IdolEmotionRankChart";
 import styled from "styled-components";
+import { useParams } from 'react-router';
 import { useState } from "react";
 
 const DataFrame = styled.div`
@@ -34,6 +36,8 @@ const ChartFrame = styled.div`
 
 function IdolEmotion() {
   const [check, setCheck] = useState<boolean>(true);
+  const params = useParams();
+  const idolName:string = params.idolName || "";
 
   return(
     <DataFrame>
@@ -45,7 +49,12 @@ function IdolEmotion() {
           color="red"
           changenum={3} 
           title="종합랭킹" 
-          onClick={() => !check ? setCheck(true) : null}></IdolEmotionChartBtn>
+          onClick={() => {
+            ClickTracker(idolName,"chohm1223@naver.com")
+            return (
+              !check ? setCheck(true) : null
+            )
+          }} />
         <IdolEmotionChartBtn 
           isTab = {!check} 
           ranknum="81점" 
@@ -53,7 +62,12 @@ function IdolEmotion() {
           color="red"
           changenum={3} 
           title="긍정지수" 
-          onClick={() => check? setCheck(false) : null}></IdolEmotionChartBtn>
+          onClick={() => {
+            ClickTracker(idolName,"chohm1223@naver.com")
+            return (
+              check? setCheck(false) : null
+            )
+          }}/>
       </ChartBtnFrame>
       <ChartFrame>
         {
