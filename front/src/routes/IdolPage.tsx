@@ -25,7 +25,6 @@ const TopRightFrame = styled.div`
   margin-right: 15px;
 `;
 
-
 const BottomFrame = styled.div`
 `;
 

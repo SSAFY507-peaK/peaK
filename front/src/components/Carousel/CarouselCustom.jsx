@@ -77,13 +77,14 @@ const CarouselCustom = props => (
       {props.items.map((item, idx) => {
         return (
           <Card
-            title={item.title.length <= 27 ? item.title : item.title.substr(0, 23) + "..."}
+            title={item.title.length <= 23 ? item.title : item.title.substr(0, 23) + "..."}
             content={
               item.content ||
               (item.summary.length <= 70 ? item.summary : item.summary.substr(0, 70) + "...")
             }
-            src={item.src || item.thumbnail_link}
+            src={item.thumbnailLink || item.thumbnail_link}
             link={item.link}
+            key={idx}
           />
         );
       })}
