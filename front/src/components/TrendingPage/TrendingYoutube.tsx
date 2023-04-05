@@ -11,7 +11,7 @@ const YoutubeListDiv = styled.div`
 
 const YoutubeDiv = styled.div`
   width: 100%;
-  height: 30vh;
+  height: 22vh;
   margin-bottom: 3vh;
   border-radius: 10px;
 `;

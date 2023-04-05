@@ -30,7 +30,7 @@ function TrendingPage() {
         type={false}
         firstWord="트렌딩"
         secondWord="뉴스"
-        ratio="0.65"
+        ratio="0.7"
         mr={true}
         h={true}
         data={<TrendingNews data={TrendNewsList} />}
@@ -39,7 +39,7 @@ function TrendingPage() {
         type={false}
         firstWord="트렌딩"
         secondWord="유튜브"
-        ratio="0.35"
+        ratio="0.3"
         h={true}
         data={<TrendingYoutube />}
       />
