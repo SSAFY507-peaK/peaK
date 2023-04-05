@@ -18,7 +18,7 @@ import {RootState} from "../../_store/store";
 
 
 type SignUp2Type = {
-  TOKEN: string;
+  TOKEN: string | null;
   handleChangePage: (value: number) => void;
   idolLists: IdolListsType;
 }

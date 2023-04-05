@@ -8,7 +8,7 @@ import { BlueButton, PurpleButton } from "../../components/Button";
 
 type NicknameType = "EU006" | "EU009" | "200" ;
 type SignUp1Type = {
-  TOKEN: string;
+  TOKEN: string | null;
   handleChangePage: (value: number) => void;
 }
 
