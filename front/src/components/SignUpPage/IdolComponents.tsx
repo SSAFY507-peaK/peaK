@@ -68,7 +68,7 @@ const SelectedSection = styled.div`
 /** 전체 아이돌 */
 const IdolSection = styled.div`
   overflow-y: scroll;
-  width: 960px;
+  width: 100%;
   padding: 15px;
   &::-webkit-scrollbar {
     width: 7px;

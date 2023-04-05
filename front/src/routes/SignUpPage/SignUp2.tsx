@@ -47,7 +47,7 @@ function SignUp2({handleChangePage, idolLists}: SignUp2Type) {
     // 선택된 배열에서 삭제를 하자궁...
     setSelectedIdols(prev=> prev.filter(selectedIdol => selectedIdol !== idol));
   }, []);
-  // /** 선택된 아이돌을 보여주자 */
+  /** 선택된 아이돌을 보여주자 */
   const showSelectIdols = useCallback(() => {
     const returnArr = selectedIdols?.map(idol =>
       <Selected url={`https://j8a507.p.ssafy.io/img/${encodeURI(idol)}.webp`} width="100px" >

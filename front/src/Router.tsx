@@ -25,7 +25,7 @@ const router = createBrowserRouter(
 
           <Route path="ranking" element={<RankingLayout />}>
             <Route index element={<RankingPage />} loader={RankingLoader} />
-            <Route path="chart" element={<ChartPage />} />
+            <Route path="chart" element={<ChartPage />} loader={IdolLists} />
           </Route>
 
           <Route path="trending" element={<TrendingPage />} loader={TrendingLoader} />

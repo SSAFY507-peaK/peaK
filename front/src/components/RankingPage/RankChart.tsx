@@ -14,14 +14,19 @@ import ECharts from "echarts-for-react";
 //   let D7 = new Date(now.setDate(now.getDate() - 7))
 // }
 
+
 type ChartIdolObjectType = {
   name?: string;
   data?: number[];
   type?: string;
   lineStyle?: { width: number };
 };
+type RankChartProps = {
+  selectedIdols: string[];
+  selectedChart: ChartIdolObjectType[];
+}
 
-function RankChart({ chartIdol }: any) {
+function RankChart({ selectedIdols, selectedChart }: RankChartProps) {
   let labels = ["D-6", "D-5", "D-4", "D-3", "D-2", "D-1", "오늘"];
 
   const [options, setOptions] = useState({
@@ -33,7 +38,7 @@ function RankChart({ chartIdol }: any) {
       },
     },
     legend: {
-      data: chartIdol.map((idol: ChartIdolObjectType) => idol.name),
+      data: selectedIdols,
       orient: "vertical",
       top: "170vw",
       right: "right",
@@ -56,7 +61,7 @@ function RankChart({ chartIdol }: any) {
         inverse: true,
       },
     ],
-    series: chartIdol,
+    series: selectedChart,
     graphic: {
       type: "line",
       $action: "merge",
@@ -73,7 +78,7 @@ function RankChart({ chartIdol }: any) {
         },
       },
       legend: {
-        data: chartIdol.map((idol: ChartIdolObjectType) => idol.name),
+        data: selectedIdols,
         orient: "vertical",
         top: "170vw",
         right: "right",
@@ -96,13 +101,13 @@ function RankChart({ chartIdol }: any) {
           inverse: true,
         },
       ],
-      series: chartIdol,
+      series: selectedChart,
       graphic: {
         type: "line",
         $action: "merge",
       },
     });
-  }, [chartIdol]);
+  }, [selectedIdols, selectedChart]);
 
   return (
     <ECharts
