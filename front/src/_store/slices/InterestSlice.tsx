@@ -1,10 +1,9 @@
 import { IdolInterest } from '../../_utils/Types';
 import { createSlice } from '@reduxjs/toolkit';
 
-export let myinterest = createSlice({
-  name: "myinterest",
+export let myInterest = createSlice({
+  name: "myInterest",
   initialState: { idols: [] } as IdolInterest,
-
   reducers: {
     CreateMyInterest(state, action){
       state.idols = action.payload;
@@ -12,4 +11,5 @@ export let myinterest = createSlice({
   }
 })
 
-export let { CreateMyInterest } = myinterest.actions
+export let { CreateMyInterest } = myInterest.actions
+export default myInterest.reducer
