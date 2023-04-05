@@ -76,6 +76,7 @@ public class SecurityConfig {
 			.antMatchers(PERMIT_URL_ARRAY).permitAll()
 			.antMatchers("/peak/**").permitAll()
 			.antMatchers("/idol/**").permitAll()
+			.antMatchers("/news/**").permitAll()
 
 			// .antMatchers("/user/**").hasAnyRole("USER", "GUEST")
 			.anyRequest().authenticated()    // 이외의 모든 요청은 인증 필요

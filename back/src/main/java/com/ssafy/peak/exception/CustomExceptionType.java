@@ -31,7 +31,16 @@ public enum CustomExceptionType {
 	// DATA
 	NO_CONTENT(HttpStatus.NOT_FOUND, "ED001", "데이터가 존재하지 않습니다."),
 	DO_NOT_DELETE(HttpStatus.BAD_REQUEST, "ED002", "삭제할 수 없습니다."),
-	ALREADY_EXIST(HttpStatus.CONFLICT, "ED003", "중복된 데이터입니다.");
+	ALREADY_EXIST(HttpStatus.CONFLICT, "ED003", "중복된 데이터입니다."),
+
+	// NEWS
+	NEWS_NOT_FOUND(HttpStatus.NOT_FOUND, "EN001", "해당 뉴스가 존재하지 않습니다."),
+	IDOL_NEWS_NOT_FOUND(HttpStatus.NOT_FOUND, "EN002", "해당 아이돌의 최신 뉴스 리스트가 존재하지 않습니다."),
+	ALL_IDOL_NEWS_NOT_FOUND(HttpStatus.NOT_FOUND, "EN003", "해당 최신 종합 아이돌 뉴스 리스트가 존재하지 않습니다."),
+	NEWS_ALREADY_EXIST(HttpStatus.CONFLICT, "EN004", "해당 뉴스가 이미 존재합니다."),
+	IDOL_NEWS_ALREADY_EXIST(HttpStatus.CONFLICT, "EN005", "해당 아이돌의 최신 뉴스 리스트가 이미 존재합니다."),
+	ALL_IDOL_NEWS_ALREADY_EXIST(HttpStatus.CONFLICT, "EN006", "해당 최신 종합 아이돌 뉴스 리스트가 이미 존재합니다.");
+
 
 	private final HttpStatus httpStatus;
 	private final String code;
