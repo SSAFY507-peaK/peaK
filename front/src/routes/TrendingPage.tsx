@@ -15,7 +15,6 @@ export async function loader() {
     .get(`${BASE_URL}/api/news/list/all-idol`)
     .then(response => {
       TrendNewsList = response.data;
-      console.log(TrendNewsList);
     })
     .catch(error => console.log(error));
 

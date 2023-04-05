@@ -75,10 +75,12 @@ function Logo(rank: number) {
 function IdolRank(props: IdolRankType) {
   const navigate = useNavigate();
   return (
-    <WrapperDiv onClick={() => {
-      navigate(`/${props.name}`)
-      ClickTracker(props.name,"chohm1223@naver.com")
-    }}>
+    <WrapperDiv
+      onClick={() => {
+        navigate(`/${props.name}`);
+        ClickTracker(props.name, "chohm1223@naver.com");
+      }}
+    >
       {Logo(props.rank)}
       <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
         <IdolImg url={props.url} rank={props.rank} />
