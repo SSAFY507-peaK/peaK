@@ -1,9 +1,12 @@
 import { ClickTracker } from '../ClickTracker';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import FavoriteIcon from '@mui/icons-material/Favorite';
+import { IdolSns } from '../../../_utils/Types';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import TwitterIcon from '@mui/icons-material/Twitter';
 import YouTubeIcon from '@mui/icons-material/YouTube';
+import axios from 'axios';
+import { request } from '../../../_utils/axios';
 import styled from "styled-components"
 import { useParams } from 'react-router';
 import { useState } from "react";
@@ -39,14 +42,30 @@ const IconText = styled.div`
   font-size: 0.7rem;
 `;
 
+// 더미 데이터
+const userData:IdolSns = {
+  idol: "세븐틴",
+  snsLink: {
+    instagram: "https://www.instagram.com/saythename_17/",
+    youtube: "https://twitter.com/pledis_17?ref_src=twsrc%5Egoogle%7Ctwcamp%5Eserp%7Ctwgr%5Eauthor",
+    twitter: "https://www.youtube.com/user/pledis17/videos?app=desktop"
+  },
+  interest: true
+}
 
 function IdolDataProfileSns() {
-  let instagramUrl : string = "https://www.instagram.com/saythename_17/";
-  let twitterUrl: string = "https://twitter.com/pledis_17?ref_src=twsrc%5Egoogle%7Ctwcamp%5Eserp%7Ctwgr%5Eauthor";
-  let youtubeUrl: string = "https://www.youtube.com/user/pledis17/videos?app=desktop";
-  const params = useParams();
-  const idolName:string = params.idolName || "";
-  const [like, setLike] = useState<boolean>(false);
+  // const params = useParams();
+  // const idolName:string = params.idolName || "";
+  const idolName:string = "세븐틴";
+
+  // const {idol, snsLink}: IdolSns =  request("get", `idol/${idolName}/pos-neg`)
+  const {idol, snsLink, interest} = userData
+  // let instagramUrl : string = "https://www.instagram.com/saythename_17/";
+  // let twitterUrl: string = "https://twitter.com/pledis_17?ref_src=twsrc%5Egoogle%7Ctwcamp%5Eserp%7Ctwgr%5Eauthor";
+  // let youtubeUrl: string = "https://www.youtube.com/user/pledis17/videos?app=desktop";
+
+  const [like, setLike] = useState<boolean>(interest);
+
   return (
     <Wrapper>
       <SnsFrame>
@@ -54,7 +73,7 @@ function IdolDataProfileSns() {
           <InstagramIcon 
             sx={{ fontSize: "1.3rem", cursor: "pointer", color: `var(--purple500-color)` }}
             onClick={()=> {
-              window.open(instagramUrl)
+              window.open(snsLink.instagram)
               ClickTracker(idolName,"chohm1223@naver.com")
             }}
           />
@@ -66,7 +85,7 @@ function IdolDataProfileSns() {
           <TwitterIcon 
             sx={{ fontSize: "1.3rem", cursor: "pointer", color: `var(--purple500-color)` }} 
             onClick={()=> {
-              window.open(twitterUrl)
+              window.open(snsLink.twitter)
               ClickTracker(idolName,"chohm1223@naver.com")
           }} />
         </IconFrame>
@@ -77,7 +96,7 @@ function IdolDataProfileSns() {
         <YouTubeIcon 
           sx={{ fontSize: "1.3rem", cursor: "pointer", color: `var(--purple500-color)` }}
           onClick={()=> {
-            window.open(youtubeUrl)
+            window.open(snsLink.youtube)
             ClickTracker(idolName,"chohm1223@naver.com")
         }} />
         </IconFrame>
@@ -87,9 +106,19 @@ function IdolDataProfileSns() {
         <IconFrame color="#FDD8D8" >
         {
           like?
-          <FavoriteIcon sx={{ fontSize: "1.3rem", cursor: "pointer", color: `var(--red600-color)` }} onClick={() => setLike(false)} />
+          <FavoriteIcon 
+            sx={{ fontSize: "1.3rem", cursor: "pointer", color: `var(--red600-color)` }} 
+            onClick={() => {
+              setLike(false)
+              ClickTracker(idolName,"chohm1223@naver.com")
+            }} />
           :
-          <FavoriteBorderIcon sx={{ fontSize: "1.3rem", cursor: "pointer", color: `var(--red600-color)` }} onClick={() => setLike(true)}/>
+          <FavoriteBorderIcon 
+            sx={{ fontSize: "1.3rem", cursor: "pointer", color: `var(--red600-color)` }} 
+            onClick={() => {
+              setLike(true)
+              ClickTracker(idolName,"chohm1223@naver.com")
+            }}/>
         } 
         </IconFrame>
         <IconText>팔로잉</IconText>
@@ -98,3 +127,11 @@ function IdolDataProfileSns() {
 }
 
 export default IdolDataProfileSns;
+
+
+/* 내가 해야할 것
+
+  1. 좋아요 버튼이 동작하면 서버에 알림
+  2. 좋아요 버튼이 동작하면 스토어를 수정해
+
+*/
