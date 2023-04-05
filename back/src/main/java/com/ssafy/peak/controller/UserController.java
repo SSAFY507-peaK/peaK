@@ -1,6 +1,5 @@
 package com.ssafy.peak.controller;
 
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.transaction.annotation.Transactional;
@@ -57,8 +56,6 @@ public class UserController {
 
 		token = token.split(Utils.BLANK)[1];
 		SignupDto signupDto = userService.signup(token, userRequestDto);
-		// HttpHeaders httpHeaders = new HttpHeaders();
-		// httpHeaders.set(Utils.AUTHENTICATION, Utils.BEARER_TOKEN_PREFIX + signupDto.getToken());
 
 		return ResponseEntity.ok().body(signupDto);
 	}
@@ -94,11 +91,7 @@ public class UserController {
 		String token = authorization.split(Utils.BLANK)[1];
 		JwtTokenDto tokenDto = jwtTokenProvider.reissue(token);
 
-		// header에도 토큰 넣어주기
-		HttpHeaders httpHeaders = new HttpHeaders();
-		httpHeaders.add(Utils.AUTHORIZATION, Utils.BEARER_TOKEN_PREFIX + tokenDto.getToken());
-
-		return ResponseEntity.ok().headers(httpHeaders).body(tokenDto);
+		return ResponseEntity.ok().body(tokenDto);
 	}
 
 	/**

@@ -6,6 +6,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
@@ -42,6 +43,7 @@ import com.ssafy.peak.util.SecurityUtil;
 import com.ssafy.peak.util.Utils;
 
 import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.io.Encoders;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -147,7 +149,11 @@ public class UserService {
 
 		// db에 user 정보 저장
 		userRepository.save(user);
-
+		// idol fan count 저장
+		for (Idol idol : idols) {
+			idol.setFanCount(idol.getFanCount() + 1);
+			idolRepository.save(idol);
+		}
 		return SignupDto.builder()
 			.token(accessToken)
 			.userId(user.getId())
@@ -244,21 +250,25 @@ public class UserService {
 	 */
 	public void logout(String token) {
 
-		// user 인증 정보 확인 후 db 조회
-		User user = securityUtil.getCurrentUserId()
-			.flatMap(userRepository::findById)
-			.orElseThrow(() -> new CustomException(CustomExceptionType.USER_NOT_FOUND));
+		// token에서 정보 가져오기
+		Claims claims = jwtTokenProvider.parseClaims(token);
+		String userId = jwtTokenProvider.getUserIdFromJwt(token);
 
-		// String key = "RT:" + Encoders.BASE64.encode(user.getId().getBytes());
-		// if (redisUtil.getData(key) != null) {
-		// 	redisUtil.deleteData(key);
-		// }
-		// long expiration = jwtTokenProvider.getExpiration(token);
-		// Date now = new Date();
-		// redisUtil.setDataExpire(token, token, expiration - now.getTime());
+		String key = "RT:" + Encoders.BASE64.encode(userId.getBytes());
+		if (redisUtil.getData(key) != null) {
+			redisUtil.deleteData(key);
+		}
+		long expiration = jwtTokenProvider.getExpiration(token);
+
+		log.info("logout | expiration: {}", expiration);
+
+		Date now = new Date();
+		redisUtil.setDataExpire(token, token, expiration - now.getTime());
+
+		log.info("logout | expiration - now.getTime(): {}", expiration - now.getTime());
 
 		SecurityContextHolder.getContext().setAuthentication(null);
-		log.info("로그아웃 유저 이메일 : '{}'", user.getEmail());
+		log.info("로그아웃 유저 이메일 : '{}'", jwtTokenProvider.getEmailFromClaims(claims));
 	}
 
 	/**
