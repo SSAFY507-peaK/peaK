@@ -49,7 +49,7 @@ function handleClick(event: MouseEvent<SVGSVGElement>) {
 
 function MyPage() {
   const params = useParams();
-  const userName:string = params.userName || "";
+  const userName: string = params.userName || "";
   const [idolName, setIdolName] = useState<string>(sampleData[0].idol)
   const [index, setIndex] = useState<number>(0)
   const [idolScoreData, setIdolScoreData] = useState<number[]>([0, 0])
