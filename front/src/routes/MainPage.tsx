@@ -2,11 +2,13 @@ import CarouselCustom from "../components/Carousel/CarouselCustom.jsx";
 import CommonDiv from "../components/MainPage/CommonDiv";
 import MainDiv from "../components/MainDiv";
 import NameDiv from "../components/NameDiv";
+import ReactGA from 'react-ga';
 import Top8 from "../components/MainPage/Top8";
 import TrendKeyword from "../components/MainPage/TrendKeyword";
 import { TrendNewsListType } from "../_utils/Types.js";
 import axios from "axios";
 import styled from "styled-components";
+import { useEffect } from "react";
 import { useLoaderData } from "react-router";
 
 const BASE_URL = process.env.REACT_APP_BASE_URL;
@@ -46,6 +48,10 @@ const CarouselCustomDiv = styled.div<CarouselCustomDivType>`
 
 function MainPage() {
   const TrendNewsList = useLoaderData() as TrendNewsListType[];
+
+  useEffect(() => {
+    ReactGA.set({ userId: 'chohm1223@naver.com' });
+  },[])
   // const TrendYoutubeList = [
   //   {
   //     title: "4 시간 지브리 메들리 피아노 💖 ..",
