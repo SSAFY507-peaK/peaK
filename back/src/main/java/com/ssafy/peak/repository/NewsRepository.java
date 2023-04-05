@@ -1,5 +1,6 @@
 package com.ssafy.peak.repository;
 
+import java.time.LocalDateTime;
 import java.util.Optional;
 
 import org.springframework.data.mongodb.repository.MongoRepository;
@@ -12,5 +13,5 @@ public interface NewsRepository extends MongoRepository<News, String> {
 
 	Optional<News> findByIndex(long index);
 
-	Optional<News> findByIndexAndIdol(long index, String idol);
+	Optional<News> findByIndexAndDateTimeAndIdol(long index, LocalDateTime dateTime, String idol);
 }
