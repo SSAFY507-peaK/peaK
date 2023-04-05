@@ -60,3 +60,15 @@ export interface Comment {
   content: string;
   datetime: string;
 }
+
+export interface IdolSns {
+  idol: string;
+  snsLink: SnsLink;
+  interest: boolean;
+}
+
+export interface SnsLink {
+  instagram: string;
+  youtube: string;
+  twitter: string;
+}
