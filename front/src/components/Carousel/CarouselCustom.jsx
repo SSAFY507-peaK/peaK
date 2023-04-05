@@ -71,25 +71,26 @@ const Carousel = ({ children }) => {
   );
 };
 
-const CarouselCustom = props => (
-  <AlignDiv>
-    <Carousel>
-      {props.items.map((item, idx) => {
-        return (
-          <Card
-            title={item.title.length <= 23 ? item.title : item.title.substr(0, 23) + "..."}
-            content={
-              item.content ||
-              (item.summary.length <= 70 ? item.summary : item.summary.substr(0, 70) + "...")
-            }
-            src={item.thumbnailLink || item.thumbnail_link}
-            link={item.link}
-            key={idx}
-          />
-        );
-      })}
-    </Carousel>
-  </AlignDiv>
-);
+const CarouselCustom = props => {
+  return (
+    <AlignDiv>
+      <Carousel>
+        {props.data.map((item, idx) => {
+          return (
+            <Card
+              title={item.title.length <= 23 ? item.title : item.title.substr(0, 23) + "..."}
+              content={
+                item.summary.length <= 70 ? item.summary : item.summary.substr(0, 70) + "..."
+              }
+              src={item.thumbnailLink || item.thumbnail_link}
+              link={item.link}
+              key={idx}
+            />
+          );
+        })}
+      </Carousel>
+    </AlignDiv>
+  );
+};
 
 export default CarouselCustom;
