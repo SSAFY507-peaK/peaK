@@ -26,7 +26,7 @@ type RankDivType = {
 export async function loader() {
   let RankList = null;
   await axios
-    .get(`${BASE_URL}peak/`)
+    .get(`${BASE_URL}/api/peak/`)
     .then(response => {
       RankList = response.data.ranksByHour;
     })
