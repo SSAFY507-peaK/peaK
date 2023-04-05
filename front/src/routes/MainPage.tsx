@@ -2,18 +2,18 @@ import CarouselCustom from "../components/Carousel/CarouselCustom.jsx";
 import CommonDiv from "../components/MainPage/CommonDiv";
 import MainDiv from "../components/MainDiv";
 import NameDiv from "../components/NameDiv";
-import ReactGA from "react-ga";
+// import ReactGA from "react-ga";
 import Top8 from "../components/MainPage/Top8";
 import TrendKeyword from "../components/MainPage/TrendKeyword";
 import { TrendNewsListType } from "../_utils/Types.js";
 import axios from "axios";
 import styled from "styled-components";
-import { useEffect } from "react";
-import {useLoaderData, useNavigate} from "react-router";
-import {useSearchParams} from "react-router-dom";
-import {useDispatch, useSelector} from "react-redux";
-import {CreateNickname, CreateTOKEN, CreateUserId} from "../_store/slices/UserSlice";
-import {RootState} from "../_store/store";
+// import { useEffect } from "react";
+import {useLoaderData } from "react-router";
+// import {useSearchParams} from "react-router-dom";
+// import {useDispatch, useSelector} from "react-redux";
+// import {CreateNickname, CreateTOKEN, CreateUserId} from "../_store/slices/UserSlice";
+// import {RootState} from "../_store/store";
 
 const BASE_URL = process.env.REACT_APP_BASE_URL;
 
@@ -60,29 +60,29 @@ function MainPage() {
    * 리덕스에도 토큰이 없어? 그러면 나는 로그인을 안 한 사람이야 => imtro로 보내버리자...
    */
 
-  const [query, setQuery] = useSearchParams();
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-  let userId = useSelector((state:RootState) => state.userInfo.userId);
-  let token = useSelector((state:RootState) => state.userInfo.TOKEN);
-
-  useEffect(() => {
-    if (query.get('token')) {
-      dispatch(CreateTOKEN(query.get('token')));
-      dispatch(CreateUserId(query.get('userId')));
-      dispatch(CreateNickname(query.get('nickname')));
-      ReactGA.set({ userId: userId });
-      window.history.pushState({}, "", "/")
-    }
-    else {
-      if (token !== "") {
-        ReactGA.set({ userId: userId });
-      }
-      else {
-        navigate('/intro');
-      }
-    }
-  }, [dispatch, navigate, query, token, userId]);
+  // const [query, setQuery] = useSearchParams();
+  // const dispatch = useDispatch();
+  // const navigate = useNavigate();
+  // let userId = useSelector((state:RootState) => state.userInfo.userId);
+  // let token = useSelector((state:RootState) => state.userInfo.TOKEN);
+  //
+  // useEffect(() => {
+  //   if (query.get('token')) {
+  //     dispatch(CreateTOKEN(query.get('token')));
+  //     dispatch(CreateUserId(query.get('userId')));
+  //     dispatch(CreateNickname(query.get('nickname')));
+  //     ReactGA.set({ userId: userId });
+  //     window.history.pushState({}, "", "/")
+  //   }
+  //   else {
+  //     if (token !== "") {
+  //       ReactGA.set({ userId: userId });
+  //     }
+  //     else {
+  //       navigate('/intro');
+  //     }
+  //   }
+  // }, [dispatch, navigate, query, token, userId]);
   const TrendNewsList = useLoaderData() as TrendNewsListType[];
   // const TrendYoutubeList = [
   //   {
