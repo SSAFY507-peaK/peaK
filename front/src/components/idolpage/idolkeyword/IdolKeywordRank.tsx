@@ -1,9 +1,11 @@
 import ReactGA, { EventArgs } from 'react-ga';
 import { useEffect, useState } from "react";
 
+import { ClickTracker } from '../ClickTracker';
 import IdolKeywordRankBtn from "./IdolKeywordRankBtn";
 import TitleComponent from "../TitleComponent";
 import styled from "styled-components";
+import { useParams } from 'react-router';
 
 interface Props {
   setChooseKeyword: React.Dispatch<React.SetStateAction<number>>;
@@ -42,8 +44,11 @@ function IdolKeywordRank({setChooseKeyword, chooseKeyword}:Props) {
       keyword: "아아아아아아"
     },
   ]
-  const [check, setCheck] = useState<boolean[]>([true, false, false, false, false])
 
+  const params = useParams();
+  const idolName:string = params.idolName || "";
+  const [check, setCheck] = useState<boolean[]>([true, false, false, false, false])
+  
   return (
     <RankFrame>
       {
@@ -59,15 +64,9 @@ function IdolKeywordRank({setChooseKeyword, chooseKeyword}:Props) {
                   tmp[idx] = true
                   setCheck(tmp)
                   setChooseKeyword(idx)
-                  ReactGA.event({
-                    category: 'Button',
-                    action: 'Click',
-                    label: 'Buy Now',
-                    value: 1,
-                    userId: "chohm1223@naver.com",
-                  } as CustomEventArgs);
+                  ClickTracker(idolName,"chohm1223@naver.com")
                 }
-                }
+              }
               isClick={check[idx]}
             ></IdolKeywordRankBtn>
           )
