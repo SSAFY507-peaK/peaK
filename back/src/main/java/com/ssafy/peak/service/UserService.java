@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
@@ -22,9 +23,11 @@ import org.springframework.util.StringUtils;
 import com.ssafy.peak.domain.Comment;
 import com.ssafy.peak.domain.Idol.Idol;
 import com.ssafy.peak.domain.User;
+import com.ssafy.peak.dto.CommentDto;
 import com.ssafy.peak.dto.CustomOAuth2User;
 import com.ssafy.peak.dto.SignupDto;
 import com.ssafy.peak.dto.UserDto;
+import com.ssafy.peak.dto.idol.response.IdolCommentResponseDto;
 import com.ssafy.peak.enums.Role;
 import com.ssafy.peak.exception.CustomException;
 import com.ssafy.peak.exception.CustomExceptionType;
@@ -254,13 +257,13 @@ public class UserService {
 		// 오늘 해당 아이돌에게 쓴 응원 메시지가 있다면 예외 처리 (하루에 하나만 작성 가능)
 		LocalDateTime start = LocalDateTime.of(LocalDate.now(), LocalTime.MIN).plusHours(9);    // 오늘 날짜 시작 시간
 		LocalDateTime end = LocalDateTime.of(LocalDate.now(), LocalTime.MAX).plusHours(9);    // 오늘 날짜 끝 시간
-		Comment comment = commentRepository
+		List<Comment> comments = commentRepository
 			.findByEmailAndIdolAndDateTimeBetween(loginUser.getEmail(), idolName, start, end).orElse(null);
-		if (comment != null) {
+		if (!CollectionUtils.isEmpty(comments)) {
 			throw new CustomException(CustomExceptionType.DO_NOT_WRITE_MESSAGE);
 		}
 
-		log.info("start / end / comment : {} / {} / {}", start, end, comment);
+		log.info("start / end / comment : {} / {} / {}", start, end, comments.toString());
 
 		// 아이돌 조회
 		Idol idol = idolRepository.findByIdol(idolName)
@@ -299,7 +302,7 @@ public class UserService {
 			user.getIdols().add(userIdolInfo);
 		}
 		// comment 생성
-		comment = Comment.builder()
+		Comment comment = Comment.builder()
 			.email(loginUser.getEmail())
 			.idol(idol.getIdol())
 			.dateTime(LocalDateTime.now().plusHours(9))
@@ -312,5 +315,51 @@ public class UserService {
 		commentRepository.save(comment);
 		userRepository.save(user);
 		idolRepository.save(idol);
+	}
+
+	/**
+	 * 최근 2주 동안 내가 남긴 관심 아이돌 별 응원 메시지
+	 */
+	public IdolCommentResponseDto getMyCheeingMessages(UserPrincipal loginUser, String idolName) {
+
+		// 유저 조회
+		User user = userRepository.findById(loginUser.getId())
+			.orElseThrow(() -> new CustomException(CustomExceptionType.USER_NOT_FOUND));
+
+		// 아이돌 존재 확인
+		idolRepository.findByIdol(idolName).orElseThrow(() -> new CustomException(CustomExceptionType.IDOL_NOT_FOUND));
+
+		// 유저의 아이돌 기록 조회
+		List<User.Idol> userIdols = user.getIdols();
+		if (CollectionUtils.isEmpty(userIdols)) {
+			throw new CustomException(CustomExceptionType.NO_CONTENT);
+		}
+		// 관심 아이돌 조회
+		User.Idol interestIdol = null;
+		for (int i = 0; i < userIdols.size(); i++) {
+			if (idolName.equals(userIdols.get(i).getIdol()) && userIdols.get(i).isLike()) {
+				interestIdol = userIdols.get(i);
+			}
+		}
+		// 관심 아이돌이 없으면 예외처리
+		if (interestIdol == null) {
+			throw new CustomException(CustomExceptionType.NOT_INTEREST);
+		}
+		// 2주 간 해당 아이돌에게 쓴 나의 응원 메시지 리스트 조회
+		LocalDateTime start = LocalDateTime.of(LocalDate.now(), LocalTime.MIN).plusHours(9)
+			.minusDays(13);    // 13일 전 시작시간
+		LocalDateTime end = LocalDateTime.of(LocalDate.now(), LocalTime.MAX).plusHours(9);    // 오늘 날짜 끝 시간
+		List<Comment> comments = commentRepository
+			.findByEmailAndIdolAndDateTimeBetween(loginUser.getEmail(), idolName, start, end).orElse(null);
+
+		List<CommentDto> commentDtoList = new ArrayList<>();
+		if (CollectionUtils.isEmpty(comments)) {
+			return null;
+		} else {
+			for (Comment comment : comments) {
+				commentDtoList.add(CommentDto.of(comment, user.getNickname()));
+			}
+			return IdolCommentResponseDto.builder().comments(commentDtoList).build();
+		}
 	}
 }
