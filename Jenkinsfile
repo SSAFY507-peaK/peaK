@@ -41,7 +41,7 @@ pipeline {
         stage('Backend Deploy') {
             steps {
                 sh 'docker rm -f backend'
-                sh 'docker run -d --name backend -p 8093:8080 -u root peak-backend:latest'
+                sh 'docker run -d --net host --name backend -p 8093:8080 -u root peak-backend:latest'
             }
         }
         stage('Frontend Deploy') {
