@@ -13,7 +13,15 @@ export type RankListType = {
 
 export type IdolListsType = {
   idols: string[];
-}
+};
+
+export type TrendNewsListType = {
+  link: string;
+  press: string;
+  summary: string;
+  thumbnailLink: string;
+  title: string;
+};
 
 // export type MyIdolDetail = {
 //   name: string;
@@ -35,7 +43,6 @@ export type IdolListsType = {
 //   // id: number;
 //   data: number;
 // }
-
 
 export interface IdolInterest {
   idols: MyIdolDetail[];
