@@ -12,10 +12,6 @@ interface Props {
   chooseKeyword: number;
 }
 
-interface CustomEventArgs extends EventArgs {
-  userId: string;
-}
-
 const RankFrame = styled.div`
   margin-bottom: 20px;
 `;

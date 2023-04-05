@@ -50,7 +50,7 @@ function MainPage() {
   const TrendNewsList = useLoaderData() as TrendNewsListType[];
 
   useEffect(() => {
-    ReactGA.set({ userId: 'chohm1223@naver.com' });
+    ReactGA.set({ userId: "chohm1223@naver.com" });
   },[])
   // const TrendYoutubeList = [
   //   {
