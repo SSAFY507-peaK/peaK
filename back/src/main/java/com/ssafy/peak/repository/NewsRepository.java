@@ -11,4 +11,6 @@ import com.ssafy.peak.domain.news.News;
 public interface NewsRepository extends MongoRepository<News, String> {
 
 	Optional<News> findByIndex(long index);
+
+	Optional<News> findByIndexAndIdol(long index, String idol);
 }

@@ -39,8 +39,8 @@ public class IdolNewsListByTimeService {
 		IdolNewsListByTime idolNewsListByTime = idolNewsListByTimeRequestDto.toEntity();
 		if (idolNewsListByTimeRepository.findByIdolAndDateTime(
 			idolNewsListByTime.getIdol(),
-			idolNewsListByTime.getDateTime()).isPresent()
-		) {
+			idolNewsListByTime.getDateTime()
+		).isPresent()) {
 			throw new CustomException(CustomExceptionType.IDOL_NEWS_ALREADY_EXIST);
 		}
 		idolNewsListByTimeRepository.insert(idolNewsListByTime);

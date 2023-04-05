@@ -31,4 +31,8 @@ public class News {
 	private String summary;
 	private String link;
 	private String thumbnailLink;
+
+	public void updateWordCounter(Map<String, Integer> wordCounter) {
+		this.wordCounter = wordCounter;
+	}
 }
