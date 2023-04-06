@@ -12,9 +12,10 @@ import {
 } from "../../components/SignUpPage/IdolComponents";
 import IdolImgNameContainer from "../../components/IdolImgNameContainer";
 import {BlueButton, CloseButton, PurpleButton} from "../../components/Button";
-import {Description, DescriptionSection, PageContainer} from "../../components/SignUpPage/SignUpComponents";
+import {Description, DescriptionSection, PageContainer, SearchSection} from "../../components/SignUpPage/SignUpComponents";
 import {IdolListsType} from "../../_utils/Types";
 import {RootState} from "../../_store/store";
+import {SearchInputDiv} from "../../components/Search";
 
 const BASE_URL = process.env.REACT_APP_BASE_URL
 
@@ -29,6 +30,7 @@ function SignUp2({TOKEN, handleChangePage, idolLists}: SignUp2Props) {
   let dispatch = useDispatch();
   const NICKNAME = useSelector((state:RootState) => state.userInfo.nickname)
   const [selectedIdols, setSelectedIdols] = useState<string[]>([]);
+  const [searchIdol, setSearchIdol] = useState<string>("");
 
   /** 좋아하는 아이돌을 선택하자 */
   const handleSelectIdol = useCallback((idol: string): void => {
@@ -58,6 +60,10 @@ function SignUp2({TOKEN, handleChangePage, idolLists}: SignUp2Props) {
     }
     return returnArr;
   }, [selectedIdols, handleDeleteSelectedIdol]);
+  /** 아이돌을 검색해보자 */
+  const handleSearchIdol = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchIdol(e.target.value);
+  }, [])
 
   /** 회원가입을 하자 */
   // 여기 axios 나중에 수정하자..
@@ -99,18 +105,33 @@ function SignUp2({TOKEN, handleChangePage, idolLists}: SignUp2Props) {
         </DescriptionSection>
         <IdolGrid cols={5}>{ showSelectIdols() }</IdolGrid>
       </SelectedSection>
-      <h2 >전체 아이돌</h2>
+      <SearchSection>
+        <h2>전체 아이돌</h2>
+        <SearchInputDiv handleSearchIdol={handleSearchIdol} />
+      </SearchSection>
       <IdolSection>
-        <IdolGrid cols={6} gap="20px">
-          {idolLists.idols.map((idol: string) =>
-            <IdolImgNameContainer
-              url={`${BASE_URL}/img/${encodeURIComponent(idol)}.webp`}
-              width="100%"
-              idol={ idol }
-              onClick={()=> selectedIdols.includes(idol) ? handleDeleteSelectedIdol(idol) : handleSelectIdol(idol)}
-              className={`${selectedIdols.includes(idol) && "selected"}`}
-            />
-          )}
+        <IdolGrid cols={7} gap="20px">
+          { searchIdol.length ?
+            idolLists.idols.map((idol: string) => {
+              return idol.toLocaleLowerCase().includes(searchIdol.toLocaleLowerCase()) &&
+                <IdolImgNameContainer
+                  url={`${BASE_URL}/img/${encodeURIComponent(`${idol}`)}.webp`}
+                  width="100%"
+                  idol={ idol }
+                  onClick={()=> selectedIdols.includes(idol) ? handleDeleteSelectedIdol(idol) : handleSelectIdol(idol)}
+                  className={`${selectedIdols.includes(idol) && "selected"}`}
+                />
+            }) :
+            idolLists.idols.map((idol: string) =>
+              <IdolImgNameContainer
+                url={`${BASE_URL}/img/${encodeURIComponent(`${idol}`)}.webp`}
+                width="100%"
+                idol={ idol }
+                onClick={()=> selectedIdols.includes(idol) ? handleDeleteSelectedIdol(idol) : handleSelectIdol(idol)}
+                className={`${selectedIdols.includes(idol) && "selected"}`}
+              />
+            )
+          }
         </IdolGrid>
       </IdolSection>
     </PageContainer>

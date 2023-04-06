@@ -8,7 +8,7 @@ import HomeIcon from "@mui/icons-material/Home";
 import { ReactComponent as Logo } from "../../assets/peaK.svg";
 import LogoutIcon from "@mui/icons-material/Logout";
 import PersonIcon from "@mui/icons-material/Person";
-import Search from "../Search";
+import { SearchList } from "../Search";
 import TrendingUpIcon from "@mui/icons-material/TrendingUp";
 import styled from "styled-components";
 
@@ -80,7 +80,7 @@ function MenuBar({ nickname }: MenuBarProps) {
         <Link to="/">
           <Logo />
         </Link>
-        <Search width="220px" />
+        <SearchList width="220px" />
         <MenuTab>
           <Menu>
             <NavLink to="/" className={({ isActive }) => (isActive ? "active" : "")}>
