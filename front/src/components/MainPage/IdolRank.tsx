@@ -1,4 +1,4 @@
-import { ClickTracker } from "../idolpage/ClickTracker";
+import { ClickTracker } from "../../_utils/UserTracker";
 import Rank1 from "../../assets/1.png";
 import Rank2 from "../../assets/2.png";
 import Rank3 from "../../assets/3.png";

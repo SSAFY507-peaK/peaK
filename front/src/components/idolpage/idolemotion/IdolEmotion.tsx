@@ -1,13 +1,14 @@
+import { PosNeg, WeeklyRankingType } from '../../../_utils/Types';
+import { useEffect, useState } from "react";
+
 import ArrowDropUpIcon from '@mui/icons-material/ArrowDropUp';
-import { ClickTracker } from '../ClickTracker';
+import { ClickTracker } from '../../../_utils/UserTracker';
 import IdolEmotionChart from "./IdolEmotionChart";
 import IdolEmotionChartBtn from "./IdolEmotionChartBtn";
 import IdolEmotionRankChart from "./IdolEmotionRankChart";
+import { request } from '../../../_utils/axios';
 import styled from "styled-components";
 import { useParams } from 'react-router';
-import { useEffect, useState } from "react";
-import { request } from '../../../_utils/axios';
-import { PosNeg, WeeklyRankingType } from '../../../_utils/Types';
 
 const DataFrame = styled.div`
   display: flex;
@@ -107,13 +108,17 @@ function IdolEmotion() {
   const params = useParams();
   const idolName:string = params.idolName || "";
 
-
-
   const [rankData, setRankData] = useState<WeeklyRankingType>(tmp2)
-  // request("get", `/peak/weekly/${idolName}`).then( res => rankData ? null : setRankData(res))
-
   const [posNegWeek, setPosNegWeek] = useState<PosNeg[]>(tmp)
-  request("get", `/idol/${idolName}/pos-neg`).then( res => posNegWeek ? null : setPosNegWeek(res.posNegWeek))
+
+  useEffect(() => {
+    async function Loader() {
+      await request("get", `/peak/weekly/${idolName}`).then( res => rankData ? null : setRankData(res))
+      await request("get", `/idol/${idolName}/pos-neg`).then( res => posNegWeek ? null : setPosNegWeek(res.posNegWeek))
+    }
+    Loader();
+
+  }, [])
 
 
   const [rankWeek, setRankWeek] = useState<number[]>([0]);
@@ -131,7 +136,6 @@ function IdolEmotion() {
         <IdolEmotionChartBtn
           isTab = {check}
           ranknum= {`${rankData.current.rank}위`}
-          // ranknum= {`1위`}
           rankicon={<ArrowDropUpIcon sx={{ color: "red"}} />}
           color="red"
           changenum={3} 
@@ -160,9 +164,9 @@ function IdolEmotion() {
         {
           check 
           ?
-          <IdolEmotionChart posNegWeek={posNegWeek} />
-          :
           <IdolEmotionRankChart rankWeek={rankWeek} />
+          :
+          <IdolEmotionChart posNegWeek={posNegWeek} />
         }
       </ChartFrame>
     </DataFrame>

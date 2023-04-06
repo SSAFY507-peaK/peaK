@@ -1,12 +1,12 @@
 import ReactGA, { EventArgs } from 'react-ga';
 import { useEffect, useState } from "react";
 
-import { ClickTracker } from '../ClickTracker';
+import { ClickTracker } from '../../../_utils/UserTracker';
 import IdolKeywordRankBtn from "./IdolKeywordRankBtn";
 import TitleComponent from "../TitleComponent";
 import styled from "styled-components";
-import { useParams } from 'react-router';
 import { useAppSelector } from '../../../_hooks/hooks';
+import { useParams } from 'react-router';
 
 interface Props {
   setChooseKeyword: React.Dispatch<React.SetStateAction<number>>;

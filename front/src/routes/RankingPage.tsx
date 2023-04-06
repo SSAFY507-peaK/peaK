@@ -1,4 +1,4 @@
-import { ClickTracker } from "../components/idolpage/ClickTracker";
+import { ClickTracker } from "../_utils/UserTracker";
 import { ReactComponent as Down } from "../assets/arrow-down.svg";
 import { RankListType } from "../_utils/Types";
 import { ReactComponent as Stable } from "../assets/stable.svg";

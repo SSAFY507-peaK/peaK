@@ -35,7 +35,6 @@ function TotalChart({userName, setIdolName}:Props) {
 
   const idolData = useAppSelector<IdolInterest>(state => state.myInterest)
   for (let i = 0; i < idolData.idols.length; i++ ) {
-    // console.log(idolData.idols[i].idol)
     if (i === 0) {
       chartData.push( { name: idolData.idols[i].idol, value: idolData.idols[i].value, itemStyle: {color: color[i]}, selected: true})
     } else {

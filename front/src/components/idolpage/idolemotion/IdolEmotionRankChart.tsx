@@ -1,7 +1,7 @@
 import ECharts from 'echarts-for-react';
 import { faker } from '@faker-js/faker';
-import { useState } from 'react';
 import { useParams } from 'react-router';
+import { useState } from 'react';
 
 interface Props {
   rankWeek: number[];
@@ -13,7 +13,7 @@ function IdolEmotionRankChart({rankWeek}:Props) {
   const params = useParams();
   const idolName:string = params.idolName || "";
 
-  const [options, setOptions] = useState({
+  const options = {
     color: "#F946FF",
     tooltip: {
       trigger: 'axis',
@@ -70,7 +70,7 @@ function IdolEmotionRankChart({rankWeek}:Props) {
         data: rankWeek
       },
     ]
-  })
+  }
 
   return (
     <ECharts
