@@ -80,9 +80,13 @@ const CarouselCustom = props => {
             <Card
               title={item.title.length <= 23 ? item.title : item.title.substr(0, 23) + "..."}
               content={
-                item.summary.length <= 70 ? item.summary : item.summary.substr(0, 70) + "..."
+                item.summary
+                  ? item.summary.length <= 70
+                    ? item.summary
+                    : item.summary.substr(0, 70) + "..."
+                  : null
               }
-              src={item.thumbnailLink || item.thumbnail_link}
+              src={item.thumbnailLink || item.thumbnail}
               link={item.link}
               key={idx}
             />
