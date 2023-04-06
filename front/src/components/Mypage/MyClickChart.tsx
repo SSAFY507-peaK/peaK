@@ -16,7 +16,7 @@ function MyClickChart({userName, userClick}:Props) {
       score={`${userClick.myTotaldata}회`}
       title="클릭 수"
       icon={<Icon />}
-      data={<ChartComponent idoldata={userClick} />}
+      data={<ChartComponent name={"클릭 수"} idoldata={userClick} />}
     />
   )
 }

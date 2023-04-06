@@ -11,14 +11,13 @@ interface Props {
 }
 
 function MyVisitChart({userName, userTime}:Props) {
-  // const visitedTime:number = 51
   return (
     <ChartFrameComponent
       score={`${userTime.myTotaldata}분`}
       title="방문 시간"
       mr="0px"
       icon={<Icon />}
-      data={<ChartComponent idoldata={userTime} />}
+      data={<ChartComponent name={"방문 시간"} idoldata={userTime} />}
     />
   )
 }

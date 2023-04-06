@@ -11,13 +11,13 @@ interface Props {
 }
 
 function MyChatChart({userName, userChat}:Props) {
-  // const dayCount:number = 5
   return (
     <ChartFrameComponent
       score={`${userChat.myTotaldata}일`}
       title="응원 댓글 참여일"
       icon={<Icon />}
-      data={<ChartComponent idoldata={userChat} />}
+      data={<ChartComponent name={"댓글 수"} idoldata={userChat} />}
+      
     />
   )
 }
