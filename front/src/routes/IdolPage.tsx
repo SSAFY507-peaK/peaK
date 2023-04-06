@@ -12,6 +12,8 @@ import styled from "styled-components";
 import {useAppDispatch, useAppSelector} from "../_hooks/hooks";
 // import { useEffect } from "react";
 import {useParams} from "react-router-dom";
+import { CreateIdolChat } from "../_store/slices/IdolDetailChatSlice";
+import { CreateTOKEN } from "../_store/slices/UserSlice";
 
 const Wrapper = styled.div`
   display: flex;
@@ -45,8 +47,12 @@ function IdolPage() {
 
   const dispatch = useAppDispatch()
 
+  /** 관심 아이돌 댓글 Store에 저장 */
+  request("get", `/idol/${idolName}/comment`).then(res => dispatch(CreateIdolChat(res)))
+  
   /** 차트관련 정보 Store에 저장 */
-  request("get", `/idol/${idolName}/pos-neg` ).then(res =>  dispatch(CreatePosNegWeek(res)))
+  // request("get", `/idol/${idolName}/pos-neg` ).then(res =>  dispatch(CreatePosNegWeek(res)))
+  request("get", `/idol/${idolName}/pos-neg` ).then(res =>  res.posNegWeek.length ? dispatch(CreatePosNegWeek(res)) : dispatch(CreateNewsData({posNegWeek:{pos: 0, neg: 0}})))
   // request("get", `/peak/weekly/${idolName}`).then(res => dispatch(CreateIdolRank(res)))
   
   /** 뉴스관련 정보 Store에 저장 */
