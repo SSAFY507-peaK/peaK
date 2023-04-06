@@ -42,7 +42,7 @@ const MainGrid = styled.div`
 function MainPage() {
   const TrendNewsList = useLoaderData() as TrendNewsListType[];
 
-  const CarouselData = (
+  const CarouselNewsData = (
     <CarouselDiv>
       <CarouselCustom data={TrendNewsList[0]} />
     </CarouselDiv>
@@ -68,7 +68,7 @@ function MainPage() {
         }
       />
       <TitleContent
-        data={CarouselData}
+        data={CarouselNewsData}
         gridColumn="1 / 3"
         noContentBackground={true}
         title={
