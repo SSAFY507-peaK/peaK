@@ -1,15 +1,16 @@
+import {CreateNickname, CreateTOKEN, CreateUserId} from "../_store/slices/UserSlice";
+import ReactGA, { ga } from "react-ga";
+import {useDispatch, useSelector} from "react-redux";
+
 import MenuBar from "../components/LayoutPage/MenuBar";
+import {RootState} from "../_store/store";
 import RouteChangeTracker from "../_utils/RouteChangeTracker";
 import Wrapper from "../components/LayoutPage/Wrapper";
 import styled from "styled-components";
-import {useSearchParams} from "react-router-dom";
-import {useDispatch, useSelector} from "react-redux";
-import {useNavigate} from "react-router";
-import {RootState} from "../_store/store";
-import {useEffect} from "react";
-import {CreateNickname, CreateTOKEN, CreateUserId} from "../_store/slices/UserSlice";
-import ReactGA from "react-ga";
 import {useAppSelector} from "../_hooks/hooks";
+import {useEffect} from "react";
+import {useNavigate} from "react-router";
+import {useSearchParams} from "react-router-dom";
 
 // const Background = styled.div`
 //   width: 100vw;
@@ -44,12 +45,14 @@ function Layout() {
       dispatch(CreateTOKEN(query.get('token')));
       dispatch(CreateUserId(query.get('userId')));
       dispatch(CreateNickname(query.get('nickname')));
-      ReactGA.set({ userId: userId });
+      // ReactGA.set({ userId: userId });
+      ga('set', 'userId', userId)
       window.history.pushState({}, "", "/")
     }
     else {
       if (token !== "") {
-        ReactGA.set({ userId: userId });
+        // ReactGA.set({ userId: userId });
+        ga('set', 'userId', userId)
       }
       else {
         navigate('/intro');
