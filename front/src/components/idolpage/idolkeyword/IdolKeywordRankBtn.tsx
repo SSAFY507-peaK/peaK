@@ -16,7 +16,7 @@ const Frame = styled.div<FrameType>`
   flex-direction: row;
   background: ${props => props.isClick ?`rgba(235, 221, 243, 0.6)`: null};
   opacity: ${props => props.isClick ? null : 0.5 };
-  height: 40px;
+  height: 38px;
   width: 100%;
   padding: 5px;
   border-radius: 30px;
@@ -39,14 +39,18 @@ const RankFrame = styled.div`
   background: linear-gradient(151.76deg, #A869CD 9.32%, #76349D 84.76%);
   border-radius: 50%;
   color: white;
-  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  //text-align: center;
   padding: 5px;
 `;
 
 const TextFrame = styled.div`
   flex: 1;
   text-align: left;
-  margin-left: 20px;
+  margin-left: 15px;
+  font-size: 14px;
 `;
 
 
