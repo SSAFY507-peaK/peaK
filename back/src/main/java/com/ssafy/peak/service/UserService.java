@@ -6,7 +6,6 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
@@ -259,15 +258,9 @@ public class UserService {
 			redisUtil.deleteData(key);
 		}
 		long expiration = jwtTokenProvider.getExpiration(token);
-
-		log.info("logout | expiration: {}", expiration);
-
-		Date now = new Date();
-		redisUtil.setDataExpire(token, token, expiration - now.getTime());
-
-		log.info("logout | expiration - now.getTime(): {}", expiration - now.getTime());
-
+		redisUtil.setDataExpire(token, token, expiration);
 		SecurityContextHolder.getContext().setAuthentication(null);
+
 		log.info("로그아웃 유저 이메일 : '{}'", jwtTokenProvider.getEmailFromClaims(claims));
 	}
 

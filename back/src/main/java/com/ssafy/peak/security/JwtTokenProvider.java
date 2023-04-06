@@ -81,7 +81,7 @@ public class JwtTokenProvider implements InitializingBean {
 		}
 		String token = Jwts.builder()
 			.setSubject(customOAuth2User.getName()) // user id
-			.claim(Utils.AUTHENTICATION, authentication) // authentication 저장
+			// .claim(Utils.AUTHENTICATION, authentication) // authentication 저장
 			.claim(Utils.EMAIL, customOAuth2User.getEmail())    // 이메일 정보 저장
 			.claim(Utils.ROLE, customOAuth2User.getRole()) // 권한 정보 저장
 			.setIssuedAt(now) // 액세스 토큰 발행 시간

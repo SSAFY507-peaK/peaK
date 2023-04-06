@@ -46,7 +46,7 @@ public class JwtAuthenticationFilter extends GenericFilterBean {
 			}
 		} else {
 			// 로그아웃한 사용자는 redis에 key가 access token인 값을 넣어두었음
-			log.debug("로그아웃한 사용자입니다. 새로 로그인해야 합니다., uri: {}", requestURI);
+			log.info("로그아웃한 사용자입니다. 새로 로그인해야 합니다., uri: {}", requestURI);
 		}
 		filterChain.doFilter(servletRequest, servletResponse);    // filterChain에서 다음 필터를 호출
 	}
