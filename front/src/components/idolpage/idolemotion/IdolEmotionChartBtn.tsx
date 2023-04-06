@@ -20,26 +20,26 @@ const ButtonFrameOn = styled.div`
   display: flex;
   flex-direction: column;
   /* align-items: center; */
-  justify-content: center;
+  justify-content: flex-end;
   background: linear-gradient(130.91deg, #A869CD 7.03%, #76349D 91.83%);
   border-radius: 15px;
   width: 85%;
   flex: 0.45;
   cursor: pointer;
-  padding-left: 25px;
+  padding: 20px;
 `;
 
 const ButtonFrameOff = styled.div`
   display: flex;
   flex-direction: column;
   /* align-items: center; */
-  justify-content: center;
+  justify-content: flex-end;
   background: white;
   border-radius: 15px;
   width: 85%;
   flex: 0.45;
   cursor: pointer;
-  padding-left: 25px;
+  padding: 20px;
 `;
 
 const TextFrame = styled.div`

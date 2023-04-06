@@ -9,8 +9,8 @@ import IdolYoutube from "../components/idolpage/IdolYoutube";
 import { TimeTracker } from "../_utils/UserTracker";
 import { request } from "../_utils/axios";
 import styled from "styled-components";
-import { useAppDispatch } from "../_hooks/hooks";
-import { useEffect } from "react";
+import {useAppDispatch, useAppSelector} from "../_hooks/hooks";
+// import { useEffect } from "react";
 import {useParams} from "react-router-dom";
 
 const Wrapper = styled.div`
@@ -35,11 +35,13 @@ const BottomFrame = styled.div`
 `;
 export type IdolNameProps = {
   idolName: string;
+  favIdols?: string[];
 }
 function IdolPage() {
   const params = useParams();
   const idolName = params.idolName || "";
-  TimeTracker(`/${idolName}`)
+  TimeTracker(`/${idolName}`);
+  // const favIdols = useAppSelector(state => state.myInterest.idols.map(idol => idol.idol));
 
   const dispatch = useAppDispatch()
 
