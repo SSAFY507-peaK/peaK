@@ -25,15 +25,6 @@ function TrendingPage() {
   const TrendNewsList = useLoaderData() as TrendNewsListType[];
   return (
     <MainDiv>
-      {/* <CommonDiv
-        type={false}
-        firstWord="트렌딩"
-        secondWord="뉴스"
-        ratio="0.7"
-        mr={true}
-        h={true}
-        data={<TrendingNews data={TrendNewsList} />}
-      /> */}
       <CommonDiv
         type={false}
         firstWord="트렌딩"
