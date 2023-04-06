@@ -50,7 +50,7 @@ function Layout() {
       window.history.pushState({}, "", "/")
     }
     else {
-      if (token !== "") {
+      if (token !== "" || token !== null) {
         // ReactGA.set({ userId: userId });
         ga('set', userId, userId); // 사용자 ID 설정
       }
