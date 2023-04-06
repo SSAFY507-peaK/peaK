@@ -6,11 +6,13 @@ import axios from "axios";
 const DOMAIN = process.env.REACT_APP_BASE_URL + "/api"
 // const DOMAIN = process.env.REACT_APP_BASE_URL
 axios.defaults.withCredentials = true; // 쿠키 데이터를 전송받기 위해
-export async function request(method:string, url:string, data?:any) {
+export async function request(method:string, url:string, data?:any, headers?:any) {
+  console.log(data)
   let response: any
   await axios({
     method,
     url: DOMAIN + url,
+    headers,
     data
   })
     .then((res) => response = res.data)

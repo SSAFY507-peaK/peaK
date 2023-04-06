@@ -36,36 +36,6 @@ const ChartFrame = styled.div`
   height: 30vh;
   border-radius: 20px;
 `;
-const tmp:PosNeg[] = [
-  {
-    pos:80,
-    neg:20
-  },
-  {
-    pos:80,
-    neg:20
-  },
-  {
-    pos:80,
-    neg:20
-  },
-  {
-    pos:80,
-    neg:20
-  },
-  {
-    pos:80,
-    neg:20
-  },
-  {
-    pos:80,
-    neg:20
-  },
-  {
-    pos:80,
-    neg:20
-  },    
-]
 
 const tmp2:WeeklyRankingType = {
 	current: {
@@ -113,8 +83,7 @@ function IdolEmotion() {
   const userId:string = useAppSelector(state => state.userInfo.userId)
   const posNeg:PosNeg[] = useAppSelector(state => state.idolDetailChart.posNegWeek)
   // const rankData:WeeklyRankingType = useAppSelector(state => state.idolDetailChart.rankData)
-  console.log(posNeg[0])
-
+  console.log(posNeg)
 
   return(
     <DataFrame>

@@ -1,7 +1,6 @@
 import { NewsType, WordCloud } from "../../_utils/Types";
 
 import { createSlice } from "@reduxjs/toolkit";
-import { request } from "../../_utils/axios";
 
 export const idolDetailNews = createSlice({
   name: "idolDetailNews",

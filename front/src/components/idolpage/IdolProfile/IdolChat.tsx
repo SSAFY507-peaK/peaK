@@ -1,4 +1,4 @@
-import { Comments, UserInfo } from "../../../_utils/Types";
+import { Comment, Comments, UserInfo } from "../../../_utils/Types";
 import { MouseEvent, useState } from "react";
 
 import { ClickTracker } from "../../../_utils/UserTracker";
@@ -6,8 +6,10 @@ import { PurpleButton } from "../../Button";
 import TitleComponent from "../TitleComponent";
 import { request } from "../../../_utils/axios";
 import styled from "styled-components";
-import { useAppSelector } from "../../../_hooks/hooks";
+import { useAppDispatch, useAppSelector } from "../../../_hooks/hooks";
 import { useParams } from "react-router";
+import axios from "axios";
+import { CreateIdolChat } from "../../../_store/slices/IdolDetailChatSlice";
 
 const Wrapper = styled.div`
   display: flex;
@@ -69,47 +71,35 @@ const ChatInput = styled.input`
 
 
 function IdolChat() {
-  const [comments, setComments] = useState<any[]>([])
+  // const [comments, setComments] = useState<any[]>([])
   const params = useParams();
   const idolName:string = params.idolName || "";
   const [todayComment, setTodayComment] = useState<string>("")
   const userInfo:UserInfo = useAppSelector(state => state.userInfo)
   const userId:string = useAppSelector(state => state.userInfo.userId)
-  
-  let tmp = []
-  for (let i=0 ; i < 30; i++) {
-    tmp.push({
-      nickname: "사랑아럿뜰해",
-      content: "와 고잉은 따라올 수가 없다. 진짜 최고인듯"
-    })
-  }
-  if(comments.length === 0) {
-    setComments(tmp)
-  }
-  // // 아이돌 채팅 목록 가자오기
-  // const [comments, setComments] = useState<Comments>(null)
-  // request("get", `/${idolName}/comment`).then(res => comments ? null :setComments(res.comments))
-  
+    // // 아이돌 채팅 목록 가자오기
+  const comments:Comment[] = useAppSelector(state => state.idolDetailChat.comments)
+  const dispatch = useAppDispatch()
+
   // 아이돌 입력 채팅 등록
   const handleSubmit = async (e:any) => {
     e.preventDefault()
 
-    // 더미 데이터
-    const data = { nickname:userInfo.nickname, content:todayComment }
-    const tmp = [data, ...comments]
-    setComments(tmp)
+    const data = {content: todayComment} 
+    const headers = {Authorization:userInfo.TOKEN }
 
-    // const data = {
-    //   Header: {Authorization: userInfo.TOKEN},
-    //   Body: {content: todayComment} 
-    // }
-    // request("post", `/user/comment/${idolName}`, data)
-    //   .then(res => {
-    //     setComments([])
-    //     alert(res.message)
-    //     request("get", `/${idolName}/comment`).then(res => comments ? null :setComments(res.comments))
-    //   })
-    //   .catch(err => console.log(err))
+    request("post", `/user/comment/${idolName}`, data, headers)
+      .then(res => {
+        console.log(res)
+        if (res){
+          alert(res.message)
+          request("get", `/idol/${idolName}/comment`).then(res => dispatch(CreateIdolChat(res)))
+        }
+        else {
+          alert("응원은 하루에 한 번! 내일 또 봐요😉")
+        }
+      })
+      .catch(err => console.log(err))
 
     ClickTracker(idolName, userId)
     setTodayComment("")
