@@ -70,8 +70,7 @@ const NewsDiv = styled.div`
 `;
 
 const NewsMainProfile = styled.div<NewsProfileType>`
-  background-image: url("https://ssl.pstatic.net/mimgnews/image/016/2023/04/06/20230405000860_0_20230406104220577.jpg?type=w540");
-  /* background-image: url(${props => props.url}); */
+  background-image: url(${props => props.url});
   width: 98%;
   height: 15vw;
   background-size: cover;
@@ -80,8 +79,7 @@ const NewsMainProfile = styled.div<NewsProfileType>`
 `;
 
 const NewsSubProfile = styled.div<NewsProfileType>`
-  background-image: url("https://ssl.pstatic.net/mimgnews/image/016/2023/04/06/20230405000860_0_20230406104220577.jpg?type=w540");
-  /* background-image: url(${props => props.url}); */
+  background-image: url(${props => props.url});
   width: 65%;
   height: 15vh;
   background-size: cover;
@@ -90,8 +88,7 @@ const NewsSubProfile = styled.div<NewsProfileType>`
 `;
 
 const NewsProfile = styled.div<NewsProfileType>`
-  background-image: url("https://ssl.pstatic.net/mimgnews/image/016/2023/04/06/20230405000860_0_20230406104220577.jpg?type=w540");
-  /* background-image: url(${props => props.url}); */
+  background-image: url(${props => props.url});
   width: 25%;
   height: 8vw;
   background-size: cover;
