@@ -74,11 +74,10 @@ public class YouTubeService {
 
 		log.info("searchYouTube | youTubeDtoList: {}", youTubeDtoList);
 
-		if (redisUtil.getYouTubeSearchList(keyword) == null) {
+		if (youTubeDtoList == null) {
 			// 검색 기록이 없으면 youtube api 요청해서 redis에 저장 후 return
 			try {
-				YouTube.Search.List search = youtube.search().list(Collections.singletonList(Utils.SNIPPET));
-				// search.setLocation("https://www.googleapis.com/youtube/v3/search");
+				YouTube.Search.List search = youtube.search().list(Collections.singletonList(Utils.PART));
 				search.setKey(YOUTUBE_APIKEY);    // youtube api key 설정
 				search.setQ(keyword);    // 검색어 설정
 				search.setType(Collections.singletonList(YOUTUBE_SEARCH_TYPE));    // 검색 타입 설정
@@ -87,6 +86,9 @@ public class YouTubeService {
 				SearchListResponse searchResponse = search.execute();
 
 				List<SearchResult> searchResultList = searchResponse.getItems();
+
+				log.info("searchResultList: {}", searchResultList);
+
 				if (!CollectionUtils.isEmpty(searchResultList)) {
 					for (SearchResult searchResult : searchResultList) {
 						YouTubeDto youTubeDto = YouTubeDto.builder()

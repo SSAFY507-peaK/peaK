@@ -31,7 +31,7 @@ public class Utils {
 	public static final String USER_ID = "userId";
 
 	public static final String IDOL = "아이돌";
-	public static final String SNIPPET = "snippet";
+	public static final String PART = "id,snippet";
 
 	public static final long ONE_DAY = 86400L;
 
