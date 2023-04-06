@@ -52,7 +52,8 @@ const Menu = styled.div`
   > * {
     display: flex;
     align-items: center;
-    padding: 15px 0 15px 30px;
+    padding: 10px 0 10px 30px;
+    margin-bottom: 5px;
 
     &:hover {
       font-weight: 600;
@@ -133,4 +134,4 @@ function MenuBar({ nickname }: MenuBarProps) {
   );
 }
 
-export default MenuBar;
+export default React.memo(MenuBar);

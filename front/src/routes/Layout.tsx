@@ -1,9 +1,8 @@
 import {CreateNickname, CreateTOKEN, CreateUserId} from "../_store/slices/UserSlice";
-import ReactGA, { ga } from "react-ga";
-import {useDispatch, useSelector} from "react-redux";
+import { ga } from "react-ga";
+import {useDispatch } from "react-redux";
 
 import MenuBar from "../components/LayoutPage/MenuBar";
-import {RootState} from "../_store/store";
 import RouteChangeTracker from "../_utils/RouteChangeTracker";
 import Wrapper from "../components/LayoutPage/Wrapper";
 import styled from "styled-components";
@@ -11,6 +10,7 @@ import {useAppSelector} from "../_hooks/hooks";
 import {useEffect} from "react";
 import {useNavigate} from "react-router";
 import {useSearchParams} from "react-router-dom";
+import axios from "axios";
 
 // const Background = styled.div`
 //   width: 100vw;
@@ -31,34 +31,58 @@ const Frame = styled.div`
   width: 100vw;
   display: flex;
 `;
+const BASE_URL = process.env.REACT_APP_BASE_URL;
 
 /** nav바랑 footer를 담는 페이지. 아래 Outlet에 진짜 페이지들이 렌더링됩니다. */
 function Layout() {
   const [query, setQuery] = useSearchParams();
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  let userId = useSelector((state:RootState) => state.userInfo.userId);
-  let token = useSelector((state:RootState) => state.userInfo.TOKEN);
+  let userId = useAppSelector(state => state.userInfo.userId);
+  let token = useAppSelector(state => state.userInfo.TOKEN);
   let nickname = useAppSelector(state => state.userInfo.nickname)
   useEffect(() => {
-    if (query.get('token')) {
+    if (query.get('token')) {   // 로그인 후에는 query에 token이 들어있으므로 그 값을 저장하자.
       dispatch(CreateTOKEN(query.get('token')));
       dispatch(CreateUserId(query.get('userId')));
       dispatch(CreateNickname(query.get('nickname')));
       // ReactGA.set({ userId: userId });
-      ga('set', userId, userId); // 사용자 ID 설정
+      // ga('set', userId, userId); // 사용자 ID 설정
       window.history.pushState({}, "", "/")
     }
     else {
-      if (token !== "" || token !== null) {
+      if (token) {   // 토큰이 있으면 토큰 유효성을 검사하자
+        axios.post(`${BASE_URL}/api/user/reissue`, {}, {
+          headers: {
+            Authorization: token
+          }
+        })
+          .then(response => {
+            // console.log(response.data)
+            return response.data.token
+          })
+          .then(token => {
+            const TOKEN = `Bearer ${token}`
+            dispatch(CreateTOKEN(TOKEN));
+            // ga('set', userId, userId); // 사용자 ID 설정
+          })
+          .catch(error => {
+            console.log(error);
+            window.localStorage.clear();
+            navigate('/intro');
+          })
         // ReactGA.set({ userId: userId });
-        ga('set', userId, userId); // 사용자 ID 설정
       }
-      else {
+      else {    // 토큰이 없으면 intro로 보내버리자.
         navigate('/intro');
       }
     }
-  }, [dispatch, navigate, query, token, userId]);
+  }, [navigate]);
+
+  useEffect(() => {
+    userId.length? ga('set', userId, userId) : navigate('/intro');
+    // console.log("userId 변경!");
+  }, [userId])
 
   RouteChangeTracker();
 
