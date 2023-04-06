@@ -77,7 +77,7 @@ type MenuBarProps = {
 }
 function MenuBar({ nickname }: MenuBarProps) {
   const favIdols = useAppSelector(state => state.userInfo.favIdols);
-  const randomIdol = favIdols[Math.floor(Math.random() * favIdols.length)];
+  const randomIdol = favIdols.length ? favIdols[Math.floor(Math.random() * favIdols.length)] : "BTS"
   return (
     <MenuBackground>
       <MenuSection>
