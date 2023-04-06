@@ -46,13 +46,13 @@ function Layout() {
       dispatch(CreateUserId(query.get('userId')));
       dispatch(CreateNickname(query.get('nickname')));
       // ReactGA.set({ userId: userId });
-      ga('set', 'userId', userId)
+      ga('set', 'userId', userId); // 사용자 ID 설정
       window.history.pushState({}, "", "/")
     }
     else {
       if (token !== "") {
         // ReactGA.set({ userId: userId });
-        ga('set', 'userId', userId)
+        ga('set', 'userId', userId); // 사용자 ID 설정
       }
       else {
         navigate('/intro');

@@ -8,6 +8,7 @@ import Rank6 from "../../assets/6.png";
 import Rank7 from "../../assets/7.png";
 import Rank8 from "../../assets/8.png";
 import styled from "styled-components";
+import { useAppSelector } from "../../_hooks/hooks";
 import { useNavigate } from "react-router";
 
 type IdolImgType = {
@@ -74,11 +75,13 @@ function Logo(rank: number) {
 /** rank, name, img 필요 */
 function IdolRank(props: IdolRankType) {
   const navigate = useNavigate();
+  const userId:string = useAppSelector(state => state.userInfo.userId)
+
   return (
     <WrapperDiv
       onClick={() => {
         navigate(`/${props.name}`);
-        ClickTracker(props.name);
+        ClickTracker(props.name, userId);
       }}
     >
       {Logo(props.rank)}

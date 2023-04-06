@@ -8,6 +8,7 @@ import IdolEmotionChartBtn from "./IdolEmotionChartBtn";
 import IdolEmotionRankChart from "./IdolEmotionRankChart";
 import { request } from '../../../_utils/axios';
 import styled from "styled-components";
+import { useAppSelector } from '../../../_hooks/hooks';
 import { useParams } from 'react-router';
 
 const DataFrame = styled.div`
@@ -110,6 +111,7 @@ function IdolEmotion() {
 
   const [rankData, setRankData] = useState<WeeklyRankingType>(tmp2)
   const [posNegWeek, setPosNegWeek] = useState<PosNeg[]>(tmp)
+  const userId:string = useAppSelector(state => state.userInfo.userId)
 
   useEffect(() => {
     async function Loader() {
@@ -141,7 +143,7 @@ function IdolEmotion() {
           changenum={3} 
           title="종합랭킹" 
           onClick={() => {
-            ClickTracker(idolName)
+            ClickTracker(idolName, userId)
             return (
               !check ? setCheck(true) : null
             )
@@ -154,7 +156,7 @@ function IdolEmotion() {
           changenum={3} 
           title="긍정지수" 
           onClick={() => {
-            ClickTracker(idolName)
+            ClickTracker(idolName, userId)
             return (
               check? setCheck(false) : null
             )
