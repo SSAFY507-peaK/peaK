@@ -1,4 +1,4 @@
-import ReactGA, { EventArgs } from "react-ga";
+import ReactGA, { EventArgs, ga } from "react-ga";
 
 import { useAppSelector } from "../_hooks/hooks";
 
