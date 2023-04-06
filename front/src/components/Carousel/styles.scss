@@ -28,7 +28,7 @@ $card-size: 20rem;
 
 .card-container {
   position: absolute;
-  width: 100%;
+  width: 90%;
   height: 100%;
   transform: rotateY(calc(var(--offset) * 40deg)) scaleY(calc(1 + var(--abs-offset) * -0.3))
     translateZ(calc(var(--abs-offset) * -25rem)) translateX(calc(var(--direction) * -4rem));
