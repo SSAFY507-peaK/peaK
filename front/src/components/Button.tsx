@@ -55,6 +55,13 @@ const BlueButton = styled(Button)`
   }
 `
 
+const GrayButton = styled(Button)`
+  background: var(--gray-gradient);
+  &:hover {
+    background-color: var(--gray-gradient-hover);
+  }
+`
+
 const CloseButton = styled.button`
   height: 20px;
   width: 20px;
@@ -67,4 +74,4 @@ const CloseButton = styled.button`
   right: 0;
 `
 
-export { PurpleButton, RedButton, BlueButton, CloseButton };
+export { PurpleButton, RedButton, BlueButton, GrayButton, CloseButton };

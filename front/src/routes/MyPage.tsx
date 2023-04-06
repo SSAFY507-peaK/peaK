@@ -1,4 +1,4 @@
-import { MouseEvent, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { CreateMyInterest } from '../_store/slices/InterestSlice';
 import DriveFileRenameOutlineOutlinedIcon from '@mui/icons-material/DriveFileRenameOutlineOutlined';
@@ -11,8 +11,14 @@ import TitleComponent from "../components/idolpage/TitleComponent";
 import TotalChart from '../components/Mypage/TotalChart';
 import sampleData from "../components/Mypage/sampleData.json"
 import styled from "styled-components";
-import { useAppDispatch } from '../_hooks/hooks';
-import { useParams } from "react-router-dom";
+import {useAppDispatch, useAppSelector} from '../_hooks/hooks';
+import {useNavigate, useParams} from "react-router-dom";
+import {MessageDiv, NicknameInput} from "../components/SignUpPage/NicknameComponents";
+import {BlueButton, PurpleButton, GrayButton} from "../components/Button";
+import {InputWrapper} from "../components/SignUpPage/SignUpComponents";
+import axios from "axios";
+import {CreateNickname} from "../_store/slices/UserSlice";
+// import {useSelector} from "react-redux";
 
 const Wrapper = styled.div`
   display: flex;
@@ -42,20 +48,23 @@ const BottomFrame = styled.div`
 
 
 /** 클릭시 닉네임 변경 모달창과 함께 닉네임 변경  */
-function handleClick(event: MouseEvent<SVGSVGElement>) {
-  console.log('닉네임 변경 구현할 예정');
-}
+// function handleEditNickname(event: MouseEvent<SVGSVGElement>) {
+//   console.log('닉네임 변경 구현할 예정');
+// }
 
+const BASE_URL = process.env.REACT_APP_BASE_URL;
+type NicknameType = "EU006" | "EU009" | "200" ;
 
 function MyPage() {
   const params = useParams();
   const userName: string = params.userName || "";
-  const [idolName, setIdolName] = useState<string>(sampleData[0].idol)
-  const [index, setIndex] = useState<number>(0)
-  const [idolScoreData, setIdolScoreData] = useState<number[]>([0, 0])
+  const [idolName, setIdolName] = useState<string>(sampleData[0].idol);
+  const [index, setIndex] = useState<number>(0);
+  const [idolScoreData, setIdolScoreData] = useState<number[]>([0, 0]);
   const dispatch = useAppDispatch()
 
-  
+
+
   // 스토어에 데이터 저장
   dispatch(CreateMyInterest(sampleData))
 
@@ -68,20 +77,95 @@ function MyPage() {
       setIndex(newIndex)
     }
   },[idolName])
-  
+
 
   // 선택된 아이돌의 점수 저장
   useEffect(() => {
     if (index >= 0) { // index 값이 올바른지 확인
       setIdolScoreData([sampleData[index].interestScore, sampleData[index].interestAverage])
     }
-  }, [index])
+  }, [index]);
+
+  // 닉네임 수정 관련
+  const [isEditing, setIsEditing] = useState<boolean>(false);
+  const [nickname, setNickname] = useState<string>("");
+  const [message, setMessage] = useState<string>("");
+  const [nicknameCode, setNicknameCode] = useState<NicknameType | undefined>(undefined);
+  const TOKEN = useAppSelector(state => state.userInfo.TOKEN);
+  const navigate = useNavigate();
+
+  /** 닉네임 수정하기 */
+  const handleEditNickname = () => {
+    setIsEditing(true);
+  }
+  /** 닉네임 입력받기 */
+  const handleNickname = (e: React.ChangeEvent<HTMLInputElement>): void => {
+    setNickname(e.target.value);
+    setNicknameCode(undefined);
+    setMessage("");
+  };
+  /** 닉네임 중복확인 */
+  const handleIsValidNickname = (): void => {
+    axios.get(`${BASE_URL}/api/user/nickname/${nickname}`, {
+      headers: {
+        Authorization: TOKEN
+      }
+    })
+      .then(response => {
+        console.log(response.data)
+        const CODE = response.data.code;
+        const MESSAGE = response.data.message;
+        setNicknameCode(CODE);
+        setMessage(MESSAGE);
+      })
+      .catch(error => {
+        console.log(error);
+        const CODE = error.response.data.code;
+        const MESSAGE = error.response.data.message;
+        setNicknameCode(CODE);
+        setMessage(MESSAGE);
+      })
+  };
+  /** 닉네임 변경하기 */
+  const handleSaveNickname = () => {
+    dispatch(CreateNickname(nickname));
+    setNickname("")
+    setMessage("");
+    setNicknameCode(undefined);
+    setIsEditing(false);
+    navigate(`../mypage/${nickname}`, {replace: true})
+  }
+  /** 닉네임 변경 취소 */
+  const handleCancelEditNickname = () => {
+    setNickname("");
+    setMessage("");
+    setNicknameCode(undefined);
+    setIsEditing(false);
+  }
+
+  const Title = <>
+      <TitleComponent id="2" blacktxt="어서오세요, " purpletxt={userName} addtxt=" 님" />
+      <DriveFileRenameOutlineOutlinedIcon sx={{ fontSize: "1.2rem", cursor: "pointer" }} onClick={handleEditNickname} />
+    </>
+  const EditNickname =
+    <InputWrapper>
+      <div>
+        <NicknameInput isValid={nicknameCode} onChange={e => handleNickname(e)} value={nickname} />
+        <MessageDiv isValid={nicknameCode === "200"}>
+          { message }
+        </MessageDiv>
+      </div>
+      <GrayButton width="100px" onClick={ handleCancelEditNickname }>이전으로</GrayButton>
+      {nicknameCode !== "200" && <PurpleButton onClick={ handleIsValidNickname } width="100px">중복 확인</PurpleButton>}
+      {nicknameCode === "200" && <BlueButton onClick={ handleSaveNickname } width="100px">변경하기</BlueButton>}
+    </InputWrapper>
 
   return (
     <Wrapper>
       <TitleFrame>
-        <TitleComponent id="2" blacktxt="어서오세요, " purpletxt={userName} addtxt=" 님" />
-        <DriveFileRenameOutlineOutlinedIcon sx={{ fontSize: "1.2rem", cursor: "pointer" }} onClick={handleClick} />
+        { isEditing ? EditNickname : Title }
+        {/*<TitleComponent id="2" blacktxt="어서오세요, " purpletxt={userName} addtxt=" 님" />*/}
+        {/*<DriveFileRenameOutlineOutlinedIcon sx={{ fontSize: "1.2rem", cursor: "pointer" }} onClick={handleEditNickname} />*/}
       </TitleFrame>
       {
         index > -1
