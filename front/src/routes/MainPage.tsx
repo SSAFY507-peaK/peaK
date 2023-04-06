@@ -52,8 +52,6 @@ function MainPage() {
     TrendNewsListType[],
     TrendYoutubeListType[],
   ];
-  console.log("뉴스리스트", TrendNewsList);
-  console.log("유튜브리스트", TrendYoutubeList);
 
   const CarouselNewsData = (
     <CarouselDiv>

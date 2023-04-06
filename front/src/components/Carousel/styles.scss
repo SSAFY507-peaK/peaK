@@ -2,7 +2,7 @@ $color-purple: #8b5cf6;
 $color-pink: #ec4899;
 $color-gray: #9ca3af;
 $color-black: #1f2937;
-$card-size: 20rem;
+$card-size: 22rem;
 
 //body {
 //  width: 50vw;
@@ -29,7 +29,7 @@ $card-size: 20rem;
 .card-container {
   position: absolute;
   width: 90%;
-  height: 100%;
+  height: 85%;
   transform: rotateY(calc(var(--offset) * 40deg)) scaleY(calc(1 + var(--abs-offset) * -0.3))
     translateZ(calc(var(--abs-offset) * -25rem)) translateX(calc(var(--direction) * -4rem));
   filter: blur(calc(var(--abs-offset) * 0.8rem));
@@ -74,11 +74,11 @@ $card-size: 20rem;
   border: unset;
 
   &.left {
-    transform: translateX(-110%) translatey(-50%);
+    transform: translateX(-110%) translatey(-80%);
   }
 
   &.right {
     right: 0;
-    transform: translateX(0%) translatey(-50%);
+    transform: translateX(0%) translatey(-80%);
   }
 }
