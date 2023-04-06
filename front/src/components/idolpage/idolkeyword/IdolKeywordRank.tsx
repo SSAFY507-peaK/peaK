@@ -45,7 +45,8 @@ function IdolKeywordRank({setChooseKeyword, chooseKeyword}:Props) {
   const params = useParams();
   const idolName:string = params.idolName || "";
   const [check, setCheck] = useState<boolean[]>([true, false, false, false, false])
-  
+  const userId:string = useAppSelector(state => state.userInfo.userId)
+
   return (
     <RankFrame>
       {
@@ -61,7 +62,7 @@ function IdolKeywordRank({setChooseKeyword, chooseKeyword}:Props) {
                   tmp[idx] = true
                   setCheck(tmp)
                   setChooseKeyword(idx)
-                  ClickTracker(idolName)
+                  ClickTracker(idolName, userId)
                 }
               }
               isClick={check[idx]}

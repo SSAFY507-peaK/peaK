@@ -10,18 +10,18 @@ const RankDiv = styled.div`
 
 const RankTopDiv = styled.div`
   width: 100%;
-  flex: 0.55;
+  flex: 0.6;
   display: flex;
   position: relative;
-  justify-content: space-evenly;
+  justify-content: space-around;
 `;
 
 const RankBottomDiv = styled.div`
   width: 100%;
-  flex: 0.45;
+  flex: 0.4;
   display: flex;
   position: relative;
-  justify-content: space-evenly;
+  justify-content: space-around;
 `;
 
 function Top8() {

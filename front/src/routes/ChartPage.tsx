@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from "react";
+import React, {useCallback, useState} from "react";
 import {useLoaderData} from "react-router-dom";
 // import axios from "axios";
 import styled from "styled-components";
@@ -13,7 +13,7 @@ import {
 import { CloseButton } from "../components/Button";
 import ContentDiv from "../components/Content";
 import RankChart from "../components/RankingPage/RankChart";
-import Search from "../components/Search";
+import { SearchInputDiv } from "../components/Search";
 import IdolImgNameContainer from "../components/IdolImgNameContainer";
 
 const BASE_URL = process.env.REACT_APP_BASE_URL;
@@ -39,13 +39,20 @@ const ChartDiv = styled(ContentDiv)`
 `;
 
 const IdolSelectDiv = styled(ContentDiv)`
-  flex: 1;
+  flex: 1 0;
+  & > div {
+    margin-bottom: 20px;
+  }
+  & > div:nth-last-of-type(1) {
+    margin-bottom: 0;
+  }
 `;
 
 function ChartPage() {
   const idolLists = useLoaderData() as IdolListsType;
   const [selectedIdols, setSelectedIdols] = useState<string[]>([]);
   const [selectedChart, setSelectedChart] = useState<ChartIdolObjectType[]>([]);
+  const [searchIdol, setSearchIdol] = useState<string>("");
 
   /** 좋아하는 아이돌을 선택하자 */
   const handleSelectIdol = useCallback((idol: string): void => {
@@ -54,6 +61,7 @@ function ChartPage() {
       return;
     }
     else {
+      // 이거 더미데이터임
       const responseData = {
         current: {
           rank: 1,
@@ -114,6 +122,13 @@ function ChartPage() {
     }
     return returnArr;
   }, [selectedIdols, handleDeleteSelectedIdol]);
+  // showIdols = useCallback(() => {
+  //   const idols = searchIdol.length
+  // })
+  /** 아이돌을 검색해보자 */
+  const handleSearchIdol = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchIdol(e.target.value);
+  }, [])
 
 
   return (
@@ -122,19 +137,31 @@ function ChartPage() {
         <RankChart selectedIdols={selectedIdols} selectedChart={selectedChart}  />
       </ChartDiv>
       <IdolSelectDiv>
-        <Search />
+        <SearchInputDiv handleSearchIdol={handleSearchIdol} />
         <IdolGrid cols={5}>{showSelectIdols()}</IdolGrid>
         <IdolSection>
           <IdolGrid cols={4} gap="20px">
-            {idolLists.idols.map((idol: string) =>
-              <IdolImgNameContainer
-                url={`${BASE_URL}/img/${encodeURIComponent(`${idol}`)}.webp`}
-                width="100%"
-                idol={ idol }
-                onClick={()=> selectedIdols.includes(idol) ? handleDeleteSelectedIdol(idol) : handleSelectIdol(idol)}
-                className={`${selectedIdols.includes(idol) && "selected"}`}
-              />
-            )}
+            { searchIdol.length ?
+              idolLists.idols.map((idol: string) => {
+                return idol.toLocaleLowerCase().includes(searchIdol.toLocaleLowerCase()) &&
+                <IdolImgNameContainer
+                  url={`${BASE_URL}/img/${encodeURIComponent(`${idol}`)}.webp`}
+                  width="100%"
+                  idol={ idol }
+                  onClick={()=> selectedIdols.includes(idol) ? handleDeleteSelectedIdol(idol) : handleSelectIdol(idol)}
+                  className={`${selectedIdols.includes(idol) && "selected"}`}
+                />
+              }) :
+              idolLists.idols.map((idol: string) =>
+                <IdolImgNameContainer
+                  url={`${BASE_URL}/img/${encodeURIComponent(`${idol}`)}.webp`}
+                  width="100%"
+                  idol={ idol }
+                  onClick={()=> selectedIdols.includes(idol) ? handleDeleteSelectedIdol(idol) : handleSelectIdol(idol)}
+                  className={`${selectedIdols.includes(idol) && "selected"}`}
+                />
+              )
+            }
           </IdolGrid>
         </IdolSection>
       </IdolSelectDiv>

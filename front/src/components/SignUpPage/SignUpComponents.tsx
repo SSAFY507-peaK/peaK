@@ -20,6 +20,9 @@ const Description = styled.p`
 // 첫 번째 페이지
 const InputWrapper = styled.div`
   display: flex;
+  & button {
+    margin-right: 15px;
+  }
 `
 // 두 번째 페이지
 /** 아이돌 선택에 대한 설명을 담은 div */
@@ -29,5 +32,11 @@ const DescriptionSection = styled.div`
     margin-right: 15px;
   }
 `
+const SearchSection = styled.div`
+  margin: 10px 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+`
 
-export { Container, PageContainer, Description, InputWrapper, DescriptionSection};
+export { Container, PageContainer, Description, InputWrapper, DescriptionSection, SearchSection};

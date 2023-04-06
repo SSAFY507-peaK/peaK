@@ -74,7 +74,8 @@ function IdolChat() {
   const idolName:string = params.idolName || "";
   const [todayComment, setTodayComment] = useState<string>("")
   const userInfo:UserInfo = useAppSelector(state => state.userInfo)
-
+  const userId:string = useAppSelector(state => state.userInfo.userId)
+  
   let tmp = []
   for (let i=0 ; i < 30; i++) {
     tmp.push({
@@ -110,7 +111,7 @@ function IdolChat() {
     //   })
     //   .catch(err => console.log(err))
 
-    ClickTracker(idolName)
+    ClickTracker(idolName, userId)
     setTodayComment("")
   }
   

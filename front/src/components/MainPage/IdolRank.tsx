@@ -1,3 +1,5 @@
+import { IdolImageNameContainer, IdolName } from "../IdolImgNameContainer";
+
 import { ClickTracker } from "../../_utils/UserTracker";
 import Rank1 from "../../assets/1.png";
 import Rank2 from "../../assets/2.png";
@@ -8,6 +10,7 @@ import Rank6 from "../../assets/6.png";
 import Rank7 from "../../assets/7.png";
 import Rank8 from "../../assets/8.png";
 import styled from "styled-components";
+import { useAppSelector } from "../../_hooks/hooks";
 import { useNavigate } from "react-router";
 
 type IdolImgType = {
@@ -23,6 +26,8 @@ type IdolRankType = {
 
 const WrapperDiv = styled.div`
   display: flex;
+  height: 100%;
+  aspect-ratio: 1;
   flex-direction: column;
   margin: auto 0;
 `;
@@ -31,11 +36,13 @@ const IdolImg = styled.div<IdolImgType>`
   background-image: url(${props => props.url});
   background-size: cover;
   background-position: center;
-  border-radius: 70px;
-  box-shadow: 0px 0px 10px -5px rgb(28, 28, 28);
-  width: ${props => (props.rank <= 3 ? "12vw" : "8vw")};
-  height: ${props => (props.rank <= 3 ? "12vw" : "8vw")};
-  margin: 15px 0px 0px 20px;
+  border-radius: ${props => (props.rank > 3 ? "50%" : "40%")};
+  box-shadow: 0 0 10px -5px rgb(28, 28, 28);
+  // width: ${props => (props.rank <= 3 ? "12vw" : "8vw")};
+  width: 90%;
+  aspect-ratio: 1;
+  // height: ${props => (props.rank <= 3 ? "12vw" : "8vw")};
+  margin: 15px 0 0 30px;
   transition: all 100ms ease-in-out;
   &:hover {
     transform: scale(1.03, 1.03);
@@ -44,10 +51,8 @@ const IdolImg = styled.div<IdolImgType>`
   z-index: 1;
 `;
 
-const NameDiv = styled.div`
+const NameDiv = styled(IdolName)`
   margin-left: 20px;
-  margin-top: 5px;
-  font-size: 15px;
 `;
 
 function Logo(rank: number) {
@@ -72,20 +77,22 @@ function Logo(rank: number) {
 }
 
 /** rank, name, img 필요 */
-function IdolRank(props: IdolRankType) {
+function IdolRank({ url, name, rank }: IdolRankType) {
   const navigate = useNavigate();
+  const userId: string = useAppSelector(state => state.userInfo.userId);
+
   return (
     <WrapperDiv
       onClick={() => {
-        navigate(`/${props.name}`);
-        ClickTracker(props.name);
+        navigate(`/${name}`);
+        ClickTracker(name, userId);
       }}
     >
-      {Logo(props.rank)}
-      <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
-        <IdolImg url={props.url} rank={props.rank} />
-        <NameDiv>{props.name}</NameDiv>
-      </div>
+      {Logo(rank)}
+      <IdolImageNameContainer width="80%">
+        <IdolImg url={url} rank={rank} />
+        <NameDiv>{name}</NameDiv>
+      </IdolImageNameContainer>
     </WrapperDiv>
   );
 }

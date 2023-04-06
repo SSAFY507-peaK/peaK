@@ -1,6 +1,6 @@
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 
-import { IdolLists } from "../_utils/loader";
+// import { IdolLists } from "../_utils/loader";
 import { IdolListsType } from "../_utils/Types";
 import SearchIcon from "@mui/icons-material/Search";
 import UseOnClickOutside from "../_hooks/useOnClickOutside";
@@ -12,12 +12,6 @@ type WrapperType = {
   width?: string;
 };
 
-const SearchDiv = styled.div`
-  display: flex;
-  flex-direction: column;
-  position: relative;
-`;
-
 const Wrapper = styled.div<WrapperType>`
   display: flex;
   align-items: center;
@@ -28,7 +22,6 @@ const Wrapper = styled.div<WrapperType>`
   height: 33px;
   width: ${props => props.width || "300px"};
 `;
-
 const SearchInput = styled.input`
   width: 100%;
   margin: 3px 10px;
@@ -39,16 +32,33 @@ const SearchInput = styled.input`
   }
 `;
 
+const SearchDiv = styled.div`
+  display: flex;
+  flex-direction: column;
+  position: relative;
+`;
 const SearchAllResult = styled.div`
   width: 95%;
   background-color: white;
-  box-shadow: 0px 0px 10px -2px #cfcdcd;
+  box-shadow: 0 0 10px -2px #cfcdcd;
   padding: 5px 10px 10px 10px;
+  border-radius: 5px;
   position: absolute;
   top: 33px;
   left: 5px;
-`;
+  max-height: 300px;
+  overflow-y: auto;
 
+  &::-webkit-scrollbar {
+    width: 5px;
+    border-radius: 4px;
+    background-color: rgba(255, 255, 255, 0.8);
+  }
+  &::-webkit-scrollbar-thumb {
+    border-radius: 4px;
+    background: var(--gray700-color);
+  }
+`;
 const SearchResultDiv = styled.div`
   cursor: pointer;
   font-size: 13px;
@@ -63,7 +73,7 @@ const SearchResultDiv = styled.div`
   }
 `;
 
-function Search({ width }: WrapperType) {
+function SearchList({ width }: WrapperType) {
   const [search, setSearch] = useState("");
   const [isClicked, setIsClicked] = useState(false);
   const searchRef = useRef<any>();
@@ -76,7 +86,7 @@ function Search({ width }: WrapperType) {
     setIsClicked(true);
   };
 
-  const onClick = (e: any) => {
+  const onClick = () => {
     setIsClicked(true);
   };
 
@@ -119,4 +129,16 @@ function Search({ width }: WrapperType) {
   );
 }
 
-export default Search;
+type SearchInputDivProps = {
+  handleSearchIdol: (value: React.ChangeEvent<HTMLInputElement>) => void;
+}
+function SearchInputDiv ({handleSearchIdol}: SearchInputDivProps) {
+  return (
+    <Wrapper style={{flexShrink: "0"}}>
+      <SearchInput onChange={e => handleSearchIdol(e)} placeholder="아이돌 이름을 입력해주세요" />
+      <SearchIcon sx={{ color: "var(--gray600-color)" }} />
+    </Wrapper>
+  );
+}
+
+export { SearchList, SearchInputDiv };
