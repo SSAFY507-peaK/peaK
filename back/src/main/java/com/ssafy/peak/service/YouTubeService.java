@@ -1,6 +1,7 @@
 package com.ssafy.peak.service;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -39,7 +40,7 @@ public class YouTubeService {
 	// GET https://www.googleapis.com/youtube/v3/search
 	private static final HttpTransport HTTP_TRANSPORT = new NetHttpTransport();
 	private static final JsonFactory JSON_FACTORY = new JacksonFactory();
-	private static final long NUMBER_OF_VIDEOS_RETURNED = 10;
+	private static final long NUMBER_OF_VIDEOS_RETURNED = 30;
 	private static final String GOOGLE_YOUTUBE_URL = "https://www.youtube.com/watch?v=";
 	@Value("${youtube.search.type}")
 	private String YOUTUBE_SEARCH_TYPE;
@@ -70,11 +71,11 @@ public class YouTubeService {
 			}
 		}).setApplicationName(YOUTUBE_API_APPLICATION).build();
 
-		List<YouTubeDto> youTubeDtoList = (List<YouTubeDto>)redisUtil.getYouTubeSearchList(keyword);
+		List<YouTubeDto> youTubeDtoList = new ArrayList<>();
 
 		log.info("searchYouTube | youTubeDtoList: {}", youTubeDtoList);
 
-		if (youTubeDtoList == null) {
+		if (redisUtil.getYouTubeSearchList(keyword) == null) {
 			// 검색 기록이 없으면 youtube api 요청해서 redis에 저장 후 return
 			try {
 				YouTube.Search.List search = youtube.search().list(Collections.singletonList(Utils.PART));
@@ -110,6 +111,8 @@ public class YouTubeService {
 			} catch (Throwable t) {
 				t.printStackTrace();
 			}
+		} else {
+			youTubeDtoList = (List<YouTubeDto>)redisUtil.getYouTubeSearchList(keyword);
 		}
 		return youTubeDtoList;
 	}
