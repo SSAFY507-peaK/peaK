@@ -1,3 +1,5 @@
+import { IdolImageNameContainer, IdolName } from "../IdolImgNameContainer";
+
 import { ClickTracker } from "../../_utils/UserTracker";
 import Rank1 from "../../assets/1.png";
 import Rank2 from "../../assets/2.png";
@@ -10,7 +12,6 @@ import Rank8 from "../../assets/8.png";
 import styled from "styled-components";
 import { useAppSelector } from "../../_hooks/hooks";
 import { useNavigate } from "react-router";
-import {IdolName, IdolImageNameContainer} from "../IdolImgNameContainer";
 
 type IdolImgType = {
   url: string;
@@ -35,7 +36,7 @@ const IdolImg = styled.div<IdolImgType>`
   background-image: url(${props => props.url});
   background-size: cover;
   background-position: center;
-  border-radius: ${props => (props.rank > 3) ? "50%" : "40%"};
+  border-radius: ${props => (props.rank > 3 ? "50%" : "40%")};
   box-shadow: 0 0 10px -5px rgb(28, 28, 28);
   // width: ${props => (props.rank <= 3 ? "12vw" : "8vw")};
   width: 90%;
@@ -76,15 +77,15 @@ function Logo(rank: number) {
 }
 
 /** rank, name, img 필요 */
-function IdolRank({url, name, rank}: IdolRankType) {
+function IdolRank({ url, name, rank }: IdolRankType) {
   const navigate = useNavigate();
-  const userId:string = useAppSelector(state => state.userInfo.userId)
+  const userId: string = useAppSelector(state => state.userInfo.userId);
 
   return (
     <WrapperDiv
       onClick={() => {
-        navigate(`/${props.name}`);
-        ClickTracker(props.name, userId);
+        navigate(`/${name}`);
+        ClickTracker(name, userId);
       }}
     >
       {Logo(rank)}
