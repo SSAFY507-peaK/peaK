@@ -42,5 +42,6 @@ public class NewsService {
 			.findByIndexAndDateTimeAndIdol(index, dateTime, idol)
 			.orElseThrow(() -> new CustomException(CustomExceptionType.NEWS_NOT_FOUND));
 		news.getWordCounter().putAll(wordCounter);
+		newsRepository.save(news);
 	}
 }
