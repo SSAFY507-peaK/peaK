@@ -11,6 +11,7 @@ import PersonIcon from "@mui/icons-material/Person";
 import { SearchList } from "../Search";
 import TrendingUpIcon from "@mui/icons-material/TrendingUp";
 import styled from "styled-components";
+import {useAppSelector} from "../../_hooks/hooks";
 
 const MenuBackground = styled.nav`
   flex: 1 0 250px;
@@ -75,6 +76,8 @@ type MenuBarProps = {
   nickname: string;
 }
 function MenuBar({ nickname }: MenuBarProps) {
+  const favIdols = useAppSelector(state => state.userInfo.favIdols);
+  const randomIdol = favIdols[Math.floor(Math.random() * favIdols.length)];
   return (
     <MenuBackground>
       <MenuSection>
@@ -89,7 +92,7 @@ function MenuBar({ nickname }: MenuBarProps) {
             </NavLink>
           </Menu>
           <Menu>
-            <NavLink to="/BTS" className={({ isActive }) => (isActive ? "active" : "")}>
+            <NavLink to={`/${randomIdol}`} className={({ isActive }) => (isActive ? "active" : "")}>
               <FavoriteIcon style={style} />
               관심 아이돌
             </NavLink>

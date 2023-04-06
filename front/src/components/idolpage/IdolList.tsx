@@ -55,7 +55,7 @@ function IdolList({ idolName }: IdolNameProps) {
   const [isClicked, setIsClicked] = useState(false);
   const DropDownRef = useRef<HTMLDivElement>(null);
   const navigate = useNavigate();
-  const favIdols = useAppSelector(state => state.myInterest.idols.map(idol => idol.idol));
+  const favIdols = useAppSelector(state => state.userInfo.favIdols);
 
 
   const SVGStyle = {
@@ -66,7 +66,7 @@ function IdolList({ idolName }: IdolNameProps) {
   }
 
   const handleOnClick = () => {
-    console.log("클릭");
+    // console.log("클릭");
     setIsClicked(prev => !prev);
   }
 
