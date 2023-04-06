@@ -45,6 +45,7 @@ function Layout() {
 
   const userInfoFunction = async () => {
     if (query.get('token')) {   // 로그인 후에는 query에 token이 들어있으므로 그 값을 저장하자.
+      const token = query.get('token');
       dispatch(CreateTOKEN(query.get('token')));
       dispatch(CreateUserId(query.get('userId')));
       dispatch(CreateNickname(query.get('nickname')));
@@ -85,7 +86,7 @@ function Layout() {
           })
 
         // 리덕스에 값이 없으면 요청하기
-        await favIdols.length === 0 && axios.get(`${BASE_URL}/api/interest/list`, {
+        favIdols.length === 0 && await axios.get(`${BASE_URL}/api/interest/list`, {
           headers: {
             Authorization: token
           }
@@ -102,8 +103,8 @@ function Layout() {
       }
     }
   }
-
   userInfoFunction();
+
 
   /** ga에 대한 것, userId가 존재하면 ga 시작 */
   useEffect(() => {
@@ -114,7 +115,7 @@ function Layout() {
 
   return (
       <Frame>
-        <MenuBar nickname={nickname} />
+        <MenuBar nickname={nickname} favIdols={useAppSelector(state => state.userInfo.favIdols)} />
         <Wrapper />
       </Frame>
   );
