@@ -9,6 +9,7 @@ public class Utils {
 	public static final String EQUALS_SIGN = "=";
 	public static final String AMPERSAND = "&";
 	public static final String UTF_8 = "UTF-8";
+
 	// JWT
 	public static final String ROLE = "role";
 	public static final String ROLE_GUEST = "ROLE_GUEST";
@@ -28,6 +29,11 @@ public class Utils {
 	// USER
 	public static final String NICKNAME = "nickname";
 	public static final String USER_ID = "userId";
+
+	public static final String IDOL = "아이돌";
+	public static final String SNIPPET = "snippet";
+
+	public static final long ONE_DAY = 86400L;
 
 	public static LocalDateTime dateTimeToHour(LocalDateTime dateTime) {
 		LocalDateTime hourDateTime = dateTime.withMinute(0).withSecond(0).withNano(0);
