@@ -1,4 +1,5 @@
-import { CreateIdolRank, CreatePosNegWeek } from "../_store/slices/IdolDetailSlice";
+import { CreateIdolRank, CreatePosNegWeek } from "../_store/slices/IdolDetailChartSlice";
+import { CreateNewsData, CreateWordCloud } from "../_store/slices/IdolDetailNewsSlice";
 
 import IdolData from "../components/idolpage/IdolProfile/IdolData";
 import IdolEmotion from "../components/idolpage/idolemotion/IdolEmotion";
@@ -41,11 +42,17 @@ function IdolPage() {
   TimeTracker(`/${idolName}`)
 
   const dispatch = useAppDispatch()
-  // dispatch(CreateIdolRank(idolName))
-  // dispatch(CreatePosNegWeek(idolName))
+
+  /** 차트관련 정보 Store에 저장 */
   request("get", `/idol/${idolName}/pos-neg` ).then(res =>  dispatch(CreatePosNegWeek(res)))
   // request("get", `/peak/weekly/${idolName}`).then(res => dispatch(CreateIdolRank(res)))
   
+  /** 뉴스관련 정보 Store에 저장 */
+  // request("get", `/news/list/keywords/${idolName}`)
+  //   .then(res => { 
+  //     dispatch(CreateNewsData(res.newsList));
+  //     dispatch(CreateWordCloud(res.wordCounter));
+  //   })
   return (
     <Wrapper>
       <IdolList idolName={idolName} />

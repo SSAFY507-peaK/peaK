@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { request } from "../../_utils/axios";
 
-export const idolDetail = createSlice({
+export const idolDetailChart = createSlice({
   name: "idolDetail",
   initialState: {
     rankData: {
@@ -25,5 +25,5 @@ export const idolDetail = createSlice({
 })
 
 
-export const { CreateIdolRank, CreatePosNegWeek } = idolDetail.actions
-export default idolDetail.reducer
+export const { CreateIdolRank, CreatePosNegWeek } = idolDetailChart.actions
+export default idolDetailChart.reducer

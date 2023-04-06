@@ -2,6 +2,7 @@ import IdolKeywordNewsItem from "./IdolKeywordNewsItem";
 import TitleComponent from "../TitleComponent"
 import bg  from "../sampleImg/image 38.png"
 import styled from "styled-components";
+import { useAppSelector } from "../../../_hooks/hooks";
 
 interface Props {
   chooseKeyword: number;
@@ -20,14 +21,48 @@ const NewsFrame = styled.div`
   height: 100%;
 `;
 
+const newsList = [
+  {  
+    press: "billboard",
+    title: "1번 뉴스",
+    summary: "세븐틴 하이하이 바이바이 하이하이 아이오오 우에우에요히히히ㅣㅎ",
+    link: "aaaaa",
+    thumbnailLink: `${bg}`
+  },
+  {  
+    press: "billboard",
+    title: "2번 뉴스",
+    summary: "세븐틴 하이하이 바이바이 하이하이",
+    link: "bbbbb",
+    thumbnailLink: `${bg}`
+  },
+  {  
+    press: "billboard",
+    title: "3번 뉴스",
+    summary: "세븐틴 하이하이 바이바이 ",
+    link: "ccccc",
+    thumbnailLink: `${bg}`
+  },
+  {  
+    press: "billboard",
+    title: "4번 뉴스",
+    summary: "세븐틴 하이하이 바이바이 하이하이 바이바이",
+    link: "ddddd",
+    thumbnailLink: `${bg}`
+  },
+  ]
+
 function IdolKeywordNews({chooseKeyword}:Props) {
+  /* const newsList = useAppSelector(state => state.idolDetailNews.newsList[chooseKeyword]) */
+
   return (
     <Frame>
       <NewsFrame>
-        <IdolKeywordNewsItem image={bg} title={`${chooseKeyword+1} 번 뉴스`} summary="세븐틴 하이하이 바이바이 하이하이 아이오오 우에우에요히히히ㅣㅎ" source="billboard"/>
-        <IdolKeywordNewsItem image={bg} title={`${chooseKeyword+1} 번 뉴스`} summary="세븐틴 하이하이 바이바이 하이하이" source="billboard"/>
-        <IdolKeywordNewsItem image={bg} title={`${chooseKeyword+1} 번 뉴스`} summary="세븐틴 하이하이 바이바이 하이하이" source="billboard"/>
-        <IdolKeywordNewsItem image={bg} title={`${chooseKeyword+1} 번 뉴스`} summary="세븐틴 하이하이 바이바이 하이하이" source="billboard"/>
+      {
+        newsList.map((e, idx) => {
+          return( <IdolKeywordNewsItem image={e.thumbnailLink} title={e.title} summary={e.summary} source={e.press}  /> )
+        })
+      }
       </NewsFrame>
     </Frame>
   )

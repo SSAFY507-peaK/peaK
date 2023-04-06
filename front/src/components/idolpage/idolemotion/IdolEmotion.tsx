@@ -111,8 +111,8 @@ function IdolEmotion() {
 
   const [rankData, setRankData] = useState<WeeklyRankingType>(tmp2)
   const userId:string = useAppSelector(state => state.userInfo.userId)
-  const posNeg:PosNeg[] = useAppSelector(state => state.idolDetail.posNegWeek)
-  // const rankData:WeeklyRankingType = useAppSelector(state => state.idolDetail.rankData)
+  const posNeg:PosNeg[] = useAppSelector(state => state.idolDetailChart.posNegWeek)
+  // const rankData:WeeklyRankingType = useAppSelector(state => state.idolDetailChart.rankData)
   console.log(posNeg[0])
 
 

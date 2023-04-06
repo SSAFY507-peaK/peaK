@@ -99,3 +99,36 @@ export interface PosNeg {
   pos: number;
   neg: number;
 }
+
+/** 키워드 뉴스 데이터 타입 */
+export interface News {
+  newsList: KeyWord[];
+  wordCounter: WordCounterType[];
+}
+
+export interface KeyWord {
+  keyword: string;
+  newsList: NewsType[];
+}
+
+export interface NewsType {
+  press: string;
+  title: string;
+  summary: string;
+  link: string;
+  thumbnailLink: string;
+}
+
+export interface WordCounterType {
+  keyword: string;
+  wordCounter: WordValue[];
+}
+
+export interface WordValue {
+  word: number;
+}
+
+export interface WordCloud {
+  text: string;
+  value: number;
+}
