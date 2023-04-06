@@ -21,6 +21,7 @@ const IdolImage = styled.div<{ url?: string, width?: string }>`
   background-size: cover;
   background-position: center;
   border-radius: 50%;
+  box-shadow: 0 0 10px -5px rgb(28, 28, 28);
   transition: transform 100ms ease-in-out;
   &:hover {
     transform: scale(1.05, 1.05);
@@ -51,6 +52,7 @@ const Selected = styled(IdolImage)<SelectedIdolType>`
 `;
 const NotSelected = styled(IdolImage)<SelectedIdolType>`
   background: transparent;
+  box-shadow: none;
   border: 2px dashed var(--gray700-color);
   &:hover {
     transform: none;

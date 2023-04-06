@@ -1,4 +1,4 @@
-// import CarouselCustom from "../components/Carousel/CarouselCustom.jsx";
+import CarouselCustom from "../components/Carousel/CarouselCustom.jsx";
 // import CommonDiv from "../components/MainPage/CommonDiv";
 // import MainDiv from "../components/MainDiv";
 // import NameDiv from "../components/NameDiv";
@@ -33,30 +33,30 @@ export async function loader() {
   // return [TrendNewsList, TrendYoutubeList];
 }
 
-type CarouselCustomDivType = {
-  ratio: number;
-};
+// type CarouselCustomDivType = {
+//   ratio: number;
+// };
 
 const CarouselDiv = styled.div`
   width: 100%;
   margin: 0 auto;
 `;
 
-const CarouselCustomDiv = styled.div<CarouselCustomDivType>`
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  margin: 0 auto;
-  flex: ${props => props.ratio};
-`;
+// const CarouselCustomDiv = styled.div<CarouselCustomDivType>`
+//   width: 100%;
+//   display: flex;
+//   flex-direction: column;
+//   margin: 0 auto;
+//   flex: ${props => props.ratio};
+// `;
 
 const MainGrid = styled.div`
   display: grid;
   width: 100%;
-  height: 100%;
+  height: auto;
   
   grid-template-columns: repeat(4, 1fr);
-  grid-template-rows: 60vh auto;
+  grid-template-rows: 70vh auto;
   gap: 25px;
 `
 
@@ -146,6 +146,9 @@ function MainPage() {
   //     src: "https://i.ytimg.com/vi/ff68QPAI6YI/hq720.jpg?sqp=-oaymwEcCNAFEJQDSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLB-eVctdC6EbDG7T7D0SHV5yCWYRw",
   //   },
   // ];
+  const CarouselData = <CarouselDiv>
+                        <CarouselCustom data={TrendNewsList[0]} />
+                      </CarouselDiv>
   return (
     // <>
     //   <MainDiv style={{ marginBottom: "2vh" }}>
@@ -179,10 +182,10 @@ function MainPage() {
     //   </MainDiv>
     // </>
     <MainGrid>
-      <TitleContent data={Top8()} gridColumn="1 / 4" title={<h3>랭킹 <span style={{color: "var(--purple400-color)"}}>Top8</span></h3>} />
-      <TitleContent data={<TrendKeyword />} gridColumn="4 / 5" title={<h3>인기 <span style={{color: "var(--purple400-color)"}}>키워드</span></h3>} />
-      <TitleContent gridColumn="1 / 3" noContentBackground={true} title={<h3>트렌딩 <span style={{color: "var(--purple400-color)"}}>뉴스</span></h3>} />
-      <TitleContent gridColumn="3 / 5" noContentBackground={true} title={<h3>트렌딩 <span style={{color: "var(--purple400-color)"}}>유튜브</span></h3>} />
+      <TitleContent data={Top8()} gridColumn="1 / 4" title={<h3>랭킹 <span style={{color: "var(--purple500-color)"}}>Top8</span></h3>} />
+      <TitleContent data={<TrendKeyword />} gridColumn="4 / 5" title={<h3>인기 <span style={{color: "var(--purple500-color)"}}>키워드</span></h3>} />
+      <TitleContent data={CarouselData} gridColumn="1 / 3" noContentBackground={true} title={<h3>트렌딩 <span style={{color: "var(--purple500-color)"}}>뉴스</span></h3>} />
+      <TitleContent gridColumn="3 / 5" noContentBackground={true} title={<h3>트렌딩 <span style={{color: "var(--purple500-color)"}}>유튜브</span></h3>} />
     </MainGrid>
   );
 }
