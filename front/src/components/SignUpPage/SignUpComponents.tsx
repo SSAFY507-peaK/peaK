@@ -29,5 +29,11 @@ const DescriptionSection = styled.div`
     margin-right: 15px;
   }
 `
+const SearchSection = styled.div`
+  margin: 10px 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+`
 
-export { Container, PageContainer, Description, InputWrapper, DescriptionSection};
+export { Container, PageContainer, Description, InputWrapper, DescriptionSection, SearchSection};

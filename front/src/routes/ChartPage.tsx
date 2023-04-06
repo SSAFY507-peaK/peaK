@@ -127,10 +127,6 @@ function ChartPage() {
   // })
   /** 아이돌을 검색해보자 */
   const handleSearchIdol = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
-    /*
-     * 아이돌을 검색하면 useState 값이 변함
-     * 값이 변하면 아래에 띄우깅...filter 이용해서
-     */
     setSearchIdol(e.target.value);
   }, [])
 
