@@ -77,7 +77,8 @@ type MenuBarProps = {
 }
 function MenuBar({ nickname }: MenuBarProps) {
   const favIdols = useAppSelector(state => state.userInfo.favIdols);
-  const randomIdol = favIdols.length ? favIdols[Math.floor(Math.random() * favIdols.length)] : "BTS"
+  console.log(favIdols);
+  // const randomIdol = favIdols.length ? favIdols[Math.floor(Math.random() * favIdols.length)] : "BTS"
   return (
     <MenuBackground>
       <MenuSection>
@@ -92,7 +93,8 @@ function MenuBar({ nickname }: MenuBarProps) {
             </NavLink>
           </Menu>
           <Menu>
-            <NavLink to={`/${randomIdol}`} className={({ isActive }) => (isActive ? "active" : "")}>
+            {/*<NavLink to={`/${randomIdol}`} className={({ isActive }) => (isActive ? "active" : "")}>*/}
+            <NavLink to={`/BTS`} className={({ isActive }) => (isActive ? "active" : "")}>
               <FavoriteIcon style={style} />
               관심 아이돌
             </NavLink>
