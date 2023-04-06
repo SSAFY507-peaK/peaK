@@ -1,4 +1,4 @@
-import {CreateNickname, CreateTOKEN, CreateUserId} from "../_store/slices/UserSlice";
+import {CreateFavIdols, CreateNickname, CreateTOKEN, CreateUserId, UpdateFavIdols} from "../_store/slices/UserSlice";
 import { ga } from "react-ga";
 import {useDispatch } from "react-redux";
 
@@ -40,14 +40,15 @@ function Layout() {
   const navigate = useNavigate();
   let userId = useAppSelector(state => state.userInfo.userId);
   let token = useAppSelector(state => state.userInfo.TOKEN);
-  let nickname = useAppSelector(state => state.userInfo.nickname)
+  let nickname = useAppSelector(state => state.userInfo.nickname);
+  // let favIdols = useAppSelector(state => state.userInfo.favIdols);
+
+  /** 토큰에 대한 useEffect */
   useEffect(() => {
     if (query.get('token')) {   // 로그인 후에는 query에 token이 들어있으므로 그 값을 저장하자.
       dispatch(CreateTOKEN(query.get('token')));
       dispatch(CreateUserId(query.get('userId')));
       dispatch(CreateNickname(query.get('nickname')));
-      // ReactGA.set({ userId: userId });
-      // ga('set', userId, userId); // 사용자 ID 설정
       window.history.pushState({}, "", "/")
     }
     else {
@@ -71,7 +72,6 @@ function Layout() {
             window.localStorage.clear();
             navigate('/intro');
           })
-        // ReactGA.set({ userId: userId });
       }
       else {    // 토큰이 없으면 intro로 보내버리자.
         navigate('/intro');
@@ -79,10 +79,36 @@ function Layout() {
     }
   }, [navigate]);
 
+  /** ga에 대한 것, userId가 존재하면 ga 시작 */
   useEffect(() => {
-    userId.length? ga('set', userId, userId) : navigate('/intro');
+    userId.length && ga('set', userId, userId);
     // console.log("userId 변경!");
-  }, [userId])
+  }, [userId]);
+
+  useEffect(() => {
+
+    axios.get(`${BASE_URL}/api/interest/list`, {
+      headers: {
+        Authorization: token
+      }
+    })
+      .then(response => {
+        console.log(response.data);
+        return response.data.idols
+      })
+      .then(idols => dispatch(CreateFavIdols(idols)))
+      .catch(error => console.log(error));
+
+    // axios.post(`${BASE_URL}/api/user/comment/${idol}`, {
+    //   content: "세븐틴 멋쟁이~"
+    // }, {
+    //   headers: {
+    //     Authorization: token
+    //   }
+    // })
+    // return () => dispatch(CreateFavIdols([]))
+
+  }, [])
 
   RouteChangeTracker();
 

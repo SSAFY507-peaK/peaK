@@ -1,10 +1,10 @@
 import styled from "styled-components";
 import { IdolNameProps } from "../../routes/IdolPage";
-import {useRef, useState} from "react";
+import { useRef, useState} from "react";
 import UseOnClickOutside from "../../_hooks/useOnClickOutside";
-import {useAppSelector} from "../../_hooks/hooks";
 import {useNavigate} from "react-router-dom";
 import { ReactComponent as ArrowDown} from "../../assets/arrow-down.svg"
+import {useAppSelector} from "../../_hooks/hooks";
 
 const IdolListFrame = styled.div`
   width: auto;
@@ -12,7 +12,6 @@ const IdolListFrame = styled.div`
 `;
 
 const IdolTitle = styled.h2`
-  
   display: inline-flex;
   align-items: center;
   :hover{
@@ -53,35 +52,35 @@ const IdolDiv = styled.div`
 
 
 function IdolList({ idolName }: IdolNameProps) {
-  const favIdols = useAppSelector(state => state.myInterest.idols.map(idol => idol.idol));
-  console.log(favIdols);
   const [isClicked, setIsClicked] = useState(false);
   const DropDownRef = useRef<HTMLDivElement>(null);
   const navigate = useNavigate();
+  const favIdols = useAppSelector(state => state.userInfo.favIdols);
 
 
-  const SVGstyle = {
+  const SVGStyle = {
     width: "24px",
     fill: "var(--purple500-color)",
-    transition: "transform 100ms ease-in",
-    // isClicked ?
-    //   transform: "scaleX(90)" : null
+    transition: "transform 200ms ease-in",
+    transform: isClicked ? "rotate(180deg)" : "rotate(0)",
   }
 
-  const onClick = () => {
+  const handleOnClick = () => {
+    // console.log("클릭");
     setIsClicked(prev => !prev);
-  };
+  }
+
   UseOnClickOutside(DropDownRef, () => {
     setIsClicked(false);
   });
 
   return (
     <IdolListFrame >
-      <IdolTitle onMouseUp={onClick}>{idolName}<ArrowDown style={SVGstyle}  /></IdolTitle>
+      <IdolTitle onClick={handleOnClick}> {idolName}<ArrowDown style={SVGStyle} /> </IdolTitle>
       { isClicked &&
         <IdolListDropDown ref={DropDownRef}>
           <IdolDesc>좋아하는 아이돌</IdolDesc>
-          { favIdols.map(idol => <IdolDiv onClick={() => {
+          { favIdols?.map(idol => <IdolDiv onClick={() => {
             setIsClicked(false);
             navigate(`/${idol}`)
           }}>{idol}</IdolDiv>) }
