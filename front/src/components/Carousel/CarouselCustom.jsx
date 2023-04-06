@@ -23,7 +23,8 @@ const Card = props => (
       backgroundSize: "cover",
       backgroundPosition: "center",
       cursor: "pointer",
-      width: "100%",
+      // width: "100%",
+      height: "100%",
     }}
     onClick={event => {
       event.preventDefault();
@@ -31,7 +32,13 @@ const Card = props => (
     }}
   >
     <h3>{props.title}</h3>
-    <p>{props.content}</p>
+    {props.content ? (
+      props.content.length < 80 ? (
+        <p>{props.content}</p>
+      ) : (
+        <p>{props.content.substr(0, 80) + "..."}</p>
+      )
+    ) : null}
   </div>
 );
 
@@ -87,7 +94,7 @@ const CarouselCustom = props => {
                   : null
               }
               src={item.thumbnailLink || item.thumbnail}
-              link={item.link}
+              link={item.link || item.url}
               key={idx}
             />
           );
