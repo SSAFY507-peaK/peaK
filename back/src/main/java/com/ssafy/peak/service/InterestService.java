@@ -42,12 +42,14 @@ public class InterestService {
 
 		log.info("user: {}", user);
 
-		List<User.Idol> interestIdols = user.getIdols();
+		List<User.Idol> useridols = user.getIdols();
 		List<String> interestIdolNameList = new ArrayList<>();
-		for (int i = 0; i < interestIdols.size(); i++) {
-			interestIdolNameList.add(interestIdols.get(i).getIdol());
+		for (int i = 0; i < useridols.size(); i++) {
+			if (useridols.get(i).isLike()) {
+				interestIdolNameList.add(useridols.get(i).getIdol());
+			}
 		}
-
+		
 		log.info("interestIdolNameList: {}", interestIdolNameList.toString());
 
 		return IdolListResponseDto.builder()
