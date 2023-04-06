@@ -1,20 +1,23 @@
 import CarouselCustom from "../components/Carousel/CarouselCustom.jsx";
-// import CommonDiv from "../components/MainPage/CommonDiv";
-// import MainDiv from "../components/MainDiv";
-// import NameDiv from "../components/NameDiv";
-// import ReactGA from "react-ga";
+import TitleContent from "../components/TitleContent";
 import Top8 from "../components/MainPage/Top8";
 import TrendKeyword from "../components/MainPage/TrendKeyword";
 import { TrendNewsListType } from "../_utils/Types.js";
 import axios from "axios";
 import styled from "styled-components";
+import { useLoaderData } from "react-router";
+
+// import CommonDiv from "../components/MainPage/CommonDiv";
+// import MainDiv from "../components/MainDiv";
+// import NameDiv from "../components/NameDiv";
+// import ReactGA from "react-ga";
+
 // import { useEffect } from "react";
-import {useLoaderData } from "react-router";
+
 // import {useSearchParams} from "react-router-dom";
 // import {useDispatch, useSelector} from "react-redux";
 // import {CreateNickname, CreateTOKEN, CreateUserId} from "../_store/slices/UserSlice";
 // import {RootState} from "../_store/store";
-import TitleContent from "../components/TitleContent"
 
 const BASE_URL = process.env.REACT_APP_BASE_URL;
 
@@ -54,12 +57,11 @@ const MainGrid = styled.div`
   display: grid;
   width: 100%;
   height: auto;
-  
+
   grid-template-columns: repeat(4, 1fr);
   grid-template-rows: 70vh auto;
   gap: 25px;
-`
-
+`;
 
 function MainPage() {
   /*
@@ -146,9 +148,11 @@ function MainPage() {
   //     src: "https://i.ytimg.com/vi/ff68QPAI6YI/hq720.jpg?sqp=-oaymwEcCNAFEJQDSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLB-eVctdC6EbDG7T7D0SHV5yCWYRw",
   //   },
   // ];
-  const CarouselData = <CarouselDiv>
-                        <CarouselCustom data={TrendNewsList[0]} />
-                      </CarouselDiv>
+  const CarouselData = (
+    <CarouselDiv>
+      <CarouselCustom data={TrendNewsList[0]} />
+    </CarouselDiv>
+  );
   return (
     // <>
     //   <MainDiv style={{ marginBottom: "2vh" }}>
@@ -182,10 +186,43 @@ function MainPage() {
     //   </MainDiv>
     // </>
     <MainGrid>
-      <TitleContent data={Top8()} gridColumn="1 / 4" title={<h3>랭킹 <span style={{color: "var(--purple500-color)"}}>Top8</span></h3>} />
-      <TitleContent data={<TrendKeyword />} gridColumn="4 / 5" title={<h3>인기 <span style={{color: "var(--purple500-color)"}}>키워드</span></h3>} />
-      <TitleContent data={CarouselData} gridColumn="1 / 3" noContentBackground={true} title={<h3>트렌딩 <span style={{color: "var(--purple500-color)"}}>뉴스</span></h3>} />
-      <TitleContent gridColumn="3 / 5" noContentBackground={true} title={<h3>트렌딩 <span style={{color: "var(--purple500-color)"}}>유튜브</span></h3>} />
+      <TitleContent
+        data={Top8()}
+        gridColumn="1 / 4"
+        title={
+          <h3>
+            랭킹 <span style={{ color: "var(--purple500-color)" }}>Top8</span>
+          </h3>
+        }
+      />
+      <TitleContent
+        data={<TrendKeyword />}
+        gridColumn="4 / 5"
+        title={
+          <h3>
+            인기 <span style={{ color: "var(--purple500-color)" }}>키워드</span>
+          </h3>
+        }
+      />
+      <TitleContent
+        data={CarouselData}
+        gridColumn="1 / 3"
+        noContentBackground={true}
+        title={
+          <h3>
+            트렌딩 <span style={{ color: "var(--purple500-color)" }}>뉴스</span>
+          </h3>
+        }
+      />
+      <TitleContent
+        gridColumn="3 / 5"
+        noContentBackground={true}
+        title={
+          <h3>
+            트렌딩 <span style={{ color: "var(--purple500-color)" }}>유튜브</span>
+          </h3>
+        }
+      />
     </MainGrid>
   );
 }
