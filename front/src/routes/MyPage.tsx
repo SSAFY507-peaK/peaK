@@ -86,14 +86,13 @@ function MyPage() {
     }
   }, [index]);
 
-  // 닉네임 수정 관련
+  // 닉네임 수정 관련 모음집
   const [isEditing, setIsEditing] = useState<boolean>(false);
   const [nickname, setNickname] = useState<string>("");
   const [message, setMessage] = useState<string>("");
   const [nicknameCode, setNicknameCode] = useState<NicknameType | undefined>(undefined);
   const TOKEN = useAppSelector(state => state.userInfo.TOKEN);
   const navigate = useNavigate();
-
   /** 닉네임 수정하기 */
   const handleEditNickname = () => {
     setIsEditing(true);
@@ -128,12 +127,23 @@ function MyPage() {
   };
   /** 닉네임 변경하기 */
   const handleSaveNickname = () => {
-    dispatch(CreateNickname(nickname));
-    setNickname("")
-    setMessage("");
-    setNicknameCode(undefined);
-    setIsEditing(false);
-    navigate(`../mypage/${nickname}`, {replace: true})
+
+    axios.put(`${BASE_URL}/api/user/nickname/${nickname}`, {}, {
+      headers: {
+        Authorization: TOKEN
+      }
+    })
+      .then(() => {
+        dispatch(CreateNickname(nickname));
+        setNickname("")
+        setMessage("");
+        setNicknameCode(undefined);
+        setIsEditing(false);
+        navigate(`../mypage/${nickname}`, {replace: true})
+      })
+      .catch(error => {
+        console.log(error);
+      })
   }
   /** 닉네임 변경 취소 */
   const handleCancelEditNickname = () => {
