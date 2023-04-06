@@ -2,6 +2,7 @@ import CommonDiv from "../components/MainPage/CommonDiv";
 import MainDiv from "../components/MainDiv";
 import { TrendNewsListType } from "../_utils/Types";
 import TrendingNews from "../components/TrendingPage/TrendingNews";
+import TrendingNewsGrid from "../components/TrendingPage/TrendingNewsGrid";
 import TrendingYoutube from "../components/TrendingPage/TrendingYoutube";
 import axios from "axios";
 import { useLoaderData } from "react-router";
@@ -25,7 +26,7 @@ function TrendingPage() {
   const TrendNewsList = useLoaderData() as TrendNewsListType[];
   return (
     <MainDiv>
-      <CommonDiv
+      {/* <CommonDiv
         type={false}
         firstWord="트렌딩"
         secondWord="뉴스"
@@ -33,6 +34,15 @@ function TrendingPage() {
         mr={true}
         h={true}
         data={<TrendingNews data={TrendNewsList} />}
+      /> */}
+      <CommonDiv
+        type={false}
+        firstWord="트렌딩"
+        secondWord="뉴스"
+        ratio="0.7"
+        mr={true}
+        h={true}
+        data={<TrendingNewsGrid data={TrendNewsList} />}
       />
       <CommonDiv
         type={false}
