@@ -132,14 +132,14 @@ function TrendingNews({ data }: Props) {
       <NewsListGrid>
         {items.map((item: NewsType, idx) =>
           idx >= 3 ? null : idx === 0 ? (
-            <NewsGridLarge>
+            <NewsGridLarge onClick={() => window.open(item.link)}>
               <NewsMainProfile url={item.thumbnailLink} />
               <NewsMainTitle>
                 {item.title.length <= 20 ? item.title : item.title.substring(0, 20) + "..."}
               </NewsMainTitle>
             </NewsGridLarge>
           ) : (
-            <NewsGridSmall>
+            <NewsGridSmall onClick={() => window.open(item.link)}>
               <NewsSubProfile url={item.thumbnailLink} />
               <NewsInfo>
                 <NewsTitle>
