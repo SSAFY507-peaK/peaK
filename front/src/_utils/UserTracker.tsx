@@ -7,17 +7,19 @@ import { useAppSelector } from "../_hooks/hooks";
 // }
 
 /** User의 활동을 Google Analytics */
-export function ClickTracker(idolName: string) {
-  const userId:string = useAppSelector(state => state.userInfo.userId)
+export function ClickTracker(idolName: string, userId: string) {
   // const userId: string = "2737090856";
+  
+  // const userId:string = useAppSelector(state => state.userInfo.userId)
 
-//   ReactGA.event({
-//     category: idolName,
-//     action: "Click",
-//     // label: `{idolName}`,
-//     value: 1,
-//     userId: userId,
-//   } as CustomEventArgs);
+  // ReactGA.event({
+  //   category: idolName,
+  //   action: "Click",
+  //   // label: `{idolName}`,
+  //   value: 1,
+  //   userId: userId,
+  // } as CustomEventArgs);
+
   ga('send', {
     hitType: 'event',
     eventCategory: idolName,
@@ -26,7 +28,6 @@ export function ClickTracker(idolName: string) {
     eventValue: 1,
     userId: userId // 사용자 ID 추가
   });
-
 }
 
 export function TimeTracker(page: string) {
@@ -34,5 +35,4 @@ export function TimeTracker(page: string) {
   // ReactGA.pageview(page);
   ga('set', 'page', page); // 페이지 설정
   ga('send', 'pageview', page); // 페이지뷰 전송
-
 }

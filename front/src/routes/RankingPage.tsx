@@ -5,6 +5,7 @@ import { ReactComponent as Stable } from "../assets/stable.svg";
 import { ReactComponent as Up } from "../assets/arrow-up.svg";
 import axios from "axios";
 import styled from "styled-components";
+import { useAppSelector } from "../_hooks/hooks";
 import { useLoaderData } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
@@ -142,10 +143,11 @@ const RankDiffer = (diff: number) => {
 /** 아이돌 1팀의 순위, 순위변동, 사진, 점수, 이름 */
 const RankDiv = (props: RankDivType) => {
   const navigate = useNavigate();
+  const userId:string = useAppSelector(state => state.userInfo.userId)
   return (
     <IdolRankDiv
       onClick={() => {
-        ClickTracker(props.idol);
+        ClickTracker(props.idol, userId);
         navigate(`/${props.idol}`);
       }}
     >

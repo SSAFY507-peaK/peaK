@@ -58,6 +58,7 @@ function IdolDataProfileSns() {
   // const params = useParams();
   // const idolName:string = params.idolName || "";
   const idolName:string = "세븐틴";
+  const userId:string = useAppSelector(state => state.userInfo.userId)
 
   // const {idol, snsLink}: IdolSns =  request("get", `idol/${idolName}/pos-neg`)
   const {idol, snsLink, interest} = userData
@@ -72,7 +73,7 @@ function IdolDataProfileSns() {
             sx={{ fontSize: "1.3rem", cursor: "pointer", color: `var(--purple500-color)` }}
             onClick={()=> {
               window.open(snsLink.instagram)
-              ClickTracker(idolName)
+              ClickTracker(idolName, userId)
             }}
           />
         </IconFrame>
@@ -84,7 +85,7 @@ function IdolDataProfileSns() {
             sx={{ fontSize: "1.3rem", cursor: "pointer", color: `var(--purple500-color)` }} 
             onClick={()=> {
               window.open(snsLink.twitter)
-              ClickTracker(idolName)
+              ClickTracker(idolName, userId)
           }} />
         </IconFrame>
         <IconText>트위터</IconText>
@@ -95,7 +96,7 @@ function IdolDataProfileSns() {
           sx={{ fontSize: "1.3rem", cursor: "pointer", color: `var(--purple500-color)` }}
           onClick={()=> {
             window.open(snsLink.youtube)
-            ClickTracker(idolName)
+            ClickTracker(idolName, userId)
           }} />
         </IconFrame>
         <IconText>유튜브</IconText>
@@ -108,14 +109,14 @@ function IdolDataProfileSns() {
             sx={{ fontSize: "1.3rem", cursor: "pointer", color: `var(--red600-color)` }} 
             onClick={() => {
               setLike(false)
-              ClickTracker(idolName)
+              ClickTracker(idolName, userId)
             }} />
           :
           <FavoriteBorderIcon 
             sx={{ fontSize: "1.3rem", cursor: "pointer", color: `var(--red600-color)` }} 
             onClick={() => {
               setLike(true)
-              ClickTracker(idolName)
+              ClickTracker(idolName, userId)
             }}/>
         } 
         </IconFrame>
