@@ -30,7 +30,7 @@ const LeftFrame = styled.div`
 function IdolKeyword() {
   // const [clickKeyword, setClickKeyword] = useState<boolean[]>([true, false, false, false, false])
   const [chooseKeyword, setChooseKeyword] = useState<number>(0)
-
+  
   useEffect(() => {
 
   }, [chooseKeyword])

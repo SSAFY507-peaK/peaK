@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 interface BtnType {
-  rank: string;
+  rank: number;
   keyword: string;
   isClick: boolean;
   onClick: () => void;
