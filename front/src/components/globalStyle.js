@@ -47,6 +47,7 @@ const GlobalStyle = createGlobalStyle`
     --red200-color: #9D0606;
     --red100-color: #6C0404;
 
+    --purple900-color: #f6f2f8;
     --purple800-color: #EBDDF3;
     --purple700-color: #D5B6E7;
     --purple600-color: #BE90DA;
