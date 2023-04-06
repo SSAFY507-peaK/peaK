@@ -1,7 +1,6 @@
 import CommonDiv from "../components/MainPage/CommonDiv";
 import MainDiv from "../components/MainDiv";
 import { TrendNewsListType } from "../_utils/Types";
-import TrendingNews from "../components/TrendingPage/TrendingNews";
 import TrendingNewsGrid from "../components/TrendingPage/TrendingNewsGrid";
 import TrendingYoutube from "../components/TrendingPage/TrendingYoutube";
 import axios from "axios";
