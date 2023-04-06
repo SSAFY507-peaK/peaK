@@ -54,7 +54,6 @@ public class RedisUtil {
 	 * 유튜브 검색 리스트 가져오기
 	 */
 	public Object getYouTubeSearchList(String key) {
-		// RedisOperations<String, Object> operations = redisTemplate.opsForList().getOperations();
 		ValueOperations<String, Object> valueOperations = redisTemplate.opsForValue();
 		return valueOperations.get(key);
 	}
