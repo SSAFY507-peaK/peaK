@@ -1,6 +1,6 @@
 import ReactGA, { EventArgs } from "react-ga";
 
-import { useAppSelector } from "../../_hooks/hooks";
+import { useAppSelector } from "../_hooks/hooks";
 
 interface CustomEventArgs extends EventArgs {
   userId: string;

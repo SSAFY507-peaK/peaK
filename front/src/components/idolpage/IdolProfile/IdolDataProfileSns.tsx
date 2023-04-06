@@ -1,4 +1,4 @@
-import { ClickTracker } from '../ClickTracker';
+import { ClickTracker } from '../../../_utils/UserTracker';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import { IdolSns } from '../../../_utils/Types';
@@ -8,9 +8,9 @@ import YouTubeIcon from '@mui/icons-material/YouTube';
 import axios from 'axios';
 import { request } from '../../../_utils/axios';
 import styled from "styled-components"
+import { useAppSelector } from '../../../_hooks/hooks';
 import { useParams } from 'react-router';
 import { useState } from "react";
-import { useAppSelector } from '../../../_hooks/hooks';
 
 const Wrapper = styled.div`
   display: flex;

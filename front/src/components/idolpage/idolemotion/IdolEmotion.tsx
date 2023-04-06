@@ -1,13 +1,14 @@
+import { PosNeg, WeeklyRankingType } from '../../../_utils/Types';
+import { useEffect, useState } from "react";
+
 import ArrowDropUpIcon from '@mui/icons-material/ArrowDropUp';
-import { ClickTracker } from '../ClickTracker';
+import { ClickTracker } from '../../../_utils/UserTracker';
 import IdolEmotionChart from "./IdolEmotionChart";
 import IdolEmotionChartBtn from "./IdolEmotionChartBtn";
 import IdolEmotionRankChart from "./IdolEmotionRankChart";
+import { request } from '../../../_utils/axios';
 import styled from "styled-components";
 import { useParams } from 'react-router';
-import { useEffect, useState } from "react";
-import { request } from '../../../_utils/axios';
-import { PosNeg, WeeklyRankingType } from '../../../_utils/Types';
 
 const DataFrame = styled.div`
   display: flex;

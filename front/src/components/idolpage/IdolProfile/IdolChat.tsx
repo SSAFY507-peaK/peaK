@@ -1,13 +1,13 @@
+import { Comments, UserInfo } from "../../../_utils/Types";
 import { MouseEvent, useState } from "react";
 
-import { ClickTracker } from "../ClickTracker";
-import { Comments, UserInfo } from "../../../_utils/Types";
+import { ClickTracker } from "../../../_utils/UserTracker";
 import { PurpleButton } from "../../Button";
 import TitleComponent from "../TitleComponent";
 import { request } from "../../../_utils/axios";
 import styled from "styled-components";
-import { useParams } from "react-router";
 import { useAppSelector } from "../../../_hooks/hooks";
+import { useParams } from "react-router";
 
 const Wrapper = styled.div`
   display: flex;

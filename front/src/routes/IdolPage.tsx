@@ -1,12 +1,11 @@
-import {useParams } from "react-router-dom";
-
 import IdolData from "../components/idolpage/IdolProfile/IdolData";
 import IdolEmotion from "../components/idolpage/idolemotion/IdolEmotion";
 import IdolKeyword from "../components/idolpage/idolkeyword/IdolKeyword";
 import IdolList from "../components/idolpage/IdolList";
 import IdolYoutube from "../components/idolpage/IdolYoutube";
-import { TimeTracker } from "../components/idolpage/ClickTracker";
+import { TimeTracker } from "../_utils/UserTracker";
 import styled from "styled-components";
+import {useParams} from "react-router-dom";
 
 const Wrapper = styled.div`
   display: flex;
