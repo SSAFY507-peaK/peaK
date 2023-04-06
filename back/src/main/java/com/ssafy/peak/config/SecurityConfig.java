@@ -77,9 +77,10 @@ public class SecurityConfig {
 			.antMatchers("/peak/**").permitAll()
 			.antMatchers("/idol/**").permitAll()
 			.antMatchers("/news/**").permitAll()
+			.antMatchers("/youtube/**").permitAll()
 
-			// .antMatchers("/user/**").hasAnyRole("USER", "GUEST")
 			.anyRequest().authenticated()    // 이외의 모든 요청은 인증 필요
+			// .antMatchers("/user/**").hasAnyRole("USER", "GUEST")
 			// .anyRequest().permitAll()
 
 			.and()    // OAuth2 로그인 설정

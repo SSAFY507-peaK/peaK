@@ -65,7 +65,6 @@ public class YouTubeService {
 		}
 
 		log.info("searchYouTube | keyword: {}", keyword);
-
 		youtube = new YouTube.Builder(HTTP_TRANSPORT, JSON_FACTORY, new HttpRequestInitializer() {
 			public void initialize(HttpRequest request) throws IOException {
 			}
@@ -73,11 +72,10 @@ public class YouTubeService {
 
 		List<YouTubeDto> youTubeDtoList = new ArrayList<>();
 
-		log.info("searchYouTube | youTubeDtoList: {}", youTubeDtoList);
-
 		if (redisUtil.getYouTubeSearchList(keyword) == null) {
 			// 검색 기록이 없으면 youtube api 요청해서 redis에 저장 후 return
 			try {
+				log.info("YouTube Data API 요청");
 				YouTube.Search.List search = youtube.search().list(Collections.singletonList(Utils.PART));
 				search.setKey(YOUTUBE_APIKEY);    // youtube api key 설정
 				search.setQ(keyword);    // 검색어 설정
@@ -86,10 +84,8 @@ public class YouTubeService {
 				search.setMaxResults(NUMBER_OF_VIDEOS_RETURNED);    // 반환 개수 설정
 				SearchListResponse searchResponse = search.execute();
 
+				// 검색 리스트 저장
 				List<SearchResult> searchResultList = searchResponse.getItems();
-
-				log.info("searchResultList: {}", searchResultList);
-
 				if (!CollectionUtils.isEmpty(searchResultList)) {
 					for (SearchResult searchResult : searchResultList) {
 						YouTubeDto youTubeDto = YouTubeDto.builder()
@@ -112,6 +108,8 @@ public class YouTubeService {
 				t.printStackTrace();
 			}
 		} else {
+			// 검색 기록이 있으면 redis에서 꺼내서 return
+			log.info("get in Redis");
 			youTubeDtoList = (List<YouTubeDto>)redisUtil.getYouTubeSearchList(keyword);
 		}
 		return youTubeDtoList;
