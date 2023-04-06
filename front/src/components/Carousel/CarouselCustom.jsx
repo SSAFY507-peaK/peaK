@@ -8,7 +8,6 @@ import styled from "styled-components";
 
 const AlignDiv = styled.div`
   display: flex;
-  width: 90%;
   flex-direction: column;
   align-items: center;
   margin: 0 auto;
@@ -24,6 +23,7 @@ const Card = props => (
       backgroundSize: "cover",
       backgroundPosition: "center",
       cursor: "pointer",
+      width: "100%",
     }}
     onClick={event => {
       event.preventDefault();

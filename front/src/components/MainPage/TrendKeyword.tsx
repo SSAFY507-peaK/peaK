@@ -8,11 +8,21 @@ const ComponentDiv = styled.div`
   border-radius: 30px;
   display: flex;
   flex-direction: column;
-  flex: 0.3;
+  height: 100%;
+  //justify-content: space-between;
 `;
 
 function TrendKeyword() {
   const [chooseKeyword, setChooseKeyword] = useState<number>(0);
+
+  // 멋지게 10초마다 선택한 키워드 변경하고 싶었음..
+  // useEffect(() => {
+  //   const ChangeKeyword = setTimeout(() => {
+  //     setChooseKeyword(prev => (prev + 1) % 5);
+  //   }, 10000)
+  //   return () => {clearTimeout(ChangeKeyword)}
+  // }, [chooseKeyword])
+
   return (
     <ComponentDiv>
       <IdolKeywordRank setChooseKeyword={setChooseKeyword} chooseKeyword={chooseKeyword} />
