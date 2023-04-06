@@ -7,6 +7,7 @@ import MyChatChart from '../components/Mypage/MyChatChart';
 import MyClickChart from '../components/Mypage/MyClickChart';
 import MyInterest from '../components/Mypage/MyInterest';
 import MyVisitChart from '../components/Mypage/MyVisitChart';
+import { TimeTracker } from '../_utils/UserTracker';
 import TitleComponent from "../components/idolpage/TitleComponent";
 import TotalChart from '../components/Mypage/TotalChart';
 import sampleData from "../components/Mypage/sampleData.json"
@@ -54,6 +55,8 @@ function MyPage() {
   const [index, setIndex] = useState<number>(0)
   const [idolScoreData, setIdolScoreData] = useState<number[]>([0, 0])
   const dispatch = useAppDispatch()
+
+  TimeTracker(`/mypage/${userName}`)
 
   // 스토어에 데이터 저장
   dispatch(CreateMyInterest(sampleData))
