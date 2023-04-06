@@ -13,5 +13,4 @@ import lombok.Setter;
 @NoArgsConstructor
 public class JwtTokenDto {
 	private String token;
-	private long expiration;
 }

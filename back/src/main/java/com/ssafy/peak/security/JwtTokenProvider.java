@@ -70,6 +70,7 @@ public class JwtTokenProvider implements InitializingBean {
 	public String createTokensFromAuthentication(Authentication authentication, String tokenType) {
 
 		CustomOAuth2User customOAuth2User = (CustomOAuth2User)authentication.getPrincipal();
+
 		Date now = new Date();
 		Date expiration = null;
 
@@ -80,7 +81,7 @@ public class JwtTokenProvider implements InitializingBean {
 		}
 		String token = Jwts.builder()
 			.setSubject(customOAuth2User.getName()) // user id
-			.claim(Utils.AUTHENTICATION, authentication) // authentication 저장
+			// .claim(Utils.AUTHENTICATION, authentication) // authentication 저장
 			.claim(Utils.EMAIL, customOAuth2User.getEmail())    // 이메일 정보 저장
 			.claim(Utils.ROLE, customOAuth2User.getRole()) // 권한 정보 저장
 			.setIssuedAt(now) // 액세스 토큰 발행 시간
@@ -137,11 +138,11 @@ public class JwtTokenProvider implements InitializingBean {
 
 		Claims claims = parseClaims(token);
 
-		log.info("claims: {}", claims);
+		log.info("getAuthentication | claims: {}", claims);
 
 		// 권한이 없는 경우 예외 발생
 		if (claims.get(Utils.ROLE) == null) {
-			log.info("claims.get(Utils.ROLE): {}", claims.get(Utils.ROLE));
+			log.info("getAuthentication | claims.get(Utils.ROLE): {}", claims.get(Utils.ROLE));
 			throw new CustomException(CustomExceptionType.AUTHORITY_ERROR);
 		}
 		if (claims.get(Utils.ROLE).equals(Utils.ROLE_GUEST)) {
@@ -153,7 +154,7 @@ public class JwtTokenProvider implements InitializingBean {
 				.build();
 			userPrincipal = UserPrincipal.createUserPrincipal(user);
 
-			log.info("claims.get(Utils.ROLE).equals(Utils.ROLE_GUEST): {}",
+			log.info("getAuthentication | claims.get(Utils.ROLE).equals(Utils.ROLE_GUEST): {}",
 				claims.get(Utils.ROLE).equals(Utils.ROLE_GUEST));
 
 		} else if (claims.get(Utils.ROLE).equals(Utils.ROLE_USER)) {
@@ -162,7 +163,7 @@ public class JwtTokenProvider implements InitializingBean {
 				.map(UserPrincipal::createUserPrincipal)
 				.orElseThrow(() -> new CustomException(CustomExceptionType.AUTHORITY_ERROR));
 
-			log.info("claims.get(Utils.ROLE).equals(Utils.ROLE_USER): {}",
+			log.info("getAuthentication | claims.get(Utils.ROLE).equals(Utils.ROLE_USER): {}",
 				claims.get(Utils.ROLE).equals(Utils.ROLE_USER));
 
 		}
@@ -183,6 +184,11 @@ public class JwtTokenProvider implements InitializingBean {
 	public boolean validateToken(String token) {
 		try {
 			Jws<Claims> claims = Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(token);
+
+			log.info("validateToken | claims.getBody().getExpiration():{}", claims.getBody().getExpiration());
+			log.info("validateToken | claims.getBody().getExpiration().after(new Date()):{}",
+				claims.getBody().getExpiration().after(new Date()));
+
 			return claims.getBody().getExpiration().after(new Date());
 		} catch (io.jsonwebtoken.security.SecurityException | MalformedJwtException e) {
 			log.info("잘못된 JWT 서명입니다.");
@@ -271,24 +277,16 @@ public class JwtTokenProvider implements InitializingBean {
 		Authentication authentication = getAuthentication(token);
 		UserPrincipal userPrincipal = (UserPrincipal)authentication.getPrincipal();
 		String userId = userPrincipal.getId();
-
-		log.info("userId: {}", userId);
-
 		String key = "RT:" + Encoders.BASE64.encode(userId.getBytes());
 		String refreshToken = redisUtil.getData(key);
-
-		log.info("reissue key: {}", key);
-		log.info("reissue refreshToken: {}", refreshToken);
-
 		if (refreshToken == null) {
 			throw new CustomException(CustomExceptionType.REFRESH_TOKEN_ERROR);
 		}
-		String accessToken = createTokensFromAuthentication(authentication, Utils.ACCESS_TOKEN);
+		String accessToken = createTokensFromUserPrincipal(userPrincipal, Utils.ACCESS_TOKEN);
 		SecurityContextHolder.getContext().setAuthentication(authentication);
 
 		return JwtTokenDto.builder()
 			.token(accessToken)
-			.expiration(getExpiration(accessToken))
 			.build();
 	}
 }

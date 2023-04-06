@@ -35,14 +35,18 @@ public class JwtAuthenticationFilter extends GenericFilterBean {
 		String accessToken = getTokenFromRequest(httpServletRequest);
 		String requestURI = httpServletRequest.getRequestURI();
 
-		// if (StringUtils.hasText(accessToken) && redisUtil.getData(accessToken) == null) {
-		// 액세스 토큰이 유효하다면, 토큰으로부터 유저 정보를 받아와서 SecurityContext에 인증 정보 저장
-		if (StringUtils.hasText(accessToken) && jwtTokenProvider.validateToken(accessToken)) {
-			Authentication authentication = jwtTokenProvider.getAuthentication(accessToken);
-			SecurityContextHolder.getContext().setAuthentication(authentication);
-			log.info("Security Context에 '{}' 인증 정보를 저장했습니다, uri: {}", authentication.getName(), requestURI);
+		if (StringUtils.hasText(accessToken) && redisUtil.getData(accessToken) == null) {
+			// 액세스 토큰이 유효하다면, 토큰으로부터 유저 정보를 받아와서 SecurityContext에 인증 정보 저장
+			if (jwtTokenProvider.validateToken(accessToken)) {
+				Authentication authentication = jwtTokenProvider.getAuthentication(accessToken);
+				SecurityContextHolder.getContext().setAuthentication(authentication);
+				log.info("Security Context에 '{}' 인증 정보를 저장했습니다, uri: {}", authentication.getName(), requestURI);
+			} else {
+				log.info("액세스 토큰이 유효하지 않습니다, uri: {}", requestURI);
+			}
 		} else {
-			log.info("액세스 토큰이 유효하지 않습니다, uri: {}", requestURI);
+			// 로그아웃한 사용자는 redis에 key가 access token인 값을 넣어두었음
+			log.info("로그아웃한 사용자입니다. 새로 로그인해야 합니다., uri: {}", requestURI);
 		}
 		filterChain.doFilter(servletRequest, servletResponse);    // filterChain에서 다음 필터를 호출
 	}
