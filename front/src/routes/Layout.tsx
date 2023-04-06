@@ -44,13 +44,45 @@ function Layout() {
   let favIdols = useAppSelector(state => state.userInfo.favIdols);
 
   const userInfoFunction = async () => {
-    if (query.get('token')) {   // 로그인 후에는 query에 token이 들어있으므로 그 값을 저장하자.
+    if (token !== "") {   // 토큰이 있으면 토큰 유효성을 검사하자
+      await axios.post(`${BASE_URL}/api/user/reissue`, {}, {
+        headers: {
+          Authorization: token
+        }
+      })
+        .then(response => {
+          return response.data.token
+        })
+        .then(token => {
+          const TOKEN = `Bearer ${token}`
+          dispatch(CreateTOKEN(TOKEN));
+        })
+        .catch(error => {
+          console.log(error);
+          window.localStorage.clear();
+          navigate('/intro');
+        })
+
+      // 리덕스에 값이 없으면 요청하기
+      favIdols.length === 0 && await axios.get(`${BASE_URL}/api/interest/list`, {
+        headers: {
+          Authorization: token
+        }
+      })
+        .then(response => {
+          console.log(response.data);
+          return response.data.idols
+        })
+        .then(idols => dispatch(CreateFavIdols(idols)))
+        .catch(error => console.log(error));
+    }
+    else if (query.get('token')) {   // 로그인 후에는 query에 token이 들어있으므로 그 값을 저장하자.
       const token = query.get('token');
       dispatch(CreateTOKEN(query.get('token')));
       dispatch(CreateUserId(query.get('userId')));
       dispatch(CreateNickname(query.get('nickname')));
 
-      await axios.get(`${BASE_URL}/api/interest/list`, {
+      axios.get(`${BASE_URL}/api/interest/list`, {
         headers: {
           Authorization: token
         }
@@ -63,48 +95,15 @@ function Layout() {
         .catch(error => console.log(error));
 
       ga('set', userId, userId);
-      window.history.pushState({}, "", "/")
+      window.history.pushState({}, "", "/");
+      return;
     }
-    else {
-      if (token) {   // 토큰이 있으면 토큰 유효성을 검사하자
-        await axios.post(`${BASE_URL}/api/user/reissue`, {}, {
-          headers: {
-            Authorization: token
-          }
-        })
-          .then(response => {
-            return response.data.token
-          })
-          .then(token => {
-            const TOKEN = `Bearer ${token}`
-            dispatch(CreateTOKEN(TOKEN));
-          })
-          .catch(error => {
-            console.log(error);
-            window.localStorage.clear();
-            navigate('/intro');
-          })
-
-        // 리덕스에 값이 없으면 요청하기
-        favIdols.length === 0 && await axios.get(`${BASE_URL}/api/interest/list`, {
-          headers: {
-            Authorization: token
-          }
-        })
-          .then(response => {
-            console.log(response.data);
-            return response.data.idols
-          })
-          .then(idols => dispatch(CreateFavIdols(idols)))
-          .catch(error => console.log(error));
-      }
-      else {    // 토큰이 없으면 intro로 보내버리자.
-        navigate('/intro');
-      }
+    else {// 토큰이 없으면 intro로 보내버리자.
+      navigate('/intro');
     }
   }
-  userInfoFunction();
 
+  userInfoFunction();
 
   /** ga에 대한 것, userId가 존재하면 ga 시작 */
   useEffect(() => {
