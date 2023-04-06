@@ -1,23 +1,24 @@
-import ECharts from 'echarts-for-react';
-import { faker } from '@faker-js/faker';
 import { useEffect, useState } from 'react';
+
+import ECharts from 'echarts-for-react';
 import { PosNeg } from '../../../_utils/Types';
+import { faker } from '@faker-js/faker';
 
 interface Props {
-  posNegWeek: PosNeg[];
+  posNeg: PosNeg[];
 }
 
-function IdolEmotionChart({posNegWeek}:Props) {
+function IdolEmotionChart({posNeg}:Props) {
   let labels = ['월', '화', '수', '목', '금', '토', '일']
   const [posList, setPosList] = useState<number[]>([0])
   const [negList, setNegList] = useState<number[]>([0])
   useEffect(() => {
     let posTmp:number[] = []
     let negTmp:number[] = []
-    if ( posNegWeek ) {
-      for ( let i=0; i < posNegWeek.length; i++) {
-        posTmp.push(posNegWeek[i].pos)
-        negTmp.push(posNegWeek[i].neg)
+    if ( posNeg ) {
+      for ( let i=0; i < posNeg.length; i++) {
+        posTmp.push(posNeg[i].pos)
+        negTmp.push(posNeg[i].neg)
       }
       setPosList(posTmp)
       setNegList(negTmp)

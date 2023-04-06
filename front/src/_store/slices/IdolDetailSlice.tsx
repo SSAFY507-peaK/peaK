@@ -4,26 +4,22 @@ import { request } from "../../_utils/axios";
 export const idolDetail = createSlice({
   name: "idolDetail",
   initialState: {
-    currentRank: 0,
-    currentScore: 0,
+    rankData: {
+      current:{
+        rank: 0,
+        score: 0
+      },
+      rankWeek: [],
+    },
     posNegWeek: [],
   },
   reducers: {
     CreateIdolRank(state, action){
-      const url = `/peak/weekly/${action.payload}`
-      console.log(action.payload)
-      request("get", url)
-        .then( res => {
-          console.log(res)
-          state.currentRank = res.current.rank
-          state.currentScore = res.current.score
-          state.posNegWeek = res.rankWeek
-        }
-      )
-
+      // console.log(action)
+      state.rankData = action.payload
     },
     CreatePosNegWeek(state, action){
-      state.posNegWeek = action.payload
+      state.posNegWeek = action.payload.posNegWeek
     }
   }
 })

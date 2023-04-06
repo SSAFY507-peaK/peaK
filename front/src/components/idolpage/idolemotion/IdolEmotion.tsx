@@ -110,27 +110,11 @@ function IdolEmotion() {
   const idolName:string = params.idolName || "";
 
   const [rankData, setRankData] = useState<WeeklyRankingType>(tmp2)
-  const [posNegWeek, setPosNegWeek] = useState<PosNeg[]>(tmp)
   const userId:string = useAppSelector(state => state.userInfo.userId)
+  const posNeg:PosNeg[] = useAppSelector(state => state.idolDetail.posNegWeek)
+  // const rankData:WeeklyRankingType = useAppSelector(state => state.idolDetail.rankData)
+  console.log(posNeg[0])
 
-  useEffect(() => {
-    async function Loader() {
-      await request("get", `/peak/weekly/${idolName}`).then( res => rankData ? null : setRankData(res))
-      await request("get", `/idol/${idolName}/pos-neg`).then( res => posNegWeek ? null : setPosNegWeek(res.posNegWeek))
-    }
-    Loader();
-
-  }, [])
-
-
-  const [rankWeek, setRankWeek] = useState<number[]>([0]);
-  useEffect(() => {
-    let tmp:number[] =[]
-    for (let i = 0; i < rankData.rankWeek.length; i++) {
-      tmp = [...tmp, rankData.rankWeek[i].rank]
-    }
-    setRankWeek(tmp)
-  },[rankData])
 
   return(
     <DataFrame>
@@ -150,7 +134,7 @@ function IdolEmotion() {
           }} />
         <IdolEmotionChartBtn 
           isTab = {!check} 
-          ranknum={`${posNegWeek[0].pos}점`}
+          ranknum={`${posNeg[0].pos}점`}
           rankicon={<ArrowDropUpIcon  sx={{ color: "red"}} />}
           color="red"
           changenum={3} 
@@ -166,9 +150,9 @@ function IdolEmotion() {
         {
           check 
           ?
-          <IdolEmotionRankChart rankWeek={rankWeek} />
+          <IdolEmotionRankChart rankData={rankData} />
           :
-          <IdolEmotionChart posNegWeek={posNegWeek} />
+          <IdolEmotionChart posNeg={posNeg} />
         }
       </ChartFrame>
     </DataFrame>

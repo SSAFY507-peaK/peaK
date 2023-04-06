@@ -1,11 +1,12 @@
-import { CreateIdolRank } from "../_store/slices/IdolDetailSlice";
+import { CreateIdolRank, CreatePosNegWeek } from "../_store/slices/IdolDetailSlice";
+
 import IdolData from "../components/idolpage/IdolProfile/IdolData";
 import IdolEmotion from "../components/idolpage/idolemotion/IdolEmotion";
 import IdolKeyword from "../components/idolpage/idolkeyword/IdolKeyword";
 import IdolList from "../components/idolpage/IdolList";
 import IdolYoutube from "../components/idolpage/IdolYoutube";
 import { TimeTracker } from "../_utils/UserTracker";
-import { request } from "http";
+import { request } from "../_utils/axios";
 import styled from "styled-components";
 import { useAppDispatch } from "../_hooks/hooks";
 import { useEffect } from "react";
@@ -40,8 +41,11 @@ function IdolPage() {
   TimeTracker(`/${idolName}`)
 
   const dispatch = useAppDispatch()
-  dispatch(CreateIdolRank(idolName))
-
+  // dispatch(CreateIdolRank(idolName))
+  // dispatch(CreatePosNegWeek(idolName))
+  request("get", `/idol/${idolName}/pos-neg` ).then(res =>  dispatch(CreatePosNegWeek(res)))
+  // request("get", `/peak/weekly/${idolName}`).then(res => dispatch(CreateIdolRank(res)))
+  
   return (
     <Wrapper>
       <IdolList idolName={idolName} />
