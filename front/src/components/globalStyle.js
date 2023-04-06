@@ -63,11 +63,12 @@ const GlobalStyle = createGlobalStyle`
     --purple-gradient: linear-gradient(to bottom right, #A869CD 0%, #76349D 100%);
     --purple-gradient-hover: linear-gradient(to bottom right, #925bb3 0%, #642c85 100%);
     --gray-gradient: linear-gradient(to bottom right, #B8B8B8 0%, #6B6B6B 100%);
+    --gray-gradient-hover: linear-gradient(to bottom right, #9e9e9e 0%, #525252 100%);
     --blue-gradient: linear-gradient(to bottom right, #9FC6F4 0%, #1976E1 100%);
     --blue-gradient-hover: linear-gradient(to bottom right, #8fb2db 0%, #1668c7 100%);
     --yellow-gradient: linear-gradient(to bottom right, #FFD99E 0%, #FF9B05 100%);
     --green-gradient: linear-gradient(to bottom right, #93F2A2 0%, #1AD138 100%);
-    
+
     /* Graph color */
     --graph1-color: #4CD7F6;
     --graph2-color: #6DBFFF;
@@ -136,7 +137,7 @@ const GlobalStyle = createGlobalStyle`
   textarea {
     font-family: inherit;
   }
-  
+
   h1, h2, h3 {
     margin: 0 0 10px;
   }
