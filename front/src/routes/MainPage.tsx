@@ -1,8 +1,9 @@
+import { TrendNewsListType, TrendYoutubeListType } from "../_utils/Types.js";
+
 import CarouselCustom from "../components/Carousel/CarouselCustom.jsx";
 import TitleContent from "../components/TitleContent";
 import Top8 from "../components/MainPage/Top8";
 import TrendKeyword from "../components/MainPage/TrendKeyword";
-import { TrendNewsListType } from "../_utils/Types.js";
 import axios from "axios";
 import styled from "styled-components";
 import { useLoaderData } from "react-router";
@@ -20,8 +21,15 @@ export async function loader() {
     })
     .catch(error => console.log(error));
 
-  return [TrendNewsList];
-  // return [TrendNewsList, TrendYoutubeList];
+  await axios
+    .get(`${BASE_URL}/api/youtube/아이돌`)
+    .then(response => {
+      console.log("Youtube 전체 데이터는 어떻게 오나요!", response.data);
+      TrendYoutubeList = response.data;
+    })
+    .catch(error => console.log(error));
+
+  return [TrendNewsList, TrendYoutubeList];
 }
 
 const CarouselDiv = styled.div`
@@ -40,13 +48,26 @@ const MainGrid = styled.div`
 `;
 
 function MainPage() {
-  const TrendNewsList = useLoaderData() as TrendNewsListType[];
+  const [TrendNewsList, TrendYoutubeList] = useLoaderData() as [
+    TrendNewsListType[],
+    TrendYoutubeListType[],
+  ];
 
   const CarouselNewsData = (
     <CarouselDiv>
       <CarouselCustom data={TrendNewsList[0]} />
     </CarouselDiv>
   );
+
+  const CarouselYoutubeData = (
+    <CarouselDiv>
+      <CarouselCustom data={TrendYoutubeList[0]} />
+    </CarouselDiv>
+  );
+
+  console.log("TrendYoutubeList", TrendYoutubeList);
+  console.log("TrendYoutubeList[0]", TrendYoutubeList[0]);
+
   return (
     <MainGrid>
       <TitleContent
@@ -78,6 +99,7 @@ function MainPage() {
         }
       />
       <TitleContent
+        data={CarouselYoutubeData}
         gridColumn="3 / 5"
         noContentBackground={true}
         title={

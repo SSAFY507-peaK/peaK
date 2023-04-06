@@ -31,6 +31,12 @@ export type TrendNewsListType = {
   title: string;
 };
 
+export type TrendYoutubeListType = {
+  url: string;
+  thumbnail: string;
+  title: string;
+};
+
 // export type MyIdolDetail = {
 //   name: string;
 //   myScore: number;
