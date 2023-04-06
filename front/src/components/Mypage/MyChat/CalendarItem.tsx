@@ -19,14 +19,16 @@ interface Type {
 
 const DayComponent = styled.option<Type>`
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;  
+  padding:10px 5px;
   margin: 5px;
-  font-size: 1.1rem;
+  font-size: 1rem;
   cursor: ${props => props.data ? "pointer" : null};
-  text-decoration: underline;
+  //text-decoration: underline;
   color: ${props => props.click ? "white" : props => props.data ?  `var(--purple400-color)` : null};
-  background-color: ${props => props.click ? `var(--purple400-color)` : "white"};
+  background: ${props => props.click ? `linear-gradient(to bottom right, #A869CD 0%, #76349D 100%)` : "white"};
   opacity: ${props => props.data ? null : 0.5};
   border-radius: 5px;
 `;

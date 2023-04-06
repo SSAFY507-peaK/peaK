@@ -6,7 +6,7 @@ const ContentDiv = styled.div`
   flex-direction: column;
   background-color: white;
   border-radius: 15px;
-  box-shadow: 0 0 5px rgba(151, 151, 151, 0.25);
+  box-shadow: 0 0 5px -2px rgba(151, 151, 151, 0.25);
   padding: 30px;
   height: 100%;
   overflow-y: auto;

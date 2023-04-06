@@ -16,12 +16,12 @@ const Title = styled.h3`
   /* font-size: 2rem;
   font-weight: 700; */
   /* margin-right: 10px; */
-  margin: 0px 10px 20px 0px;
+  margin: 0 10px 10px 0;
   color: ${props => props.color || `var(--purple500-color)`};
 `;
 
 const BigTitle = styled.h2`
-  margin: 0px 5px 0px 0px;
+  margin: 0 5px 0 0;
   color: ${props => props.color || `var(--purple500-color)`};
 `;
 
