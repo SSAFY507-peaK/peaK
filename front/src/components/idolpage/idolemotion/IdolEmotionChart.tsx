@@ -1,11 +1,30 @@
 import ECharts from 'echarts-for-react';
 import { faker } from '@faker-js/faker';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { PosNeg } from '../../../_utils/Types';
 
-function IdolEmotionChart() {
+interface Props {
+  posNegWeek: PosNeg[];
+}
+
+function IdolEmotionChart({posNegWeek}:Props) {
   let labels = ['월', '화', '수', '목', '금', '토', '일']
-
-  const [options, setOptions] = useState({
+  const [posList, setPosList] = useState<number[]>([0])
+  const [negList, setNegList] = useState<number[]>([0])
+  useEffect(() => {
+    let posTmp:number[] = []
+    let negTmp:number[] = []
+    if ( posNegWeek ) {
+      for ( let i=0; i < posNegWeek.length; i++) {
+        posTmp.push(posNegWeek[i].pos)
+        negTmp.push(posNegWeek[i].neg)
+      }
+      setPosList(posTmp)
+      setNegList(negTmp)
+    }
+  }, [])
+  
+  const options = {
     color: ['rgba(230, 35, 77, 0.5)', 'rgba(57, 17, 232, 0.5)'],
     tooltip: {
       trigger: 'axis',
@@ -55,7 +74,8 @@ function IdolEmotionChart() {
         emphasis: {
           focus: 'series'
         },
-        data: labels.map(() => faker.datatype.float({ min: 0, max: 100 }))
+        data: posList
+        // data: posList
       },
       {
         name: '부정',
@@ -72,10 +92,11 @@ function IdolEmotionChart() {
         emphasis: {
           focus: 'series'
         },
-        data: labels.map(() => faker.datatype.float({ min: 0, max: 100 }))
+        data: negList
+        // data: negList
       },
     ]
-	});	
+	};	
 
 	return (
     <ECharts

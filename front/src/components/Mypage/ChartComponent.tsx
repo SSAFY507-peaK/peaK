@@ -4,14 +4,14 @@ import styled from 'styled-components';
 
 interface Props {
   idoldata: Idoldata;
+  name: string;
 }
 
 const Frame = styled.div`
   height: 26.5vh;  
 `;
 
-// const color:string[] = ["#4CD7F6","#6DBFFF","#7166F9", "#C74BF6", "#F946FF"]
-function ChartComponent({idoldata}:Props) {
+function ChartComponent({idoldata, name}:Props) {
   const option = {
     color: ["#4CD7F6", "#C74BF6"],
     tooltip: {
@@ -25,15 +25,9 @@ function ChartComponent({idoldata}:Props) {
     },
     toolbox: {
       feature: {
-        // dataView: { show: false, readOnly: false },
         magicType: { show: false, type: ['line', 'bar'] },
-        // restore: { show: false },
-        // saveAsImage: { show: false }
       }
     },
-    // legend: {
-    //   data: ['Evaporation', 'Precipitation', 'Temperature']
-    // },
 
     xAxis: [
       {
@@ -47,13 +41,8 @@ function ChartComponent({idoldata}:Props) {
     yAxis: [
       {
         type: 'value',
-        // name: 'Precipitation',
         min: 0,
-        // max: 250,
         interval: 50,
-        // axisLabel: {
-        //   formatter: '{value} ml'
-        // }
       },
       {
         type: 'value',
@@ -68,7 +57,7 @@ function ChartComponent({idoldata}:Props) {
     ],
     series: [
       {
-        name: 'Evaporation',
+        name: `나의 ${name}`,
         type: 'bar',
         // tooltip: {
         //   valueFormatter: function (value:number) {
@@ -78,7 +67,7 @@ function ChartComponent({idoldata}:Props) {
         data: idoldata.dataLst
       },
       {
-        name: 'Precipitation',
+        name: `평균 ${name}`,
         type: 'bar',
         // tooltip: {
         //   valueFormatter: function (value:number) {

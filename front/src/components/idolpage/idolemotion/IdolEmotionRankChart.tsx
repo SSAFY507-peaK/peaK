@@ -1,20 +1,24 @@
 import ECharts from 'echarts-for-react';
 import { faker } from '@faker-js/faker';
+import { useParams } from 'react-router';
 import { useState } from 'react';
 
-function IdolEmotionRankChart() {
-  let labels = ['월', '화', '수', '목', '금', '토', '일']
+interface Props {
+  rankWeek: number[];
+}
 
-  const idolName = "세븐틴"
-  const [options, setOptions] = useState({
+
+function IdolEmotionRankChart({rankWeek}:Props) {
+  let labels = ['월', '화', '수', '목', '금', '토', '일']
+  const params = useParams();
+  const idolName:string = params.idolName || "";
+
+  const options = {
     color: "#F946FF",
     tooltip: {
       trigger: 'axis',
       axisPointer: {
         type: 'cross',
-        // label: {
-        //   backgroundColor: '#6a7985'
-        // }
       }
     },
     legend: {
@@ -41,10 +45,10 @@ function IdolEmotionRankChart() {
         max: 1,
         min: 100,
         interval: 20,
-        inverse: true
-        // splitLine: {
-        //   show: false // 가로선 숨기기
-        // }
+        inverse: true,
+        splitLine: {
+          show: false // 가로선 숨기기
+        }
       }
     ],
     series: [
@@ -63,10 +67,10 @@ function IdolEmotionRankChart() {
         emphasis: {
           focus: 'series'
         },
-        data: labels.map(() => faker.datatype.number({ min: 0, max: 100 }))
+        data: rankWeek
       },
     ]
-  })
+  }
 
   return (
     <ECharts

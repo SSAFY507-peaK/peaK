@@ -99,37 +99,6 @@ function MyPage() {
         </>
         : null
       }
-      {/* <TopFrame>
-        <TotalChart userName={userName} setIdolName={setIdolName} />
-        <MyInterest userName={userName} idolName={idolName} idolScoreData={idolScoreData} />
-        <MyChat userName={userName} idolChatData={sampleData[index].comments}/> */}
-        {/* {
-          idolName && index > -1
-          ?
-          <>
-            <MyInterest userName={userName} idolName={idolName} idolScoreData={idolScoreData} />
-            <MyChat userName={userName} idolChatData={sampleData[index].comments}/>
-          </>
-          :
-          null
-        } */}
-      {/* </TopFrame>
-      <BottomFrame>
-        <MyClickChart userName={userName} userClick={sampleData[index].click}/>
-        <MyChatChart userName={userName} userChat={sampleData[index].chat}/>
-        <MyVisitChart userName={userName} userTime={sampleData[index].time}/>
-      </BottomFrame> */}
-      {/* {
-        idolName && index > -1
-        ?
-        <BottomFrame>
-          <MyClickChart userName={userName} userClick={sampleData[index].click}/>
-          <MyChatChart userName={userName} userChat={sampleData[index].chat}/>
-          <MyVisitChart userName={userName} userTime={sampleData[index].time}/>
-        </BottomFrame>
-        :
-        null
-      } */}
     </Wrapper>
   );
 }

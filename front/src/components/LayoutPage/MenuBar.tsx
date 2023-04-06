@@ -88,7 +88,7 @@ function MenuBar({ nickname }: MenuBarProps) {
             </NavLink>
           </Menu>
           <Menu>
-            <NavLink to="/newjeans" className={({ isActive }) => (isActive ? "active" : "")}>
+            <NavLink to="/BTS" className={({ isActive }) => (isActive ? "active" : "")}>
               <FavoriteIcon style={style} />
               관심 아이돌
             </NavLink>

@@ -1,12 +1,15 @@
-import {useParams } from "react-router-dom";
-
+import { CreateIdolRank } from "../_store/slices/IdolDetailSlice";
 import IdolData from "../components/idolpage/IdolProfile/IdolData";
 import IdolEmotion from "../components/idolpage/idolemotion/IdolEmotion";
 import IdolKeyword from "../components/idolpage/idolkeyword/IdolKeyword";
 import IdolList from "../components/idolpage/IdolList";
 import IdolYoutube from "../components/idolpage/IdolYoutube";
-import { TimeTracker } from "../components/idolpage/ClickTracker";
+import { TimeTracker } from "../_utils/UserTracker";
+import { request } from "http";
 import styled from "styled-components";
+import { useAppDispatch } from "../_hooks/hooks";
+import { useEffect } from "react";
+import {useParams} from "react-router-dom";
 
 const Wrapper = styled.div`
   display: flex;
@@ -35,6 +38,10 @@ function IdolPage() {
   const params = useParams();
   const idolName = params.idolName || "";
   TimeTracker(`/${idolName}`)
+
+  const dispatch = useAppDispatch()
+  dispatch(CreateIdolRank(idolName))
+
   return (
     <Wrapper>
       <IdolList idolName={idolName} />

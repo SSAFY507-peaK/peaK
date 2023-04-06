@@ -1,10 +1,11 @@
 import ReactGA, { EventArgs } from 'react-ga';
 import { useEffect, useState } from "react";
 
-import { ClickTracker } from '../ClickTracker';
+import { ClickTracker } from '../../../_utils/UserTracker';
 import IdolKeywordRankBtn from "./IdolKeywordRankBtn";
 import TitleComponent from "../TitleComponent";
 import styled from "styled-components";
+import { useAppSelector } from '../../../_hooks/hooks';
 import { useParams } from 'react-router';
 
 interface Props {
@@ -60,7 +61,7 @@ function IdolKeywordRank({setChooseKeyword, chooseKeyword}:Props) {
                   tmp[idx] = true
                   setCheck(tmp)
                   setChooseKeyword(idx)
-                  ClickTracker(idolName,"chohm1223@naver.com")
+                  ClickTracker(idolName)
                 }
               }
               isClick={check[idx]}

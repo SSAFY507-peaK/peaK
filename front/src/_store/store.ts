@@ -4,6 +4,7 @@ import storage from 'redux-persist/lib/storage';
 
 import myInterestReducer from './slices/InterestSlice';
 import userInfoReducer from './slices/UserSlice';
+import idolDetailReducer from './slices/IdolDetailSlice';
 
 // storage에 저장할거야
 const persistConfig = {
@@ -15,6 +16,7 @@ const persistConfig = {
 const rootReducers = combineReducers({
   userInfo: userInfoReducer,
   myInterest: myInterestReducer,
+  idolDetail: idolDetailReducer,
 })
 
 const persistedReducer = persistReducer(persistConfig, rootReducers);

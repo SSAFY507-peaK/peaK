@@ -1,4 +1,4 @@
-import { ClickTracker } from "../idolpage/ClickTracker";
+import { ClickTracker } from "../../_utils/UserTracker";
 import Rank1 from "../../assets/1.png";
 import Rank2 from "../../assets/2.png";
 import Rank3 from "../../assets/3.png";
@@ -78,7 +78,7 @@ function IdolRank(props: IdolRankType) {
     <WrapperDiv
       onClick={() => {
         navigate(`/${props.name}`);
-        ClickTracker(props.name, "chohm1223@naver.com");
+        ClickTracker(props.name);
       }}
     >
       {Logo(props.rank)}

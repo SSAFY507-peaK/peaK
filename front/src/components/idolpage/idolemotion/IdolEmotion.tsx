@@ -1,11 +1,14 @@
+import { PosNeg, WeeklyRankingType } from '../../../_utils/Types';
+import { useEffect, useState } from "react";
+
 import ArrowDropUpIcon from '@mui/icons-material/ArrowDropUp';
-import { ClickTracker } from '../ClickTracker';
+import { ClickTracker } from '../../../_utils/UserTracker';
 import IdolEmotionChart from "./IdolEmotionChart";
 import IdolEmotionChartBtn from "./IdolEmotionChartBtn";
 import IdolEmotionRankChart from "./IdolEmotionRankChart";
+import { request } from '../../../_utils/axios';
 import styled from "styled-components";
 import { useParams } from 'react-router';
-import { useState } from "react";
 
 const DataFrame = styled.div`
   display: flex;
@@ -32,38 +35,126 @@ const ChartFrame = styled.div`
   height: 30vh;
   border-radius: 20px;
 `;
+const tmp:PosNeg[] = [
+  {
+    pos:80,
+    neg:20
+  },
+  {
+    pos:80,
+    neg:20
+  },
+  {
+    pos:80,
+    neg:20
+  },
+  {
+    pos:80,
+    neg:20
+  },
+  {
+    pos:80,
+    neg:20
+  },
+  {
+    pos:80,
+    neg:20
+  },
+  {
+    pos:80,
+    neg:20
+  },    
+]
 
+const tmp2:WeeklyRankingType = {
+	current: {
+		rank: 1,
+		score: 13000
+	},
+	rankWeek: [
+		{
+			rank: 1,
+			score: 13000
+		},
+		{
+			rank: 5,
+			score: 13000
+		},
+		{
+			rank: 4,
+			score: 13000
+		},
+    {
+			rank: 41,
+			score: 13000
+		},
+		{
+			rank: 5,
+			score: 13000
+		},
+		{
+			rank: 44,
+			score: 13000
+		},
+    {
+			rank: 4,
+			score: 13000
+		},
+	]
+}
 
 function IdolEmotion() {
   const [check, setCheck] = useState<boolean>(true);
   const params = useParams();
   const idolName:string = params.idolName || "";
 
+  const [rankData, setRankData] = useState<WeeklyRankingType>(tmp2)
+  const [posNegWeek, setPosNegWeek] = useState<PosNeg[]>(tmp)
+
+  useEffect(() => {
+    async function Loader() {
+      await request("get", `/peak/weekly/${idolName}`).then( res => rankData ? null : setRankData(res))
+      await request("get", `/idol/${idolName}/pos-neg`).then( res => posNegWeek ? null : setPosNegWeek(res.posNegWeek))
+    }
+    Loader();
+
+  }, [])
+
+
+  const [rankWeek, setRankWeek] = useState<number[]>([0]);
+  useEffect(() => {
+    let tmp:number[] =[]
+    for (let i = 0; i < rankData.rankWeek.length; i++) {
+      tmp = [...tmp, rankData.rankWeek[i].rank]
+    }
+    setRankWeek(tmp)
+  },[rankData])
+
   return(
     <DataFrame>
       <ChartBtnFrame>
         <IdolEmotionChartBtn
           isTab = {check}
-          ranknum="1위"
+          ranknum= {`${rankData.current.rank}위`}
           rankicon={<ArrowDropUpIcon sx={{ color: "red"}} />}
           color="red"
           changenum={3} 
           title="종합랭킹" 
           onClick={() => {
-            ClickTracker(idolName,"chohm1223@naver.com")
+            ClickTracker(idolName)
             return (
               !check ? setCheck(true) : null
             )
           }} />
         <IdolEmotionChartBtn 
           isTab = {!check} 
-          ranknum="81점" 
+          ranknum={`${posNegWeek[0].pos}점`}
           rankicon={<ArrowDropUpIcon  sx={{ color: "red"}} />}
           color="red"
           changenum={3} 
           title="긍정지수" 
           onClick={() => {
-            ClickTracker(idolName,"chohm1223@naver.com")
+            ClickTracker(idolName)
             return (
               check? setCheck(false) : null
             )
@@ -73,9 +164,9 @@ function IdolEmotion() {
         {
           check 
           ?
-          <IdolEmotionRankChart />
+          <IdolEmotionRankChart rankWeek={rankWeek} />
           :
-          <IdolEmotionChart />
+          <IdolEmotionChart posNegWeek={posNegWeek} />
         }
       </ChartFrame>
     </DataFrame>
