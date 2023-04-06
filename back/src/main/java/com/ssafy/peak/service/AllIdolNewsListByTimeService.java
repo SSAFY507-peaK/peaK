@@ -118,6 +118,7 @@ public class AllIdolNewsListByTimeService {
 		return keywordRelatedWordCounterList;
 	}
 
+	@Transactional
 	public void addNewsToAllIdolNewsList(NewsSearchRequestDto newsSearchRequestDto) {
 		long index = newsSearchRequestDto.getIndex();
 		LocalDateTime dateTime = newsSearchRequestDto.getDateTime();
@@ -130,8 +131,10 @@ public class AllIdolNewsListByTimeService {
 				.findByDateTime(dateTime)
 				.orElseThrow(() -> new CustomException(CustomExceptionType.ALL_IDOL_NEWS_NOT_FOUND));
 		allIdolNewsList.getNewsList().add(news);
+		allIdolNewsListByTimeRepository.save(allIdolNewsList);
 	}
 
+	@Transactional
 	public void addKeywordCounterToAllIdolNewsList(KeywordCounterRequestDto keywordCounterRequestDto) {
 		LocalDateTime dateTime = keywordCounterRequestDto.getDateTime();
 		Map<String, Integer> keywordCounter = keywordCounterRequestDto.getKeywordCounter();
@@ -140,5 +143,6 @@ public class AllIdolNewsListByTimeService {
 				.findByDateTime(dateTime)
 				.orElseThrow(() -> new CustomException(CustomExceptionType.ALL_IDOL_NEWS_NOT_FOUND));
 		allIdolNewsList.getKeywordCounter().putAll(keywordCounter);
+		allIdolNewsListByTimeRepository.save(allIdolNewsList);
 	}
 }
