@@ -12,6 +12,7 @@ export const idolDetailNews = createSlice({
   reducers: {
     /** 뉴스 키워드 정제 */
     CreateNewsData(state, action){
+      console.log(action.payload)
       const newsList = action.payload
       let tmpKeyword = []
       let tmpNews = []

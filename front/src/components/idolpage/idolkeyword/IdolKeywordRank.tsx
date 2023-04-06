@@ -20,8 +20,8 @@ const RankFrame = styled.div`
 
 function IdolKeywordRank({setChooseKeyword, chooseKeyword}:Props) {
 
-  // const keywords = useAppSelector(state => state.idolDetailNews.keywordList)
-  const keywords = ["주희발빠집주의!", "정보처리기사", "실기책 비쌈", "잔디 언제심지", "아아아아아아"]
+  const keywords = useAppSelector(state => state.idolDetailNews.keywordList)
+  // const keywords = ["주희발빠짐주의!", "배고픈이문세", "갓귤", "돌아돌아", "오오오오"]
 
   const params = useParams();
   const idolName:string = params.idolName || "";

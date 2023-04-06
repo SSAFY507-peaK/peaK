@@ -14,6 +14,7 @@ import {useAppDispatch, useAppSelector} from "../_hooks/hooks";
 import {useParams} from "react-router-dom";
 import { CreateIdolChat } from "../_store/slices/IdolDetailChatSlice";
 import { CreateTOKEN } from "../_store/slices/UserSlice";
+import axios from "axios";
 
 const Wrapper = styled.div`
   display: flex;
@@ -45,7 +46,13 @@ function IdolPage() {
   TimeTracker(`/${idolName}`);
   // const favIdols = useAppSelector(state => state.myInterest.idols.map(idol => idol.idol));
 
+  const TOKEN = useAppSelector(state => state.userInfo.TOKEN);
+  const headers = {headers: TOKEN}
   const dispatch = useAppDispatch()
+
+  /** 관심 아이돌 sns Store에 저장 */
+  // request("get", `/idol/${idolName}`).then(res => console.log(res))
+  // axios.get (`/idol/${idolName}`)
 
   /** 관심 아이돌 댓글 Store에 저장 */
   request("get", `/idol/${idolName}/comment`).then(res => dispatch(CreateIdolChat(res)))
@@ -56,11 +63,11 @@ function IdolPage() {
   // request("get", `/peak/weekly/${idolName}`).then(res => dispatch(CreateIdolRank(res)))
   
   /** 뉴스관련 정보 Store에 저장 */
-  // request("get", `/news/list/keywords/${idolName}`)
-  //   .then(res => { 
-  //     dispatch(CreateNewsData(res.newsList));
-  //     dispatch(CreateWordCloud(res.wordCounter));
-  //   })
+  request("get", `/news/list/keywords/${idolName}`)
+    .then(res => { 
+      dispatch(CreateNewsData(res.newsList));
+      dispatch(CreateWordCloud(res.wordCounter));
+    })
   return (
     <Wrapper>
       <IdolList idolName={idolName} />

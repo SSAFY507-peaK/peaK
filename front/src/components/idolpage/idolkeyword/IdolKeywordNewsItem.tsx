@@ -5,6 +5,7 @@ interface NewsDataType {
   title: string;
   summary: string;
   source: string;
+  link: string;
 }
 
 const Frame = styled.div`
@@ -12,6 +13,7 @@ const Frame = styled.div`
   flex-direction: row;
   flex: 0.2;
   padding: 5px;
+  cursor: pointer;
 `;
 
 const NewsImg = styled.img` 
@@ -19,6 +21,7 @@ const NewsImg = styled.img`
   border-radius: 15px;
   background-size: cover;
   width: 100px;
+  height: 100px;
   margin-right: 10px;
 `;
 
@@ -47,13 +50,13 @@ const NewsSource = styled.div`
 `;
 
 
-function IdolKeywordNewsItem({image, title, summary, source}: NewsDataType) {
+function IdolKeywordNewsItem({image, title, summary, source, link}: NewsDataType) {
   return (
-    <Frame>
+    <Frame onClick={() => window.open(link)}>
       <NewsImg src={image} />
       <NewsDataFrame>
         <NewsTitle>{title}</NewsTitle>
-        <NewsDetail>{summary}</NewsDetail>
+        <NewsDetail>{summary.length <= 30 ? summary : summary.substring(0, 70) + "..."}</NewsDetail>
         <NewsSource>{source}</NewsSource>
       </NewsDataFrame>
     </Frame>
