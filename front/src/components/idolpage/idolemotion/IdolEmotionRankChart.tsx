@@ -1,17 +1,28 @@
+import { useEffect, useState } from 'react';
+
 import ECharts from 'echarts-for-react';
+import { WeeklyRankingType } from '../../../_utils/Types';
 import { faker } from '@faker-js/faker';
 import { useParams } from 'react-router';
-import { useState } from 'react';
 
 interface Props {
-  rankWeek: number[];
+  rankData: WeeklyRankingType;
 }
 
 
-function IdolEmotionRankChart({rankWeek}:Props) {
+function IdolEmotionRankChart({rankData}:Props) {
   let labels = ['월', '화', '수', '목', '금', '토', '일']
   const params = useParams();
   const idolName:string = params.idolName || "";
+
+  const [rankWeek, setRankWeek] = useState<number[]>([0]);
+  useEffect(() => {
+    let tmp:number[] =[]
+    for (let i = 0; i < rankData.rankWeek.length; i++) {
+      tmp = [...tmp, rankData.rankWeek[i].rank]
+    }
+    setRankWeek(tmp)
+  },[rankData])
 
   const options = {
     color: "#F946FF",

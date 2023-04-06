@@ -19,28 +19,9 @@ const RankFrame = styled.div`
 
 
 function IdolKeywordRank({setChooseKeyword, chooseKeyword}:Props) {
-  const dumy = [
-    {
-      rank: "1",
-      keyword: "주희발빠집주의!"
-    }, 
-    {
-      rank: "2",
-      keyword: "정보처리기사"
-    }, 
-    {
-      rank: "3",
-      keyword: "실기책 비쌈"
-    }, 
-    {
-      rank: "4",
-      keyword: "잔디 언제심지"
-    }, 
-    {
-      rank: "5",
-      keyword: "아아아아아아"
-    },
-  ]
+
+  // const keywords = useAppSelector(state => state.idolDetailNews.keywordList)
+  const keywords = ["주희발빠집주의!", "정보처리기사", "실기책 비쌈", "잔디 언제심지", "아아아아아아"]
 
   const params = useParams();
   const idolName:string = params.idolName || "";
@@ -50,12 +31,12 @@ function IdolKeywordRank({setChooseKeyword, chooseKeyword}:Props) {
   return (
     <RankFrame>
       {
-        dumy.map((e, idx) => {
+        keywords.map((e, idx) => {
           return (
             <IdolKeywordRankBtn
               key={idx}
-              rank={e.rank}
-              keyword={e.keyword}
+              rank={idx+1}
+              keyword={e}
               onClick={()=>
                 {
                   const tmp = [ false ,false, false, false, false]
@@ -66,7 +47,7 @@ function IdolKeywordRank({setChooseKeyword, chooseKeyword}:Props) {
                 }
               }
               isClick={check[idx]}
-            ></IdolKeywordRankBtn>
+            />
           )
 
         })

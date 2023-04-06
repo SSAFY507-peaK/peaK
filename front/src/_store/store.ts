@@ -1,10 +1,11 @@
-import {Action, ThunkAction, configureStore, combineReducers} from '@reduxjs/toolkit';
+import {Action, ThunkAction, combineReducers, configureStore} from '@reduxjs/toolkit';
+
+import IdolDetailNewsReducer from './slices/IdolDetailNewsSlice'
+import idolDetailChartReducer from './slices/IdolDetailChartSlice';
+import myInterestReducer from './slices/InterestSlice';
 import { persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
-
-import myInterestReducer from './slices/InterestSlice';
 import userInfoReducer from './slices/UserSlice';
-import idolDetailReducer from './slices/IdolDetailSlice';
 
 // storage에 저장할거야
 const persistConfig = {
@@ -16,7 +17,8 @@ const persistConfig = {
 const rootReducers = combineReducers({
   userInfo: userInfoReducer,
   myInterest: myInterestReducer,
-  idolDetail: idolDetailReducer,
+  idolDetailChart: idolDetailChartReducer,
+  idolDetailNews: IdolDetailNewsReducer,
 })
 
 const persistedReducer = persistReducer(persistConfig, rootReducers);

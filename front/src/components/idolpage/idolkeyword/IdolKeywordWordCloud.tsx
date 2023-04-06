@@ -1,6 +1,7 @@
 import WordCloud from 'react-d3-cloud';
 import { faker } from '@faker-js/faker';
 import styled from "styled-components";
+import { useAppSelector } from '../../../_hooks/hooks';
 
 interface Props {
   chooseKeyword: number;
@@ -20,16 +21,18 @@ const WordCloudFrame = styled.div`
 
 function IdolKeywordWordCloud ({chooseKeyword}:Props){
   
-  const data = []
+  // const wordCloud = useAppSelector(state => state.idolDetailNews.wordCloud[chooseKeyword])
+
+  const wordCloud = []
   for (let i=0;  i < 30; i++) {
     const tmp = {text: faker.datatype.string(5), value: faker.datatype.number({ min: 0, max: 200})}
-    data.push(tmp)
+    wordCloud.push(tmp)
   }
 
   return (
     <WordCloudFrame>
       <WordCloud
-        data={data}
+        data={wordCloud}
         fontSize={(word) => Math.log2(word.value) * 4}
         spiral="rectangular"
         width={300} 
@@ -51,7 +54,6 @@ function IdolKeywordWordCloud ({chooseKeyword}:Props){
         //   console.log(`onWordMouseOut: ${d.text}`);
         // }}
       />
-
     </WordCloudFrame>
   )
 }
