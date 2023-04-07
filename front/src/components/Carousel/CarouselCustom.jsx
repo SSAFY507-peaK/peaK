@@ -13,7 +13,7 @@ const AlignDiv = styled.div`
   margin: 0 auto;
 `;
 
-const MAX_VISIBILITY = 3;
+const MAX_VISIBILITY = 2;
 
 const Card = props => (
   <div
@@ -23,8 +23,6 @@ const Card = props => (
       backgroundSize: "cover",
       backgroundPosition: "center",
       cursor: "pointer",
-      // width: "100%",
-      height: "100%",
     }}
     onClick={event => {
       event.preventDefault();
@@ -85,12 +83,12 @@ const CarouselCustom = props => {
         {props.data.map((item, idx) => {
           return (
             <Card
-              title={item.title.length <= 23 ? item.title : item.title.substr(0, 23) + "..."}
+              title={item.title.length <= 15 ? item.title : item.title.substr(0, 15) + "..."}
               content={
                 item.summary
-                  ? item.summary.length <= 60
+                  ? item.summary.length <= 30
                     ? item.summary
-                    : item.summary.substr(0, 60) + "..."
+                    : item.summary.substr(0, 30) + "..."
                   : null
               }
               src={item.thumbnailLink || item.thumbnail}

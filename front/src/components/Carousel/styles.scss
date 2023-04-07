@@ -2,7 +2,7 @@ $color-purple: #8b5cf6;
 $color-pink: #ec4899;
 $color-gray: #9ca3af;
 $color-black: #1f2937;
-$card-size: 20rem;
+$card-size: 24rem;
 
 //body {
 //  width: 50vw;
@@ -38,15 +38,19 @@ $card-size: 20rem;
 
 .card {
   width: 100%;
+  display: flex;
+  flex-direction: column;
   height: 100%;
-  padding: 6.5rem 1rem 0 1rem;
-  background-color: hsl(280deg, 40%, calc(100% - var(--abs-offset) * 50%));
+  padding: 6.5rem 1rem 0.5rem 1rem;
+  // background-color: hsl(280deg, 40%, calc(100% - var(--abs-offset) * 50%));
   border-radius: 1rem;
   color: $color-gray;
   text-align: justify;
   transition: all 0.3s ease-out;
+  justify-content: flex-end;
 
   h3 {
+    display: flex;
     font-size: 1rem;
     font-weight: bold;
     color: white;
@@ -54,6 +58,7 @@ $card-size: 20rem;
   }
 
   p {
+    display: flex;
     font-size: 0.7rem;
     color: white;
     text-shadow: 1px 1px 2px #626262;
@@ -79,6 +84,6 @@ $card-size: 20rem;
 
   &.right {
     right: 0;
-    transform: translateX(0%) translatey(-80%);
+    transform: translateX(-20%) translatey(-80%);
   }
 }
