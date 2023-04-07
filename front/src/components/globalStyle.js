@@ -38,6 +38,7 @@ const GlobalStyle = createGlobalStyle`
     --yellow200-color: #9E5F00;
     --yellow100-color: #6B4100;
 
+    --red900-color: #fceaea;
     --red800-color: #FDD8D8;
     --red700-color: #FCA7A7;
     --red600-color: #FA7474;
@@ -47,6 +48,7 @@ const GlobalStyle = createGlobalStyle`
     --red200-color: #9D0606;
     --red100-color: #6C0404;
 
+    --purple900-color: #f6f2f8;
     --purple800-color: #EBDDF3;
     --purple700-color: #D5B6E7;
     --purple600-color: #BE90DA;
@@ -95,6 +97,13 @@ const GlobalStyle = createGlobalStyle`
     font-family: 'Pretendard';
     src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
     font-weight: 400;
+    font-style: normal;
+  }
+
+  @font-face {
+    font-family: 'Humanbumsuk';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2210-2@1.0/Humanbumsuk.woff2') format('woff2');
+    font-weight: normal;
     font-style: normal;
   }
 

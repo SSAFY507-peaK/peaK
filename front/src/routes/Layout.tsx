@@ -41,66 +41,81 @@ function Layout() {
   let userId = useAppSelector(state => state.userInfo.userId);
   let token = useAppSelector(state => state.userInfo.TOKEN);
   let nickname = useAppSelector(state => state.userInfo.nickname);
-  // let favIdols = useAppSelector(state => state.userInfo.favIdols);
+  let favIdols = useAppSelector(state => state.userInfo.favIdols);
 
-  /** 토큰에 대한 useEffect */
-  useEffect(() => {
-    if (query.get('token')) {   // 로그인 후에는 query에 token이 들어있으므로 그 값을 저장하자.
+  const userInfoFunction = async (token:string) => {
+    if (token !== "") {   // 토큰이 있으면 토큰 유효성을 검사하자
+      await axios.post(`${BASE_URL}/api/user/reissue`, {}, {
+        headers: {
+          Authorization: token
+        }
+      })
+        .then(response => {
+          return response.data.token
+        })
+        .then(token => {
+          const TOKEN = `Bearer ${token}`
+          dispatch(CreateTOKEN(TOKEN));
+        })
+        .catch(error => {
+          console.log(error);
+          window.localStorage.clear();
+          navigate('/intro');
+        })
+
+      // 리덕스에 값이 없으면 요청하기
+      favIdols.length === 0 && await axios.get(`${BASE_URL}/api/interest/list`, {
+        headers: {
+          Authorization: token
+        }
+      })
+        .then(response => {
+          console.log(response.data);
+          return response.data.idols
+        })
+        .then(idols => dispatch(CreateFavIdols(idols)))
+        .catch(error => console.log(error));
+    }
+    else if (query.get('token')) {   // 로그인 후에는 query에 token이 들어있으므로 그 값을 저장하자.
+      const token = query.get('token');
       dispatch(CreateTOKEN(query.get('token')));
       dispatch(CreateUserId(query.get('userId')));
       dispatch(CreateNickname(query.get('nickname')));
-      window.history.pushState({}, "", "/")
-    }
-    else {
-      if (token) {   // 토큰이 있으면 토큰 유효성을 검사하자
-        axios.post(`${BASE_URL}/api/user/reissue`, {}, {
-          headers: {
-            Authorization: token
-          }
+
+      axios.get(`${BASE_URL}/api/interest/list`, {
+        headers: {
+          Authorization: token
+        }
+      })
+        .then(response => {
+          console.log(response.data);
+          return response.data.idols
         })
-          .then(response => {
-            return response.data.token
-          })
-          .then(token => {
-            const TOKEN = `Bearer ${token}`
-            dispatch(CreateTOKEN(TOKEN));
-          })
-          .catch(error => {
-            console.log(error);
-            window.localStorage.clear();
-            navigate('/intro');
-          })
-      }
-      else {    // 토큰이 없으면 intro로 보내버리자.
-        navigate('/intro');
-      }
+        .then(idols => dispatch(CreateFavIdols(idols)))
+        .catch(error => console.log(error));
+
+      ga('set', userId, userId);
+      window.history.pushState({}, "", "/");
+      return;
     }
-  }, [navigate]);
+    else {// 토큰이 없으면 intro로 보내버리자.
+      window.localStorage.clear();
+      navigate('/intro');
+    }
+  }
+
+  userInfoFunction(token);
 
   /** ga에 대한 것, userId가 존재하면 ga 시작 */
   useEffect(() => {
     userId.length && ga('set', userId, userId);
   }, [userId]);
 
-  useEffect(() => {
-    axios.get(`${BASE_URL}/api/interest/list`, {
-      headers: {
-        Authorization: token
-      }
-    })
-      .then(response => {
-        console.log(response.data);
-        return response.data.idols
-      })
-      .then(idols => dispatch(CreateFavIdols(idols)))
-      .catch(error => console.log(error));
-  }, [])
-
   RouteChangeTracker();
 
   return (
       <Frame>
-        <MenuBar nickname={nickname} />
+        <MenuBar nickname={nickname} favIdols={useAppSelector(state => state.userInfo.favIdols)} />
         <Wrapper />
       </Frame>
   );

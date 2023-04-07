@@ -20,11 +20,12 @@ const DateFrame = styled.div`
 `;
 
 const CommentFrame = styled.div`
+  font-family: 'Humanbumsuk';
   height: 11vh;
-  padding: 20px;
+  padding: 20px 20px 20px 10px;
   border-radius: 15px;
-  background-color: #f6f2f8;
-  box-shadow: 1px 3px 1px #cfcdcd;
+  //background-color: #f6f2f8;
+  //box-shadow: 1px 3px 1px #cfcdcd;
 `;
 
 function MyIdolChat({item}:Props) {

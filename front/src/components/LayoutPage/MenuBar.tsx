@@ -11,7 +11,7 @@ import PersonIcon from "@mui/icons-material/Person";
 import { SearchList } from "../Search";
 import TrendingUpIcon from "@mui/icons-material/TrendingUp";
 import styled from "styled-components";
-import {useAppSelector} from "../../_hooks/hooks";
+// import {useAppSelector} from "../../_hooks/hooks";
 
 const MenuBackground = styled.nav`
   flex: 1 0 250px;
@@ -49,15 +49,22 @@ const MenuTab = styled.div`
 const Menu = styled.div`
   width: 90%;
   color: var(--gray400-color);
-
+  transition: all 300ms ease-in;
+  
   > * {
     display: flex;
     align-items: center;
-    padding: 10px 0 10px 30px;
-    margin-bottom: 5px;
+    padding: 12px 0 12px 30px;
+    margin-bottom: 3px;
+    border-radius: 15px 0 0 15px;
 
     &:hover {
       font-weight: 600;
+    }
+    &.logout:hover {
+      color: var(--red600-color);
+      background-color: var(--red900-color);
+      border-right: 4px solid var(--red400-color);
     }
 
     &.active {
@@ -65,7 +72,6 @@ const Menu = styled.div`
       border-right: 4px solid var(--purple400-color);
       font-weight: 600;
       background-color: var(--background-color);
-      border-radius: 15px 0 0 15px;
     }
   }
 `;
@@ -74,11 +80,12 @@ const style = { marginRight: "10px", fontSize: "medium" };
 
 type MenuBarProps = {
   nickname: string;
+  favIdols: string[];
 }
-function MenuBar({ nickname }: MenuBarProps) {
-  const favIdols = useAppSelector(state => state.userInfo.favIdols);
-  console.log(favIdols);
-  // const randomIdol = favIdols.length ? favIdols[Math.floor(Math.random() * favIdols.length)] : "BTS"
+function MenuBar({ nickname, favIdols }: MenuBarProps) {
+  // const favIdols = useAppSelector(state => state.userInfo.favIdols);
+  // console.log(favIdols);
+  const randomIdol = favIdols.length && favIdols[Math.floor(Math.random() * favIdols.length)];
   return (
     <MenuBackground>
       <MenuSection>
@@ -93,8 +100,8 @@ function MenuBar({ nickname }: MenuBarProps) {
             </NavLink>
           </Menu>
           <Menu>
-            {/*<NavLink to={`/${randomIdol}`} className={({ isActive }) => (isActive ? "active" : "")}>*/}
-            <NavLink to={`/BTS`} className={({ isActive }) => (isActive ? "active" : "")}>
+            <NavLink to={`/${randomIdol}`} className={({ isActive }) => (isActive ? "active" : "")}>
+            {/*<NavLink to={`/BTS`} className={({ isActive }) => (isActive ? "active" : "")}>*/}
               <FavoriteIcon style={style} />
               관심 아이돌
             </NavLink>
@@ -128,7 +135,7 @@ function MenuBar({ nickname }: MenuBarProps) {
             </NavLink>
           </Menu>
           <Menu>
-            <Link onClick={() => localStorage.clear()} to="/intro">
+            <Link className="logout" onClick={() => localStorage.clear()} to="/intro">
               <LogoutIcon style={style} />
               로그아웃
             </Link>

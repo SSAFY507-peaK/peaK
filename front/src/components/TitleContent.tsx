@@ -4,7 +4,7 @@ import Content from "./Content";
 
 const TitleContentContainer = styled.div<TitleContentProps>`
   width: 100%;
-  height: 100%;
+  height: ${props => props.height? props.height : "100%" };
   display: flex;
   flex-direction: column;
   grid-column: ${props => props.gridColumn? props.gridColumn :"1"};
@@ -18,10 +18,11 @@ type TitleContentProps = {
   gridColumn?: string;
   noContentBackground?: boolean;
   data?: any;
+  height?: string;
 }
-function TitleContent({title, gridColumn, noContentBackground, data}: TitleContentProps) {
+function TitleContent({title, gridColumn, noContentBackground, data, height}: TitleContentProps) {
   return (
-    <TitleContentContainer gridColumn={gridColumn}>
+    <TitleContentContainer height={height} gridColumn={gridColumn}>
       {title}
       {noContentBackground ? <TransparentContent>{data}</TransparentContent> : <Content>{data}</Content> }
     </TitleContentContainer>

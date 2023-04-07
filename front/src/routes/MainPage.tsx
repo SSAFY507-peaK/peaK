@@ -43,7 +43,7 @@ const MainGrid = styled.div`
   height: auto;
 
   grid-template-columns: repeat(4, 1fr);
-  grid-template-rows: 70vh auto;
+  grid-template-rows: 65vh auto;
   gap: 25px;
 `;
 

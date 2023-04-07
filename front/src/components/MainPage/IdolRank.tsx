@@ -39,7 +39,7 @@ const IdolImg = styled.div<IdolImgType>`
   border-radius: ${props => (props.rank > 3 ? "50%" : "40%")};
   box-shadow: 0 0 10px -5px rgb(28, 28, 28);
   // width: ${props => (props.rank <= 3 ? "12vw" : "8vw")};
-  width: 90%;
+  width: 95%;
   aspect-ratio: 1;
   // height: ${props => (props.rank <= 3 ? "12vw" : "8vw")};
   margin: 15px 0 0 30px;
