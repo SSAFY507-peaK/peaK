@@ -8,6 +8,8 @@ import storage from 'redux-persist/lib/storage';
 import userInfoReducer from './slices/UserSlice';
 import idolDetailChatReducer from './slices/IdolDetailChatSlice';
 import idolDetailWordCountReducer from './slices/IdolDetailWordCountSlice'
+import idolDetailSnsReducer from './slices/IdolDetailSnsSlice'
+
 // storage에 저장할거야
 const persistConfig = {
   key: 'root',
@@ -22,6 +24,7 @@ const rootReducers = combineReducers({
   idolDetailNews: idolDetailNewsReducer,
   idolDetailChat: idolDetailChatReducer,
   idolDetailWordCount: idolDetailWordCountReducer,
+  idolDetailSns: idolDetailSnsReducer,
 })
 
 const persistedReducer = persistReducer(persistConfig, rootReducers);
