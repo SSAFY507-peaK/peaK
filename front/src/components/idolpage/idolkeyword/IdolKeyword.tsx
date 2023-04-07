@@ -35,7 +35,7 @@ function IdolKeyword() {
   const wordDataList = useAppSelector(state => state.idolDetailWordCount.wordCloud)
   const keyWordList = useAppSelector(state => state.idolDetailNews.keywordList)
   const keyWordNewsList = useAppSelector(state => state.idolDetailNews.newsList)
-  console.log(keyWordNewsList)
+
   const [wordData, setWordData] = useState<WordData[]>([])
   const [keyWordNews, setkeyWordNews] = useState<NewsType[]>([])
   useEffect(() => {
