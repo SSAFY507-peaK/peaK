@@ -15,6 +15,7 @@ import ContentDiv from "../components/Content";
 import RankChart from "../components/RankingPage/RankChart";
 import { SearchInputDiv } from "../components/Search";
 import IdolImgNameContainer from "../components/IdolImgNameContainer";
+import axios from "axios";
 
 const BASE_URL = process.env.REACT_APP_BASE_URL;
 type ChartIdolObjectType = {
@@ -62,46 +63,46 @@ function ChartPage() {
     }
     else {
       // 이거 더미데이터임
-      const responseData = {
-        current: {
-          rank: 1,
-          score: 13000
-        },
-        rankWeek: [
-          {
-            rank: 1,
-              score: 13000
-          },
-          {
-            rank: 5,
-              score: 13000
-          },
-          {
-            rank: 4,
-              score: 13000
-          },
-        ]
-      }
-      const weeklyRanking = [...responseData.rankWeek.map(rank => rank.rank), responseData.current.rank];
-      setSelectedIdols(prev => [...prev, idol]);
-      setSelectedChart(prev => [
-        ...prev,
-        { name: idol, type: "line", data: weeklyRanking, lineStyle: { width: 3 } },
-      ]);
+      // const responseData = {
+      //   current: {
+      //     rank: 1,
+      //     score: 13000
+      //   },
+      //   rankWeek: [
+      //     {
+      //       rank: 1,
+      //         score: 13000
+      //     },
+      //     {
+      //       rank: 5,
+      //         score: 13000
+      //     },
+      //     {
+      //       rank: 4,
+      //         score: 13000
+      //     },
+      //   ]
+      // }
+      // const weeklyRanking = [...responseData.rankWeek.map(rank => rank.rank), responseData.current.rank];
+      // setSelectedIdols(prev => [...prev, idol]);
+      // setSelectedChart(prev => [
+      //   ...prev,
+      //   { name: idol, type: "line", data: weeklyRanking, lineStyle: { width: 3 } },
+      // ]);
 
       // 이렇게 요청 보내야하지 않을까
-      // axios.get(`${BASE_URL}/api/peak/weekly/${idol}`)
-      //   .then(response => {
-      //     const responseData = response.data;
-      //     console.log(responseData);
-      //     const weeklyRanking = [...responseData.rankWeek.map(rank => rank.rank), responseData.current.rank];
-      //     setSelectedIdols(prev => [...prev, idol]);
-      //     setSelectedChart(prev => [
-      //       ...prev,
-      //       { name: idol, type: "line", data: weeklyRanking, lineStyle: { width: 3 } },
-      //     ]);
-      //   })
-      //   .catch(error => console.log(error))
+      axios.get(`${BASE_URL}/api/peak/weekly/${idol}`)
+        .then(response => {
+          const responseData = response.data;
+          console.log(responseData);
+          const weeklyRanking = [...responseData.rankWeek.map((rank:any) => rank.rank), responseData.current.rank];
+          setSelectedIdols(prev => [...prev, idol]);
+          setSelectedChart(prev => [
+            ...prev,
+            { name: idol, type: "line", data: weeklyRanking, lineStyle: { width: 3 } },
+          ]);
+        })
+        .catch(error => console.log(error))
     }
   }, [selectedIdols]);
   /** 선택한 아이돌을 삭제하자 */
