@@ -1,6 +1,5 @@
 import { CreateIdolRank, CreatePosNegWeek } from "../_store/slices/IdolDetailChartSlice";
 import { CreateNewsData, CreateWordCloud } from "../_store/slices/IdolDetailNewsSlice";
-import { useAppDispatch, useAppSelector } from "../_hooks/hooks";
 
 import { CreateIdolChat } from "../_store/slices/IdolDetailChatSlice";
 import { CreateTOKEN } from "../_store/slices/UserSlice";
@@ -18,20 +17,9 @@ import { useLoaderData } from "react-router-dom";
 import { useParams } from "react-router-dom";
 
 // import { useEffect } from "react";
-
-const BASE_URL = process.env.REACT_APP_BASE_URL;
-
-export async function loader({ params }: { params: any }) {
-  const IdolName = params.idolName;
-  let IdolYoutubeList;
-  await axios
-    .get(`${BASE_URL}/api/youtube/${IdolName}`)
-    .then(response => {
-      IdolYoutubeList = response.data;
-    })
-    .catch(error => console.log(error));
-  return IdolYoutubeList;
-}
+import {useParams} from "react-router-dom";
+import { CreateIdolChat } from "../_store/slices/IdolDetailChatSlice";
+import { CreateTOKEN } from "../_store/slices/UserSlice";
 
 const Wrapper = styled.div`
   display: flex;
@@ -63,7 +51,8 @@ function IdolPage() {
   const idolName = params.idolName || "";
   TimeTracker(`/${idolName}`);
   // const favIdols = useAppSelector(state => state.myInterest.idols.map(idol => idol.idol));
-  const dispatch = useAppDispatch();
+
+  const dispatch = useAppDispatch()
 
   /** 관심 아이돌 댓글 Store에 저장 */
   request("get", `/idol/${idolName}/comment`).then(res => dispatch(CreateIdolChat(res)));
@@ -79,7 +68,7 @@ function IdolPage() {
 
   /** 뉴스관련 정보 Store에 저장 */
   // request("get", `/news/list/keywords/${idolName}`)
-  //   .then(res => {
+  //   .then(res => { 
   //     dispatch(CreateNewsData(res.newsList));
   //     dispatch(CreateWordCloud(res.wordCounter));
   //   })

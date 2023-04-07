@@ -3,9 +3,11 @@ import TitleComponent from "../TitleComponent"
 import bg  from "../sampleImg/image 38.png"
 import styled from "styled-components";
 import { useAppSelector } from "../../../_hooks/hooks";
+import { NewsType } from "../../../_utils/Types";
 
 interface Props {
   chooseKeyword: number;
+  keyWordNews: NewsType[];
 }
 
 const Frame = styled.div`
@@ -52,20 +54,31 @@ const newsList = [
   },
   ]
 
-function IdolKeywordNews({chooseKeyword}:Props) {
-  /* const newsList = useAppSelector(state => state.idolDetailNews.newsList[chooseKeyword]) */
+  function IdolKeywordNews({ chooseKeyword, keyWordNews }: Props) {
+
+  // newsList[chooseKeyword]이 배열인 경우에만 map 함수를 호출하도록 처리
+  /* const keywordNews: NewsType[] = Array.isArray(newsList[chooseKeyword]) ? newsList[chooseKeyword] as unknown as NewsType[] : []; */
 
   return (
     <Frame>
       <NewsFrame>
-      {
-        newsList.map((e, idx) => {
-          return( <IdolKeywordNewsItem image={e.thumbnailLink} title={e.title} summary={e.summary} source={e.press}  /> )
-        })
-      }
+        {
+          keyWordNews.map((e: NewsType, idx: number) => {
+            return (
+              <IdolKeywordNewsItem
+                key={idx}
+                image={e.thumbnailLink}
+                title={e.title}
+                summary={e.summary}
+                source={e.press}
+                link={e.link}
+              />
+            );
+          })
+        }
       </NewsFrame>
     </Frame>
-  )
+  );
 }
 
-export default IdolKeywordNews
+export default IdolKeywordNews;
