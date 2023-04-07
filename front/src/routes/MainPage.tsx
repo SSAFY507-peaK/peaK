@@ -1,9 +1,9 @@
-import {TrendKeywordsType, TrendNewsListType, TrendYoutubeListType} from "../_utils/Types.js";
+import {TrendNewsListType, TrendYoutubeListType} from "../_utils/Types.js";
 
 import CarouselCustom from "../components/Carousel/CarouselCustom.jsx";
 import TitleContent from "../components/TitleContent";
 import Top8 from "../components/MainPage/Top8";
-import TrendKeyword from "../components/MainPage/TrendKeyword";
+// import TrendKeyword from "../components/MainPage/TrendKeyword";
 import axios from "axios";
 import styled from "styled-components";
 import { useLoaderData } from "react-router";
@@ -43,13 +43,13 @@ export async function loader() {
     })
     .catch(error => console.log(error));
 
-  await axios.get(`${BASE_URL}/api/news/keywords/all-idol`)
-    .then(response => {
-      TrendKeywords = response.data;
-    })
-    .catch(error => console.log(error))
+  // await axios.get(`${BASE_URL}/api/news/keywords/all-idol`)
+  //   .then(response => {
+  //     TrendKeywords = response.data;
+  //   })
+  //   .catch(error => console.log(error))
   // return [TrendNewsList];
-  return [TrendNewsList, TrendYoutubeList, TrendKeywords, RankList];
+  return [TrendNewsList, TrendYoutubeList, RankList];
 }
 
 const CarouselDiv = styled.div`
@@ -68,10 +68,9 @@ const MainGrid = styled.div`
 `;
 
 function MainPage() {
-  const [TrendNewsList, TrendYoutubeList, TrendKeywords, RankList] = useLoaderData() as [
+  const [TrendNewsList, TrendYoutubeList, RankList] = useLoaderData() as [
     TrendNewsListType[],
     TrendYoutubeListType[],
-    TrendKeywordsType[],
     any[],
   ];
 
