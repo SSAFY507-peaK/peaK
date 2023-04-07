@@ -2,7 +2,7 @@ $color-purple: #8b5cf6;
 $color-pink: #ec4899;
 $color-gray: #9ca3af;
 $color-black: #1f2937;
-$card-size: 22rem;
+$card-size: 20rem;
 
 //body {
 //  width: 50vw;
@@ -21,7 +21,7 @@ $card-size: 22rem;
 .carousel {
   position: relative;
   width: $card-size;
-  height: $card-size/1.618;
+  height: $card-size/1.8;
   perspective: 500px;
   transform-style: preserve-3d;
 }
@@ -29,7 +29,7 @@ $card-size: 22rem;
 .card-container {
   position: absolute;
   width: 90%;
-  height: 85%;
+  height: 90%;
   transform: rotateY(calc(var(--offset) * 40deg)) scaleY(calc(1 + var(--abs-offset) * -0.3))
     translateZ(calc(var(--abs-offset) * -25rem)) translateX(calc(var(--direction) * -4rem));
   filter: blur(calc(var(--abs-offset) * 0.8rem));

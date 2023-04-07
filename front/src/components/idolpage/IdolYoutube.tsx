@@ -1,5 +1,5 @@
-import CarouselIdol from "../Carousel/CarouselIdol.jsx";
-import IdolYoutubeCarousel from "./IdolYoutubeCarousel";
+import CarouselIdol from "../CarouselIdol/CarouselIdol.jsx";
+import IdolYoutubeCarousel from "./IdolYoutubeCarousel.js";
 import TitleComponent from "./TitleComponent";
 import YouTubeIcon from "@mui/icons-material/YouTube";
 import styled from "styled-components";
@@ -28,7 +28,7 @@ function IdolYoutube(props: any) {
       <TitleComponent blacktxt="트렌딩" purpletxt="유튜브" />
       <YoutubeCarouselDiv>
         <CarouselDiv>
-          <CarouselIdol data={items} width="250px" height="180px"></CarouselIdol>
+          <CarouselIdol data={items}></CarouselIdol>
         </CarouselDiv>
       </YoutubeCarouselDiv>
     </Frame>

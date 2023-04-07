@@ -52,6 +52,7 @@ const TopRightFrame = styled.div`
 `;
 
 const BottomFrame = styled.div``;
+
 export type IdolNameProps = {
   idolName: string;
   favIdols?: string[];

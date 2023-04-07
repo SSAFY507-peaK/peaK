@@ -18,7 +18,7 @@ $card-size: 25rem;
 //  box-sizing: border-box;
 //}
 
-.carousel {
+.carousel2 {
   position: relative;
   width: $card-size;
   height: $card-size/1.618;
@@ -26,7 +26,7 @@ $card-size: 25rem;
   transform-style: preserve-3d;
 }
 
-.card-container {
+.card-container2 {
   position: absolute;
   width: 90%;
   height: 83%;
@@ -36,7 +36,7 @@ $card-size: 25rem;
   transition: all 0.3s ease-out;
 }
 
-.card {
+.card2 {
   width: 100%;
   height: 100%;
   padding: 6.5rem 1rem 0 1rem;

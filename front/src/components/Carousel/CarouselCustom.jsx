@@ -88,9 +88,9 @@ const CarouselCustom = props => {
               title={item.title.length <= 23 ? item.title : item.title.substr(0, 23) + "..."}
               content={
                 item.summary
-                  ? item.summary.length <= 70
+                  ? item.summary.length <= 60
                     ? item.summary
-                    : item.summary.substr(0, 70) + "..."
+                    : item.summary.substr(0, 60) + "..."
                   : null
               }
               src={item.thumbnailLink || item.thumbnail}

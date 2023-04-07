@@ -1,4 +1,4 @@
-import "./styles2.scss";
+import "./stylesidol.scss";
 
 import React, { useState } from "react";
 
@@ -17,7 +17,7 @@ const MAX_VISIBILITY = 4;
 
 const Card = props => (
   <div
-    className="card"
+    className="card2"
     style={{
       backgroundImage: `url(${props.src})`,
       backgroundSize: "cover",
@@ -47,7 +47,7 @@ const Carousel = ({ children }) => {
   const count = React.Children.count(children);
 
   return (
-    <div className="carousel">
+    <div className="carousel2">
       {active > 0 && (
         <button className="nav left" onClick={() => setActive(i => i - 1)}>
           <ArrowBackIosNewIcon sx={{ fontSize: "1.75rem" }} />
@@ -55,7 +55,7 @@ const Carousel = ({ children }) => {
       )}
       {React.Children.map(children, (child, i) => (
         <div
-          className="card-container"
+          className="card-container2"
           style={{
             "--active": i === active ? 1 : 0,
             "--offset": (active - i) / 3,
