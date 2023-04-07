@@ -25,6 +25,7 @@ const NewsListGrid = styled.div`
   grid-template-rows: repeat(2, 1fr);
   row-gap: 2px;
   column-gap: 40px;
+  
 `;
 
 const NewsListDiv = styled.div`
@@ -39,33 +40,42 @@ const NewsGridLarge = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
-  margin-bottom: 2vh;
+  margin-bottom: 1vh;
+  padding: 5px;
+  border-radius: 5px;
   transition: all 100ms ease-in-out;
   &:hover {
     transform: scale(1.01, 1.01);
     cursor: pointer;
+    background-color: var(--purple900-color);
   }
 `;
 
 const NewsGridSmall = styled.div`
   display: flex;
   width: 100%;
-  margin-bottom: 2vh;
+  margin-bottom: 1vh;
+  padding: 5px;
+  border-radius: 5px;
   transition: all 100ms ease-in-out;
   &:hover {
     transform: scale(1.01, 1.01);
     cursor: pointer;
+    background-color: var(--purple900-color);
   }
 `;
 
 const NewsDiv = styled.div`
   display: flex;
   width: 100%;
-  margin-bottom: 4vh;
+  margin-bottom: 1vh;
+  padding: 10px;
+  border-radius: 5px;
   transition: all 100ms ease-in-out;
   &:hover {
-    transform: scale(1.01, 1.01);
+    transform: scale(1.02, 1.02);
     cursor: pointer;
+    background-color: var(--purple900-color);
   }
 `;
 
@@ -108,7 +118,7 @@ const NewsMainTitle = styled.div`
   font-size: 22px;
   font-weight: bold;
   padding-top: 1.5vh;
-  padding-bottom: 0vh;
+  padding-bottom: 0;
 `;
 
 const NewsTitle = styled.div`

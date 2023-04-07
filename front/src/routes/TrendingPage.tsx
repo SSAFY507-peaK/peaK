@@ -1,11 +1,13 @@
 import { TrendNewsListType, TrendYoutubeListType } from "../_utils/Types";
 
-import CommonDiv from "../components/MainPage/CommonDiv";
-import MainDiv from "../components/MainDiv";
+// import CommonDiv from "../components/MainPage/CommonDiv";
+// import MainDiv from "../components/MainDiv";
 import TrendingNewsGrid from "../components/TrendingPage/TrendingNewsGrid";
 import TrendingYoutube from "../components/TrendingPage/TrendingYoutube";
 import axios from "axios";
 import { useLoaderData } from "react-router";
+import styled from "styled-components";
+import TitleContent from "../components/TitleContent";
 
 const BASE_URL = process.env.REACT_APP_BASE_URL;
 
@@ -31,31 +33,45 @@ export async function loader() {
   return [TrendNewsList, TrendYoutubeList];
 }
 
+const TrendingGrid = styled.div`
+  display: grid;
+  width: 100%;
+  height: auto;
+
+  grid-template-columns: repeat(8, 1fr);
+  //grid-template-rows: auto;
+  gap: 25px;
+`
+
+
 function TrendingPage() {
   const [TrendNewsList, TrendYoutubeList] = useLoaderData() as [
     TrendNewsListType[],
     TrendYoutubeListType[],
   ];
   return (
-    <MainDiv>
-      <CommonDiv
-        type={false}
-        firstWord="트렌딩"
-        secondWord="뉴스"
-        ratio="0.7"
-        mr={true}
-        h={true}
+    <TrendingGrid>
+      <TitleContent
+        title={
+          <h3>
+            트렌딩 <span style={{ color: "var(--purple500-color)" }}>뉴스</span>
+          </h3>
+        }
+        gridColumn="1 / 6"
+        height="calc(100vh - 60px)"
         data={<TrendingNewsGrid data={TrendNewsList} />}
       />
-      <CommonDiv
-        type={false}
-        firstWord="트렌딩"
-        secondWord="유튜브"
-        ratio="0.3"
-        h={true}
+      <TitleContent
+        title={
+          <h3>
+            트렌딩 <span style={{ color: "var(--purple500-color)" }}>유튜브</span>
+          </h3>
+        }
+        gridColumn="6 / 9"
+        height="calc(100vh - 60px)"
         data={<TrendingYoutube data={TrendYoutubeList} />}
       />
-    </MainDiv>
+    </TrendingGrid>
   );
 }
 

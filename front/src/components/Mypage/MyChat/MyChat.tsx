@@ -5,6 +5,7 @@ import { Comment } from "../../../_utils/Types";
 import MyIdolChat from "./MyIdolChat";
 import TitleComponent from "../../idolpage/TitleComponent";
 import styled from "styled-components";
+import Content from "../../Content";
 
 interface Props {
   userName: string;
@@ -23,14 +24,14 @@ const Wrapper = styled.div`
   width: 100%;
 `;
 
-const ChatFrame = styled.div`
-  display: flex;
-  flex-direction: column;
-  background-color: white;
-  border-radius: 20px;
-  padding: 30px;
-  height: 100%;
-`;
+// const ChatFrame = styled.div`
+//   display: flex;
+//   flex-direction: column;
+//   background-color: white;
+//   border-radius: 20px;
+//   padding: 30px;
+//   height: 100%;
+// `;
 
 
 function MyChat({userName, idolChatData}:Props) {
@@ -54,10 +55,10 @@ function MyChat({userName, idolChatData}:Props) {
   return (
     <Wrapper>
       <TitleComponent blacktxt="나의" purpletxt="응원 댓글" />
-      <ChatFrame>
+      <Content>
         <Calendar setClickIndex={setClickIndex} idolChatData={idolChatData} />
         {item && <MyIdolChat item={item}/>}
-      </ChatFrame>
+      </Content>
     </Wrapper>
   )
 }
