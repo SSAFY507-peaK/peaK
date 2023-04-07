@@ -43,7 +43,7 @@ function Layout() {
   let nickname = useAppSelector(state => state.userInfo.nickname);
   let favIdols = useAppSelector(state => state.userInfo.favIdols);
 
-  const userInfoFunction = async (token) => {
+  const userInfoFunction = async (token:string) => {
     if (token !== "") {   // 토큰이 있으면 토큰 유효성을 검사하자
       await axios.post(`${BASE_URL}/api/user/reissue`, {}, {
         headers: {

@@ -49,15 +49,22 @@ const MenuTab = styled.div`
 const Menu = styled.div`
   width: 90%;
   color: var(--gray400-color);
-
+  transition: all 300ms ease-in;
+  
   > * {
     display: flex;
     align-items: center;
-    padding: 10px 0 10px 30px;
-    margin-bottom: 5px;
+    padding: 12px 0 12px 30px;
+    margin-bottom: 3px;
+    border-radius: 15px 0 0 15px;
 
     &:hover {
       font-weight: 600;
+    }
+    &.logout:hover {
+      color: var(--red600-color);
+      background-color: var(--red900-color);
+      border-right: 4px solid var(--red400-color);
     }
 
     &.active {
@@ -65,7 +72,6 @@ const Menu = styled.div`
       border-right: 4px solid var(--purple400-color);
       font-weight: 600;
       background-color: var(--background-color);
-      border-radius: 15px 0 0 15px;
     }
   }
 `;
@@ -80,7 +86,6 @@ function MenuBar({ nickname, favIdols }: MenuBarProps) {
   // const favIdols = useAppSelector(state => state.userInfo.favIdols);
   // console.log(favIdols);
   const randomIdol = favIdols.length && favIdols[Math.floor(Math.random() * favIdols.length)];
-  console.log(randomIdol);
   return (
     <MenuBackground>
       <MenuSection>
@@ -130,7 +135,7 @@ function MenuBar({ nickname, favIdols }: MenuBarProps) {
             </NavLink>
           </Menu>
           <Menu>
-            <Link onClick={() => localStorage.clear()} to="/intro">
+            <Link className="logout" onClick={() => localStorage.clear()} to="/intro">
               <LogoutIcon style={style} />
               로그아웃
             </Link>
