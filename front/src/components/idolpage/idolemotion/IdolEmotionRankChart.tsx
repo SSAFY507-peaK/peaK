@@ -11,7 +11,7 @@ interface Props {
 
 
 function IdolEmotionRankChart({rankData}:Props) {
-  let labels = ['월', '화', '수', '목', '금', '토', '일']
+  let labels = ['D-6', 'D-5', 'D-4', 'D-3', 'D-2', 'D-1', '오늘']
   const params = useParams();
   const idolName:string = params.idolName || "";
 
