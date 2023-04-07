@@ -58,7 +58,7 @@ function TrendingPage() {
           </h3>
         }
         gridColumn="1 / 6"
-        height="calc(100vh - 100px)"
+        height="calc(100vh - 60px)"
         data={<TrendingNewsGrid data={TrendNewsList} />}
       />
       <TitleContent
@@ -68,7 +68,7 @@ function TrendingPage() {
           </h3>
         }
         gridColumn="6 / 9"
-        height="calc(100vh - 100px)"
+        height="calc(100vh - 60px)"
         data={<TrendingYoutube data={TrendYoutubeList} />}
       />
     </TrendingGrid>
