@@ -15,14 +15,14 @@ const ImgStyleRight:React.CSSProperties = {
   // opacity: 0.6,
   bottom: 25,
   right: 0,
-  height: "80%",
+  height: "75%",
 }
 const ImgStyleLeft:React.CSSProperties = {
   position: "absolute",
   // opacity: 0.6,
   bottom: 25,
   left: 0,
-  height: "80%",
+  height: "75%",
 }
 
 function SectionOne({ backgroundColor }: WrapperType): JSX.Element {
@@ -96,7 +96,7 @@ function SectionFour({ backgroundColor }: WrapperType): JSX.Element {
   return (
     <PageContainer backgroundColor={backgroundColor} >
       <ContentSection>
-        <img style={{...ImgStyleLeft, height: "100%"}} src={swimImg} alt="수영 이미지" />
+        <img style={ImgStyleLeft} src={swimImg} alt="수영 이미지" />
         <TextSection className="right">
           <h1>지금 바로 데이터 속으로 <span style={{color: "var(--graph3-color)"}} >풍덩</span></h1>
           <div style={{marginBottom: "70px"}}>
