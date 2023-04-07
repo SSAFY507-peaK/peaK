@@ -43,7 +43,7 @@ function Layout() {
   let nickname = useAppSelector(state => state.userInfo.nickname);
   let favIdols = useAppSelector(state => state.userInfo.favIdols);
 
-  const userInfoFunction = async () => {
+  const userInfoFunction = async (token) => {
     if (token !== "") {   // 토큰이 있으면 토큰 유효성을 검사하자
       await axios.post(`${BASE_URL}/api/user/reissue`, {}, {
         headers: {
@@ -99,11 +99,12 @@ function Layout() {
       return;
     }
     else {// 토큰이 없으면 intro로 보내버리자.
+      window.localStorage.clear();
       navigate('/intro');
     }
   }
 
-  userInfoFunction();
+  userInfoFunction(token);
 
   /** ga에 대한 것, userId가 존재하면 ga 시작 */
   useEffect(() => {
