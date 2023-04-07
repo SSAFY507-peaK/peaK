@@ -4,7 +4,7 @@ import NavBar from "../../components/LayoutPage/NavBar";
 import {FullPageContainer} from "./SectionComponents";
 import DotComponent from "./DotComponent";
 
-function TmpFullPage() {
+function FullPage() {
   const [scrollIdx, setScrollIdx] = useState<number>(1);  // 현재 내 위치를 알기 위함
   const mainWrapperRef = useRef<any>();  // 전체 페이지, 스크롤바를 조작하기 위해 필요함
 
@@ -15,10 +15,6 @@ function TmpFullPage() {
     const scrollTop: number = mainWrapperRef.current.scrollTop; // 현재 스크롤 위치(상단 기준)
     const pageHeight: number = mainWrapperRef.current.getBoundingClientRect().height;      // 화면 세로길이 !== 100vh, 미세하게 값이 달라지는 것을 잡아내야 함
     const scrollToTop: number = Math.ceil(pageHeight);
-
-    // console.log(pageHeight)
-    // console.log(`옮겨진 곳 scrollTop : ${mainWrapperRef.current.scrollTop}`)
-    // console.log(`현재 idx : ${scrollIdx}`)
 
     // 양수 === 스크롤을 내림
     if (deltaY > 0) {
@@ -92,6 +88,7 @@ function TmpFullPage() {
     }
   }, [scrollIdx]);
 
+  /** 마우스 도로롱 굴릴 때마다 이벤트 달아주기 */
   useEffect(() => {
     const wrapperRefCurrent = mainWrapperRef.current;
     wrapperRefCurrent.addEventListener("wheel", wheelHandler);
@@ -101,13 +98,13 @@ function TmpFullPage() {
   return (
     <FullPageContainer ref={mainWrapperRef} >
       <SectionOne />
-      <SectionTwo />
+      <SectionTwo backgroundColor="white" />
       <SectionThree />
-      <SectionFour />
+      <SectionFour backgroundColor="white" />
       <NavBar />
       <DotComponent scrollIdx={scrollIdx} />
     </FullPageContainer>
   );
 }
 
-export default TmpFullPage;
+export default FullPage;

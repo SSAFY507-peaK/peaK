@@ -1,5 +1,5 @@
 import React from "react";
-import { PageContainer, TextSection, ImageSection } from "./SectionComponents";
+import {PageContainer, TextSection, ContentSection} from "./SectionComponents";
 import { KakaoLogin } from "../../components/LoginModal/LoginButton";
 import chartImg from "../../assets/chart.png";
 import internetImg from "../../assets/internet.png";
@@ -10,25 +10,37 @@ type WrapperType = {
   backgroundColor?: string;
 };
 
+const ImgStyleRight:React.CSSProperties = {
+  position: "absolute",
+  // opacity: 0.6,
+  bottom: 25,
+  right: 0,
+  height: "80%",
+}
+const ImgStyleLeft:React.CSSProperties = {
+  position: "absolute",
+  // opacity: 0.6,
+  bottom: 25,
+  left: 0,
+  height: "80%",
+}
+
 function SectionOne({ backgroundColor }: WrapperType): JSX.Element {
   return (
     <PageContainer backgroundColor={backgroundColor} >
-      <TextSection>
-        <h2>나의 아이돌을 분석한다면?</h2>
-        <p>
-          나의 아이돌 어쩌구 저쩌구 분석하고싶은가 자네
-          <br />
-          여기 아이돌을 분석해드리겠다네
-        </p>
-        <p>
-          우리는 어떤 서비스인지 솰라솰라 소개해주는 인트로 페이지
-          <br />
-          근데 너무 길면 지루하니까 짧게 고~
-        </p>
-      </TextSection>
-      <ImageSection>
-        <img src={chartImg} alt="차트 이미지" />
-      </ImageSection>
+      <ContentSection>
+        <img style={ImgStyleRight} src={chartImg} alt="차트 이미지" />
+        <TextSection className="left">
+          <h1>나의 아이돌을 <span style={{color: "var(--red500-color)"}} >분석</span>한다면?</h1>
+          <div>
+            <p>나의 아이돌은 얼마나 언급되고 있을까요?</p>
+            <p>긍정적인 글이 많을까요 부정적인 글이 많을까요?</p>
+          </div>
+          <div>
+            <p>peaK에서는 게시글을 기반으로 아이돌을 분석해줍니다.</p>
+          </div>
+        </TextSection>
+      </ContentSection>
     </PageContainer>
   );
 }
@@ -36,20 +48,22 @@ function SectionOne({ backgroundColor }: WrapperType): JSX.Element {
 function SectionTwo({ backgroundColor }: WrapperType): JSX.Element {
   return (
     <PageContainer backgroundColor={backgroundColor} >
-      <ImageSection width="100%">
-        <img src={internetImg} alt="데이터 수집 이미지" />
-      </ImageSection>
-      <TextSection>
-        <h2>데이터는 어디서 가져오나요?</h2>
-        <p>
-          데이터는 트위터, 뉴스, 커뮤니티 언급량을 이용합니다.
-          <br />그 데이터를 잘 이용해서 어쩌구 저쩌구 열심히 산정합니다.
-        </p>
-        <p>
-          잘 분석해서 점수를 낸다. 데이터는 몇 시간마다 갱신되고 <br />
-          긍정지수는 어쩌구저쩌구 쌀라쌀라.
-        </p>
-      </TextSection>
+      <ContentSection>
+        <img style={ImgStyleLeft} src={internetImg} alt="데이터 수집 이미지" />
+        <TextSection className="right">
+          <h1>데이터는 <span style={{color: "var(--purple500-color)"}} >어디서</span> 가져오나요?</h1>
+          <div>
+            <p>데이터는 트위터 ,뉴스에서 수집합니다</p>
+          </div>
+          <div>
+            <p>트위터 감성분석을 통해 내 최애가 어떤 반응을 이끌어내는지 살펴보고</p>
+            <p>뉴스를 통해 아이돌의 가장 핫한 키워드를 알아보세요!</p>
+          </div>
+          <div>
+            <p>랭킹과 뉴스는 1시간, 그 외의 지수들은 일 단위로 갱신됩니다</p>
+          </div>
+        </TextSection>
+      </ContentSection>
     </PageContainer>
   );
 }
@@ -57,18 +71,23 @@ function SectionTwo({ backgroundColor }: WrapperType): JSX.Element {
 function SectionThree({ backgroundColor }: WrapperType): JSX.Element {
   return (
     <PageContainer backgroundColor={backgroundColor} >
-      <TextSection>
-        <h2>분석 이외에도 다양한 즐거움</h2>
-        <p>그밖에 데이터 분석 이외에도 어떤 서비스를 제공하는지 써주자.</p>
-        <p>
-          실시간 트렌드 뉴스 분석, 실시간 트렌드 유튜브 제공
-          <br />
-          이뿐만 아니라 한 줄 응원까지~ 어쩌구~
-        </p>
-      </TextSection>
-      <ImageSection>
-        <img src={contentsImg} alt="다양한 컨텐츠 이미지" />
-      </ImageSection>
+
+      <ContentSection>
+        <img style={ImgStyleRight} src={contentsImg} alt="다양한 컨텐츠 이미지" />
+        <TextSection className="left">
+          <h1>분석 이외에도 다양한 <span style={{color: "var(--red500-color)"}} >즐거움</span></h1>
+          <div>
+            <p>아이돌 뿐만 아니라 나의 데이터 분석도 제공하고 있습니다</p>
+          </div>
+          <div>
+            <p>실시간 트렌드 뉴스, 실시간 트렌드 유튜브 제공,</p>
+            <p>나의 아이돌에게 남기는 한 줄 응원</p>
+          </div>
+          <div>
+            <p>나의 활동 내역을 마이페이지에서 확인해보세요</p>
+          </div>
+        </TextSection>
+      </ContentSection>
     </PageContainer>
   );
 }
@@ -76,16 +95,17 @@ function SectionThree({ backgroundColor }: WrapperType): JSX.Element {
 function SectionFour({ backgroundColor }: WrapperType): JSX.Element {
   return (
     <PageContainer backgroundColor={backgroundColor} >
-      <TextSection>
-        <h2>지금 바로 데이터의 바다로 풍덩</h2>
-        <p>소셜 로그인으로 간단하게 즐겨보세요</p>
-
-        <KakaoLogin />
-
-      </TextSection>
-      <ImageSection width="100%">
-        <img src={swimImg} alt="수영 이미지" />
-      </ImageSection>
+      <ContentSection>
+        <img style={{...ImgStyleLeft, height: "100%"}} src={swimImg} alt="수영 이미지" />
+        <TextSection className="right">
+          <h1>지금 바로 데이터 속으로 <span style={{color: "var(--graph3-color)"}} >풍덩</span></h1>
+          <div style={{marginBottom: "70px"}}>
+            <p>아이돌을 위한, 나를 위한 분석 사이트 peaK</p>
+            <p>소셜 로그인으로 간단하게 즐겨보세요!</p>
+          </div>
+          <KakaoLogin />
+        </TextSection>
+      </ContentSection>
     </PageContainer>
   );
 }

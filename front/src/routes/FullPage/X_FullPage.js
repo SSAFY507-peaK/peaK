@@ -4,9 +4,9 @@ import { FullPage as Full, Slide } from "react-full-page";
 import NavBar from "../../components/LayoutPage/NavBar";
 import { SectionOne, SectionTwo, SectionThree, SectionFour } from "./SectionPages";
 
-import "./FullPage.scss";
+import "./X_FullPage.scss";
 
-function FullPage() {
+function X_FullPage() {
   return (
     <>
       <NavBar />
@@ -28,4 +28,4 @@ function FullPage() {
   );
 }
 
-export default FullPage;
+export default X_FullPage;

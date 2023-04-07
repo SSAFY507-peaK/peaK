@@ -3,7 +3,7 @@ import { Link, NavLink } from "react-router-dom";
 
 import BarChartIcon from "@mui/icons-material/BarChart";
 import FavoriteIcon from "@mui/icons-material/Favorite";
-import HelpIcon from "@mui/icons-material/Help";
+// import HelpIcon from "@mui/icons-material/Help";
 import HomeIcon from "@mui/icons-material/Home";
 import { ReactComponent as Logo } from "../../assets/peaK.svg";
 import LogoutIcon from "@mui/icons-material/Logout";
@@ -128,12 +128,12 @@ function MenuBar({ nickname, favIdols }: MenuBarProps) {
       </MenuSection>
       <MenuSection>
         <MenuTab>
-          <Menu>
-            <NavLink to="data">
-              <HelpIcon style={style} />
-              데이터 산출 근거
-            </NavLink>
-          </Menu>
+          {/*<Menu>*/}
+          {/*  <NavLink to="data">*/}
+          {/*    <HelpIcon style={style} />*/}
+          {/*    데이터 산출 근거*/}
+          {/*  </NavLink>*/}
+          {/*</Menu>*/}
           <Menu>
             <Link className="logout" onClick={() => localStorage.clear()} to="/intro">
               <LogoutIcon style={style} />
