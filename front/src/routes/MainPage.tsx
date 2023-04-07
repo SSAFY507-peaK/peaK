@@ -12,7 +12,8 @@ const BASE_URL = process.env.REACT_APP_BASE_URL;
 
 export async function loader() {
   let TrendNewsList,
-    TrendYoutubeList = null;
+    TrendYoutubeList,
+    RankList = null;
 
   await axios
     .get(`${BASE_URL}/api/news/list/all-idol`)
@@ -28,8 +29,15 @@ export async function loader() {
     })
     .catch(error => console.log(error));
 
+  await axios
+    .get(`${BASE_URL}/api/peak/`)
+    .then(response => {
+      RankList = response.data.ranksByHour;
+    })
+    .catch(error => console.log(error));
+
   // return [TrendNewsList];
-  return [TrendNewsList, TrendYoutubeList];
+  return [TrendNewsList, TrendYoutubeList, RankList];
 }
 
 const CarouselDiv = styled.div`
@@ -48,9 +56,10 @@ const MainGrid = styled.div`
 `;
 
 function MainPage() {
-  const [TrendNewsList, TrendYoutubeList] = useLoaderData() as [
+  const [TrendNewsList, TrendYoutubeList, RankList] = useLoaderData() as [
     TrendNewsListType[],
     TrendYoutubeListType[],
+    any[],
   ];
 
   const CarouselNewsData = (
@@ -66,7 +75,7 @@ function MainPage() {
   return (
     <MainGrid>
       <TitleContent
-        data={Top8()}
+        data={Top8(RankList)}
         gridColumn="1 / 4"
         title={
           <h3>
