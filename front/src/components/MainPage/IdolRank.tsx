@@ -52,7 +52,7 @@ const IdolImg = styled.div<IdolImgType>`
 `;
 
 const NameDiv = styled(IdolName)`
-  margin-left: 20px;
+  margin-left: 18px;
 `;
 
 function Logo(rank: number) {
