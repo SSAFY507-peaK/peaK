@@ -83,7 +83,7 @@ function IdolEmotion() {
   const userId:string = useAppSelector(state => state.userInfo.userId)
   const posNeg:PosNeg[] = useAppSelector(state => state.idolDetailChart.posNegWeek)
   // const rankData:WeeklyRankingType = useAppSelector(state => state.idolDetailChart.rankData)
-  console.log(posNeg)
+  // console.log(posNeg)
 
   return(
     <DataFrame>

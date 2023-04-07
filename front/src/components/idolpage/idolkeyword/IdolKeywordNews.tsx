@@ -7,6 +7,7 @@ import { NewsType } from "../../../_utils/Types";
 
 interface Props {
   chooseKeyword: number;
+  keyWordNews: NewsType[];
 }
 
 const Frame = styled.div`
@@ -22,7 +23,7 @@ const NewsFrame = styled.div`
   height: 100%;
 `;
 
-/* const newsList = [
+const newsList = [
   {  
     press: "billboard",
     title: "1번 뉴스",
@@ -51,20 +52,18 @@ const NewsFrame = styled.div`
     link: "ddddd",
     thumbnailLink: `${bg}`
   },
-  ] */
+  ]
 
-  function IdolKeywordNews({ chooseKeyword }: Props) {
-  const newsList: NewsType[] = useAppSelector(state => state.idolDetailNews.newsList);
-  console.log(newsList);
+  function IdolKeywordNews({ chooseKeyword, keyWordNews }: Props) {
 
   // newsList[chooseKeyword]이 배열인 경우에만 map 함수를 호출하도록 처리
-  const keywordNews: NewsType[] = Array.isArray(newsList[chooseKeyword]) ? newsList[chooseKeyword] as unknown as NewsType[] : [];
+  /* const keywordNews: NewsType[] = Array.isArray(newsList[chooseKeyword]) ? newsList[chooseKeyword] as unknown as NewsType[] : []; */
 
   return (
     <Frame>
       <NewsFrame>
         {
-          keywordNews.map((e: NewsType, idx: number) => {
+          keyWordNews.map((e: NewsType, idx: number) => {
             return (
               <IdolKeywordNewsItem
                 key={idx}

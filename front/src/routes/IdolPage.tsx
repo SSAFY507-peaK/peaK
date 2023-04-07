@@ -1,5 +1,5 @@
 import { CreateIdolRank, CreatePosNegWeek } from "../_store/slices/IdolDetailChartSlice";
-import { CreateNewsData, CreateWordCloud } from "../_store/slices/IdolDetailNewsSlice";
+import { CreateNewsData } from "../_store/slices/IdolDetailNewsSlice";
 
 import IdolData from "../components/idolpage/IdolProfile/IdolData";
 import IdolEmotion from "../components/idolpage/idolemotion/IdolEmotion";
@@ -15,6 +15,7 @@ import {useParams} from "react-router-dom";
 import { CreateIdolChat } from "../_store/slices/IdolDetailChatSlice";
 import { CreateTOKEN } from "../_store/slices/UserSlice";
 import axios from "axios";
+import { CreateWordCount } from "../_store/slices/IdolDetailWordCountSlice";
 
 const Wrapper = styled.div`
   display: flex;
@@ -63,11 +64,10 @@ function IdolPage() {
   // request("get", `/peak/weekly/${idolName}`).then(res => dispatch(CreateIdolRank(res)))
   
   /** 뉴스관련 정보 Store에 저장 */
-  request("get", `/news/list/keywords/${idolName}`)
-    .then(res => { 
-      dispatch(CreateNewsData(res.newsList));
-      dispatch(CreateWordCloud(res.wordCounter));
-    })
+  request("get", `/news/list/keywords/${idolName}`).then(res => { dispatch(CreateNewsData(res.newsList))})
+  request("get", `/news/list/keywords/${idolName}`).then(res => { dispatch(CreateWordCount(res.wordCounter))})
+  
+
   return (
     <Wrapper>
       <IdolList idolName={idolName} />

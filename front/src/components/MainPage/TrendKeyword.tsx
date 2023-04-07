@@ -25,8 +25,8 @@ function TrendKeyword() {
 
   return (
     <ComponentDiv>
-      <IdolKeywordRank setChooseKeyword={setChooseKeyword} chooseKeyword={chooseKeyword} />
-      <IdolKeywordWordCloud chooseKeyword={chooseKeyword} />
+      {/* <IdolKeywordRank setChooseKeyword={setChooseKeyword} chooseKeyword={chooseKeyword} /> */}
+      {/* <IdolKeywordWordCloud chooseKeyword={chooseKeyword} /> */}
     </ComponentDiv>
   );
 }

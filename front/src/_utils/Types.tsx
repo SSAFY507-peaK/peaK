@@ -113,8 +113,10 @@ export interface News {
 }
 
 export interface KeyWord {
-  keyword: string;
-  newsList: NewsType[];
+  news: {
+    keyword: string;
+    newsList: NewsType[];
+  }
 }
 
 export interface NewsType {
@@ -127,14 +129,10 @@ export interface NewsType {
 
 export interface WordCounterType {
   keyword: string;
-  wordCounter: WordValue[];
+  wordCounter: Record<string, number>;
 }
 
-export interface WordValue {
-  word: number;
-}
-
-export interface WordCloud {
+export interface WordData {
   text: string;
   value: number;
 }

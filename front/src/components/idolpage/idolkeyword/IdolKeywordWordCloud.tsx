@@ -2,9 +2,12 @@ import WordCloud from 'react-d3-cloud';
 import { faker } from '@faker-js/faker';
 import styled from "styled-components";
 import { useAppSelector } from '../../../_hooks/hooks';
+import { Button, Tooltip } from '@mui/material';
+import { WordData } from '../../../_utils/Types';
 
 interface Props {
   chooseKeyword: number;
+  wordData: WordData[];
 }
 
 const WordCloudFrame = styled.div`
@@ -19,24 +22,26 @@ const WordCloudFrame = styled.div`
 `;
 
 
-function IdolKeywordWordCloud ({chooseKeyword}:Props){
-  
-  // const wordCloud = useAppSelector(state => state.idolDetailNews.wordCloud[chooseKeyword])
-
-  const wordCloud = []
-  for (let i=0;  i < 30; i++) {
-    const tmp = {text: faker.datatype.string(5), value: faker.datatype.number({ min: 0, max: 200})}
-    wordCloud.push(tmp)
-  }
+function IdolKeywordWordCloud ({chooseKeyword, wordData}:Props){
+  // console.log(wordData)
+  // const wordCloud = useAppSelector(state => state.idolDetailNews.wordCloud)
+  // console.log(wordCloud[chooseKeyword])
+  // const wordData = []
+  // for (let i=0;  i < 30; i++) {
+  //   const tmp = {text: faker.datatype.string(5), value: faker.datatype.number({ min: 0, max: 200})}
+  //   wordCloud.push(tmp)
+  // }
 
   return (
     <WordCloudFrame>
       <WordCloud
-        data={wordCloud}
-        fontSize={(word) => Math.log2(word.value) * 4}
-        spiral="rectangular"
+        // data={wordCloud[chooseKeyword]}
+        data={wordData}
+        fontSize={(word) => Math.log2(word.value) * 3}
+        // spiral="rectangular"
         width={300} 
         height={150}
+        // padding={5}
         rotate={(word) => {
           if (word.value % 2) {
             return (0)
@@ -44,11 +49,12 @@ function IdolKeywordWordCloud ({chooseKeyword}:Props){
             return (90)
           }
         }}
+        // fontStyle="inherit"
         // onWordClick={(event, d) => {
         //   console.log(`onWordClick: ${d.text}`);
         // }}
-        // onWordMouseOver={(event, d) => {
-        //   console.log(`onWordMouseOver: ${d.text}`);
+        // onWordMouseOver={(event, d) =>{
+          
         // }}
         // onWordMouseOut={(event, d) => {
         //   console.log(`onWordMouseOut: ${d.text}`);
