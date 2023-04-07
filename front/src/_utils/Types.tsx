@@ -37,6 +37,13 @@ export type TrendYoutubeListType = {
   title: string;
 };
 
+export type TrendKeywordsType = {
+  keyword: string;
+  wordCounter: {
+    word: number;
+  }
+}
+
 // export type MyIdolDetail = {
 //   name: string;
 //   myScore: number;
