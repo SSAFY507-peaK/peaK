@@ -1,4 +1,4 @@
-import { TrendNewsListType, TrendYoutubeListType } from "../_utils/Types.js";
+import {TrendKeywordsType, TrendNewsListType, TrendYoutubeListType} from "../_utils/Types.js";
 
 import CarouselCustom from "../components/Carousel/CarouselCustom.jsx";
 import TitleContent from "../components/TitleContent";
@@ -12,7 +12,8 @@ const BASE_URL = process.env.REACT_APP_BASE_URL;
 
 export async function loader() {
   let TrendNewsList,
-    TrendYoutubeList = null;
+    TrendYoutubeList,
+    TrendKeywords = null;
 
   await axios
     .get(`${BASE_URL}/api/news/list/all-idol`)
@@ -27,9 +28,13 @@ export async function loader() {
       TrendYoutubeList = response.data;
     })
     .catch(error => console.log(error));
-
+  await axios.get(`${BASE_URL}/api/news/keywords/all-idol`)
+    .then(response => {
+      TrendKeywords = response.data;
+    })
+    .catch(error => console.log(error))
   // return [TrendNewsList];
-  return [TrendNewsList, TrendYoutubeList];
+  return [TrendNewsList, TrendYoutubeList, TrendKeywords];
 }
 
 const CarouselDiv = styled.div`
@@ -43,14 +48,15 @@ const MainGrid = styled.div`
   height: auto;
 
   grid-template-columns: repeat(4, 1fr);
-  grid-template-rows: 65vh auto;
+  grid-template-rows: 85vh auto;
   gap: 25px;
 `;
 
 function MainPage() {
-  const [TrendNewsList, TrendYoutubeList] = useLoaderData() as [
+  const [TrendNewsList, TrendYoutubeList, TrendKeywords] = useLoaderData() as [
     TrendNewsListType[],
     TrendYoutubeListType[],
+    TrendKeywordsType[]
   ];
 
   const CarouselNewsData = (
@@ -67,22 +73,22 @@ function MainPage() {
     <MainGrid>
       <TitleContent
         data={Top8()}
-        gridColumn="1 / 4"
+        gridColumn="1 / 5"
         title={
           <h3>
             랭킹 <span style={{ color: "var(--purple500-color)" }}>Top8</span>
           </h3>
         }
       />
-      <TitleContent
-        data={<TrendKeyword />}
-        gridColumn="4 / 5"
-        title={
-          <h3>
-            인기 <span style={{ color: "var(--purple500-color)" }}>키워드</span>
-          </h3>
-        }
-      />
+      {/*<TitleContent*/}
+      {/*  data={<TrendKeyword TrendKeywords={TrendKeywords} />}*/}
+      {/*  gridColumn="4 / 5"*/}
+      {/*  title={*/}
+      {/*    <h3>*/}
+      {/*      인기 <span style={{ color: "var(--purple500-color)" }}>키워드</span>*/}
+      {/*    </h3>*/}
+      {/*  }*/}
+      {/*/>*/}
       <TitleContent
         data={CarouselNewsData}
         gridColumn="1 / 3"
