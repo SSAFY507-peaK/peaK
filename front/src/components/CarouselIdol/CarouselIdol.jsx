@@ -1,4 +1,4 @@
-import "./styles.scss";
+import "./stylesidol.scss";
 
 import React, { useState } from "react";
 
@@ -13,16 +13,18 @@ const AlignDiv = styled.div`
   margin: 0 auto;
 `;
 
-const MAX_VISIBILITY = 2;
+const MAX_VISIBILITY = 4;
 
 const Card = props => (
   <div
-    className="card"
+    className="card2"
     style={{
       backgroundImage: `url(${props.src})`,
       backgroundSize: "cover",
       backgroundPosition: "center",
       cursor: "pointer",
+      // width: "100%",
+      height: "100%",
     }}
     onClick={event => {
       event.preventDefault();
@@ -45,7 +47,7 @@ const Carousel = ({ children }) => {
   const count = React.Children.count(children);
 
   return (
-    <div className="carousel">
+    <div className="carousel2">
       {active > 0 && (
         <button className="nav left" onClick={() => setActive(i => i - 1)}>
           <ArrowBackIosNewIcon sx={{ fontSize: "1.75rem" }} />
@@ -53,7 +55,7 @@ const Carousel = ({ children }) => {
       )}
       {React.Children.map(children, (child, i) => (
         <div
-          className="card-container"
+          className="card-container2"
           style={{
             "--active": i === active ? 1 : 0,
             "--offset": (active - i) / 3,
@@ -76,19 +78,19 @@ const Carousel = ({ children }) => {
   );
 };
 
-const CarouselCustom = props => {
+const CarouselIdol = props => {
   return (
     <AlignDiv>
       <Carousel>
         {props.data.map((item, idx) => {
           return (
             <Card
-              title={item.title.length <= 15 ? item.title : item.title.substr(0, 15) + "..."}
+              title={item.title.length <= 23 ? item.title : item.title.substr(0, 23) + "..."}
               content={
                 item.summary
-                  ? item.summary.length <= 30
+                  ? item.summary.length <= 70
                     ? item.summary
-                    : item.summary.substr(0, 30) + "..."
+                    : item.summary.substr(0, 70) + "..."
                   : null
               }
               src={item.thumbnailLink || item.thumbnail}
@@ -102,4 +104,4 @@ const CarouselCustom = props => {
   );
 };
 
-export default CarouselCustom;
+export default CarouselIdol;

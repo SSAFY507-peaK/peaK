@@ -1,3 +1,4 @@
+import IdolPage, { loader as IdolLoader } from "./routes/IdolPage";
 import MainPage, { loader as MainLoader } from "./routes/MainPage";
 import RankingPage, { loader as RankingLoader } from "./routes/RankingPage";
 import { Route, createBrowserRouter, createRoutesFromElements } from "react-router-dom";
@@ -6,7 +7,6 @@ import TrendingPage, { loader as TrendingLoader } from "./routes/TrendingPage";
 import ChartPage from "./routes/ChartPage";
 import ErrorPage from "./routes/ErrorPage";
 import { IdolLists } from "./_utils/loader";
-import IdolPage from "./routes/IdolPage";
 import Layout from "./routes/Layout";
 import MyPage from "./routes/MyPage";
 import RankingLayout from "./routes/RankingLayout";
@@ -30,7 +30,7 @@ const router = createBrowserRouter(
 
           <Route path="trending" element={<TrendingPage />} loader={TrendingLoader} />
 
-          <Route path=":idolName" element={<IdolPage />} />
+          <Route path=":idolName" element={<IdolPage />} loader={IdolLoader} />
           <Route path="mypage/:userName" element={<MyPage />} />
         </Route>
       </Route>
