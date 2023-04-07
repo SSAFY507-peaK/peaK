@@ -13,8 +13,8 @@ const BASE_URL = process.env.REACT_APP_BASE_URL;
 export async function loader() {
   let TrendNewsList,
     TrendYoutubeList,
-    RankList,
-    TrendKeywords = null;
+    TrendKeywords,
+    RankList = null;
 
   await axios
     .get(`${BASE_URL}/api/news/list/all-idol`)
@@ -29,6 +29,12 @@ export async function loader() {
       TrendYoutubeList = response.data;
     })
     .catch(error => console.log(error));
+
+  await axios.get(`${BASE_URL}/api/news/keywords/all-idol`)
+    .then(response => {
+      TrendKeywords = response.data;
+    })
+    .catch(error => console.log(error))
 
   await axios
     .get(`${BASE_URL}/api/peak/`)
@@ -83,7 +89,7 @@ function MainPage() {
     <MainGrid>
       <TitleContent
         data={Top8(RankList)}
-        gridColumn="1 / 4"
+        gridColumn="1 / 5"
         title={
           <h3>
             랭킹 <span style={{ color: "var(--purple500-color)" }}>Top8</span>
