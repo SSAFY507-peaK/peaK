@@ -1,10 +1,8 @@
-import styled, { css } from "styled-components";
-
-type ButtonColor = "red" | "purple";
+import styled from "styled-components";
 
 interface ButtonType {
-  buttonColor: ButtonColor;
   width?: string;
+  height?: string;
 }
 
 const Button = styled.button<ButtonType>`
@@ -12,30 +10,68 @@ const Button = styled.button<ButtonType>`
   font-size: 0.8rem;
   padding-left: 20px;
   padding-right: 20px;
-  border-radius: 20px;
-  height: 33px;
+  border-radius: 100px;
+  height: ${props => (props.height? props.height : "35px")};
   width: ${props => (props.width ? props.width : "auto")};
-  /* display: flex;
-  align-items: center; */
   text-align: center;
-
-  ${props =>
-    props.buttonColor === "red" &&
-    css`
-      background-color: var(--red600-color);
-      &:hover {
-        background-color: var(--red300-color);
-      }
-    `};
-
-  ${props =>
-    props.buttonColor === "purple" &&
-    css`
-      background-color: var(--purple500-color);
-      &:hover {
-        background-color: var(--purple300-color);
-      }
-    `}
+  transition: all 300ms ease-in-out;
+  
+  // 버튼 비활성화하면 안눌리게 하기
+  &[disabled] {
+    background: var(--gray-gradient);
+    cursor: default;
+  }
 `;
 
-export default Button;
+const PurpleButton = styled(Button)`
+  background: var(--purple-gradient);
+  &:hover {
+    background: var(--purple-gradient-hover);
+  }
+  &[disabled] {
+    background: var(--gray-gradient);
+  }
+`
+
+const RedButton = styled(Button)`
+  background: var(--red-gradient);
+
+  &:hover {
+    background: var(--red-gradient-hover);
+  }
+  &[disabled] {
+    background: var(--gray-gradient);
+  }
+`
+
+const BlueButton = styled(Button)`
+  background: var(--blue-gradient);
+  
+  &:hover {
+    background: var(--blue-gradient-hover);
+  }
+  &[disabled] {
+    background: var(--gray-gradient);
+  }
+`
+
+const GrayButton = styled(Button)`
+  background: var(--gray-gradient);
+  &:hover {
+    background-color: var(--gray-gradient-hover);
+  }
+`
+
+const CloseButton = styled.button`
+  height: 20px;
+  width: 20px;
+  border-radius: 15px;
+  color: white;
+  background-color: var(--gray700-color);
+  
+  position: absolute;
+  top: 0;
+  right: 0;
+`
+
+export { PurpleButton, RedButton, BlueButton, GrayButton, CloseButton };

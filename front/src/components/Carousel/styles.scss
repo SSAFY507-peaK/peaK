@@ -1,0 +1,102 @@
+$color-purple: #8b5cf6;
+$color-pink: #ec4899;
+$color-gray: #9ca3af;
+$color-black: #1f2937;
+$card-size: 24rem;
+
+//body {
+//  width: 50vw;
+//  height: 50vh;
+//  display: flex;
+//  align-items: center;
+//  justify-content: center;
+//  overflow: hidden;
+//  font-family: "Montserrat", sans-serif;
+//}
+//
+//* {
+//  box-sizing: border-box;
+//}
+
+.carousel {
+  position: relative;
+  width: $card-size;
+  height: $card-size/1.8;
+  perspective: 500px;
+  transform-style: preserve-3d;
+}
+
+.card-container {
+  position: absolute;
+  width: 90%;
+  height: 90%;
+  transform: rotateY(calc(var(--offset) * 40deg)) scaleY(calc(1 + var(--abs-offset) * -0.3))
+    translateZ(calc(var(--abs-offset) * -25rem)) translateX(calc(var(--direction) * -4rem));
+  filter: blur(calc(var(--abs-offset) * 0.8rem));
+  transition: all 0.3s ease-out;
+  &::after {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 0 0 10px 10px;
+    background: linear-gradient(0deg, rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0) 50%);
+  }
+}
+
+.card {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: 6.5rem 1rem 0.5rem 1rem;
+  // background-color: hsl(280deg, 40%, calc(100% - var(--abs-offset) * 50%));
+  border-radius: 1rem;
+  color: $color-gray;
+  text-align: justify;
+  transition: all 0.3s ease-out;
+  justify-content: flex-end;
+
+  h3 {
+    display: flex;
+    font-size: 1rem;
+    font-weight: bold;
+    color: white;
+    text-shadow: 1px 1px 2px #626262;
+    z-index: 1;
+  }
+
+  p {
+    display: flex;
+    font-size: 0.7rem;
+    color: white;
+    text-shadow: 1px 1px 2px #626262;
+    z-index: 1;
+  }
+}
+
+.nav {
+  color: rgba(255, 178, 249, 0.962);
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  top: 50%;
+  z-index: 2;
+  cursor: pointer;
+  user-select: none;
+  background: unset;
+  border: unset;
+
+  &.left {
+    transform: translateX(-110%) translatey(-80%);
+  }
+
+  &.right {
+    right: 0;
+    transform: translateX(-20%) translatey(-80%);
+  }
+}

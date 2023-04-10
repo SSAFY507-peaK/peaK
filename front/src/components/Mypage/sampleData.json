@@ -1,0 +1,262 @@
+[
+  {
+    "idol": "세븐틴",
+    "value": 45,
+    "interestScore": 67,
+    "interestAverage": 54,
+    "comments": [
+      {
+        "content": "세븐틴 사랑ㅎ래",
+        "datetime": "2023년 03월 25일"
+      }, 
+      false, 
+      {
+        "content": "세븐틴 사랑ㅎ래2",
+        "datetime": "2023년 03월 27일"
+      }, 
+      false, 
+      false, 
+      {
+        "content": "세븐틴 사랑ㅎ래3",
+        "datetime": "2023년 03월 30일"
+      },
+      false, 
+      false, 
+      {
+        "content": "세븐틴 사랑ㅎ래",
+        "datetime": "2023년 04월 02일"
+      }, 
+      false, 
+      false, 
+      false, 
+      {
+        "content": "와 고잉은 따라올 수가 없다. 진짜 최고인듯",
+        "datetime": "2023년 04월 06일"
+      }, 
+      false
+    ],
+    "click": {
+      "myTotaldata": 87,
+      "dataLst": [ 30, 45, 66, 11, 98, 100, 53],
+      "dataAvg": [ 60, 43, 6, 47, 98, 100, 78]
+    },
+    "chat": {
+      "myTotaldata": 7,
+      "dataLst": [ 6, 5, 5, 3, 6, 7, 7],
+      "dataAvg": [ 6, 4, 6, 7, 5, 3, 4]
+    },
+    "time":{
+      "myTotaldata": 59,
+      "dataLst": [ 50, 35, 36, 40, 8, 100, 98],
+      "dataAvg": [ 50, 49, 61, 38, 98, 100, 78]
+    }
+  },
+  {
+    "idol": "BLACKPINK",
+    "value": 30,
+    "interestScore": 50,
+    "interestAverage": 60,
+    "comments": [
+      {
+        "content": "꽃향기 가득한 지수가 가는길 블링크가 늘 함께할게❤",
+        "datetime": "2023년 03월 25일"
+      },
+      false, 
+      {
+        "content": "대한지수 만만세 !!!!!!!!!!!!!!!!!!!!!! 풍악을 울리어라 ~~~~~",
+        "datetime": "2023년 03월 27일"
+      }, 
+      false, 
+      false, 
+      {
+        "content": "이게 바로 김치츄 클라뜨❤❤",
+        "datetime": "2023년 03월 30일"
+      },
+      false, 
+      {
+        "content": "곡, 외모, 스타일링, 몸매 하나하나 최상급만을 모아놓은 명품일세 음방 자주 나와줬으면..",
+        "datetime": "2023년 04월 01일"
+      }, 
+      false, 
+      false, 
+      false, 
+      {
+        "content": "진짜 미쳤어요 정말로로로로로로 너무 좋아 음방 중에서 이렇게 화려하고 스토리 살린건 처음 인 듯",
+        "datetime": "2023년 04월 05일"
+      }, 
+      false, 
+      false
+    ],
+    "click": {
+      "myTotaldata": 57,
+      "dataLst": [ 30, 75, 61, 21, 13, 10, 53],
+      "dataAvg": [ 65, 33, 26, 43, 67, 70, 58]
+    },
+    "chat": {
+      "myTotaldata": 6,
+      "dataLst": [ 4, 3, 2, 2, 4, 6, 6],
+      "dataAvg": [ 4, 6, 6, 4, 3, 2, 2]
+    },
+    "time":{
+      "myTotaldata": 59,
+      "dataLst": [ 40, 8, 100, 98, 50, 35, 36],
+      "dataAvg": [ 61, 38, 98, 100, 50, 49, 78]
+    }
+  },
+  {
+    "idol": "BTS",
+    "value": 15,
+    "interestScore": 40,
+    "interestAverage": 73,
+    "comments": [
+      {
+        "content": "어떻게 이렇게 매력적인 친구들 7명을 한 팀으로 다 모아놨나요??????????? 달방 보면 너무 헤벌쭉 웃어서 잇몸이 마름 사랑해 방탄:sob::purple_heart:",
+        "datetime": "2023년 03월 25일"
+      }, 
+      false, 
+      false, 
+      {
+        "content": "아아앙 애들아 고마워... 진짜 진짜 너무 좋다!!",
+        "datetime": "2023년 03월 28일"
+      }, 
+      false, 
+      false, 
+      false, 
+      false,
+      {
+        "content": "함께 모여 있는 영상은 아미들에게 정말 큰 선물이예요, 감사합니다. 언제나 보고 싶고 그리운 방탄소년단.",
+        "datetime": "2023년 04월 02일"
+      },
+      false,
+      {
+        "content": "이번 편 보면서 많이 웃었는데 제이홉이 배구하러 왔을 때 대박 :joy_cat::joy_cat:",
+        "datetime": "2023년 04월 04일"
+      }, 
+      false, 
+      false, 
+      false
+    ],
+    "click": {
+      "myTotaldata": 33,
+      "dataLst": [ 11, 98, 100, 53, 30, 45, 66],
+      "dataAvg": [ 98, 100, 78, 60, 43, 6, 47]
+    },
+    "chat": {
+      "myTotaldata": 3,
+      "dataLst": [ 4, 4, 2, 3, 5, 4, 3],
+      "dataAvg": [ 7, 5, 3, 4, 6, 4, 6]
+    },
+    "time":{
+      "myTotaldata": 59,
+      "dataLst": [  8, 36, 40, 100, 50, 35, 98],
+      "dataAvg": [ 61, 38, 98, 100, 50, 49, 78]
+    }
+  },
+  {
+    "idol": "TWICE",
+    "value": 5,
+    "interestScore": 34,
+    "interestAverage": 73,
+    "comments": [
+      {
+        "content": "와 너무 예쁘고 노래도 미쳣다ㅠㅠㅠㅠㅠㅠ카메라 무빙도 레전드 :heartpulse:",
+        "datetime": "2023년 03월 25일"
+      }, 
+      false, 
+      {
+        "content": "너무 사랑스럽다 :heartpulse:",
+        "datetime": "2023년 03월 27일"
+      }, 
+      false, 
+      false, 
+      {
+        "content": "트와이스 사랑해!",
+        "datetime": "2023년 03월 30일"
+      },
+      false, 
+      false, 
+      {
+        "content": "이번 무대에서 쯔위는 너무 멋져요! 쯔위 화이팅!!! :heartpul:",
+        "datetime": "2023년 04월 02일"
+      }, 
+      false, 
+      {
+        "content": "얘들아 열심히 활동해 줘서 정말 고마워~~  다들  건강하길~~",
+        "datetime": "2023년 04월 04일"
+      }, 
+      false, 
+      {
+        "content": "정연언니 정말 아름답고 멋지고 자랑스럽다!!",
+        "datetime": "2023년 04월 06일"
+      }, 
+      false
+    ],
+    "click": {
+      "myTotaldata": 132,
+      "dataLst": [ 130, 45, 66, 111, 98, 100, 153],
+      "dataAvg": [ 160, 43, 56, 47, 98, 80, 78]
+    },
+    "chat": {
+      "myTotaldata": 4,
+      "dataLst": [ 4, 5, 6, 4, 6, 5, 4],
+      "dataAvg": [ 5, 6, 4, 7, 5, 3, 4]
+    },
+    "time":{
+      "myTotaldata": 73,
+      "dataLst": [ 64, 80, 46, 150, 80, 120, 98],
+      "dataAvg": [ 50, 49, 61, 138, 98, 100, 178]
+    }
+  },
+  {
+    "idol": "IVE",
+    "value": 5,
+    "interestScore": 20,
+    "interestAverage": 67,
+    "comments": [
+      false, 
+      {
+        "content": "데뷔곡 이라는 게 믿기지 않을만큼 고퀄에 퍼포먼스 까지 ㄷ ㄷ",
+        "datetime": "2023년 03월 26일"
+      }, 
+      false, 
+      {
+        "content": "뮤비가 진짜 말도 안돼게 예쁨 중소에서 찍었다고는 믿을 수 없을 정도로....",
+        "datetime": "2023년 03월 28일"
+      }, 
+      false, 
+      {
+        "content": "나 이 뮤비보고 데뷔곡이 아닌거 같음 진짜 카리스마랑 진짜....대박임 특히 레이 무표정 느낌에다......와..:+1:",
+        "datetime": "2023년 03월 30일"
+      },
+      false, 
+      {
+        "content": "아이브 데뷔 1주년 축하해 :tada::tada",
+        "datetime": "2023년 04월 01일"
+      }, 
+      false, 
+      false, 
+      {
+        "content": "진짜 노래 너무 중독적..나도 모르게 계속 부르고 다님",
+        "datetime": "2023년 04월 04일"
+      }, 
+      false, 
+      false, 
+      false
+    ],
+    "click": {
+      "myTotaldata": 37,
+      "dataLst": [ 30, 45, 6, 11, 48, 20, 43],
+      "dataAvg": [ 66, 33, 46, 67, 58, 60, 78]
+    },
+    "chat": {
+      "myTotaldata": 4,
+      "dataLst": [ 4, 5, 6, 4, 5, 6, 4],
+      "dataAvg": [ 6, 6, 7, 5, 4, 3, 4]
+    },
+    "time":{
+      "myTotaldata": 59,
+      "dataLst": [ 8, 50, 35, 36, 40, 100, 98],
+      "dataAvg": [ 50, 49, 100, 61, 38, 98, 78]
+    }
+  }
+]
