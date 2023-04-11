@@ -1,12 +1,19 @@
 import { useRef, useState } from "react";
 
-// import { IdolLists } from "../_utils/loader";
 import { IdolListsType } from "../_utils/Types";
 import SearchIcon from "@mui/icons-material/Search";
 import UseOnClickOutside from "../_hooks/useOnClickOutside";
 import styled from "styled-components";
 import { useLoaderData } from "react-router";
 import { useNavigate } from "react-router";
+
+// import { IdolLists } from "../_utils/loader";
+
+
+
+
+
+
 
 type WrapperType = {
   width?: string;
@@ -81,7 +88,6 @@ function SearchList({ width }: WrapperType) {
   const navigate = useNavigate();
 
   const onChange = (e: any) => {
-    console.log(search);
     setSearch(e.target.value);
     setIsClicked(true);
   };
@@ -131,10 +137,10 @@ function SearchList({ width }: WrapperType) {
 
 type SearchInputDivProps = {
   handleSearchIdol: (value: React.ChangeEvent<HTMLInputElement>) => void;
-}
-function SearchInputDiv ({handleSearchIdol}: SearchInputDivProps) {
+};
+function SearchInputDiv({ handleSearchIdol }: SearchInputDivProps) {
   return (
-    <Wrapper style={{flexShrink: "0"}}>
+    <Wrapper style={{ flexShrink: "0" }}>
       <SearchInput onChange={e => handleSearchIdol(e)} placeholder="아이돌 이름을 입력해주세요" />
       <SearchIcon sx={{ color: "var(--gray600-color)" }} />
     </Wrapper>
