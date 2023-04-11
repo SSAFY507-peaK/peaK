@@ -1,9 +1,8 @@
-import {TrendNewsListType, TrendYoutubeListType} from "../_utils/Types.js";
+import { TrendNewsListType, TrendYoutubeListType } from "../_utils/Types.js";
 
 import CarouselCustom from "../components/Carousel/CarouselCustom.jsx";
 import TitleContent from "../components/TitleContent";
 import Top8 from "../components/MainPage/Top8";
-// import TrendKeyword from "../components/MainPage/TrendKeyword";
 import axios from "axios";
 import styled from "styled-components";
 import { useLoaderData } from "react-router";
@@ -13,7 +12,6 @@ const BASE_URL = process.env.REACT_APP_BASE_URL;
 export async function loader() {
   let TrendNewsList,
     TrendYoutubeList,
-    TrendKeywords,
     RankList = null;
 
   await axios
@@ -30,12 +28,6 @@ export async function loader() {
     })
     .catch(error => console.log(error));
 
-  await axios.get(`${BASE_URL}/api/news/keywords/all-idol`)
-    .then(response => {
-      TrendKeywords = response.data;
-    })
-    .catch(error => console.log(error))
-
   await axios
     .get(`${BASE_URL}/api/peak/`)
     .then(response => {
@@ -43,12 +35,6 @@ export async function loader() {
     })
     .catch(error => console.log(error));
 
-  // await axios.get(`${BASE_URL}/api/news/keywords/all-idol`)
-  //   .then(response => {
-  //     TrendKeywords = response.data;
-  //   })
-  //   .catch(error => console.log(error))
-  // return [TrendNewsList];
   return [TrendNewsList, TrendYoutubeList, RankList];
 }
 
@@ -95,15 +81,6 @@ function MainPage() {
           </h3>
         }
       />
-      {/*<TitleContent*/}
-      {/*  data={<TrendKeyword TrendKeywords={TrendKeywords} />}*/}
-      {/*  gridColumn="4 / 5"*/}
-      {/*  title={*/}
-      {/*    <h3>*/}
-      {/*      인기 <span style={{ color: "var(--purple500-color)" }}>키워드</span>*/}
-      {/*    </h3>*/}
-      {/*  }*/}
-      {/*/>*/}
       <TitleContent
         data={CarouselNewsData}
         gridColumn="1 / 3"
