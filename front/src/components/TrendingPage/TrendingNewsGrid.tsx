@@ -25,7 +25,6 @@ const NewsListGrid = styled.div`
   grid-template-rows: repeat(2, 1fr);
   row-gap: 2px;
   column-gap: 40px;
-  
 `;
 
 const NewsListDiv = styled.div`
