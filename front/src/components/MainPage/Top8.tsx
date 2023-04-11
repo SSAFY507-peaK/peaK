@@ -28,7 +28,6 @@ const RankBottomDiv = styled.div`
 
 function Top8(props: any) {
   const items = props;
-  console.log(items);
   const itemsTop = items.slice(0, 3);
   const itemsBottom = items.slice(3, 8);
 
