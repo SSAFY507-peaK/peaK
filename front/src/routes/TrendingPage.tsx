@@ -1,13 +1,11 @@
 import { TrendNewsListType, TrendYoutubeListType } from "../_utils/Types";
 
-// import CommonDiv from "../components/MainPage/CommonDiv";
-// import MainDiv from "../components/MainDiv";
+import TitleContent from "../components/TitleContent";
 import TrendingNewsGrid from "../components/TrendingPage/TrendingNewsGrid";
 import TrendingYoutube from "../components/TrendingPage/TrendingYoutube";
 import axios from "axios";
-import { useLoaderData } from "react-router";
 import styled from "styled-components";
-import TitleContent from "../components/TitleContent";
+import { useLoaderData } from "react-router";
 
 const BASE_URL = process.env.REACT_APP_BASE_URL;
 
@@ -29,7 +27,6 @@ export async function loader() {
     })
     .catch(error => console.log(error));
 
-  // return [TrendNewsList];
   return [TrendNewsList, TrendYoutubeList];
 }
 
@@ -39,10 +36,8 @@ const TrendingGrid = styled.div`
   height: auto;
 
   grid-template-columns: repeat(8, 1fr);
-  //grid-template-rows: auto;
   gap: 25px;
-`
-
+`;
 
 function TrendingPage() {
   const [TrendNewsList, TrendYoutubeList] = useLoaderData() as [
