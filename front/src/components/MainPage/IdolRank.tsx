@@ -75,7 +75,7 @@ function Logo(rank: number) {
   }
 }
 
-/** rank, name, img 필요 */
+/** rank, name, img 를 parameter로 가짐 */
 function IdolRank({ url, name, rank }: IdolRankType) {
   const navigate = useNavigate();
   const userId: string = useAppSelector(state => state.userInfo.userId);

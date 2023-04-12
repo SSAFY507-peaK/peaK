@@ -47,7 +47,6 @@ const MainGrid = styled.div`
   display: grid;
   width: 100%;
   height: auto;
-
   grid-template-columns: repeat(4, 1fr);
   grid-template-rows: 85vh auto;
   gap: 25px;
@@ -65,11 +64,13 @@ function MainPage() {
       <CarouselCustom data={TrendNewsList} />
     </CarouselDiv>
   );
+
   const CarouselYoutubeData = (
     <CarouselDiv>
       <CarouselCustom data={TrendYoutubeList} />
     </CarouselDiv>
   );
+
   return (
     <MainGrid>
       <TitleContent
