@@ -17,8 +17,11 @@ const YoutubeDiv = styled.div`
   margin-bottom: 3vh;
   border-radius: 10px;
 `;
+
+/** 트렌딩 유튜브를 iframe으로 보여주는 함수 */
 function TrendingYoutube({ data }: Props) {
   const items = data;
+
   return (
     <YoutubeListDiv>
       {items.map(item => (
