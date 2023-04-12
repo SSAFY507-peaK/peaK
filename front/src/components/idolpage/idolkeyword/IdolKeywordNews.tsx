@@ -1,13 +1,13 @@
 import IdolKeywordNewsItem from "./IdolKeywordNewsItem";
+import { NewsType } from "../../../_utils/Types";
 import TitleComponent from "../TitleComponent"
 import bg  from "../sampleImg/image 38.png"
 import styled from "styled-components";
 import { useAppSelector } from "../../../_hooks/hooks";
-import { NewsType } from "../../../_utils/Types";
 
 interface Props {
-  chooseKeyword: number;
-  keyWordNews: NewsType[];
+  chooseKeywordIdx: number;
+  keyWordNewsList: NewsType[][];
 }
 
 const Frame = styled.div`
@@ -54,16 +54,15 @@ const newsList = [
   },
   ]
 
-  function IdolKeywordNews({ chooseKeyword, keyWordNews }: Props) {
+  function IdolKeywordNews({ chooseKeywordIdx, keyWordNewsList }: Props) {
 
-  // newsList[chooseKeyword]이 배열인 경우에만 map 함수를 호출하도록 처리
-  /* const keywordNews: NewsType[] = Array.isArray(newsList[chooseKeyword]) ? newsList[chooseKeyword] as unknown as NewsType[] : []; */
-
+  // newsList[chooseKeywordIdx]이 배열인 경우에만 map 함수를 호출하도록 처리
+  /* const keyWordNewsList: NewsType[] = Array.isArray(newsList[chooseKeywordIdx]) ? newsList[chooseKeywordIdx] as unknown as NewsType[] : []; */
   return (
     <Frame>
       <NewsFrame>
         {
-          keyWordNews.map((e: NewsType, idx: number) => {
+          keyWordNewsList[chooseKeywordIdx].map((e: NewsType, idx: number) => {
             return (
               <IdolKeywordNewsItem
                 key={idx}

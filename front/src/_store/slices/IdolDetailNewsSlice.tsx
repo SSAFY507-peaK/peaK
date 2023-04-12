@@ -9,30 +9,15 @@ export const idolDetailNews = createSlice({
   },
   reducers: {
     /** 뉴스 키워드 정제 */
-    CreateNewsData(state, action){
-      const newsList = action.payload
-      
-      let tmpKeyword = []
-      let tmpNews = []
-      for ( let i = 0; i< 5; i++){
-        tmpKeyword.push(newsList[i].keyword)
-        console.log(newsList[i].keyword)
-
-        tmpNews.push(newsList[i].newsList)
-
-      }
-
-      state.keywordList = [...tmpKeyword]
-      state.newsList = [...tmpNews]
-
+    CreateNewsKeyword(state, action){
+      state.keywordList = action.payload
     },
-    InitializeNewsData(state, action){
-      state.keywordList = []
-      state.newsList = []
+    CreateNewsList(state, action){
+      state.newsList = action.payload
     }
   }
 })
 
 
-export const { CreateNewsData, InitializeNewsData } = idolDetailNews.actions
+export const { CreateNewsKeyword, CreateNewsList } = idolDetailNews.actions
 export default idolDetailNews.reducer

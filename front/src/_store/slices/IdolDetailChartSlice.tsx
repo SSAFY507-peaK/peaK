@@ -25,7 +25,6 @@ export const idolDetailChart = createSlice({
       state.rankData.rankWeek = action.payload
     },
     CreatePosNegWeek(state, action){
-      console.log(action.payload)
       state.posNegWeek = action.payload.posNegWeek
     }
   }

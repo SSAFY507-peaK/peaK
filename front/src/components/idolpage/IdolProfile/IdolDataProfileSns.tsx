@@ -1,5 +1,6 @@
 import { DeleteFavIdols, UpdateFavIdols } from '../../../_store/slices/UserSlice';
 import { useAppDispatch, useAppSelector } from '../../../_hooks/hooks';
+import { useEffect, useState } from "react";
 
 import { ClickTracker } from '../../../_utils/UserTracker';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
@@ -12,7 +13,6 @@ import YouTubeIcon from '@mui/icons-material/YouTube';
 import { request } from '../../../_utils/axios';
 import styled from "styled-components"
 import { useParams } from 'react-router';
-import { useState } from "react";
 
 const Wrapper = styled.div`
   display: flex;
@@ -59,6 +59,9 @@ function IdolDataProfileSns() {
   const snsLink:SnsLink = idolSnsList.snsLink
   const [like, setLike] = useState<boolean>(interest);
 
+  useEffect(() => {
+    setLike(interest)
+  },[])
 
   return (
     <Wrapper>

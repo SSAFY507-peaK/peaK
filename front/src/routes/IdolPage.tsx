@@ -1,5 +1,6 @@
 import { CreateIdolRank, CreateIdolWeeklyRank, CreatePosNegWeek } from "../_store/slices/IdolDetailChartSlice";
-import { CreateNewsData, InitializeNewsData } from "../_store/slices/IdolDetailNewsSlice";
+import { CreateNewsKeyword, CreateNewsList } from "../_store/slices/IdolDetailNewsSlice";
+import { TrendYoutubeListType, WordData } from "../_utils/Types";
 import { useAppDispatch, useAppSelector } from "../_hooks/hooks";
 
 import { CreateIdolChat } from "../_store/slices/IdolDetailChatSlice";
@@ -11,7 +12,6 @@ import IdolKeyword from "../components/idolpage/idolkeyword/IdolKeyword";
 import IdolList from "../components/idolpage/IdolList";
 import IdolYoutube from "../components/idolpage/IdolYoutube";
 import { TimeTracker } from "../_utils/UserTracker";
-import { TrendYoutubeListType } from "../_utils/Types";
 import axios from "axios";
 import { request } from "../_utils/axios";
 import styled from "styled-components";
@@ -84,12 +84,33 @@ function IdolPage() {
   //   })
 
   /** 뉴스관련 정보 Store에 저장 */
+  request("get", `/news/list/keywords/${idolName}`)
+    .then(res => {
+      const newsList = res.newsList
+      let tmpKeyword = []
+      let tmpNews = []
+      for ( let i = 0; i< newsList.length; i++){
+        tmpKeyword.push(newsList[i].keyword)
+        tmpNews.push(newsList[i].newsList)
+      }
+      dispatch(CreateNewsKeyword(tmpKeyword))
+      dispatch(CreateNewsList(tmpNews))
+    })
   // request("get", `/news/list/keywords/${idolName}`)
-  //   .then(res => {
-  //     console.log(res)
-  //     dispatch(CreateNewsData(res.newsList))
+  //   .then(res => { 
+  //     let tmpWordCloud: WordData[][] = [];
+  //     for ( let i = 0; i< 5; i++){
+  //       let wordList = res.wordCounter[i].wordCounter
+  //       let tmp: WordData[] = [];
+  //       if (typeof wordList !== "undefined"){
+  //         for ( let key in wordList ) {
+  //           tmp.push({text:key, value:wordList[key]})
+  //         }
+  //       tmpWordCloud.push(tmp)
+  //       }
+  //     }
+  //     dispatch(CreateWordCount(tmpWordCloud))
   //   })
-  // request("get", `/news/list/keywords/${idolName}`).then(res => { dispatch(CreateWordCount(res.wordCounter))})
   
 
   return (
@@ -99,12 +120,12 @@ function IdolPage() {
         <IdolData idolName={idolName} />
         <TopRightFrame>
           <IdolEmotion />
-          {/* <IdolKeyword /> */}
+          <IdolKeyword />
         </TopRightFrame>
       </TopFrame>
-      {/* <BottomFrame>
+      <BottomFrame>
         <IdolYoutube data={IdolYoutubeList} />
-      </BottomFrame> */}
+      </BottomFrame>
     </Wrapper>
   );
 }

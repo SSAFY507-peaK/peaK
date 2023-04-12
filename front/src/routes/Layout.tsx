@@ -1,16 +1,16 @@
-import {CreateFavIdols, CreateNickname, CreateTOKEN, CreateUserId, } from "../_store/slices/UserSlice";
-import { ga } from "react-ga";
-import {useDispatch } from "react-redux";
+import {CreateFavIdols, CreateNickname, CreateTOKEN, CreateUserId,} from "../_store/slices/UserSlice";
 
 import MenuBar from "../components/LayoutPage/MenuBar";
 import RouteChangeTracker from "../_utils/RouteChangeTracker";
 import Wrapper from "../components/LayoutPage/Wrapper";
+import axios from "axios";
+import { ga } from "react-ga";
 import styled from "styled-components";
 import {useAppSelector} from "../_hooks/hooks";
+import {useDispatch} from "react-redux";
 import {useEffect} from "react";
 import {useNavigate} from "react-router";
 import {useSearchParams} from "react-router-dom";
-import axios from "axios";
 
 // const Background = styled.div`
 //   width: 100vw;

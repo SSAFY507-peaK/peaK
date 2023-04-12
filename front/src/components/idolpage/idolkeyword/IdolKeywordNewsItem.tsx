@@ -56,7 +56,7 @@ function IdolKeywordNewsItem({image, title, summary, source, link}: NewsDataType
       <NewsImg src={image} />
       <NewsDataFrame>
         <NewsTitle>{title}</NewsTitle>
-        <NewsDetail>{summary.length <= 30 ? summary : summary.substring(0, 70) + "..."}</NewsDetail>
+        <NewsDetail>{summary.length <= 30 ? summary : summary.substring(0, 40) + "..."}</NewsDetail>
         <NewsSource>{source}</NewsSource>
       </NewsDataFrame>
     </Frame>

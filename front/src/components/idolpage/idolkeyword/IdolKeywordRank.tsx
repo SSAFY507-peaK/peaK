@@ -1,14 +1,14 @@
-import {  useState } from "react";
+import { useAppDispatch, useAppSelector } from '../../../_hooks/hooks';
 
 import { ClickTracker } from '../../../_utils/UserTracker';
 import IdolKeywordRankBtn from "./IdolKeywordRankBtn";
 import styled from "styled-components";
-import { useAppDispatch, useAppSelector } from '../../../_hooks/hooks';
 import { useParams } from 'react-router';
+import { useState } from "react";
 
 interface Props {
-  setChooseKeyword: React.Dispatch<React.SetStateAction<number>>;
-  chooseKeyword: number;
+  getChooseKeyword(idx:number): void;
+  chooseKeywordIdx: number;
   keyWordList: string[];
 }
 
@@ -17,7 +17,7 @@ const RankFrame = styled.div`
 `;
 
 
-function IdolKeywordRank({setChooseKeyword, chooseKeyword, keyWordList}:Props) {
+function IdolKeywordRank({getChooseKeyword, chooseKeywordIdx, keyWordList}:Props) {
   // const keywords = useAppSelector(state => state.idolDetailNews.keywordList)
   // const keyWordList = ["주희발빠짐주의!", "배고픈이문세", "갓귤", "돌아돌아", "오오오오"]
 
@@ -40,7 +40,7 @@ function IdolKeywordRank({setChooseKeyword, chooseKeyword, keyWordList}:Props) {
                   const tmp = [ false ,false, false, false, false]
                   tmp[idx] = true
                   setCheck(tmp)
-                  setChooseKeyword(idx)
+                  getChooseKeyword(idx)
                   ClickTracker(idolName, userId)
                 }
               }
