@@ -1,5 +1,4 @@
 import CarouselIdol from "../CarouselIdol/CarouselIdol.jsx";
-import IdolYoutubeCarousel from "./IdolYoutubeCarousel.js";
 import TitleComponent from "./TitleComponent";
 import YouTubeIcon from "@mui/icons-material/YouTube";
 import styled from "styled-components";

@@ -28,10 +28,12 @@ export let userInfo = createSlice({
       state.favIdols = action.payload;
     },
     UpdateFavIdols(state, action) {
-      state.favIdols.push(action.payload)
+      const tmp = [ ...state.favIdols, action.payload ]
+      state.favIdols = tmp
     },
     DeleteFavIdols(state, action) {
-      state.favIdols.filter(idol => idol !== action.payload);
+      const tmp = state.favIdols.filter(idol => idol !== action.payload)
+      state.favIdols = tmp
     }
   }
 })

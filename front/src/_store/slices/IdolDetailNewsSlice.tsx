@@ -1,5 +1,4 @@
 import { NewsType } from "../../_utils/Types";
-
 import { createSlice } from "@reduxjs/toolkit";
 
 export const idolDetailNews = createSlice({
@@ -10,25 +9,15 @@ export const idolDetailNews = createSlice({
   },
   reducers: {
     /** 뉴스 키워드 정제 */
-    CreateNewsData(state, action){
-      const newsList = action.payload
-
-      let tmpKeyword = []
-      let tmpNews = []
-
-      for ( let i = 0; i< 5; i++){
-        tmpKeyword.push(newsList[i].keyword)
-        tmpNews.push(newsList[i].newsList)
-
-      }
-
-      state.keywordList = [...tmpKeyword]
-      state.newsList = [...tmpNews]
-
+    CreateNewsKeyword(state, action){
+      state.keywordList = action.payload
+    },
+    CreateNewsList(state, action){
+      state.newsList = action.payload
     }
   }
 })
 
 
-export const { CreateNewsData } = idolDetailNews.actions
+export const { CreateNewsKeyword, CreateNewsList } = idolDetailNews.actions
 export default idolDetailNews.reducer

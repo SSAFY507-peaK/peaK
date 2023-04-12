@@ -4,21 +4,26 @@ export const idolDetailSns = createSlice({
   name: "idolDetailSns",
   initialState: { 
     idol: "",
-    SnsData: {
+    snsLink: {
       instagram: "",
       youtube: "",
       twitter: ""    
     },
-    interest: ""
+    interest: false
   },
   reducers: {
     CreateIdolSns(state, action){
-      state = action.payload
+      state.idol = action.payload.idol
+      state.snsLink = action.payload.snsLink
+      state.interest = action.payload.interest
     },
+    UpdateIdolInterest(state, action){
+      state.interest = action.payload
+    }
 
   }
 })
 
 
-export const { CreateIdolSns } = idolDetailSns.actions
+export const { CreateIdolSns, UpdateIdolInterest } = idolDetailSns.actions
 export default idolDetailSns.reducer
