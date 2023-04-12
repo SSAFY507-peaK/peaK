@@ -1,8 +1,10 @@
-import { CreatePosNegWeek } from "../_store/slices/IdolDetailChartSlice";
-import { CreateNewsData } from "../_store/slices/IdolDetailNewsSlice";
+import { CreateNewsData, InitializeNewsData } from "../_store/slices/IdolDetailNewsSlice";
 import { useAppDispatch, useAppSelector } from "../_hooks/hooks";
 
 import { CreateIdolChat } from "../_store/slices/IdolDetailChatSlice";
+import { CreateIdolSns } from "../_store/slices/IdolDetailSnsSlice";
+import { CreatePosNegWeek } from "../_store/slices/IdolDetailChartSlice";
+import { CreateWordCount } from "../_store/slices/IdolDetailWordCountSlice";
 import IdolData from "../components/idolpage/IdolProfile/IdolData";
 import IdolEmotion from "../components/idolpage/idolemotion/IdolEmotion";
 import IdolKeyword from "../components/idolpage/idolkeyword/IdolKeyword";
@@ -15,7 +17,6 @@ import { request } from "../_utils/axios";
 import styled from "styled-components";
 import { useLoaderData } from "react-router-dom";
 import { useParams } from "react-router-dom";
-import { CreateWordCount } from "../_store/slices/IdolDetailWordCountSlice";
 
 // import { useEffect } from "react";
 
@@ -65,28 +66,31 @@ function IdolPage() {
   // const favIdols = useAppSelector(state => state.myInterest.idols.map(idol => idol.idol));
 
   const TOKEN = useAppSelector(state => state.userInfo.TOKEN);
-  const headers = {headers: TOKEN}
+  const headers = {Authorization: TOKEN}
   const dispatch = useAppDispatch()
 
   /** 관심 아이돌 sns Store에 저장 */
-  // request("get", `/idol/${idolName}`).then(res => console.log(res))
-  // axios.get (`/idol/${idolName}`)
+  request("get", `/idol/${idolName}`,"", headers).then(res => dispatch(CreateIdolSns(res)))
 
   /** 관심 아이돌 댓글 Store에 저장 */
   request("get", `/idol/${idolName}/comment`).then(res => dispatch(CreateIdolChat(res)));
 
   /** 차트관련 정보 Store에 저장 */
   // request("get", `/idol/${idolName}/pos-neg` ).then(res =>  dispatch(CreatePosNegWeek(res)))
-  request("get", `/idol/${idolName}/pos-neg`).then(res =>
-    res.posNegWeek.length
-      ? dispatch(CreatePosNegWeek(res))
-      : dispatch(CreateNewsData({ posNegWeek: { pos: 0, neg: 0 } })),
-  );
+  // request("get", `/idol/${idolName}/pos-neg`).then(res =>
+  //   res.posNegWeek.length
+  //     ? dispatch(CreatePosNegWeek(res))
+  //     : dispatch(CreateNewsData({ posNegWeek: { pos: 0, neg: 0 } })),
+  // );
   // request("get", `/peak/weekly/${idolName}`).then(res => dispatch(CreateIdolRank(res)))
 
   /** 뉴스관련 정보 Store에 저장 */
-  request("get", `/news/list/keywords/${idolName}`).then(res => { dispatch(CreateNewsData(res.newsList))})
-  request("get", `/news/list/keywords/${idolName}`).then(res => { dispatch(CreateWordCount(res.wordCounter))})
+  // request("get", `/news/list/keywords/${idolName}`)
+  //   .then(res => {
+  //     console.log(res)
+  //     dispatch(CreateNewsData(res.newsList))
+  //   })
+  // request("get", `/news/list/keywords/${idolName}`).then(res => { dispatch(CreateWordCount(res.wordCounter))})
   
 
   return (
@@ -96,7 +100,7 @@ function IdolPage() {
         <IdolData idolName={idolName} />
         <TopRightFrame>
           <IdolEmotion />
-          <IdolKeyword />
+          {/* <IdolKeyword /> */}
         </TopRightFrame>
       </TopFrame>
       <BottomFrame>

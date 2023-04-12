@@ -1,7 +1,8 @@
+import { IdolSns, SnsLink } from '../../../_utils/Types';
+
 import { ClickTracker } from '../../../_utils/UserTracker';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import FavoriteIcon from '@mui/icons-material/Favorite';
-import { IdolSns, SnsLink } from '../../../_utils/Types';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import TwitterIcon from '@mui/icons-material/Twitter';
 import YouTubeIcon from '@mui/icons-material/YouTube';
@@ -55,15 +56,14 @@ const IconText = styled.div`
 // }
 
 function IdolDataProfileSns() {
-  const idolSnsList:any = useAppSelector(state => state.idolDetailSns)
   const params = useParams();
   const idolName:string = params.idolName || "";
+  const idolSnsList = useAppSelector(state => state.idolDetailSns)
   const userId:string = useAppSelector(state => state.userInfo.userId)
 
-  console.log(idolSnsList)
-  // const {idol, snsLink}: IdolSns =  request("get", `idol/${idolName}/pos-neg`)
-  const {idol, snsLink, interest}:IdolSns = idolSnsList
-
+  const interest = idolSnsList.interest
+  console.log(interest)
+  const snsLink:SnsLink = idolSnsList.snsLink
   const [like, setLike] = useState<boolean>(interest);
 
   return (
@@ -105,7 +105,7 @@ function IdolDataProfileSns() {
         <SnsFrame>
         <IconFrame color="#FDD8D8" >
         {
-          like?
+          like === true?
           <FavoriteIcon 
             sx={{ fontSize: "1.3rem", cursor: "pointer", color: `var(--red600-color)` }} 
             onClick={() => {
