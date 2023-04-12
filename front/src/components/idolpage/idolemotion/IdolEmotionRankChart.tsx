@@ -15,16 +15,17 @@ function IdolEmotionRankChart({rankData}:Props) {
   const params = useParams();
   const idolName:string = params.idolName || "";
 
-  const [rankWeek, setRankWeek] = useState<number[]>([0]);
-  useEffect(() => {
-    let tmp:number[] =[]
-    if (rankData) {
-      for (let i = 0; i < rankData.rankWeek.length; i++) {
-        tmp = [...tmp, rankData.rankWeek[i].rank]
-      }
-      setRankWeek(tmp)
-    }
-  },[rankData])
+  // const [rankWeek, setRankWeek] = useState<number[]>([0]);
+  const [rankWeek, setRankWeek] = useState<number[]>(labels.map(() => faker.datatype.float({ min: 0, max: 100 })));
+  // useEffect(() => {
+  //   let tmp:number[] =[]
+  //   if (rankData) {
+  //     for (let i = 0; i < rankData.rankWeek.length; i++) {
+  //       tmp = [...tmp, rankData.rankWeek[i].rank]
+  //     }
+  //     setRankWeek(tmp)
+  //   }
+  // },[rankData])
 
   const options = {
     color: "white",

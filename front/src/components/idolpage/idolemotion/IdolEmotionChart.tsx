@@ -10,20 +10,21 @@ interface Props {
 
 function IdolEmotionChart({posNeg}:Props) {
   let labels = ['D-6', 'D-5', 'D-4', 'D-3', 'D-2', 'D-1', '오늘']
-  const [posList, setPosList] = useState<number[]>([0])
-  const [negList, setNegList] = useState<number[]>([0])
-  useEffect(() => {
-    let posTmp:number[] = []
-    let negTmp:number[] = []
-    if ( posNeg ) {
-      for ( let i=0; i < posNeg.length; i++) {
-        posTmp.push(posNeg[i].pos)
-        negTmp.push(posNeg[i].neg)
-      }
-      setPosList(posTmp)
-      setNegList(negTmp)
-    }
-  }, [])
+
+  const [posList, setPosList] = useState<number[]>(labels.map(() => faker.datatype.float({ min: 0, max: 100 })))
+  const [negList, setNegList] = useState<number[]>(labels.map(() => faker.datatype.float({ min: 0, max: 100 })))
+  // useEffect(() => {
+  //   let posTmp:number[] = []
+  //   let negTmp:number[] = []
+  //   if ( posNeg ) {
+  //     for ( let i=0; i < posNeg.length; i++) {
+  //       posTmp.push(posNeg[i].pos)
+  //       negTmp.push(posNeg[i].neg)
+  //     }
+  //     setPosList(posTmp)
+  //     setNegList(negTmp)
+  //   }
+  // }, [])
   
   const options = {
     color: ['rgba(230, 35, 77, 0.5)', 'rgba(57, 17, 232, 0.5)'],
@@ -76,7 +77,6 @@ function IdolEmotionChart({posNeg}:Props) {
           focus: 'series'
         },
         data: posList
-        // data: posList
       },
       {
         name: '부정',
@@ -94,7 +94,6 @@ function IdolEmotionChart({posNeg}:Props) {
           focus: 'series'
         },
         data: negList
-        // data: negList
       },
     ]
 	};	
