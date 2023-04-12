@@ -1,3 +1,4 @@
+import { DeleteFavIdols, UpdateFavIdols } from '../../../_store/slices/UserSlice';
 import { useAppDispatch, useAppSelector } from '../../../_hooks/hooks';
 import { useEffect, useState } from "react";
 
@@ -60,10 +61,6 @@ function IdolDataProfileSns() {
   const snsLink:SnsLink = idolSnsList.snsLink
   const [like, setLike] = useState<boolean>(interest);
 
-  useEffect(() => {
-    request("get", "/interest/list", "", headers).then(res => console.log(res))
-  },[like])
-  
 
   return (
     <Wrapper>
@@ -111,6 +108,7 @@ function IdolDataProfileSns() {
               setLike(false)
               ClickTracker(idolName, userId)
               request("post", `/interest/${idolName}/hate`,"", headers).then(res => dispatch(UpdateIdolInterest(interest)))
+              dispatch(DeleteFavIdols(idolName))
             }} />
           :
           <FavoriteBorderIcon 
@@ -119,6 +117,7 @@ function IdolDataProfileSns() {
               setLike(true)
               ClickTracker(idolName, userId)
               request("post", `/interest/${idolName}/love`,"", headers).then(res => dispatch(UpdateIdolInterest(interest)))
+              dispatch(UpdateFavIdols(idolName))
             }}/>
         } 
         </IconFrame>
@@ -128,11 +127,3 @@ function IdolDataProfileSns() {
 }
 
 export default IdolDataProfileSns;
-
-
-/* 내가 해야할 것
-
-  1. 좋아요 버튼이 동작하면 서버에 알림
-  2. 좋아요 버튼이 동작하면 스토어를 수정해
-
-*/

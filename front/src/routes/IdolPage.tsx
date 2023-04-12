@@ -99,13 +99,13 @@ function IdolPage() {
       <TopFrame>
         <IdolData idolName={idolName} />
         <TopRightFrame>
-          <IdolEmotion />
+          {/* <IdolEmotion /> */}
           {/* <IdolKeyword /> */}
         </TopRightFrame>
       </TopFrame>
-      <BottomFrame>
+      {/* <BottomFrame>
         <IdolYoutube data={IdolYoutubeList} />
-      </BottomFrame>
+      </BottomFrame> */}
     </Wrapper>
   );
 }
