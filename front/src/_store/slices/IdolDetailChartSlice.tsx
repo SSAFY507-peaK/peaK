@@ -19,15 +19,18 @@ export const idolDetailChart = createSlice({
   },
   reducers: {
     CreateIdolRank(state, action){
-      // console.log(action)
-      state.rankData = action.payload
+      state.rankData.current = action.payload
+    },
+    CreateIdolWeeklyRank(state, action){
+      state.rankData.rankWeek = action.payload
     },
     CreatePosNegWeek(state, action){
+      console.log(action.payload)
       state.posNegWeek = action.payload.posNegWeek
     }
   }
 })
 
 
-export const { CreateIdolRank, CreatePosNegWeek } = idolDetailChart.actions
+export const { CreateIdolRank, CreateIdolWeeklyRank, CreatePosNegWeek } = idolDetailChart.actions
 export default idolDetailChart.reducer

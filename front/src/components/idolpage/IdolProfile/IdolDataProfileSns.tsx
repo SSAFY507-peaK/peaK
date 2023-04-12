@@ -1,6 +1,5 @@
 import { DeleteFavIdols, UpdateFavIdols } from '../../../_store/slices/UserSlice';
 import { useAppDispatch, useAppSelector } from '../../../_hooks/hooks';
-import { useEffect, useState } from "react";
 
 import { ClickTracker } from '../../../_utils/UserTracker';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
@@ -10,11 +9,10 @@ import { SnsLink } from '../../../_utils/Types';
 import TwitterIcon from '@mui/icons-material/Twitter';
 import { UpdateIdolInterest } from "../../../_store/slices/IdolDetailSnsSlice";
 import YouTubeIcon from '@mui/icons-material/YouTube';
-import axios from 'axios';
 import { request } from '../../../_utils/axios';
 import styled from "styled-components"
-import { useDispatch } from "react-redux";
 import { useParams } from 'react-router';
+import { useState } from "react";
 
 const Wrapper = styled.div`
   display: flex;

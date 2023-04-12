@@ -1,9 +1,9 @@
+import { CreateIdolRank, CreateIdolWeeklyRank, CreatePosNegWeek } from "../_store/slices/IdolDetailChartSlice";
 import { CreateNewsData, InitializeNewsData } from "../_store/slices/IdolDetailNewsSlice";
 import { useAppDispatch, useAppSelector } from "../_hooks/hooks";
 
 import { CreateIdolChat } from "../_store/slices/IdolDetailChatSlice";
 import { CreateIdolSns } from "../_store/slices/IdolDetailSnsSlice";
-import { CreatePosNegWeek } from "../_store/slices/IdolDetailChartSlice";
 import { CreateWordCount } from "../_store/slices/IdolDetailWordCountSlice";
 import IdolData from "../components/idolpage/IdolProfile/IdolData";
 import IdolEmotion from "../components/idolpage/idolemotion/IdolEmotion";
@@ -76,13 +76,12 @@ function IdolPage() {
   request("get", `/idol/${idolName}/comment`).then(res => dispatch(CreateIdolChat(res)));
 
   /** 차트관련 정보 Store에 저장 */
-  // request("get", `/idol/${idolName}/pos-neg` ).then(res =>  dispatch(CreatePosNegWeek(res)))
-  // request("get", `/idol/${idolName}/pos-neg`).then(res =>
-  //   res.posNegWeek.length
-  //     ? dispatch(CreatePosNegWeek(res))
-  //     : dispatch(CreateNewsData({ posNegWeek: { pos: 0, neg: 0 } })),
-  // );
-  // request("get", `/peak/weekly/${idolName}`).then(res => dispatch(CreateIdolRank(res)))
+  // request("get", `/idol/${idolName}/pos-neg`,"",headers ).then(res => dispatch(CreatePosNegWeek(res)))
+  // request("get", `/peak/weekly/${idolName}`,"",headers)
+  //   .then(res => {
+  //       dispatch(CreateIdolRank(res.current))
+  //       dispatch(CreateIdolWeeklyRank(res.rankWeek))
+  //   })
 
   /** 뉴스관련 정보 Store에 저장 */
   // request("get", `/news/list/keywords/${idolName}`)
@@ -99,7 +98,7 @@ function IdolPage() {
       <TopFrame>
         <IdolData idolName={idolName} />
         <TopRightFrame>
-          {/* <IdolEmotion /> */}
+          <IdolEmotion />
           {/* <IdolKeyword /> */}
         </TopRightFrame>
       </TopFrame>
