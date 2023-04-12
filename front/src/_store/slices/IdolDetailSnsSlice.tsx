@@ -17,10 +17,13 @@ export const idolDetailSns = createSlice({
       state.snsLink = action.payload.snsLink
       state.interest = action.payload.interest
     },
+    UpdateIdolInterest(state, action){
+      state.interest = action.payload
+    }
 
   }
 })
 
 
-export const { CreateIdolSns } = idolDetailSns.actions
+export const { CreateIdolSns, UpdateIdolInterest } = idolDetailSns.actions
 export default idolDetailSns.reducer
