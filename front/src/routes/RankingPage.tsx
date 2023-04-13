@@ -143,7 +143,7 @@ const RankDiffer = (diff: number) => {
 /** 아이돌 1팀의 순위, 순위변동, 사진, 점수, 이름 */
 const RankDiv = (props: RankDivType) => {
   const navigate = useNavigate();
-  const userId:string = useAppSelector(state => state.userInfo.userId)
+  const userId: string = useAppSelector(state => state.userInfo.userId);
   return (
     <IdolRankDiv
       onClick={() => {
@@ -153,7 +153,9 @@ const RankDiv = (props: RankDivType) => {
     >
       <RankNumDiv>{props.rank}</RankNumDiv>
       {RankDiffer(props.diff)}
-      <IdolImgDiv url={`https://j8a507.p.ssafy.io/img/${props.idol}.webp`} />
+      <IdolImgDiv
+        url={`https://j8a507.p.ssafy.io/img/${encodeURIComponent(`${props.idol}`)}.webp`}
+      />
       <IdolNameDiv>{props.idol}</IdolNameDiv>
       <ScoreDiv>
         <div>{props.score}</div>

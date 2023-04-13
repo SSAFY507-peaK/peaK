@@ -11,21 +11,24 @@ interface Props {
 
 
 function IdolEmotionRankChart({rankData}:Props) {
-  let labels = ['월', '화', '수', '목', '금', '토', '일']
+  let labels = ['D-6', 'D-5', 'D-4', 'D-3', 'D-2', 'D-1', '오늘']
   const params = useParams();
   const idolName:string = params.idolName || "";
 
-  const [rankWeek, setRankWeek] = useState<number[]>([0]);
-  useEffect(() => {
-    let tmp:number[] =[]
-    for (let i = 0; i < rankData.rankWeek.length; i++) {
-      tmp = [...tmp, rankData.rankWeek[i].rank]
-    }
-    setRankWeek(tmp)
-  },[rankData])
+  // const [rankWeek, setRankWeek] = useState<number[]>([0]);
+  const [rankWeek, setRankWeek] = useState<number[]>(labels.map(() => faker.datatype.float({ min: 0, max: 100 })));
+  // useEffect(() => {
+  //   let tmp:number[] =[]
+  //   if (rankData) {
+  //     for (let i = 0; i < rankData.rankWeek.length; i++) {
+  //       tmp = [...tmp, rankData.rankWeek[i].rank]
+  //     }
+  //     setRankWeek(tmp)
+  //   }
+  // },[rankData])
 
   const options = {
-    color: "#F946FF",
+    color: "white",
     tooltip: {
       trigger: 'axis',
       axisPointer: {
@@ -41,7 +44,7 @@ function IdolEmotionRankChart({rankData}:Props) {
       bottom: '3%',
       show: true,
       containLabel: true,
-      backgroundColor: "white",
+      backgroundColor: "#F946FF",
     },
     xAxis: [
       {
@@ -58,7 +61,7 @@ function IdolEmotionRankChart({rankData}:Props) {
         interval: 20,
         inverse: true,
         splitLine: {
-          show: false // 가로선 숨기기
+          show: true // 가로선 숨기기
         }
       }
     ],

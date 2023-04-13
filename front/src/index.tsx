@@ -11,7 +11,7 @@ import { persistStore } from "redux-persist"
 
 import { GlobalStyle } from "./components/globalStyle.js";
 
-// import FullPage from "./routes/FullPage/FullPage"
+// import X_FullPage from "./routes/X_FullPage/X_FullPage"
 
 if (process.env.REACT_APP_GOOGLE_ANALYTICS_TRANKING_ID) {
   ReactGA.initialize(process.env.REACT_APP_GOOGLE_ANALYTICS_TRANKING_ID);

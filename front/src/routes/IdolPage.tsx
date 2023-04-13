@@ -1,21 +1,22 @@
-import { CreatePosNegWeek } from "../_store/slices/IdolDetailChartSlice";
-import { CreateNewsData } from "../_store/slices/IdolDetailNewsSlice";
+import { CreateIdolRank, CreateIdolWeeklyRank, CreatePosNegWeek } from "../_store/slices/IdolDetailChartSlice";
+import { CreateNewsKeyword, CreateNewsList } from "../_store/slices/IdolDetailNewsSlice";
+import { TrendYoutubeListType, WordData } from "../_utils/Types";
 import { useAppDispatch, useAppSelector } from "../_hooks/hooks";
 
 import { CreateIdolChat } from "../_store/slices/IdolDetailChatSlice";
+import { CreateIdolSns } from "../_store/slices/IdolDetailSnsSlice";
+import { CreateWordCount } from "../_store/slices/IdolDetailWordCountSlice";
 import IdolData from "../components/idolpage/IdolProfile/IdolData";
 import IdolEmotion from "../components/idolpage/idolemotion/IdolEmotion";
 import IdolKeyword from "../components/idolpage/idolkeyword/IdolKeyword";
 import IdolList from "../components/idolpage/IdolList";
 import IdolYoutube from "../components/idolpage/IdolYoutube";
 import { TimeTracker } from "../_utils/UserTracker";
-import { TrendYoutubeListType } from "../_utils/Types";
 import axios from "axios";
 import { request } from "../_utils/axios";
 import styled from "styled-components";
 import { useLoaderData } from "react-router-dom";
 import { useParams } from "react-router-dom";
-import { CreateWordCount } from "../_store/slices/IdolDetailWordCountSlice";
 
 // import { useEffect } from "react";
 
@@ -65,28 +66,51 @@ function IdolPage() {
   // const favIdols = useAppSelector(state => state.myInterest.idols.map(idol => idol.idol));
 
   const TOKEN = useAppSelector(state => state.userInfo.TOKEN);
-  const headers = {headers: TOKEN}
+  const headers = {Authorization: TOKEN}
   const dispatch = useAppDispatch()
 
   /** 관심 아이돌 sns Store에 저장 */
-  // request("get", `/idol/${idolName}`).then(res => console.log(res))
-  // axios.get (`/idol/${idolName}`)
+  request("get", `/idol/${idolName}`,"", headers).then(res => dispatch(CreateIdolSns(res)))
 
   /** 관심 아이돌 댓글 Store에 저장 */
   request("get", `/idol/${idolName}/comment`).then(res => dispatch(CreateIdolChat(res)));
 
   /** 차트관련 정보 Store에 저장 */
-  // request("get", `/idol/${idolName}/pos-neg` ).then(res =>  dispatch(CreatePosNegWeek(res)))
-  request("get", `/idol/${idolName}/pos-neg`).then(res =>
-    res.posNegWeek.length
-      ? dispatch(CreatePosNegWeek(res))
-      : dispatch(CreateNewsData({ posNegWeek: { pos: 0, neg: 0 } })),
-  );
-  // request("get", `/peak/weekly/${idolName}`).then(res => dispatch(CreateIdolRank(res)))
+  // request("get", `/idol/${idolName}/pos-neg`,"",headers ).then(res => dispatch(CreatePosNegWeek(res)))
+  // request("get", `/peak/weekly/${idolName}`,"",headers)
+  //   .then(res => {
+  //       dispatch(CreateIdolRank(res.current))
+  //       dispatch(CreateIdolWeeklyRank(res.rankWeek))
+  //   })
 
   /** 뉴스관련 정보 Store에 저장 */
-  request("get", `/news/list/keywords/${idolName}`).then(res => { dispatch(CreateNewsData(res.newsList))})
-  request("get", `/news/list/keywords/${idolName}`).then(res => { dispatch(CreateWordCount(res.wordCounter))})
+  request("get", `/news/list/keywords/${idolName}`)
+    .then(res => {
+      const newsList = res.newsList
+      let tmpKeyword = []
+      let tmpNews = []
+      for ( let i = 0; i< newsList.length; i++){
+        tmpKeyword.push(newsList[i].keyword)
+        tmpNews.push(newsList[i].newsList)
+      }
+      dispatch(CreateNewsKeyword(tmpKeyword))
+      dispatch(CreateNewsList(tmpNews))
+    })
+  // request("get", `/news/list/keywords/${idolName}`)
+  //   .then(res => { 
+  //     let tmpWordCloud: WordData[][] = [];
+  //     for ( let i = 0; i< 5; i++){
+  //       let wordList = res.wordCounter[i].wordCounter
+  //       let tmp: WordData[] = [];
+  //       if (typeof wordList !== "undefined"){
+  //         for ( let key in wordList ) {
+  //           tmp.push({text:key, value:wordList[key]})
+  //         }
+  //       tmpWordCloud.push(tmp)
+  //       }
+  //     }
+  //     dispatch(CreateWordCount(tmpWordCloud))
+  //   })
   
 
   return (

@@ -1,6 +1,12 @@
+import { useAppDispatch, useAppSelector } from '../../../_hooks/hooks';
+
+import { CreateIdolSns } from '../../../_store/slices/IdolDetailSnsSlice';
 import IdolDataProfileSns from './IdolDataProfileSns';
-import styled from "styled-components";
 import { IdolNameProps } from "../../../routes/IdolPage";
+import { UserInfo } from '../../../_utils/Types';
+import { request } from '../../../_utils/axios';
+import styled from "styled-components";
+
 // import { useParams } from 'react-router';
 
 interface ImageType {
@@ -28,15 +34,13 @@ const ProfileImg = styled.div<ImageType>`
   box-shadow: 0 0 10px -1px rgba(151, 151, 151, 0.25);
 `;
 
+
 function IdolDataProfile ({idolName}: IdolNameProps) {
-  // const params = useParams();
-  // const idolName:string = params.idolName || "";
   const DOMAIN = process.env.REACT_APP_BASE_URL
   return (
     <Wrapper>
-      {/* <ProfileImg backgroundImg= { `${DOMAIN}/img/${idolName}.webp`} /> */}
       <ProfileImg backgroundImg= { `${DOMAIN}/img/${encodeURIComponent(idolName)}.webp`} />
-      <IdolDataProfileSns />
+      <IdolDataProfileSns/>
     </Wrapper>
   )
 }

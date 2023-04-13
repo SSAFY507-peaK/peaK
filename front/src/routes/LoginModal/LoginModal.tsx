@@ -1,7 +1,7 @@
 import React, {useRef} from 'react';
 import styled from 'styled-components'
 import { ReactComponent as Logo } from "../../assets/logo.svg";
-import { KakaoLogin, NaverLogin } from "../../components/LoginModal/LoginButton";
+import { KakaoLogin } from "../../components/LoginModal/LoginButton";
 import useOnClickOutside from "../../_hooks/useOnClickOutside";
 
 
@@ -25,8 +25,8 @@ const ModalBackground = styled.div`
 `
 
 const ModalWrapper = styled.div`
-  width: 400px;
-  height: 450px;
+  width: 350px;
+  height: 350px;
   background-color: white;
   border-radius: 20px;
   padding: 30px;
@@ -89,10 +89,10 @@ function LoginModal({ setLoginOpen }:LoginModalProps) {
         <CloseButton onClick={() => setLoginOpen(false)}>X</CloseButton>
         <LogoWrapper>
           <Logo />
-          <h2>로그인하기</h2>
+          <h3>로그인하기</h3>
         </LogoWrapper>
         <ButtonWrapper>
-          <NaverLogin/>
+          {/*<NaverLogin/>*/}
           <KakaoLogin />
         </ButtonWrapper>
       </ModalWrapper>

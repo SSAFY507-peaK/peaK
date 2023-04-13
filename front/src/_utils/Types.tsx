@@ -116,7 +116,7 @@ export interface KeyWord {
   news: {
     keyword: string;
     newsList: NewsType[];
-  }
+  };
 }
 
 export interface NewsType {

@@ -3,7 +3,6 @@ import { TrendNewsListType, TrendYoutubeListType } from "../_utils/Types.js";
 import CarouselCustom from "../components/Carousel/CarouselCustom.jsx";
 import TitleContent from "../components/TitleContent";
 import Top8 from "../components/MainPage/Top8";
-import TrendKeyword from "../components/MainPage/TrendKeyword";
 import axios from "axios";
 import styled from "styled-components";
 import { useLoaderData } from "react-router";
@@ -12,7 +11,8 @@ const BASE_URL = process.env.REACT_APP_BASE_URL;
 
 export async function loader() {
   let TrendNewsList,
-    TrendYoutubeList = null;
+    TrendYoutubeList,
+    RankList = null;
 
   await axios
     .get(`${BASE_URL}/api/news/list/all-idol`)
@@ -28,8 +28,14 @@ export async function loader() {
     })
     .catch(error => console.log(error));
 
-  // return [TrendNewsList];
-  return [TrendNewsList, TrendYoutubeList];
+  await axios
+    .get(`${BASE_URL}/api/peak/`)
+    .then(response => {
+      RankList = response.data.ranksByHour;
+    })
+    .catch(error => console.log(error));
+
+  return [TrendNewsList, TrendYoutubeList, RankList];
 }
 
 const CarouselDiv = styled.div`
@@ -41,16 +47,16 @@ const MainGrid = styled.div`
   display: grid;
   width: 100%;
   height: auto;
-
   grid-template-columns: repeat(4, 1fr);
-  grid-template-rows: 65vh auto;
+  grid-template-rows: 85vh auto;
   gap: 25px;
 `;
 
 function MainPage() {
-  const [TrendNewsList, TrendYoutubeList] = useLoaderData() as [
+  const [TrendNewsList, TrendYoutubeList, RankList] = useLoaderData() as [
     TrendNewsListType[],
     TrendYoutubeListType[],
+    any[],
   ];
 
   const CarouselNewsData = (
@@ -58,28 +64,21 @@ function MainPage() {
       <CarouselCustom data={TrendNewsList} />
     </CarouselDiv>
   );
+
   const CarouselYoutubeData = (
     <CarouselDiv>
       <CarouselCustom data={TrendYoutubeList} />
     </CarouselDiv>
   );
+
   return (
     <MainGrid>
       <TitleContent
-        data={Top8()}
-        gridColumn="1 / 4"
+        data={Top8(RankList)}
+        gridColumn="1 / 5"
         title={
           <h3>
             랭킹 <span style={{ color: "var(--purple500-color)" }}>Top8</span>
-          </h3>
-        }
-      />
-      <TitleContent
-        data={<TrendKeyword />}
-        gridColumn="4 / 5"
-        title={
-          <h3>
-            인기 <span style={{ color: "var(--purple500-color)" }}>키워드</span>
           </h3>
         }
       />

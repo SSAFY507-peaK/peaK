@@ -25,7 +25,6 @@ const NewsListGrid = styled.div`
   grid-template-rows: repeat(2, 1fr);
   row-gap: 2px;
   column-gap: 40px;
-  
 `;
 
 const NewsListDiv = styled.div`
@@ -137,25 +136,32 @@ const NewsPress = styled.div`
 
 function TrendingNews({ data }: Props) {
   const items = data;
+
   return (
     <div>
       <NewsListGrid>
+        {/* 상위 3개의 뉴스는 최상단에 크게 표시 */}
         {items.map((item: NewsType, idx) =>
           idx >= 3 ? null : idx === 0 ? (
+            // 클릭 시 새 창으로 뉴스 기사 바로가기
             <NewsGridLarge onClick={() => window.open(item.link)}>
               <NewsMainProfile url={item.thumbnailLink} />
               <NewsMainTitle>
+                {/* 제목이 20자 초과라면 20자까지 표시 후 ... 처리 */}
                 {item.title.length <= 20 ? item.title : item.title.substring(0, 20) + "..."}
               </NewsMainTitle>
             </NewsGridLarge>
           ) : (
+            // 클릭 시 새 창으로 뉴스 기사 바로가기
             <NewsGridSmall onClick={() => window.open(item.link)}>
               <NewsSubProfile url={item.thumbnailLink} />
               <NewsInfo>
                 <NewsTitle>
+                  {/* 제목이 15자 초과라면 15자까지 표시 후 ... 처리 */}
                   {item.title.length <= 15 ? item.title : item.title.substring(0, 15) + "..."}
                 </NewsTitle>
                 <NewsContent>
+                  {/* 내용이 30자 초과라면 30자까지 표시 후 ... 처리 */}
                   {item.summary.length <= 30 ? item.summary : item.summary.substring(0, 30) + "..."}
                 </NewsContent>
                 <NewsPress>{item.press}</NewsPress>
@@ -165,8 +171,10 @@ function TrendingNews({ data }: Props) {
         )}
       </NewsListGrid>
       <NewsListDiv>
+        {/* 상위 3개의 뉴스 제외하고 나머지 뉴스는 일렬로 나열 */}
         {items.map((item: NewsType, idx) =>
           idx < 3 ? null : (
+            // 클릭 시 새 창으로 뉴스 기사 바로가기
             <NewsDiv onClick={() => window.open(item.link)}>
               <NewsProfile url={item.thumbnailLink} />
               <NewsInfo>

@@ -38,10 +38,8 @@ const IdolImg = styled.div<IdolImgType>`
   background-position: center;
   border-radius: ${props => (props.rank > 3 ? "50%" : "40%")};
   box-shadow: 0 0 10px -5px rgb(28, 28, 28);
-  // width: ${props => (props.rank <= 3 ? "12vw" : "8vw")};
   width: 95%;
   aspect-ratio: 1;
-  // height: ${props => (props.rank <= 3 ? "12vw" : "8vw")};
   margin: 15px 0 0 30px;
   transition: all 100ms ease-in-out;
   &:hover {
@@ -52,7 +50,8 @@ const IdolImg = styled.div<IdolImgType>`
 `;
 
 const NameDiv = styled(IdolName)`
-  margin-left: 20px;
+  margin-left: 30px;
+  width: 100%;
 `;
 
 function Logo(rank: number) {
@@ -76,7 +75,7 @@ function Logo(rank: number) {
   }
 }
 
-/** rank, name, img 필요 */
+/** rank, name, img 를 parameter로 가짐 */
 function IdolRank({ url, name, rank }: IdolRankType) {
   const navigate = useNavigate();
   const userId: string = useAppSelector(state => state.userInfo.userId);

@@ -1,12 +1,10 @@
+import { useLoaderData, useNavigate } from "react-router";
 import { useRef, useState } from "react";
 
-// import { IdolLists } from "../_utils/loader";
 import { IdolListsType } from "../_utils/Types";
 import SearchIcon from "@mui/icons-material/Search";
 import UseOnClickOutside from "../_hooks/useOnClickOutside";
 import styled from "styled-components";
-import { useLoaderData } from "react-router";
-import { useNavigate } from "react-router";
 
 type WrapperType = {
   width?: string;
@@ -22,6 +20,7 @@ const Wrapper = styled.div<WrapperType>`
   height: 33px;
   width: ${props => props.width || "300px"};
 `;
+
 const SearchInput = styled.input`
   width: 100%;
   margin: 3px 10px;
@@ -37,6 +36,7 @@ const SearchDiv = styled.div`
   flex-direction: column;
   position: relative;
 `;
+
 const SearchAllResult = styled.div`
   width: 95%;
   background-color: white;
@@ -48,7 +48,6 @@ const SearchAllResult = styled.div`
   left: 5px;
   max-height: 300px;
   overflow-y: auto;
-
   &::-webkit-scrollbar {
     width: 5px;
     border-radius: 4px;
@@ -59,6 +58,7 @@ const SearchAllResult = styled.div`
     background: var(--gray700-color);
   }
 `;
+
 const SearchResultDiv = styled.div`
   cursor: pointer;
   font-size: 13px;
@@ -73,28 +73,49 @@ const SearchResultDiv = styled.div`
   }
 `;
 
+type SearchInputDivProps = {
+  handleSearchIdol: (value: React.ChangeEvent<HTMLInputElement>) => void;
+};
+function SearchInputDiv({ handleSearchIdol }: SearchInputDivProps) {
+  return (
+    <Wrapper style={{ flexShrink: "0" }}>
+      <SearchInput onChange={e => handleSearchIdol(e)} placeholder="아이돌 이름을 입력해주세요" />
+      <SearchIcon sx={{ color: "var(--gray600-color)" }} />
+    </Wrapper>
+  );
+}
+
 function SearchList({ width }: WrapperType) {
-  const [search, setSearch] = useState("");
-  const [isClicked, setIsClicked] = useState(false);
   const searchRef = useRef<any>();
-  const idolLists = useLoaderData() as IdolListsType;
   const navigate = useNavigate();
 
+  // 검색창에 입력한 데이터
+  const [search, setSearch] = useState("");
+
+  // 검색창이 클릭되었는지 여부(클릭된 경우가 true)
+  const [isClicked, setIsClicked] = useState(false);
+
+  // 전체 아이돌 리스트(검색창에 검색할 때 필요)
+  const idolLists = useLoaderData() as IdolListsType;
+  const idols = idolLists.idols;
+
+  // 검색창에 검색 내용 실시간 반영
   const onChange = (e: any) => {
-    console.log(search);
     setSearch(e.target.value);
     setIsClicked(true);
   };
 
+  // 검색창 클릭 시 isClicked를 true로
   const onClick = () => {
     setIsClicked(true);
   };
 
+  // 검색창 밖 클릭 시 isClicked를 false로
   UseOnClickOutside(searchRef, () => {
     setIsClicked(false);
   });
-  const idols = idolLists.idols;
 
+  // 검색 내용이 포함된 아이돌을 idolLists에서 추출
   const filterIdol = idols.filter(idol => {
     return idol.toLocaleLowerCase().includes(search.toLocaleLowerCase());
   });
@@ -110,12 +131,14 @@ function SearchList({ width }: WrapperType) {
         />
         <SearchIcon sx={{ color: "var(--gray600-color)" }} />
       </Wrapper>
+      {/* 검색창이 빈칸이 아니고, isClicked가 true이며 filterIdol이 존재한다면 검색창 띄우기 */}
       {search !== "" && isClicked && (
         <SearchAllResult>
           {filterIdol.map(idol => (
             <SearchResultDiv
               onClick={e => {
                 e.preventDefault();
+                // 클릭 시 해당 아이돌 상세 페이지로 이동
                 navigate(`/${idol}`);
                 setSearch("");
               }}
@@ -126,18 +149,6 @@ function SearchList({ width }: WrapperType) {
         </SearchAllResult>
       )}
     </SearchDiv>
-  );
-}
-
-type SearchInputDivProps = {
-  handleSearchIdol: (value: React.ChangeEvent<HTMLInputElement>) => void;
-}
-function SearchInputDiv ({handleSearchIdol}: SearchInputDivProps) {
-  return (
-    <Wrapper style={{flexShrink: "0"}}>
-      <SearchInput onChange={e => handleSearchIdol(e)} placeholder="아이돌 이름을 입력해주세요" />
-      <SearchIcon sx={{ color: "var(--gray600-color)" }} />
-    </Wrapper>
   );
 }
 
