@@ -50,8 +50,8 @@ public class RankByHourService {
 	// 한시간 전과 비교
 	// 레디스에 넣으면 좋을..
 	public TotalRankListResponseDto list(LocalDateTime dateTime) {
-		LocalDateTime prevHour = dateTimeToHour(dateTime.minusHours(1));
-		dateTime = dateTimeToHour(dateTime);
+		LocalDateTime prevHour = dateTimeToHour(dateTime.minusHours(2));
+		dateTime = dateTimeToHour(dateTime.minusHours(1));
 
 		RankByHour rankByHour = rankByHourRepository.findByDateTime(dateTime)
 			.orElseThrow(() -> new CustomException(CustomExceptionType.NO_CONTENT));
