@@ -83,34 +83,36 @@ function IdolPage() {
     // const resultWeeklyData = await request("get", `/peak/weekly/${idolName}`,"",headers);
     /** 뉴스관련 정보 Store에 저장 */
     const resultNewsList = await request("get", `/news/list/keywords/${idolName}`);
-    const resultWordCloud = await request("get", `/news/list/keywords/${idolName}`);
+    // const resultWordCloud = await request("get", `/news/list/keywords/${idolName}`);
     
     dispatch(CreateIdolSns(resultSns))
     dispatch(CreateIdolChat(resultChat))
     dispatch(CreatePosNegWeek(resultPosNegChart))
     // dispatch(CreateIdolRank(resultWeeklyData.current))
     // dispatch(CreateIdolWeeklyRank(resultWeeklyData.rankWeek))
-    const newsList = resultNewsList.newsList
-    let tmpKeyword = []
-    let tmpNews = []
-    for ( let i = 0; i< newsList.length; i++){
-      tmpKeyword.push(newsList[i].keyword)
-      tmpNews.push(newsList[i].newsList)
-    }
-    dispatch(CreateNewsKeyword(tmpKeyword))
-    dispatch(CreateNewsList(tmpNews))
-    let tmpWordCloud: WordData[][] = [];
-    for ( let i = 0; i< 5; i++){
-      let wordList = resultWordCloud.wordCounter[i].wordCounter
-      let tmp: WordData[] = [];
-      if (typeof wordList !== "undefined"){
-        for ( let key in wordList ) {
-          tmp.push({text:key, value:wordList[key]})
-        }
-      tmpWordCloud.push(tmp)
+    if (resultNewsList !== undefined){
+      const newsList = resultNewsList.newsList
+      let tmpKeyword = []
+      let tmpNews = []
+      for ( let i = 0; i< newsList.length; i++){
+        tmpKeyword.push(newsList[i].keyword)
+        tmpNews.push(newsList[i].newsList)
       }
+      dispatch(CreateNewsKeyword(tmpKeyword))
+      dispatch(CreateNewsList(tmpNews))
+      let tmpWordCloud: WordData[][] = [];
+      for ( let i = 0; i< 5; i++){
+        let wordList = resultNewsList.wordCounter[i].wordCounter
+        let tmp: WordData[] = [];
+        if (typeof wordList !== "undefined"){
+          for ( let key in wordList ) {
+            tmp.push({text:key, value:wordList[key]})
+          }
+        tmpWordCloud.push(tmp)
+        }
+      }
+      dispatch(CreateWordCount(tmpWordCloud))
     }
-    dispatch(CreateWordCount(tmpWordCloud))
   }
 
 
