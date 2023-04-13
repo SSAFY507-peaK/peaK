@@ -1,0 +1,43 @@
+{
+  "$jsonSchema": {
+    "bsonType": "object",
+    "required": [
+      "date_time",
+      "idols"
+    ],
+    "properties": {
+      "date_time": {
+        "bsonType": "date",
+        "description": "랭킹 산출 날짜, 시간"
+      },
+      "idols": {
+        "bsonType": "array",
+        "description": "아이돌 peak 순위 리스트",
+        "items": {
+          "bsonType": "object",
+          "required": [
+            "idol",
+            "rank",
+            "score"
+          ],
+          "properties": {
+            "idol": {
+              "bsonType": "string",
+              "description": "아이돌 이름"
+            },
+            "rank": {
+              "bsonType": "int",
+              "minimum": 1,
+              "description": "peak 순위"
+            },
+            "score": {
+              "bsonType": "int",
+              "minimum": 0,
+              "description": "peak 점수"
+            }
+          }
+        }
+      }
+    }
+  }
+}

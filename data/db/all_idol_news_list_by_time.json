@@ -1,0 +1,43 @@
+{
+  "$jsonSchema": {
+    "bsonType": "object",
+    "required": [
+      "date_time",
+      "keyword_counter",
+      "news_list"
+    ],
+    "properties": {
+      "date_time": {
+        "bsonType": "date",
+        "description": "수집 일시"
+      },
+      "keyword_counter": {
+        "bsonType": "object",
+        "description": "인기 키워드 정보",
+        "patternProperties": {
+          "^[a-zA-Z0-9_가-힣]+$": {
+            "bsonType": "int",
+            "minimum": 0,
+            "description": "인기 키워드와 그에 해당하는 값"
+          }
+        }
+      },
+      "news_list": {
+        "bsonType": "array",
+        "description": "아이돌 뉴스 리스트",
+        "items": {
+          "bsonType": "object",
+          "required": [
+            "_id"
+          ],
+          "properties": {
+            "_id": {
+              "bsonType": "objectId",
+              "description": "news document의 id"
+            }
+          }
+        }
+      }
+    }
+  }
+}

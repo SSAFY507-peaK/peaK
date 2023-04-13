@@ -1,0 +1,62 @@
+{
+  "$jsonSchema": {
+    "bsonType": "object",
+    "required": [
+      "idol",
+      "index",
+      "date_time",
+      "press",
+      "title",
+      "word_counter",
+      "summary",
+      "link",
+      "thumbnail_link"
+    ],
+    "properties": {
+      "idol": {
+        "bsonType": "string",
+        "description": "아이돌 이름"
+      },
+      "index": {
+        "bsonType": "long",
+        "minimum": 0,
+        "description": "뉴스 인덱스"
+      },
+      "date_time": {
+        "bsonType": "date",
+        "description": "수집 일시"
+      },
+      "press": {
+        "bsonType": "string",
+        "description": "언론사"
+      },
+      "title": {
+        "bsonType": "string",
+        "description": "뉴스 기사 제목"
+      },
+      "word_counter": {
+        "bsonType": "object",
+        "description": "단어 카운터",
+        "patternProperties": {
+          "^[a-zA-Z0-9_가-힣]+$": {
+            "bsonType": "int",
+            "minimum": 0,
+            "description": "인기 키워드와 그에 해당하는 값"
+          }
+        }
+      },
+      "summary": {
+        "bsonType": "string",
+        "description": "뉴스 기사 요약"
+      },
+      "link": {
+        "bsonType": "string",
+        "description": "뉴스 기사 링크"
+      },
+      "thumbnail_link": {
+        "bsonType": "string",
+        "description": "썸네일 링크"
+      }
+    }
+  }
+}
