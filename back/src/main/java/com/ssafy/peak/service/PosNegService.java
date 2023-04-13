@@ -48,7 +48,7 @@ public class PosNegService {
 
 	public void insertPosNeg(PosNegRequestDto dto) {
 		PosNeg entity = dto.toEntity();
-		if (posNegRepository.findByDate(entity.getDate()).isPresent()) {
+		if (posNegRepository.findByIdolAndDate(entity.getIdol(), entity.getDate()).isPresent()) {
 			throw new CustomException(CustomExceptionType.ALREADY_EXIST);
 		}
 		posNegRepository.insert(entity);
