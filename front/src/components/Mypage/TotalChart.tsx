@@ -1,8 +1,8 @@
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 
 import { IdolInterest } from '../../_utils/Types';
 import ReactEcharts from 'echarts-for-react';
-import TitleComponent from "../idolpage/TitleComponent";
+import TitleComponent from "../IdolPage/TitleComponent";
 import styled from "styled-components";
 import { useAppSelector } from '../../_hooks/hooks';
 

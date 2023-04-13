@@ -35,8 +35,9 @@ function Top8(props: any) {
   return (
     <RankDiv>
       <RankTopDiv>
-        {itemsTop.map((item: any) => (
+        {itemsTop.map((item: any, idx: number) => (
           <IdolRank
+            key={idx}
             name={item.idol}
             rank={item.rank}
             url={`${BASE_URL}/img/${encodeURIComponent(`${item.idol}`)}.webp`}
@@ -44,8 +45,9 @@ function Top8(props: any) {
         ))}
       </RankTopDiv>
       <RankBottomDiv>
-        {itemsBottom.map((item: any) => (
+        {itemsBottom.map((item: any, idx: number) => (
           <IdolRank
+            key={idx}
             name={item.idol}
             rank={item.rank}
             url={`${BASE_URL}/img/${encodeURIComponent(`${item.idol}`)}.webp`}

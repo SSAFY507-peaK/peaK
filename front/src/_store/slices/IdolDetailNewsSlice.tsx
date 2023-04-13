@@ -14,10 +14,14 @@ export const idolDetailNews = createSlice({
     },
     CreateNewsList(state, action){
       state.newsList = action.payload
+    },
+    ResetDetailNews(state){
+      state.keywordList = []
+      state.newsList = []
     }
   }
 })
 
 
-export const { CreateNewsKeyword, CreateNewsList } = idolDetailNews.actions
+export const { CreateNewsKeyword, CreateNewsList, ResetDetailNews } = idolDetailNews.actions
 export default idolDetailNews.reducer

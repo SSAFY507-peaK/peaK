@@ -1,5 +1,5 @@
-import { Comment, Comments, UserInfo } from "../../../_utils/Types";
-import { MouseEvent, useState } from "react";
+import { Comment, UserInfo } from "../../../_utils/Types";
+import { useState } from "react";
 
 import { ClickTracker } from "../../../_utils/UserTracker";
 import { PurpleButton } from "../../Button";
@@ -8,7 +8,6 @@ import { request } from "../../../_utils/axios";
 import styled from "styled-components";
 import { useAppDispatch, useAppSelector } from "../../../_hooks/hooks";
 import { useParams } from "react-router";
-import axios from "axios";
 import { CreateIdolChat } from "../../../_store/slices/IdolDetailChatSlice";
 
 const Wrapper = styled.div`
@@ -19,11 +18,9 @@ const Wrapper = styled.div`
   box-shadow: 5px;
   padding: 20px;
   height: 100%;
-  /* box-shadow: 0px 0px 10px -2px #cfcdcd; */
 `;
 
 const ChatFrame = styled.div`
-  /* width: 100%; */
   height: 25vh;
   padding-left: 20px;
   padding-right: 20px;
@@ -71,7 +68,6 @@ const ChatInput = styled.input`
 
 
 function IdolChat() {
-  // const [comments, setComments] = useState<any[]>([])
   const params = useParams();
   const idolName:string = params.idolName || "";
   const [todayComment, setTodayComment] = useState<string>("")
