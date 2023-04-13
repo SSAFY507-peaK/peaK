@@ -6,6 +6,12 @@ type Props = {
   data: TrendYoutubeListType[];
 };
 
+const YoutubeTitleContentDiv = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 15px;
+`;
+
 const YoutubeListDiv = styled.div`
   display: flex;
   flex-direction: column;
@@ -14,7 +20,6 @@ const YoutubeListDiv = styled.div`
 const YoutubeDiv = styled.div`
   width: 100%;
   aspect-ratio: 1.8 / 1;
-  margin-bottom: 3vh;
   border-radius: 10px;
 `;
 
@@ -25,15 +30,18 @@ function TrendingYoutube({ data }: Props) {
   return (
     <YoutubeListDiv>
       {items.map(item => (
-        <YoutubeDiv>
-          <ReactPlayer
-            url={item.url}
-            width="100%"
-            height="100%"
-            light={true}
-            controls={true}
-          ></ReactPlayer>
-        </YoutubeDiv>
+        <YoutubeTitleContentDiv>
+          <YoutubeDiv>
+            <ReactPlayer
+              url={item.url}
+              width="100%"
+              height="100%"
+              light={true}
+              controls={true}
+            ></ReactPlayer>
+          </YoutubeDiv>
+          <h3>{item.title.length > 22 ? item.title.slice(0, 22) + "..." : item.title}</h3>
+        </YoutubeTitleContentDiv>
       ))}
     </YoutubeListDiv>
   );
