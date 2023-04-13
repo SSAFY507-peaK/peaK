@@ -28,6 +28,12 @@ peaK만의 기준으로 **아이돌 랭킹** 제공
 
 <br/>
 
+## :triangular_ruler: 아키텍처
+
+![아키텍쳐](/uploads/45d59c9894413bf691902add8d57c7c4/아키텍쳐.png)
+
+<br/>
+
 ## :wrench: 기술스택
 
 ### `CI/CD`
@@ -58,29 +64,23 @@ JWT 0.11.5
 
 ### `Frontend`
 
-Visual Studio Code
+Visual Studio Code 1.77.1
 
-Node.js 16
+Node.js 16.16.0
 
-React
+TypeScript 4.9.5
+
+React 18.2.0
 
 Redux
 
-TypeScript
-
-Apache ECharts
+Apache ECharts 5.4.2
 
 ### `Database`
 
-MongoDB
+MongoDB 6.0.5
 
-Redis
-
-<br/>
-
-## 아키텍처
-
-![아키텍쳐](/uploads/45d59c9894413bf691902add8d57c7c4/아키텍쳐.png)
+Redis 7.0.10
 
 <br/>
 
@@ -94,3 +94,9 @@ Redis
 | 박주희 | `back-end` CI/CD, 회원 API , 관심 아이돌 API, YouTube API |
 | 이한빈 | `front-end` 아이돌 상세 페이지, 마이페이지                |
 | 조현민 | `back-end` 데이터 분석, 개인 데이터 API, 랭킹 API         |
+
+<br/>
+
+## :clipboard: 포팅 매뉴얼
+
+[Porting_Manual_peaK.pdf](./exec/Porting_Manual_peaK.pdf)
