@@ -148,7 +148,7 @@ function TrendingNews({ data }: Props) {
               <NewsMainProfile url={item.thumbnailLink} />
               <NewsMainTitle>
                 {/* 제목이 20자 초과라면 20자까지 표시 후 ... 처리 */}
-                {item.title.length <= 20 ? item.title : item.title.substring(0, 20) + "..."}
+                {item.title.length <= 16 ? item.title : item.title.substring(0, 16) + "..."}
               </NewsMainTitle>
             </NewsGridLarge>
           ) : (
@@ -158,11 +158,11 @@ function TrendingNews({ data }: Props) {
               <NewsInfo>
                 <NewsTitle>
                   {/* 제목이 15자 초과라면 15자까지 표시 후 ... 처리 */}
-                  {item.title.length <= 15 ? item.title : item.title.substring(0, 15) + "..."}
+                  {item.title.length <= 10 ? item.title : item.title.substring(0, 10) + "..."}
                 </NewsTitle>
                 <NewsContent>
                   {/* 내용이 30자 초과라면 30자까지 표시 후 ... 처리 */}
-                  {item.summary.length <= 30 ? item.summary : item.summary.substring(0, 30) + "..."}
+                  {item.summary.length <= 20 ? item.summary : item.summary.substring(0, 20) + "..."}
                 </NewsContent>
                 <NewsPress>{item.press}</NewsPress>
               </NewsInfo>
