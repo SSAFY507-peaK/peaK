@@ -80,7 +80,7 @@ function IdolKeyword() {
         <Frame>
           <LeftFrame>
             <IdolKeywordRank getChooseKeyword={getChooseKeyword} chooseKeywordIdx={chooseKeywordIdx} keyWordList={keyWordList}/>
-            <IdolKeywordWordCloud chooseKeywordIdx={chooseKeywordIdx} wordData={wordDataList}/>
+            {/* <IdolKeywordWordCloud chooseKeywordIdx={chooseKeywordIdx} wordData={wordDataList}/> */}
           </LeftFrame>
           <IdolKeywordNews chooseKeywordIdx={chooseKeywordIdx} keyWordNewsList={keyWordNewsList}/>
         </Frame>
