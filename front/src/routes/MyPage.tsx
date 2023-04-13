@@ -7,7 +7,7 @@ import MyChatChart from '../components/Mypage/MyChatChart';
 import MyClickChart from '../components/Mypage/MyClickChart';
 import MyInterest from '../components/Mypage/MyInterest';
 import MyVisitChart from '../components/Mypage/MyVisitChart';
-import TitleComponent from "../components/idolpage/TitleComponent";
+import TitleComponent from "../components/IdolPage/TitleComponent";
 import TotalChart from '../components/Mypage/TotalChart';
 import sampleData from "../components/Mypage/sampleData.json"
 import styled from "styled-components";

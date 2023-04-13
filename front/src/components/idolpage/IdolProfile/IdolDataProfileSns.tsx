@@ -61,7 +61,7 @@ function IdolDataProfileSns() {
 
   useEffect(() => {
     setLike(interest)
-  },[])
+  },[interest])
 
   return (
     <Wrapper>

@@ -1,4 +1,4 @@
-import { useAppDispatch, useAppSelector } from '../../../_hooks/hooks';
+import { useAppSelector } from '../../../_hooks/hooks';
 
 import { ClickTracker } from '../../../_utils/UserTracker';
 import IdolKeywordRankBtn from "./IdolKeywordRankBtn";
@@ -18,8 +18,6 @@ const RankFrame = styled.div`
 
 
 function IdolKeywordRank({getChooseKeyword, chooseKeywordIdx, keyWordList}:Props) {
-  // const keywords = useAppSelector(state => state.idolDetailNews.keywordList)
-  // const keyWordList = ["주희발빠짐주의!", "배고픈이문세", "갓귤", "돌아돌아", "오오오오"]
 
   const params = useParams();
   const idolName:string = params.idolName || "";

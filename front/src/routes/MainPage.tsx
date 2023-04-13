@@ -73,7 +73,7 @@ function MainPage() {
 
   return (
     <MainGrid>
-      <TitleContent
+      {/* <TitleContent
         data={Top8(RankList)}
         gridColumn="1 / 5"
         title={
@@ -101,7 +101,7 @@ function MainPage() {
             트렌딩 <span style={{ color: "var(--purple500-color)" }}>유튜브</span>
           </h3>
         }
-      />
+      /> */}
     </MainGrid>
   );
 }

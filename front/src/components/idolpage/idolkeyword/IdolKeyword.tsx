@@ -1,5 +1,4 @@
-import { NewsType, WordData } from "../../../_utils/Types";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 import IdolKeywordNews from "./IdolKeywordNews";
 import IdolKeywordRank from "./IdolKeywordRank";
@@ -7,6 +6,7 @@ import IdolKeywordWordCloud from "./IdolKeywordWordCloud";
 import TitleComponent from "../TitleComponent";
 import styled from "styled-components";
 import { useAppSelector } from "../../../_hooks/hooks";
+import { NewsType } from "../../../_utils/Types";
 
 const Wrapper = styled.div`
   display: flex;
@@ -30,37 +30,63 @@ const LeftFrame = styled.div`
 `;
 
 function IdolKeyword() {
-  // const [clickKeyword, setClickKeyword] = useState<boolean[]>([true, false, false, false, false])
   const [chooseKeywordIdx, setChooseKeywordIdx] = useState<number>(0)
   const wordDataList = useAppSelector(state => state.idolDetailWordCount.wordCloud)
-  const keyWordList = useAppSelector(state => state.idolDetailNews.keywordList)
-  const keyWordNewsList = useAppSelector(state => state.idolDetailNews.newsList)
+  let keyWordList = useAppSelector(state => state.idolDetailNews.keywordList)
+  let keyWordNewsList:NewsType[][] = useAppSelector(state => state.idolDetailNews.newsList)
+  
+  const keywordCount:number = keyWordList.length
 
-  // const [wordData, setWordData] = useState<WordData[]>([])
-  // const [keyWordNews, setkeyWordNews] = useState<NewsType[]>([])
 
   const getChooseKeyword = (value:number) => {
     setChooseKeywordIdx(value)
   };
 
-  // useEffect(() => {
-  //   // setWordData(wordDataList[chooseKeywordIdx])
-  //   setkeyWordNews(keyWordNewsList[chooseKeywordIdx])
-  // }, [chooseKeywordIdx]);
-
-  return (
-    <Wrapper>
-      <TitleComponent blacktxt="인기" purpletxt="키워드" />
-      <Frame>
-        <LeftFrame>
-          <IdolKeywordRank getChooseKeyword={getChooseKeyword} chooseKeywordIdx={chooseKeywordIdx} keyWordList={keyWordList}/>
-          {/* <IdolKeywordWordCloud chooseKeywordIdx={chooseKeywordIdx} /> */}
-          <IdolKeywordWordCloud chooseKeywordIdx={chooseKeywordIdx} wordData={wordDataList}/>
-        </LeftFrame>
-        <IdolKeywordNews chooseKeywordIdx={chooseKeywordIdx} keyWordNewsList={keyWordNewsList}/>
-      </Frame>
-    </Wrapper>
-  )
+  if (keywordCount === 0) {
+    keyWordNewsList = [[{
+      press: "",
+      title: "뉴스 데이터가 존재하지 않습니다.",
+      summary: "",
+      link: "",
+      thumbnailLink: ""
+    }]]
+    keyWordList = [
+      "키워드 데이터가 존재하지 않습니다.",
+      "키워드 데이터가 존재하지 않습니다.",
+      "키워드 데이터가 존재하지 않습니다.",
+      "키워드 데이터가 존재하지 않습니다.",
+      "키워드 데이터가 존재하지 않습니다."
+    ]
+    return(
+      <Wrapper>
+        <TitleComponent blacktxt="인기" purpletxt="키워드" />
+        <Frame>
+          <LeftFrame>
+            <IdolKeywordRank getChooseKeyword={getChooseKeyword} chooseKeywordIdx={chooseKeywordIdx} keyWordList={keyWordList}/>
+            <IdolKeywordWordCloud chooseKeywordIdx={chooseKeywordIdx} />
+          </LeftFrame>
+          <IdolKeywordNews chooseKeywordIdx={chooseKeywordIdx} keyWordNewsList={keyWordNewsList}/>
+        </Frame>
+      </Wrapper>)
+  } else {
+    if( keywordCount < 5) {
+      for (let i = keywordCount; i<5 ; i++){
+        keyWordList.push("키워드가 없습니다.")
+      }
+    }
+    return (
+      <Wrapper>
+        <TitleComponent blacktxt="인기" purpletxt="키워드" />
+        <Frame>
+          <LeftFrame>
+            <IdolKeywordRank getChooseKeyword={getChooseKeyword} chooseKeywordIdx={chooseKeywordIdx} keyWordList={keyWordList}/>
+            <IdolKeywordWordCloud chooseKeywordIdx={chooseKeywordIdx} wordData={wordDataList}/>
+          </LeftFrame>
+          <IdolKeywordNews chooseKeywordIdx={chooseKeywordIdx} keyWordNewsList={keyWordNewsList}/>
+        </Frame>
+      </Wrapper>
+    )
+  }
 }
 
 export default IdolKeyword;
