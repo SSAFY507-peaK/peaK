@@ -17,7 +17,7 @@ public interface PosNegRepository extends MongoRepository<PosNeg, String> {
 	@Query(" { date: { $gte: ?0, $lte: ?1 }, idol: ?2 } ")
 	Optional<List<PosNeg>> findByIdolDateBetween(LocalDateTime startDateTime, LocalDateTime endDateTime, String idol);
 
-	Optional<PosNeg> findByDate(LocalDateTime date);
+	Optional<PosNeg> findByIdolAndDate(String idol, LocalDateTime date);
 
 	PosNeg insert(PosNeg entity);
 
