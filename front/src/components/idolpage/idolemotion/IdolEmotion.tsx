@@ -40,39 +40,70 @@ const ChartFrame = styled.div`
 const tmp2:WeeklyRankingType = {
 	current: {
 		rank: 1,
-		score: 13000
+		score: 14000
 	},
 	rankWeek: [
 		{
 			rank: 1,
-			score: 13000
+			score: 14000
+		},
+		{
+			rank: 15,
+			score: 9000
+		},
+		{
+			rank: 14,
+			score: 10000
+		},
+    {
+			rank: 10,
+			score: 12000
 		},
 		{
 			rank: 5,
-			score: 13000
+			score: 14000
 		},
 		{
-			rank: 4,
-			score: 13000
+			rank: 3,
+			score: 14500
 		},
     {
-			rank: 41,
-			score: 13000
-		},
-		{
-			rank: 5,
-			score: 13000
-		},
-		{
-			rank: 44,
-			score: 13000
-		},
-    {
-			rank: 4,
-			score: 13000
+			rank: 1,
+			score: 15000
 		},
 	]
 }
+
+const tmp1 = [
+  {
+    pos:80,
+    neg:30
+  },
+  {
+    pos:40,
+    neg:60
+  },
+  {
+    pos:50,
+    neg:50
+  },
+  {
+    pos:60,
+    neg:50
+  },
+  {
+    pos:60,
+    neg:40
+  },
+  {
+    pos:70,
+    neg:30
+  },
+  {
+    pos:90,
+    neg:15
+  },
+]
 
 function IdolEmotion() {
   const [check, setCheck] = useState<boolean>(true);
@@ -81,7 +112,8 @@ function IdolEmotion() {
 
   const [rankData, setRankData] = useState<WeeklyRankingType>(tmp2)
   const userId:string = useAppSelector(state => state.userInfo.userId)
-  const posNeg:PosNeg[] = useAppSelector(state => state.idolDetailChart.posNegWeek)
+  const [posNeg, setPosNeg] = useState<PosNeg[]>(tmp1)
+  // const posNeg:PosNeg[] = useAppSelector(state => state.idolDetailChart.posNegWeek)
   // const rankData:WeeklyRankingType = useAppSelector(state => state.idolDetailChart.rankData)
   // console.log(posNeg)
 

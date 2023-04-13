@@ -44,6 +44,7 @@ function TrendingPage() {
     TrendNewsListType[],
     TrendYoutubeListType[],
   ];
+
   return (
     <TrendingGrid>
       <TitleContent

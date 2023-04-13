@@ -26,6 +26,7 @@ const RankBottomDiv = styled.div`
   justify-content: space-around;
 `;
 
+/** 전체 아이돌 중 8등까지 선정 후 이름, 순위, 사진을 전달  */
 function Top8(props: any) {
   const items = props;
   const itemsTop = items.slice(0, 3);

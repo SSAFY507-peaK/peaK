@@ -1,3 +1,4 @@
+import { NewsType, WordData } from "../../../_utils/Types";
 import { useEffect, useState } from "react";
 
 import IdolKeywordNews from "./IdolKeywordNews";
@@ -6,7 +7,6 @@ import IdolKeywordWordCloud from "./IdolKeywordWordCloud";
 import TitleComponent from "../TitleComponent";
 import styled from "styled-components";
 import { useAppSelector } from "../../../_hooks/hooks";
-import { NewsType, WordData } from "../../../_utils/Types";
 
 const Wrapper = styled.div`
   display: flex;
@@ -31,27 +31,33 @@ const LeftFrame = styled.div`
 
 function IdolKeyword() {
   // const [clickKeyword, setClickKeyword] = useState<boolean[]>([true, false, false, false, false])
-  const [chooseKeyword, setChooseKeyword] = useState<number>(0)
+  const [chooseKeywordIdx, setChooseKeywordIdx] = useState<number>(0)
   const wordDataList = useAppSelector(state => state.idolDetailWordCount.wordCloud)
   const keyWordList = useAppSelector(state => state.idolDetailNews.keywordList)
   const keyWordNewsList = useAppSelector(state => state.idolDetailNews.newsList)
 
-  const [wordData, setWordData] = useState<WordData[]>([])
-  const [keyWordNews, setkeyWordNews] = useState<NewsType[]>([])
-  useEffect(() => {
-    setWordData(wordDataList[chooseKeyword])
-    setkeyWordNews(keyWordNewsList[chooseKeyword])
-  }, [chooseKeyword])
+  // const [wordData, setWordData] = useState<WordData[]>([])
+  // const [keyWordNews, setkeyWordNews] = useState<NewsType[]>([])
+
+  const getChooseKeyword = (value:number) => {
+    setChooseKeywordIdx(value)
+  };
+
+  // useEffect(() => {
+  //   // setWordData(wordDataList[chooseKeywordIdx])
+  //   setkeyWordNews(keyWordNewsList[chooseKeywordIdx])
+  // }, [chooseKeywordIdx]);
 
   return (
     <Wrapper>
       <TitleComponent blacktxt="인기" purpletxt="키워드" />
       <Frame>
         <LeftFrame>
-          <IdolKeywordRank setChooseKeyword={setChooseKeyword} chooseKeyword={chooseKeyword} keyWordList={keyWordList}/>
-          <IdolKeywordWordCloud chooseKeyword={chooseKeyword} wordData={wordData}/>
+          <IdolKeywordRank getChooseKeyword={getChooseKeyword} chooseKeywordIdx={chooseKeywordIdx} keyWordList={keyWordList}/>
+          {/* <IdolKeywordWordCloud chooseKeywordIdx={chooseKeywordIdx} /> */}
+          <IdolKeywordWordCloud chooseKeywordIdx={chooseKeywordIdx} wordData={wordDataList}/>
         </LeftFrame>
-        <IdolKeywordNews chooseKeyword={chooseKeyword} keyWordNews={keyWordNews}/>
+        <IdolKeywordNews chooseKeywordIdx={chooseKeywordIdx} keyWordNewsList={keyWordNewsList}/>
       </Frame>
     </Wrapper>
   )
