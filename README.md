@@ -88,35 +88,48 @@ Redis 7.0.10
 
 ### 인트로
 
-![peaK_인트로](/uploads/43fc7edf074e84644df701b8c202a0ee/peaK_인트로.gif)
+- 모든 기능은 회원가입 후 이용 가능하므로 서비스 소개 확인
+  ![peaK_인트로](/uploads/43fc7edf074e84644df701b8c202a0ee/peaK_인트로.gif)
 
 ### 회원가입
 
-![peaK_회원가입](/uploads/07894b0735e5810f78272dab4f434526/peaK_회원가입.gif)
+- 카카오 로그인 후 닉네임과 관심 아이돌을 설정하면 서비스 회원가입 완료
+  ![peaK_회원가입](/uploads/07894b0735e5810f78272dab4f434526/peaK_회원가입.gif)
 
 ### 홈
 
-![peaK_홈](/uploads/d3db107a0e4d7f69757099d82352ecdd/peaK_홈.gif)
+- 아이돌 랭킹 top8과 트렌딩 유튜브, 뉴스를 한 눈에 보기
+  ![peaK_홈](/uploads/d3db107a0e4d7f69757099d82352ecdd/peaK_홈.gif)
 
 ### 관심아이돌
 
-![peaK_관심아이돌](/uploads/63dbc3a502f7327d0f2a9cc54e1a19c3/peaK_관심아이돌.gif)
+- 내가 설정한 관심 아이돌의 페이지 목록으로 바로가기
+  ![peaK_관심아이돌](/uploads/63dbc3a502f7327d0f2a9cc54e1a19c3/peaK_관심아이돌.gif)
 
 ### 아이돌
 
-![peaK_아이돌](/uploads/0ebba11831e475dff243b81493748786/peaK_아이돌.gif)
+- 아이돌 검색
+- 아이돌의 순위와 긍부정 지수, 워드 클라우드와 뉴스
+- 응원 한 마디 남기기
+  ![peaK_아이돌](/uploads/0ebba11831e475dff243b81493748786/peaK_아이돌.gif)
 
 ### 랭킹 / 차트
 
-![peaK_랭킹_차트](/uploads/6babab962641ab50dca1954c1a44305b/peaK_랭킹_차트.gif)
+- 한 시간마다 업데이트 되는 랭킹
+- 내가 고른 아이돌들의 추이를 차트로 확인
+  ![peaK_랭킹_차트](/uploads/6babab962641ab50dca1954c1a44305b/peaK_랭킹_차트.gif)
 
 ### 트렌딩
 
-![peaK_트렌딩](/uploads/825da0997c7810e490c88eed1ef87f08/peaK_트렌딩.gif)
+- 지금 이 시간, 아이돌에게 어떤 일이 일어나는지 트렌딩 뉴스 모아보기
+- 오늘의 트렌딩 유튜브 모아보기
+  ![peaK_트렌딩](/uploads/825da0997c7810e490c88eed1ef87f08/peaK_트렌딩.gif)
 
 ### 마이페이지
 
-![peaK_마이페이지](/uploads/34be4831ab89b6f296bc91b50a17209b/peaK_마이페이지.gif)
+- 내 아이돌에게 얼마나 관심을 쏟았는지 수치로 확인
+- 내가 남겼던 2주 간의 응원 한 마디 기록
+  ![peaK_마이페이지](/uploads/34be4831ab89b6f296bc91b50a17209b/peaK_마이페이지.gif)
 
 <br/>
 
