@@ -16,9 +16,8 @@ import axios from "axios";
 import { request } from "../_utils/axios";
 import styled from "styled-components";
 import { useLoaderData } from "react-router-dom";
-import { useParams } from "react-router-dom";
 import { useMemo } from "react";
-
+import { useParams } from "react-router-dom";
 
 export type IdolNameProps = {
   idolName: string;
@@ -80,7 +79,7 @@ function IdolPage() {
     const resultChat = await request("get", `/idol/${idolName}/comment`);
     /** 차트관련 정보 Store에 저장 */
     const resultPosNegChart = await request("get", `/idol/${idolName}/pos-neg`,"",headers );
-    // const resultWeeklyData = await request("get", `/peak/weekly/${idolName}`,"",headers);
+    const resultWeeklyData = await request("get", `/peak/weekly/${idolName}`,"",headers);
     /** 뉴스관련 정보 Store에 저장 */
     const resultNewsList = await request("get", `/news/list/keywords/${idolName}`);
     // const resultWordCloud = await request("get", `/news/list/keywords/${idolName}`);
@@ -88,8 +87,8 @@ function IdolPage() {
     dispatch(CreateIdolSns(resultSns))
     dispatch(CreateIdolChat(resultChat))
     dispatch(CreatePosNegWeek(resultPosNegChart))
-    // dispatch(CreateIdolRank(resultWeeklyData.current))
-    // dispatch(CreateIdolWeeklyRank(resultWeeklyData.rankWeek))
+    dispatch(CreateIdolRank(resultWeeklyData.current))
+    dispatch(CreateIdolWeeklyRank(resultWeeklyData.rankWeek))
     if (resultNewsList !== undefined){
       const newsList = resultNewsList.newsList
       let tmpKeyword = []

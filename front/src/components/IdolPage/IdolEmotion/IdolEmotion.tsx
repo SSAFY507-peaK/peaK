@@ -1,14 +1,15 @@
 import { PosNeg, WeeklyRankingType } from '../../../_utils/Types';
-import { useState } from "react";
 
 import ArrowDropUpIcon from '@mui/icons-material/ArrowDropUp';
 import { ClickTracker } from '../../../_utils/UserTracker';
 import IdolEmotionChart from "./IdolEmotionChart";
 import IdolEmotionChartBtn from "./IdolEmotionChartBtn";
 import IdolEmotionRankChart from "./IdolEmotionRankChart";
+import { faker } from '@faker-js/faker';
 import styled from "styled-components";
 import { useAppSelector } from '../../../_hooks/hooks';
 import { useParams } from 'react-router';
+import { useState } from "react";
 
 const DataFrame = styled.div`
   display: flex;
@@ -45,6 +46,9 @@ function IdolEmotion() {
   const userId:string = useAppSelector(state => state.userInfo.userId)
   const posNeg:PosNeg[] = useAppSelector(state => state.idolDetailChart.posNegWeek)
   const rankData:WeeklyRankingType = useAppSelector(state => state.idolDetailChart.rankData)
+  // const rankData:WeeklyRankingType = useAppSelector(faker.datatype.float({ min: 0, max: 100 }))
+  // if 
+  // const ranking = faker.datatype.number({ min: 1, max: 10 })
   if (posNeg.length === 1 && posNeg[0].pos === 0){
     return(
       <></>
@@ -56,6 +60,7 @@ function IdolEmotion() {
           <IdolEmotionChartBtn
             isTab = {check}
             ranknum= {`${rankData.current.rank}위`}
+            // ranknum= {`3위`}
             rankicon={<ArrowDropUpIcon sx={{ color: "red"}} />}
             color="red"
             changenum={3} 
