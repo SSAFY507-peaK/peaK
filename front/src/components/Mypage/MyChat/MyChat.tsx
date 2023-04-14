@@ -2,10 +2,10 @@ import { useEffect, useState } from "react";
 
 import Calendar from "./Calendar";
 import { Comment } from "../../../_utils/Types";
-import MyIdolChat from "./MyIdolChat";
-import TitleComponent from "../../idolpage/TitleComponent";
-import styled from "styled-components";
 import Content from "../../Content";
+import MyIdolChat from "./MyIdolChat";
+import TitleComponent from "../../IdolPage/TitleComponent";
+import styled from "styled-components";
 
 interface Props {
   userName: string;
@@ -24,14 +24,6 @@ const Wrapper = styled.div`
   width: 100%;
 `;
 
-// const ChatFrame = styled.div`
-//   display: flex;
-//   flex-direction: column;
-//   background-color: white;
-//   border-radius: 20px;
-//   padding: 30px;
-//   height: 100%;
-// `;
 
 
 function MyChat({userName, idolChatData}:Props) {
@@ -45,7 +37,6 @@ function MyChat({userName, idolChatData}:Props) {
         setItem(idolChatData[i] as Item)
       }
     }
-    // setItem(null)
   },[idolChatData])
   
   useEffect(() => {

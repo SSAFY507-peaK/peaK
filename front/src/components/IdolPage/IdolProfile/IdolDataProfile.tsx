@@ -1,13 +1,8 @@
-import { useAppDispatch, useAppSelector } from '../../../_hooks/hooks';
 
-import { CreateIdolSns } from '../../../_store/slices/IdolDetailSnsSlice';
 import IdolDataProfileSns from './IdolDataProfileSns';
 import { IdolNameProps } from "../../../routes/IdolPage";
-import { UserInfo } from '../../../_utils/Types';
-import { request } from '../../../_utils/axios';
 import styled from "styled-components";
 
-// import { useParams } from 'react-router';
 
 interface ImageType {
   backgroundImg: string;

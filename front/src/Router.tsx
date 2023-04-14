@@ -17,7 +17,7 @@ const router = createBrowserRouter(
   createRoutesFromElements(
     <Route>
       <Route path="/intro" element={<FullPage />} />
-      <Route path="/signup" element={<SignUpPage />} loader={IdolLists} />
+      <Route path="/signup" element={<SignUpPage />} id="idolLists" loader={IdolLists} />
       <Route path="/" element={<Layout />} loader={IdolLists} errorElement={<ErrorPage />}>
         <Route errorElement={<ErrorPage />}>
           <Route index element={<MainPage />} loader={MainLoader} />

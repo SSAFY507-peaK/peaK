@@ -13,9 +13,6 @@ const TitleFrame = styled.div`
 `;
 
 const Title = styled.h3`
-  /* font-size: 2rem;
-  font-weight: 700; */
-  /* margin-right: 10px; */
   margin: 0 10px 10px 0;
   color: ${props => props.color || `var(--purple500-color)`};
 `;

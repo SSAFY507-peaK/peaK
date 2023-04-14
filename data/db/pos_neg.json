@@ -1,0 +1,24 @@
+{
+  "$jsonSchema": {
+    "bsonType": "object",
+    "required": [
+      "date",
+      "idol",
+      "pos_neg_score"
+    ],
+    "properties": {
+      "date": {
+        "bsonType": "date",
+        "description": "긍부정 점수를 산출한 대상 날짜, 시간은 00"
+      },
+      "idol": {
+        "bsonType": "string",
+        "description": "아이돌 이름"
+      },
+      "pos_neg_score": {
+        "bsonType": "int",
+        "description": "긍부정 점수"
+      }
+    }
+  }
+}

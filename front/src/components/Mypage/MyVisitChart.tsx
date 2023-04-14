@@ -1,5 +1,3 @@
-// import styled from "styled-components";
-
 import ChartComponent from "./ChartComponent";
 import ChartFrameComponent from "./ChartFrameComponent";
 import { ReactComponent as Icon } from "../../assets/material-symbols_timer-outline-rounded.svg"

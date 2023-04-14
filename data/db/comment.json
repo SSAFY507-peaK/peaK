@@ -1,0 +1,29 @@
+{
+  "$jsonSchema": {
+    "bsonType": "object",
+    "required": [
+      "email",
+      "idol",
+      "date_time",
+      "content"
+    ],
+    "properties": {
+      "email": {
+        "bsonType": "string",
+        "description": "응원 글을 작성한 유저의 이메일"
+      },
+      "idol": {
+        "bsonType": "string",
+        "description": "응원의 대상이 되는 아이돌"
+      },
+      "date_time": {
+        "bsonType": "date",
+        "description": "응원 글 작성날짜, 일시"
+      },
+      "content": {
+        "bsonType": "string",
+        "description": "응원 글 내용"
+      }
+    }
+  }
+}
