@@ -1,10 +1,8 @@
 import CarouselIdol from "../CarouselIdol/CarouselIdol.jsx";
 import TitleComponent from "./TitleComponent";
-import YouTubeIcon from "@mui/icons-material/YouTube";
 import styled from "styled-components";
 
 const Frame = styled.div`
-  /* background-color: rgba(255, 255, 255, 0.5); */
   border-radius: 30px;
   width: 100%;
   padding: 20px;

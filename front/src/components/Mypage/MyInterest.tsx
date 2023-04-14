@@ -1,8 +1,8 @@
+import Content from "../Content";
 import MyInterestChart from "./MyInterestChart";
 import ScoreComponent from "./ScoreComponent"
 import TitleComponent from "../IdolPage/TitleComponent";
 import styled from "styled-components";
-import Content from "../Content";
 
 interface Props {
   userName: string;
@@ -16,13 +16,6 @@ const Wrapper = styled.div`
   flex: 0.23;
   margin-right: 25px;
 `;
-
-// const Frame = styled.div`
-//   background-color: white;
-//   border-radius: 20px;
-//   height: 100%;
-//   width: 100%;
-// `;
 
 const ScoreFrame = styled.div`
   display: flex;

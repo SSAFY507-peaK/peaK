@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 
 import ECharts from 'echarts-for-react';
 import { PosNeg } from '../../../_utils/Types';
-import { faker } from '@faker-js/faker';
 
 interface Props {
   posNeg: PosNeg[];
@@ -11,8 +10,6 @@ interface Props {
 function IdolEmotionChart({posNeg}:Props) {
   let labels = ['D-6', 'D-5', 'D-4', 'D-3', 'D-2', 'D-1', '오늘']
 
-  // const [posList, setPosList] = useState<number[]>(labels.map(() => faker.datatype.float({ min: 0, max: 100 })))
-  // const [negList, setNegList] = useState<number[]>(labels.map(() => faker.datatype.float({ min: 0, max: 100 })))
   const [posList, setPosList] = useState<number[]>()
   const [negList, setNegList] = useState<number[]>()
   useEffect(() => {

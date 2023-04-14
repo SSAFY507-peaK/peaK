@@ -20,7 +20,6 @@ const CalendartFrame = styled.div`
 `;
 
 function Calendar({setClickIndex, idolChatData}:Props) {
-  // let now_year = new Date().getFullYear()
   let now_month = new Date().getMonth() + 1
   let now_day = new Date().getDate()
   const [dayList, setDayList] = useState<string[]>([])
