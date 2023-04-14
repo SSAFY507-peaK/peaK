@@ -21,7 +21,7 @@ async def crawling():
         db = client['peak']
         collection = db['idol']
         idols = [document for document in collection.find({}, {"idol": 1, "notations": 1})]
-
+        
         tasks = []
         if news_crawling_turn:
             tasks.append(asyncio.create_task(crawling_news(idols, cur_dt)))

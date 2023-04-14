@@ -20,7 +20,7 @@ async def crawling(idols, cur_dt):
 
     c = twint.Config()
     c.Since = (cur_dt - dt.timedelta(days=1)).strftime("%Y-%m-%d")
-    c.Limit = 12
+    c.Limit = 10
     c.Lang = "ko"
     c.Min_likes = 1
     c.Hide_output = True
@@ -37,15 +37,16 @@ async def crawling(idols, cur_dt):
         cnt = 0
         for notation in idol['notations']:
             c.Search = notation
-            twint.run.Search(c)
+            try:
+                twint.run.Search(c)
+            except:
+                continue
             with open(c.Output, "r+", encoding="utf-8") as f:
                 for json_txt in f:
                     json_obj = json.loads(json_txt)
                     date = json_obj['date']
                     time = json_obj["time"]
-                    reg_dt = \
-                        dt.datetime.strptime(f"{date} {time}", "%Y-%m-%d %H:%M:%S") \
-                        + dt.timedelta(hours=9)
+                    reg_dt = dt.datetime.strptime(f"{date} {time}", "%Y-%m-%d %H:%M:%S") + dt.timedelta(hours=9)
                     if prev_dt > reg_dt or reg_dt >= cur_dt:
                         break
                     json_obj['idol'] = idol['idol']
@@ -55,7 +56,6 @@ async def crawling(idols, cur_dt):
                     twit_list.append(json.dumps(json_obj, ensure_ascii=False))
                 f.truncate(0)
         name = idol['idol']
-        print(f"{name}: {cnt}개")
 
     if twit_list:
         with open(f'{result_filename}', 'a', encoding='utf-8') as f:
@@ -76,4 +76,3 @@ async def crawling(idols, cur_dt):
         except Exception as e:
             print(f"트위터 크롤링 결과(1시간) 파일 이름 변경 실패: {e}")
     print(f'{cur_dt}: 트위터 크롤링 종료')
-
