@@ -2,9 +2,12 @@ import { useLoaderData, useNavigate } from "react-router";
 import { useRef, useState } from "react";
 
 import { IdolListsType } from "../_utils/Types";
+import { ResetDetailNews } from "../_store/slices/IdolDetailNewsSlice";
+import { ResetWordCount } from "../_store/slices/IdolDetailWordCountSlice";
 import SearchIcon from "@mui/icons-material/Search";
 import UseOnClickOutside from "../_hooks/useOnClickOutside";
 import styled from "styled-components";
+import { useAppDispatch } from "../_hooks/hooks";
 
 type WrapperType = {
   width?: string;
@@ -88,7 +91,7 @@ function SearchInputDiv({ handleSearchIdol }: SearchInputDivProps) {
 function SearchList({ width }: WrapperType) {
   const searchRef = useRef<any>();
   const navigate = useNavigate();
-
+  const dispatch = useAppDispatch();
   // 검색창에 입력한 데이터
   const [search, setSearch] = useState("");
 
@@ -138,6 +141,8 @@ function SearchList({ width }: WrapperType) {
             <SearchResultDiv
               onClick={e => {
                 e.preventDefault();
+                dispatch(ResetDetailNews())
+                dispatch(ResetWordCount())
                 // 클릭 시 해당 아이돌 상세 페이지로 이동
                 navigate(`/${idol}`);
                 setSearch("");
