@@ -100,23 +100,23 @@ Redis 7.0.10
 
 ### 관심아이돌
 
-![peaK_관심아이돌](/uploads/e9f83ff7d5878d058f32149496f04486/peaK_관심아이돌.gif)
+![peaK_관심아이돌](/uploads/63dbc3a502f7327d0f2a9cc54e1a19c3/peaK_관심아이돌.gif)
 
 ### 아이돌
 
-![peaK_아이돌](/uploads/c74696e9d9ed577206d82b357c9701e0/peaK_아이돌.gif)
+![peaK_아이돌](/uploads/0ebba11831e475dff243b81493748786/peaK_아이돌.gif)
 
 ### 랭킹 / 차트
 
-![peaK_랭킹_차트](/uploads/c8b7ac1deb415c89e22c9a37dd8ccd5d/peaK_랭킹_차트.gif)
+![peaK_랭킹_차트](/uploads/6babab962641ab50dca1954c1a44305b/peaK_랭킹_차트.gif)
 
 ### 트렌딩
 
-![peaK_트렌딩](/uploads/64a150a6a99bfc58e2c4a0e7c83d3218/peaK_트렌딩.gif)
+![peaK_트렌딩](/uploads/825da0997c7810e490c88eed1ef87f08/peaK_트렌딩.gif)
 
 ### 마이페이지
 
-![peaK_마이페이지](/uploads/dd699a09f70fee8a597738212e256974/peaK_마이페이지.gif)
+![peaK_마이페이지](/uploads/34be4831ab89b6f296bc91b50a17209b/peaK_마이페이지.gif)
 
 <br/>
 
