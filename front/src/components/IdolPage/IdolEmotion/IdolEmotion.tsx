@@ -46,9 +46,6 @@ function IdolEmotion() {
   const userId:string = useAppSelector(state => state.userInfo.userId)
   const posNeg:PosNeg[] = useAppSelector(state => state.idolDetailChart.posNegWeek)
   const rankData:WeeklyRankingType = useAppSelector(state => state.idolDetailChart.rankData)
-  // const rankData:WeeklyRankingType = useAppSelector(faker.datatype.float({ min: 0, max: 100 }))
-  // if 
-  // const ranking = faker.datatype.number({ min: 1, max: 10 })
   if (posNeg.length === 1 && posNeg[0].pos === 0){
     return(
       <></>
@@ -60,7 +57,6 @@ function IdolEmotion() {
           <IdolEmotionChartBtn
             isTab = {check}
             ranknum= {`${rankData.current.rank}위`}
-            // ranknum= {`3위`}
             rankicon={<ArrowDropUpIcon sx={{ color: "red"}} />}
             color="red"
             changenum={3} 

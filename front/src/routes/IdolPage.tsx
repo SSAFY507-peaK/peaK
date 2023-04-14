@@ -82,7 +82,6 @@ function IdolPage() {
     const resultWeeklyData = await request("get", `/peak/weekly/${idolName}`,"",headers);
     /** 뉴스관련 정보 Store에 저장 */
     const resultNewsList = await request("get", `/news/list/keywords/${idolName}`);
-    // const resultWordCloud = await request("get", `/news/list/keywords/${idolName}`);
     
     dispatch(CreateIdolSns(resultSns))
     dispatch(CreateIdolChat(resultChat))

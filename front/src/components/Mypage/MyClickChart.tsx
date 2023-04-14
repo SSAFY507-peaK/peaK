@@ -1,5 +1,3 @@
-// import styled from "styled-components";
-
 import ChartComponent from "./ChartComponent";
 import ChartFrameComponent from "./ChartFrameComponent";
 import { ReactComponent as Icon } from "../../assets/mdi_cursor-default-click-outline.svg"

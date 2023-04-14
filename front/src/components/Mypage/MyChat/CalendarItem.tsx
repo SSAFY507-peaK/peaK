@@ -26,7 +26,6 @@ const DayComponent = styled.option<Type>`
   margin: 5px;
   font-size: 1rem;
   cursor: ${props => props.data ? "pointer" : null};
-  //text-decoration: underline;
   color: ${props => props.click ? "white" : props => props.data ?  `var(--purple400-color)` : null};
   background: ${props => props.click ? `linear-gradient(to bottom right, #A869CD 0%, #76349D 100%)` : "white"};
   opacity: ${props => props.data ? null : 0.5};

@@ -19,7 +19,6 @@ interface TextType {
 const ButtonFrameOn = styled.div`
   display: flex;
   flex-direction: column;
-  /* align-items: center; */
   justify-content: flex-end;
   background: linear-gradient(130.91deg, #A869CD 7.03%, #76349D 91.83%);
   border-radius: 15px;
@@ -32,7 +31,6 @@ const ButtonFrameOn = styled.div`
 const ButtonFrameOff = styled.div`
   display: flex;
   flex-direction: column;
-  /* align-items: center; */
   justify-content: flex-end;
   background: white;
   border-radius: 15px;
