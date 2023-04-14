@@ -84,16 +84,52 @@ Redis 7.0.10
 
 <br/>
 
+## :computer: 서비스 화면
+
+### 인트로
+
+![peaK_인트로](/uploads/43fc7edf074e84644df701b8c202a0ee/peaK_인트로.gif)
+
+### 회원가입
+
+![peaK_회원가입](/uploads/07894b0735e5810f78272dab4f434526/peaK_회원가입.gif)
+
+### 홈
+
+![peaK_홈](/uploads/aed89c9a91b9b1de064de1642c091ab2/peaK_홈.gif)
+
+### 관심아이돌
+
+![peaK_관심아이돌](/uploads/e9f83ff7d5878d058f32149496f04486/peaK_관심아이돌.gif)
+
+### 아이돌
+
+![peaK_아이돌](/uploads/c74696e9d9ed577206d82b357c9701e0/peaK_아이돌.gif)
+
+### 랭킹 / 차트
+
+![peaK_랭킹_차트](/uploads/c8b7ac1deb415c89e22c9a37dd8ccd5d/peaK_랭킹_차트.gif)
+
+### 트렌딩
+
+![peaK_트렌딩](/uploads/64a150a6a99bfc58e2c4a0e7c83d3218/peaK_트렌딩.gif)
+
+### 마이페이지
+
+![peaK_마이페이지](/uploads/dd699a09f70fee8a597738212e256974/peaK_마이페이지.gif)
+
+<br/>
+
 ## :family: 프로젝트 멤버
 
-| Name   | Position                                                  |
-| ------ | --------------------------------------------------------- |
-| 김규리 | `front-end` 랭킹 차트, 로그인, 인트로 페이지                             |
+| Name   | Position                                                             |
+| ------ | -------------------------------------------------------------------- |
+| 김규리 | `front-end` 랭킹 차트, 로그인, 인트로 페이지                         |
 | 박귀렬 | `back-end` 데이터 수집 및 정제, 뉴스 API, 데이터베이스 설계 및 구현  |
-| 박시현 | `front-end` 종합 아이돌 페이지, 랭킹 페이지                        |
-| 박주희 | `back-end` CI/CD, 회원 API, 관심 아이돌 API, YouTube API          |
-| 이한빈 | `front-end` 아이돌 상세 페이지, 마이페이지                         |
-| 조현민 | `back-end` 데이터 분석, 개인 데이터 API, 랭킹 API, 데이터베이스 설계|
+| 박시현 | `front-end` 종합 아이돌 페이지, 랭킹 페이지                          |
+| 박주희 | `back-end` CI/CD, 회원 API, 관심 아이돌 API, YouTube API             |
+| 이한빈 | `front-end` 아이돌 상세 페이지, 마이페이지                           |
+| 조현민 | `back-end` 데이터 분석, 개인 데이터 API, 랭킹 API, 데이터베이스 설계 |
 
 <br/>
 
