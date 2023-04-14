@@ -1,4 +1,5 @@
 import { IdolImageNameContainer, IdolName } from "../IdolImgNameContainer";
+import { useAppDispatch, useAppSelector } from "../../_hooks/hooks";
 
 import { ClickTracker } from "../../_utils/UserTracker";
 import Rank1 from "../../assets/1.png";
@@ -9,8 +10,9 @@ import Rank5 from "../../assets/5.png";
 import Rank6 from "../../assets/6.png";
 import Rank7 from "../../assets/7.png";
 import Rank8 from "../../assets/8.png";
+import { ResetDetailNews } from "../../_store/slices/IdolDetailNewsSlice";
+import { ResetWordCount } from "../../_store/slices/IdolDetailWordCountSlice";
 import styled from "styled-components";
-import { useAppSelector } from "../../_hooks/hooks";
 import { useNavigate } from "react-router";
 
 type IdolImgType = {
@@ -78,11 +80,14 @@ function Logo(rank: number) {
 /** rank, name, img 를 parameter로 가짐 */
 function IdolRank({ url, name, rank }: IdolRankType) {
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
   const userId: string = useAppSelector(state => state.userInfo.userId);
 
   return (
     <WrapperDiv
       onClick={() => {
+        dispatch(ResetDetailNews())
+        dispatch(ResetWordCount())
         navigate(`/${name}`);
         ClickTracker(name, userId);
       }}
