@@ -30,7 +30,7 @@ function SectionOne({ backgroundColor }: WrapperType): JSX.Element {
     <PageContainer backgroundColor={backgroundColor} >
       <ContentSection>
         <img style={ImgStyleRight} src={chartImg} alt="차트 이미지" />
-        <TextSection className="left">
+        <TextSection>
           <h1>나의 아이돌을 <span style={{color: "var(--red500-color)"}} >분석</span>한다면?</h1>
           <div>
             <p>나의 아이돌은 얼마나 언급되고 있을까요?</p>
@@ -74,7 +74,7 @@ function SectionThree({ backgroundColor }: WrapperType): JSX.Element {
 
       <ContentSection>
         <img style={ImgStyleRight} src={contentsImg} alt="다양한 컨텐츠 이미지" />
-        <TextSection className="left">
+        <TextSection>
           <h1>분석 이외에도 다양한 <span style={{color: "var(--red500-color)"}} >즐거움</span></h1>
           <div>
             <p>아이돌 뿐만 아니라 나의 데이터 분석도 제공하고 있습니다</p>

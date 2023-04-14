@@ -1,6 +1,6 @@
 import React, {useCallback, useState} from 'react';
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useRouteLoaderData} from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { CreateUserId, CreateNickname, CreateTOKEN } from "../../_store/slices/UserSlice";
 import {
@@ -22,10 +22,10 @@ const BASE_URL = process.env.REACT_APP_BASE_URL
 type SignUp2Props = {
   TOKEN: string | null;
   handleChangePage: (value: number) => void;
-  idolLists: IdolListsType;
 }
 
-function SignUp2({TOKEN, handleChangePage, idolLists}: SignUp2Props) {
+function SignUp2({TOKEN, handleChangePage}: SignUp2Props) {
+  const idolLists = useRouteLoaderData("idolLists") as IdolListsType;
   const navigate = useNavigate();
   let dispatch = useDispatch();
   const NICKNAME = useSelector((state:RootState) => state.userInfo.nickname)
@@ -45,7 +45,6 @@ function SignUp2({TOKEN, handleChangePage, idolLists}: SignUp2Props) {
 
   /** 선택한 아이돌을 삭제하자 */
   const handleDeleteSelectedIdol = useCallback((idol: string): void => {
-    // 선택된 배열에서 삭제를 하자궁...
     setSelectedIdols(prev=> prev.filter(selectedIdol => selectedIdol !== idol));
   }, []);
   /** 선택된 아이돌을 보여주자 */
@@ -66,7 +65,6 @@ function SignUp2({TOKEN, handleChangePage, idolLists}: SignUp2Props) {
   }, [])
 
   /** 회원가입을 하자 */
-  // 여기 axios 나중에 수정하자..
   const handleSignUp = () => {
     const headers = {
       Authorization: TOKEN,
