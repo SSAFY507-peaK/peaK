@@ -96,7 +96,7 @@ Redis 7.0.10
 
 ### 홈
 
-![peaK_홈](/uploads/aed89c9a91b9b1de064de1642c091ab2/peaK_홈.gif)
+![peaK_홈](/uploads/d3db107a0e4d7f69757099d82352ecdd/peaK_홈.gif)
 
 ### 관심아이돌
 
