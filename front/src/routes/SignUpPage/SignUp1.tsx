@@ -15,8 +15,6 @@ type SignUp1Type = {
 }
 
 function SignUp1({TOKEN, handleChangePage}: SignUp1Type) {
-  // 이제 얘기 막 찍힘
-  console.log(TOKEN);
 
   let dispatch = useDispatch();
   const [nickname, setNickname] = useState<string>("");

@@ -4,14 +4,6 @@ type PageContainerType = {
   backgroundColor?: string;
 };
 
-type ImageType = {
-  width?: string;
-  url?: string;
-}
-// type HeightType = {
-//   height: number;
-// }
-
 const FullPageContainer = styled.div`
   height: 100vh;
   overflow-y: hidden;
@@ -21,18 +13,13 @@ const FullPageContainer = styled.div`
 
 const PageContainer = styled.div<PageContainerType>`
   height: 100%;
-  //height: 100%;
   width: 100%;
-  //content: var(--content-space);
   background-color: ${props => props.backgroundColor};
-  //position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
-  //margin-left: auto;
-  //margin-right: auto;
 `;
-const ContentSection = styled.div<ImageType>`
+const ContentSection = styled.div`
   width: var(--content-space);
   height: 80%;
   display: flex;
@@ -76,18 +63,5 @@ const TextSection = styled.div`
   }
 `;
 
-const ImageSection = styled.div<ImageType>`
-  display: flex;
-  flex: 1;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
 
-  img {
-    width: ${props => props.width || "100%"};
-  }
-`;
-
-
-
-export { PageContainer, TextSection, ImageSection, ContentSection, FullPageContainer };
+export { PageContainer, TextSection, ContentSection, FullPageContainer };
