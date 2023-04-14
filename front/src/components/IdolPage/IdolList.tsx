@@ -4,7 +4,9 @@ import { useRef, useState} from "react";
 import UseOnClickOutside from "../../_hooks/useOnClickOutside";
 import {useNavigate} from "react-router-dom";
 import { ReactComponent as ArrowDown} from "../../assets/arrow-down.svg"
-import {useAppSelector} from "../../_hooks/hooks";
+import { useAppDispatch, useAppSelector} from "../../_hooks/hooks";
+import { ResetDetailNews } from "../../_store/slices/IdolDetailNewsSlice";
+import { ResetWordCount } from "../../_store/slices/IdolDetailWordCountSlice";
 
 const IdolListFrame = styled.div`
   width: auto;
@@ -55,8 +57,8 @@ function IdolList({ idolName }: IdolNameProps) {
   const [isClicked, setIsClicked] = useState(false);
   const DropDownRef = useRef<HTMLDivElement>(null);
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
   const favIdols = useAppSelector(state => state.userInfo.favIdols);
-
 
   const SVGStyle = {
     width: "24px",
@@ -68,10 +70,12 @@ function IdolList({ idolName }: IdolNameProps) {
   const handleOnClick = () => {
     // console.log("클릭");
     setIsClicked(prev => !prev);
+
   }
 
   UseOnClickOutside(DropDownRef, () => {
     setIsClicked(false);
+
   });
 
   return (
@@ -82,6 +86,8 @@ function IdolList({ idolName }: IdolNameProps) {
           <IdolDesc>좋아하는 아이돌</IdolDesc>
           { favIdols?.map(idol => <IdolDiv onClick={() => {
             setIsClicked(false);
+            dispatch(ResetDetailNews())
+            dispatch(ResetWordCount())
             navigate(`/${idol}`)
           }}>{idol}</IdolDiv>) }
         </IdolListDropDown>

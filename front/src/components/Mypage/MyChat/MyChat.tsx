@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import Calendar from "./Calendar";
 import { Comment } from "../../../_utils/Types";
 import MyIdolChat from "./MyIdolChat";
-import TitleComponent from "../../idolpage/TitleComponent";
+import TitleComponent from "../../IdolPage/TitleComponent";
 import styled from "styled-components";
 import Content from "../../Content";
 

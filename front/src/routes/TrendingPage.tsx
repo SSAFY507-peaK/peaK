@@ -53,7 +53,7 @@ function TrendingPage() {
             트렌딩 <span style={{ color: "var(--purple500-color)" }}>뉴스</span>
           </h3>
         }
-        gridColumn="1 / 7"
+        gridColumn="1 / 6"
         height="calc(100vh - 60px)"
         data={<TrendingNewsGrid data={TrendNewsList} />}
       />
@@ -63,7 +63,7 @@ function TrendingPage() {
             트렌딩 <span style={{ color: "var(--purple500-color)" }}>유튜브</span>
           </h3>
         }
-        gridColumn="7 / 9"
+        gridColumn="6 / 9"
         height="calc(100vh - 60px)"
         data={<TrendingYoutube data={TrendYoutubeList} />}
       />

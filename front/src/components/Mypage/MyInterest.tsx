@@ -1,6 +1,6 @@
 import MyInterestChart from "./MyInterestChart";
 import ScoreComponent from "./ScoreComponent"
-import TitleComponent from "../idolpage/TitleComponent";
+import TitleComponent from "../IdolPage/TitleComponent";
 import styled from "styled-components";
 import Content from "../Content";
 

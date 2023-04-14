@@ -59,7 +59,7 @@ const Carousel = ({ children }) => {
             "--offset": (active - i) / 3,
             "--direction": Math.sign(active - i),
             "--abs-offset": Math.abs(active - i) / 3,
-            "pointer-events": active === i ? "auto" : "none",
+            "pointerEvents": active === i ? "auto" : "none",
             opacity: Math.abs(active - i) >= MAX_VISIBILITY ? "0" : "1",
             display: Math.abs(active - i) > MAX_VISIBILITY ? "none" : "block",
           }}

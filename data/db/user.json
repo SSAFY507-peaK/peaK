@@ -1,0 +1,91 @@
+{
+  "$jsonSchema": {
+    "bsonType": "object",
+    "required": [
+      "email",
+      "nickname",
+      "role",
+      "provider",
+      "last_login_datetime",
+      "favorite_idols_cnt",
+      "idols"
+    ],
+    "properties": {
+      "email": {
+        "bsonType": "string",
+        "description": "이메일"
+      },
+      "role": {
+        "enum": [
+          "ROLE_USER",
+          "ROLE_GUEST",
+          "ROLE_ADMIN"
+        ],
+        "description": "권한"
+      },
+      "nickname": {
+        "bsonType": "string",
+        "description": "닉네임"
+      },
+      "provider": {
+        "enum": [
+          "kakao"
+        ],
+        "description": "로그인 제공자 (ex: kakao)"
+      },
+      "last_login_datetime": {
+        "bsonType": "date",
+        "description": "마지막 로그인 시간"
+      },
+      "favorite_idols_cnt": {
+        "bsonType": "int",
+        "minimum": 1,
+        "description": "좋아하는 아이돌 수"
+      },
+      "idols": {
+        "bsonType": "array",
+        "description": "좋아하는 아이돌 리스트",
+        "items": {
+          "bsonType": "object",
+          "required": [
+            "idol",
+            "like",
+            "modified_datetime",
+            "page_clicks_cnt",
+            "page_stay_sec",
+            "comments_cnt"
+          ],
+          "properties": {
+            "idol": {
+              "bsonType": "string",
+              "description": "아이돌 이름"
+            },
+            "like": {
+              "bsonType": "bool",
+              "description": "관심 여부"
+            },
+            "modified_datetime": {
+              "bsonType": "date",
+              "description": "최종 수정 시간"
+            },
+            "page_clicks_cnt": {
+              "bsonType": "int",
+              "minimum": 0,
+              "description": "해당 아이돌 페이지 클릭 횟수"
+            },
+            "page_stay_sec": {
+              "bsonType": "int",
+              "minimum": 0,
+              "description": "해당 아이돌 페이지 체류 시간 (초)"
+            },
+            "comments_cnt": {
+              "bsonType": "int",
+              "minimum": 0,
+              "description": "해당 아이돌 페이지 응원글 수"
+            }
+          }
+        }
+      }
+    }
+  }
+}
