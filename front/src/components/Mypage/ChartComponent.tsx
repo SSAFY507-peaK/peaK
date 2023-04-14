@@ -32,7 +32,7 @@ function ChartComponent({idoldata, name}:Props) {
     xAxis: [
       {
         type: 'category',
-        data: ['월', '화', '수', '목', '금', '토', '일'],
+        data: ['D-6', 'D-5', 'D-4', 'D-3', 'D-2', 'D-1', '오늘'],
         axisPointer: {
           type: 'shadow'
         }
@@ -46,47 +46,21 @@ function ChartComponent({idoldata, name}:Props) {
       },
       {
         type: 'value',
-        // name: 'Temperature',
         min: 0,
-        // max: 25,
         interval: 5,
-        // axisLabel: {
-        //   formatter: '{value} °C'
-        // }
       }
     ],
     series: [
       {
         name: `나의 ${name}`,
         type: 'bar',
-        // tooltip: {
-        //   valueFormatter: function (value:number) {
-        //     return (value as number) + ' ml';
-        //   }
-        // },
         data: idoldata.dataLst
       },
       {
         name: `평균 ${name}`,
         type: 'bar',
-        // tooltip: {
-        //   valueFormatter: function (value:number) {
-        //     return (value as number) + ' ml';
-        //   }
-        // },
         data: idoldata.dataAvg
       },
-      // {
-      //   name: 'Temperature',
-      //   type: 'line',
-      //   yAxisIndex: 1,
-      //   // tooltip: {
-      //   //   valueFormatter: function (value:number) {
-      //   //     return (value as number) + ' °C';
-      //   //   }
-      //   // },
-      //   data: [2.0, 2.2, 3.3, 4.5, 6.3, 10.2, 20.3, 23.4, 23.0, 16.5, 12.0, 6.2]
-      // }
     ]
   };
   return (

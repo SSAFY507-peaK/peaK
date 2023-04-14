@@ -28,7 +28,7 @@ public class RankByDateService {
 	public IdolRankByDayResponseDto rankByIdolWeekly(String idol) {
 		LocalDateTime now = LocalDateTime.now();
 		LocalDateTime startDate = dateTimeToDate(now).minusDays(7);
-		LocalDateTime endDate = dateTimeToDate(now);
+		LocalDateTime endDate = dateTimeToDate(now).minusDays(1);
 
 		List<RankResponseDto> rankList = rankByDateRepository.findByDateTimeBetween(startDate, endDate, idol)
 			.orElseThrow(() -> new CustomException(CustomExceptionType.NO_CONTENT));

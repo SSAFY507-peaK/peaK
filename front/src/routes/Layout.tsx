@@ -70,7 +70,6 @@ function Layout() {
         }
       })
         .then(response => {
-          console.log(response.data);
           return response.data.idols
         })
         .then(idols => dispatch(CreateFavIdols(idols)))
@@ -88,7 +87,6 @@ function Layout() {
         }
       })
         .then(response => {
-          console.log(response.data);
           return response.data.idols
         })
         .then(idols => dispatch(CreateFavIdols(idols)))

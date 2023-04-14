@@ -1,23 +1,24 @@
+import {BlueButton, GrayButton, PurpleButton} from "../components/Button";
+import {MessageDiv, NicknameInput} from "../components/SignUpPage/NicknameComponents";
 import React, { useEffect, useState } from 'react';
+import {useAppDispatch, useAppSelector} from '../_hooks/hooks';
+import {useNavigate, useParams} from "react-router-dom";
 
 import { CreateMyInterest } from '../_store/slices/InterestSlice';
+import {CreateNickname} from "../_store/slices/UserSlice";
 import DriveFileRenameOutlineOutlinedIcon from '@mui/icons-material/DriveFileRenameOutlineOutlined';
+import {InputWrapper} from "../components/SignUpPage/SignUpComponents";
 import MyChat from '../components/Mypage/MyChat/MyChat';
 import MyChatChart from '../components/Mypage/MyChatChart';
 import MyClickChart from '../components/Mypage/MyClickChart';
 import MyInterest from '../components/Mypage/MyInterest';
 import MyVisitChart from '../components/Mypage/MyVisitChart';
-import TitleComponent from "../components/idolpage/TitleComponent";
+import TitleComponent from "../components/IdolPage/TitleComponent";
 import TotalChart from '../components/Mypage/TotalChart';
+import axios from "axios";
 import sampleData from "../components/Mypage/sampleData.json"
 import styled from "styled-components";
-import {useAppDispatch, useAppSelector} from '../_hooks/hooks';
-import {useNavigate, useParams} from "react-router-dom";
-import {MessageDiv, NicknameInput} from "../components/SignUpPage/NicknameComponents";
-import {BlueButton, PurpleButton, GrayButton} from "../components/Button";
-import {InputWrapper} from "../components/SignUpPage/SignUpComponents";
-import axios from "axios";
-import {CreateNickname} from "../_store/slices/UserSlice";
+
 // import {useSelector} from "react-redux";
 
 const Wrapper = styled.div`
@@ -47,10 +48,6 @@ const BottomFrame = styled.div`
 `;
 
 
-/** 클릭시 닉네임 변경 모달창과 함께 닉네임 변경  */
-// function handleEditNickname(event: MouseEvent<SVGSVGElement>) {
-//   console.log('닉네임 변경 구현할 예정');
-// }
 
 const BASE_URL = process.env.REACT_APP_BASE_URL;
 type NicknameType = "EU006" | "EU009" | "200" ;
@@ -174,8 +171,6 @@ function MyPage() {
     <Wrapper>
       <TitleFrame>
         { isEditing ? EditNickname : Title }
-        {/*<TitleComponent id="2" blacktxt="어서오세요, " purpletxt={userName} addtxt=" 님" />*/}
-        {/*<DriveFileRenameOutlineOutlinedIcon sx={{ fontSize: "1.2rem", cursor: "pointer" }} onClick={handleEditNickname} />*/}
       </TitleFrame>
       {
         index > -1

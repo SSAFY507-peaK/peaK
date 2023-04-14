@@ -19,8 +19,6 @@ const Wrapper = styled.div<WrapperType>`
   flex-direction: column;
   flex: 0.35;
   box-shadow: 0 0 5px -2px rgba(151, 151, 151, 0.25);
-  /* width: 100%;
-  height: 100%; */
   margin-right: ${ props => props.mr || "25px"};
   background-color: white;
   border-radius: 20px;
