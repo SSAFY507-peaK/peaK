@@ -108,7 +108,7 @@ Redis 7.0.10
 
 - 내가 설정한 관심 아이돌의 페이지 목록으로 바로가기
 
-  ![peaK_관심아이돌](https://user-images.githubusercontent.com/106078444/232363299-5d2e6192-dfb1-48a3-9bac-92514da51cd2.gif)
+![peaK_관심아이돌](https://user-images.githubusercontent.com/106078444/232363299-5d2e6192-dfb1-48a3-9bac-92514da51cd2.gif)
 
 ### 아이돌
 
