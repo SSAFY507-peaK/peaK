@@ -1,4 +1,4 @@
-<img src="README_assets/047e4ece162c26d6cc906f2e67f07ed728dff7b4.png" title="" alt="peaK.png" width="389">
+<img src="README_assets/047e4ece162c26d6cc906f2e67f07ed728dff7b4.png" title="" alt="peaK.png" width="250">
 
 
 
